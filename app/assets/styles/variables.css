@@ -1,0 +1,42 @@
+:root {
+  --font-display: 'Epilogue', sans-serif;
+  --font-body: 'Epilogue', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --page-max-width: 1200px;
+  --shell-padding: clamp(1.5rem, 2vw, 2.5rem);
+  --section-gap: clamp(4rem, 8vw, 6rem);
+
+  --line-soft: rgba(var(--v-theme-on-surface), 0.15);
+  --line-strong: rgba(var(--v-theme-on-surface), 0.35);
+  --surface-faint: rgba(var(--v-theme-on-surface), 0.05);
+  --surface-mild: rgba(var(--v-theme-on-surface), 0.10);
+  --text-subtle: rgba(var(--v-theme-on-surface), 0.75);
+
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 10px;
+
+  --transition-fast: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 360ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Mapear variables de la app a tokens Vuetify */
+  --text-primary: rgb(var(--v-theme-on-surface));
+  --bg-soft: rgba(var(--v-theme-surface), 0.85);
+  --bg-muted: rgba(var(--v-theme-surface), 0.65);
+  --bg-elevated: rgb(var(--v-theme-surface));
+  --link: rgb(var(--v-theme-primary));
+  --link-hover: rgb(var(--v-theme-primary));
+
+  /* Paleta para Markdown */
+  --md-text: var(--text-primary);
+  --md-muted: var(--text-subtle);
+  --md-bg: transparent;
+  --md-code-bg: rgba(var(--v-theme-on-surface), 0.08);
+  --md-code-border: var(--line-soft);
+  --md-code-inline-text: rgb(var(--v-theme-primary));
+  --md-blockquote-bg: var(--surface-faint);
+  --md-blockquote-border: var(--line-soft);
+  --md-table-border: var(--line-soft);
+}

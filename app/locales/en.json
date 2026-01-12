@@ -1,0 +1,452 @@
+{
+  "navigation": {
+    "brand": {
+      "name": "DDeras",
+      "shortName": "DDeras",
+      "tagline": "Full Stack Developer",
+      "blogTagline": "Tech blog"
+    },
+    "themeToggle": {
+      "toLight": "Light mode",
+      "toDark": "Dark mode",
+      "lightShort": "Light",
+      "darkShort": "Dark"
+    },
+    "languageToggle": {
+      "label": "Language",
+      "en": "EN",
+      "es": "ES"
+    },
+    "items": {
+      "home": "Home",
+      "about": "About me",
+      "projects": "Projects",
+      "blog": "Blog",
+      "ues": "UES resources"
+    },
+    "backToMain": "Portfolio",
+    "backToBlog": "Home",
+    "viewBlogEntries": "View posts",
+    "search": "Search",
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email"
+    }
+  },
+  "seo": {
+    "siteName": "DDeras",
+    "twitterHandle": "daiv_09",
+    "defaults": {
+      "title": "Full Stack Developer with Vue, Laravel and TypeScript",
+      "description": "Personal portfolio, real projects and technical articles about Vue, Laravel and cloud deployments.",
+      "keywords": [
+        "David Deras",
+        "Full Stack Developer",
+        "Frontend Developer",
+        "Backend Developer",
+        "Vue 3",
+        "Vue 2",
+        "Vue",
+        "Laravel 11",
+        "Vuetify",
+        "PrimeVue",
+        "TypeScript",
+        "El Salvador",
+        "DDeras"
+      ],
+      "author": "David Deras",
+      "ogImage": "https://deras.dev/punpun_OG.jpg",
+      "ogImageAlt": "Projects and tutorials"
+    },
+    "pages": {
+      "home": {
+        "title": "Developing with Vue and Laravel",
+        "description": "Projects, experiments and learnings using Vue 3, Laravel and TypeScript.",
+        "keywords": ["Web development", "Vue.js", "Laravel"]
+      },
+      "me": {
+        "title": "A bit about me",
+        "description": "My experience, learning, and what I have worked on.",
+        "keywords": [
+          "David Deras",
+          "Professional profile",
+          "Experience",
+          "DDeras",
+          "daiv05"
+        ]
+      },
+      "projects": {
+        "title": "Projects",
+        "description": "Real applications I have worked on and how I built them.",
+        "keywords": ["Projects", "Case studies", "Portfolio"]
+      },
+      "blog": {
+        "title": "Blog & technical articles",
+        "description": "Notes, guides and solutions about web development that I use daily.",
+        "keywords": ["Technical blog", "Vue", "Laravel", "Web development"]
+      },
+      "ues": {
+        "title": "UES resources",
+        "description": "Academic material organized for Computer Systems Engineering students.",
+        "keywords": [
+          "Resources",
+          "UES",
+          "Engineering",
+          "Computer Systems Engineering"
+        ]
+      }
+    }
+  },
+  "blog": {
+    "eyebrow": "Technical logbook",
+    "title": "Blog & articles",
+    "lead": "Posts about development, tutorials and use cases.",
+    "backToIndex": "Back to index",
+    "search": "Search articles...",
+    "noResults": "No articles found",
+    "pagination": {
+      "page": "Page",
+      "of": "of",
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "post": {
+      "author": "Author",
+      "date": "Date",
+      "lastUpdated": "Updated",
+      "readMore": "Read more",
+      "tags": "Tags"
+    },
+    "toc": {
+      "show": "Show index",
+      "hide": "Hide index",
+      "title": "Table of contents"
+    },
+    "nav": {
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "imageViewer": {
+      "download": "Download image",
+      "close": "Close"
+    },
+    "constructionNotice": "This page is under construction. Real content will be available soon."
+  },
+  "loader": {
+    "message": "Loading…"
+  },
+  "hero": {
+    "eyebrow": "Hi, I am",
+    "title": "David Deras",
+    "highlight": "Full Stack Developer (Vue · Laravel · TypeScript)",
+    "roleLabel": "Current role",
+    "lead": "I have over two years of experience building web applications for institutions and public projects. I enjoy working with Vue 3 and Laravel, focusing on UX and thorough documentation to ensure smooth scalability.",
+    "ctas": {
+      "primary": "View projects",
+      "secondary": "Send me a message"
+    },
+    "stackTitle": "Tech stack I use",
+    "techStack": [
+      {
+        "name": "Frontend",
+        "detail": "Vue 3 · TypeScript · Vite · Pinia"
+      },
+      {
+        "name": "Backend",
+        "detail": "Laravel · PHP 8 · APIs REST"
+      },
+      {
+        "name": "Infra",
+        "detail": "Vercel · Railway · GCP · Cloudflare"
+      },
+      {
+        "name": "UI",
+        "detail": "Vuetify · PrimeVue · Figma"
+      },
+      {
+        "name": "Testing",
+        "detail": "Vitest"
+      },
+      {
+        "name": "AI Tools",
+        "detail": "Copilot · Claude · Codex"
+      }
+    ],
+    "agendaTitle": "What I am doing now",
+    "agenda": [
+      {
+        "title": "MusyCharts v2",
+        "status": "UI/UX and SEO redesign"
+      },
+      {
+        "title": "Learning React",
+        "status": "In progress"
+      }
+    ],
+    "snapshotTitle": "Quick facts",
+    "focusNotes": [
+      {
+        "label": "Base",
+        "value": "San Salvador, SV"
+      },
+      {
+        "label": "Experience",
+        "value": "2+ years"
+      },
+      {
+        "label": "Areas",
+        "value": "GovTech · Retail · Analytics"
+      }
+    ],
+    "codeLabel": "profile.js",
+    "roles": [
+      "Full Stack Developer · MINSAL",
+      "Systems Designer",
+      "Software Engineer"
+    ]
+  },
+  "overview": {
+    "eyebrow": "Content map",
+    "title": "Spaces in constant iteration",
+    "lead": "Projects, guides and resources that keep growing with every delivery. Everything is divided into clear paths so you can explore what you need.",
+    "cards": [
+      {
+        "label": "01",
+        "title": "Projects",
+        "body": "Projects I have worked on, with technical decisions and what I learned in the process.",
+        "tags": ["Vue 3", "Laravel", "Full Stack"],
+        "cta": "View projects",
+        "to": "/projects"
+      },
+      {
+        "label": "02",
+        "title": "Blog",
+        "body": "Notes, short tutorials and practical solutions.",
+        "tags": ["Vue 3", "Laravel", "Cloud"],
+        "cta": "Go to blog",
+        "to": "/blog",
+        "openInNewTab": true
+      },
+      {
+        "label": "03",
+        "title": "UES resources",
+        "body": "Organized material for Computer Systems Engineering students.",
+        "tags": ["Guides", "Labs", "Classes"],
+        "cta": "View resources",
+        "to": "/resources"
+      }
+    ],
+    "collaboration": {
+      "title": "Do you have an idea?",
+      "body": "If you want to collaborate or need help with a project, write to me and we will see it.",
+      "cta": "Contact"
+    }
+  },
+  "about": {
+    "eyebrow": "Professional profile",
+    "title": "Full Stack centered on Vue y Laravel",
+    "lead": "",
+    "facts": {
+      "location": "Location",
+      "locationValue": "San Salvador, El Salvador",
+      "github": "GitHub",
+      "email": "Email",
+      "languages": "Languages",
+      "languagesValue": "Spanish (native) · English (A2)",
+      "mode": "Availability",
+      "modeValue": "Remote · Hybrid · On-site"
+    },
+    "buttons": {
+      "contact": "Contact"
+    },
+    "me": {
+      "title": "About me",
+      "body": "Developer with more than two years building systems for government, retail and collaborative platforms. I focus on accessibility, SEO and cloud deployments that keep pace with multidisciplinary teams. Accessibility, SEO and cloud deployments are the pillars that shape my development process. I prioritize clear documentation and iterative deliveries to ensure that products not only meet current needs but also adapt seamlessly to future challenges."
+    },
+    "skills": {
+      "title": "Core skills",
+      "groups": [
+        {
+          "title": "Frontend",
+          "items": [
+            "Vue 3 · TypeScript · Vite",
+            "Component Architecture",
+            "Pinia & State Management",
+            "SEO & SSR in SPAs",
+            "Accessibility (a11y)"
+          ]
+        },
+        {
+          "title": "Backend",
+          "items": [
+            "Laravel 10/11/12 · PHP 8",
+            "REST API Design",
+            "Roles & Permissions (Spatie)",
+            "Data Modeling & Relations",
+            "Performance Optimization"
+          ]
+        },
+        {
+          "title": "Infra & Deploy",
+          "items": [
+            "Vercel · Railway · GCP",
+            "Basic Nginx",
+            "HTTPS, Domains & Redirects",
+            "Simple CI/CD with GitHub",
+            "Dev / Prod Environments"
+          ]
+        },
+        {
+          "title": "Product & Process",
+          "items": [
+            "Technical Documentation",
+            "Iteration by Deliverables",
+            "Working with Real Requirements",
+            "Maintenance & Support"
+          ]
+        }
+      ]
+    },
+    "experience": {
+      "title": "Experience & deliverables",
+      "timeline": [
+        {
+          "date": "Jan 2024 - Present",
+          "title": "Full Stack Developer · DTIC - MINSAL",
+          "description": "Development of public platforms and internal systems for the Ministry of Health: new features, integrations, monitoring and performance improvements in Vue 3 and Laravel.",
+          "tags": ["Vue 3", "Laravel", "GovTech"]
+        },
+        {
+          "date": "Ago 2024 - Dic 2025",
+          "title": "Social Hours Project · FIA - UES",
+          "description": "Development of an incident management and reporting system for the social hours program of the Faculty of Engineering and Architecture.",
+          "tags": ["Laravel", "Vue", "Incident Management"]
+        },
+        {
+          "date": "Mar 2023 - Jun 2023",
+          "title": "Full Stack Developer · Carmencita Store",
+          "description": "Built an ERP for inventory, HR and delivery on the coast. SCRUM planning, interfaces in Figma and deployments coordinated with the admin team.",
+          "tags": ["Laravel", "Vue", "ERP"]
+        },
+        {
+          "date": "Jun 2023 - Dec 2023",
+          "title": "Frontend Intern · Presidency / CASATIC",
+          "description": "Digital skills program focused on testing, deployment and agile methodologies for public innovation.",
+          "tags": ["Vue", "Testing", "Agile"]
+        },
+        {
+          "date": "2019 - Current",
+          "title": "Computer Systems Engineering · UES",
+          "description": "Final year of the degree, strengthening algorithms, databases and student leadership in tech communities.",
+          "tags": ["Academia", "Leadership"]
+        }
+      ]
+    },
+    "interests": {
+      "title": "Current interests",
+      "items": ["CSS animations", "React development", "SEO optimization"]
+    }
+  },
+  "projects": {
+    "eyebrow": "Selected work",
+    "title": "My projects",
+    "lead": "Some projects I have worked on, with comments on technical decisions and learnings.",
+    "labels": {
+      "summary": "Summary",
+      "deliverables": "Key deliverables",
+      "client": "Client",
+      "technologies": "Technologies",
+      "captures": "Screens",
+      "viewOnline": "Visit",
+      "viewRepo": "Review code",
+      "year": "Year"
+    }
+  },
+  "ues": {
+    "eyebrow": "UES resources",
+    "title": "Collaborative repository",
+    "lead": "Academic material for Computer Systems Engineering. Everything organized by modality.",
+    "categories": [
+      {
+        "title": "On-campus modality",
+        "mode": "Campus",
+        "description": "Tests, labs and summaries from in-person courses (see subjects without '- D' at the end).",
+        "driveLink": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
+        "featured": [
+          {
+            "name": "Data Structure (ESD115) · Material",
+            "link": "https://drive.google.com/drive/folders/1_Wk8OUpedalm-nH1Hgzh4sVXz4bxP6hz?usp=drive_link"
+          },
+          {
+            "name": "Productivity Tools (HDP115) · Classes",
+            "link": "https://drive.google.com/drive/folders/1KAQVYhFv5-3MWxEref72lUzQc-sOhFZn?usp=drive_link"
+          },
+          {
+            "name": "Systems Design I (DSI115) · Material",
+            "link": "https://drive.google.com/drive/folders/1IG_0YzshQNSIfTUo3Zu_yH0GyrXOgwPw?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Distance modality",
+        "mode": "Virtual",
+        "description": "Tutorials, guides and self-paced material (subjects with '- D').",
+        "driveLink": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
+        "featured": [
+          {
+            "name": "Operating Systems (SIO115 -D)",
+            "link": "https://drive.google.com/drive/folders/1AqxsN-dWjaTkj7tI9WuEt6kgwglLip4I?usp=drive_link"
+          },
+          {
+            "name": "Electronic Commerce (CET115 -D)",
+            "link": "https://drive.google.com/drive/folders/1DTjafl8XO2Ri__3DrA6BxQHV-WFtCvj1?usp=drive_link"
+          },
+          {
+            "name": "Communications I (COS115 -D)",
+            "link": "https://drive.google.com/drive/folders/1XAwcZE0ViAKgri47RQPtRicYSWbua1L3?usp=drive_link"
+          }
+        ]
+      },
+      {
+        "title": "Extras & utilities",
+        "mode": "General",
+        "description": "Additional resources: books, formats and guides for various subjects.",
+        "driveLink": "https://drive.google.com/drive/folders/1jXPLOqIRuX-uvDZsgJUQJAujQY7NwMvL?usp=drive_link",
+        "featured": [
+          {
+            "name": "System Design Interview",
+            "link": "https://drive.google.com/file/d/1c9iUwAf2KMpd7mvWbp7kJNDkscLAl0c2/view?usp=drive_link"
+          },
+          {
+            "name": "Frontend Development Projects with Vue.js 3",
+            "link": "https://drive.google.com/file/d/1caUfgKQcWmv-CGBo95FHyarBlx_Mo8Qd/view?usp=drive_link"
+          },
+          {
+            "name": "Laravel Up & Running 3rd Edition",
+            "link": "https://drive.google.com/file/d/1H4kBZhYmyzhfAwXGjLB_9XittuMJlKBq/view?usp=drive_link"
+          }
+        ]
+      }
+    ],
+    "buttons": {
+      "openFolder": "Open folder",
+      "share": "Share resource"
+    },
+    "noteBlock": {
+      "title": "Notes",
+      "body": "This repository is community driven and evolves with student contributions. If you see broken links or want to add material, reach out."
+    }
+  },
+  "footer": {
+    "description": "Full Stack Developer. Designing simple and scalable solutions.",
+    "quickMap": "Sections",
+    "links": {
+      "home": "Home",
+      "projects": "Projects",
+      "ues": "UES resources"
+    },
+    "contact": "Contact",
+    "builtWith": "Made with ❤️ using Vue"
+  }
+}

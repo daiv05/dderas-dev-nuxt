@@ -1,0 +1,7 @@
+.text-muted {
+  color: var(--text-subtle);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}

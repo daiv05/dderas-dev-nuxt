@@ -1,0 +1,77 @@
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--text-subtle);
+}
+
+.section-title {
+  font-size: clamp(2.25rem, 6vw, 3.4rem);
+  letter-spacing: -0.02em;
+}
+
+.section-lead {
+  font-size: 1.15rem;
+  color: var(--text-subtle);
+}
+
+.inline-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.inline-meta span {
+  color: var(--text-subtle);
+}
+
+.plain-sheet {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  background-color: rgba(var(--v-theme-surface), 0.8);
+  padding: 1.5rem;
+}
+
+.list-rows {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.list-rows li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line-soft);
+  padding-bottom: 0.75rem;
+}
+
+.list-rows li:last-child {
+  border-bottom: none;
+}
+
+.chipline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chipline span {
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  padding: 0.3rem 0.95rem;
+  font-size: 0.85rem;
+}
+
+.no-outline-button {
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  font-weight: 600;
+  transition: background-color var(--transition-base);
+}
+
+.no-outline-button:hover {
+  background-color: var(--surface-faint);
+}
