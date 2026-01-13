@@ -41,6 +41,14 @@
   scroll-margin-top: 88px;
   font-family: var(--font-display);
   position: relative;
+  a {
+    color: var(--md-text);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--md-text);
+    text-decoration: underline;
+  }
 }
 
 .markdown-body ul,
@@ -93,7 +101,7 @@
   position: relative;
 }
 
-.markdown-body li input[type='checkbox'] {
+.markdown-body li input[type="checkbox"] {
   position: absolute;
   left: 0.25rem;
   top: 0.35em;
@@ -111,28 +119,18 @@
   color: var(--md-text);
 }
 
-/* 
-.markdown-body code:not(pre code):not(.md-code-block code) {
+/* Código inline */
+.markdown-body code:not(pre code) {
   background: var(--md-code-bg);
   border: 1px solid var(--md-code-border);
   border-radius: 6px;
   padding: 0.1rem 0.35rem;
   font-size: 0.9em;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
   color: var(--md-code-inline-text);
 }
 
-.markdown-body p code,
-.markdown-body li code,
-.markdown-body td code,
-.markdown-body th code {
-  background: var(--md-code-bg);
-  border: 1px solid var(--md-code-border);
-  border-radius: 6px;
-  padding: 0.1rem 0.35rem;
-  font-size: 0.9em;
-}
-
+/* Bloques de código */
 .markdown-body pre {
   background: var(--bg-elevated);
   border: 1px solid var(--md-code-border);
@@ -141,6 +139,7 @@
   padding: 1rem;
 }
 
+/* Code Block wrapper con botón copiar */
 .markdown-body .md-code-block {
   position: relative;
   margin: 1.5rem 0;
@@ -159,29 +158,47 @@
   border-radius: 0;
 }
 
+/* Filename en bloques de código */
+.markdown-body .md-code-filename {
+  padding: 0.75rem 1rem;
+  padding-right: 3.5rem; /* Espacio para el botón */
+  border-bottom: 1px solid var(--md-code-border);
+  background: rgba(var(--v-theme-on-surface), 0.03);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--md-muted);
+}
+
 .markdown-body .md-code-block code {
   font-family: var(--font-mono);
   font-size: 0.875rem;
   line-height: 1.6;
 }
 
+/* Botón de copiar - centrado en el bloque de filename */
 .markdown-body .md-code-copy {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 0.5rem;
+  right: 0.5rem;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-sm);
-  background: var(--bg-mute);
+  background: var(--bg-elevated);
   color: var(--text-subtle);
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 0;
+  opacity: 0;
+}
+
+/* Mostrar botón solo con hover */
+.markdown-body .md-code-block:hover .md-code-copy {
+  opacity: 1;
 }
 
 .markdown-body .md-code-copy:hover {
@@ -244,6 +261,28 @@
   position: relative;
 }
 
+/* Ocultar todos los bloques de código por defecto */
+.markdown-body .md-code-tabs__panels .md-code-block {
+  display: none;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Ocultar filename en code groups (ya está en el tab) */
+.markdown-body
+  .md-code-tabs__panels
+  .md-code-block.in-code-group
+  .md-code-filename {
+  display: none;
+}
+
+/* Mostrar solo el bloque activo */
+.markdown-body .md-code-tabs__panels .md-code-block.is-active {
+  display: block;
+}
+
+/* Para compatibilidad con estructura antigua */
 .markdown-body .md-code-tabs__panels > .md-code-tab {
   display: none;
 }
@@ -267,9 +306,8 @@
   background: transparent;
   border: 0;
   padding: 0;
-} */
-
-html.dark .shiki,
+}
+*/ html.dark .shiki,
 html.dark .shiki span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
@@ -339,4 +377,53 @@ html.dark .shiki span {
   opacity: 0;
   transition: opacity var(--transition-fast);
   font-weight: 400;
+}
+.markdown-body h1:hover .md-anchor,
+.markdown-body h2:hover .md-anchor,
+.markdown-body h3:hover .md-anchor,
+.markdown-body h4:hover .md-anchor,
+.markdown-body h5:hover .md-anchor,
+.markdown-body h6:hover .md-anchor {
+  opacity: 1;
+}
+
+.markdown-body .md-anchor:hover {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.md-toc {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  background: var(--bg-soft);
+  margin: 2rem 0;
+}
+
+.md-toc > ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 0;
+}
+
+.md-toc ul ul {
+  list-style: none !important;
+  padding-left: 1.5rem !important;
+  margin-top: 0.5rem;
+}
+
+.md-toc li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.md-toc a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.md-toc a:hover {
+  color: var(--link);
+  text-decoration: underline;
 }

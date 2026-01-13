@@ -47,7 +47,7 @@ In this guide we'll use JavaScript to keep things simple.
 
 The fastest way to start a Vue 3 project with Vite is using the command (you can run it in any folder where you want to create the project, use VS Code's integrated terminal or your favorite terminal):
 
-```js [file.sh]{1} meta-info=val
+```bash
 npm create vue@latest
 ```
 
