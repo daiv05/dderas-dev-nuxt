@@ -3,7 +3,7 @@
     <div class="about-grid">
       <div ref="profileSection" class="profile-column">
         <div class="profile-card">
-          <img src="/img/me/me.png" :alt="contactInfo.name" />
+          <img src="/img/me/me.webp" :alt="contactInfo.name" />
           <ul class="fact-list">
             <li v-for="fact in quickFacts" :key="fact.label">
               <span class="label">{{ fact.label }}</span>

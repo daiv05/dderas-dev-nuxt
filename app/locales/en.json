@@ -56,7 +56,7 @@
         "DDeras"
       ],
       "author": "David Deras",
-      "ogImage": "https://deras.dev/punpun_OG.jpg",
+      "ogImage": "https://deras.dev/punpun_OG.webp",
       "ogImageAlt": "Projects and tutorials"
     },
     "pages": {
@@ -375,7 +375,7 @@
         "description": "A space dedicated to continuous learning. Here I centralize my study notes, links, bookmarks and development resources.",
         "link": "https://deras.notion.site/DV-Learning-2d841cf3400a80e189d2d3c977c7c262",
         "linkText": "Explore Notion",
-        "image": "/img/resources/dv-learning.png"
+        "image": "/img/resources/dv-learning.webp"
       },
       {
         "type": "study",
@@ -383,7 +383,7 @@
         "description": "Collaborative academic material for Computer Systems Engineering: tests, labs, tutorials and guides organized by modality.",
         "link": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
         "linkText": "Open repository",
-        "image": "/img/resources/ues-wall.jpg",
+        "image": "/img/resources/ues-wall.webp",
         "subcategories": [
           {
             "name": "On-campus modality",
@@ -407,7 +407,7 @@
         "type": "books",
         "title": "Recommended books",
         "description": "Selection of technical reads that have influenced how I develop software and understand systems.",
-        "image": "/img/resources/books.jpg",
+        "image": "/img/resources/books.webp",
         "items": [
           {
             "title": "System Design Interview",

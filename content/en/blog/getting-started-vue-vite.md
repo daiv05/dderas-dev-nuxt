@@ -5,7 +5,7 @@ slug: 'getting-started-vue-vite'
 date: 2025-12-04
 summary: 'A complete guide to configure your first Vue 3 project with Vite, including best practices and modern tools.'
 tags: ['Vue.js', 'Vite', 'Tailwind CSS']
-image: /blog/getting-started-vue-vite/shared/vite+vue.png
+image: /blog/getting-started-vue-vite/shared/vite+vue.webp
 author: David Deras
 lastmod: 2025-12-22
 ---
@@ -53,17 +53,17 @@ npm create vue@latest
 
 If it's the first time you use it, it will ask if you want to install the `create-vue` package. Answer yes (type `y` and press ENTER).
 
-![Installing create-vue](/blog/getting-started-vue-vite/shared/install-create-vue-package.png)
+![Installing create-vue](/blog/getting-started-vue-vite/shared/install-create-vue-package.webp)
 _Installing package: create-vue_
 
 It will ask you for the project name, type the name you want:
 
-![Project name](/blog/getting-started-vue-vite/shared/project-name.png)
+![Project name](/blog/getting-started-vue-vite/shared/project-name.webp)
 _Give your project a name_
 
 Then select the options you need:
 
-![Project options](/blog/getting-started-vue-vite/shared/project-options.png)
+![Project options](/blog/getting-started-vue-vite/shared/project-options.webp)
 _Available features when creating a Vue app_
 
 Let's go point by point (as shown in the image, we move with the arrow keys and select with the spacebar):
@@ -79,7 +79,7 @@ Let's go point by point (as shown in the image, we move with the arrow keys and 
 
 Press ENTER and now it will ask about some experimental Vite features:
 
-![Experimental Vite features](/blog/getting-started-vue-vite/shared/project-experimental-options.png)
+![Experimental Vite features](/blog/getting-started-vue-vite/shared/project-experimental-options.webp)
 _Vite experimental features_
 
 1. **Oxlint**: is a new linter, part of <a target="_blank" href="https://oxc.rs/" rel="noopener noreferrer">OXC</a>, a new collection of JavaScript tools written in Rust, Oxlint is extremely fast and shows promise, however as mentioned on its website, it still has some issues, so for now I recommend continuing to use ESLint. We ignore this option.
@@ -91,7 +91,7 @@ It will ask if you want to start with a completely blank project or with example
 
 Vite will create the initial project structure and give us some useful commands, let's run them one by one:
 
-![Project created](/blog/getting-started-vue-vite/shared/project-created.png)
+![Project created](/blog/getting-started-vue-vite/shared/project-created.webp)
 _Project created_
 
 1. First we navigate to the project folder:
@@ -118,7 +118,7 @@ npm run format
 npm run dev
 ```
 
-![Development server running](/blog/getting-started-vue-vite/shared/dev-server-running.png)
+![Development server running](/blog/getting-started-vue-vite/shared/dev-server-running.webp)
 _Development server running_
 
 Vite runs the development server at `http://localhost:5173/` (the port may vary if 5173 is already in use (5174, 5175, etc.)).
@@ -134,7 +134,7 @@ Vite runs the development server at `http://localhost:5173/` (the port may vary 
 
 If we go to that URL in our browser, we'll see the Vue app running:
 
-![Vue app running](/blog/getting-started-vue-vite/shared/vue-app-running.png)
+![Vue app running](/blog/getting-started-vue-vite/shared/vue-app-running.webp)
 _Vue app running_
 
 The Vue team shares several official resources to learn more about the framework, starting with the <a target="_blank" href="https://vuejs.org/guide/introduction.html" rel="noopener noreferrer">official documentation</a>. Explore each link to learn about the entire ecosystem.
@@ -173,7 +173,7 @@ my-vue-app/
 
 The structure may vary slightly depending on the options selected when creating the project (for example, whether or not ESLint or Pinia is included). Also, if you're using VS Code you probably see the `.vscode/` folder with specific editor settings and some files you see "grouped":
 
-![Project structure in VS Code](/blog/getting-started-vue-vite/shared/project-structure-nested.png)
+![Project structure in VS Code](/blog/getting-started-vue-vite/shared/project-structure-nested.webp)
 _Project structure in VS Code_
 
 This is just a visual way that VS Code has to organize files, you can display them individually (my preference) by changing the value of `"explorer.fileNesting.enabled"` to `false` in the `.vscode\settings.json` file.
@@ -423,7 +423,7 @@ Let's review the complete flow:
 2. In `main.js`, the Vue application is created with `App.vue` as the root component (apart from importing styles, configuring Pinia, Vue Router and other configurations).
 3. `App.vue` defines the main structure of the application (like a main layout) and uses `<RouterView />` to render views based on the current route.
 
-![Flow of a Vue app](/blog/getting-started-vue-vite/en/explaining-vue-app.png)
+![Flow of a Vue app](/blog/getting-started-vue-vite/en/explaining-vue-app.webp)
 _Flow of a Vue app_
 
 This means that everything you see inside `App.vue` will always be present (like the header and navigation menu), while the main content will be displayed inside `<RouterView />` and will change depending on the current route, thanks to our router.
@@ -630,7 +630,7 @@ Recommended readings:
 
 <a href="https://vueuse.org/" target="_blank" rel="noopener noreferrer">VueUse</a> is a collection of composables for Vue 3. It provides a wide range of ready-to-use features, from state management to DOM interactions and browser APIs. You can explore the official documentation to see all available composables and how to use them in your projects.
 
-![VueUse](/blog/getting-started-vue-vite/shared/vue-use.png)
+![VueUse](/blog/getting-started-vue-vite/shared/vue-use.webp)
 _VueUse_
 
 Some popular examples of composables in VueUse include:

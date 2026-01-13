@@ -5,7 +5,7 @@ slug: 'getting-started-vue-vite'
 date: 2025-12-04
 summary: 'Una guía completa para configurar tu primer proyecto Vue 3 con Vite, incluyendo mejores prácticas y herramientas modernas.'
 tags: ['Vue.js', 'Vite', 'Tailwind CSS']
-image: /blog/getting-started-vue-vite/shared/vite+vue.png
+image: /blog/getting-started-vue-vite/shared/vite+vue.webp
 author: David Deras
 lastmod: 2025-12-22
 ---
@@ -53,17 +53,17 @@ npm create vue@latest
 
 Si es primera vez que lo usas, te preguntará si deseas instalar el paquete `create-vue`. Responde que sí (escribimos `y` y damos ENTER).
 
-![Instalando create-vue](/blog/getting-started-vue-vite/shared/install-create-vue-package.png)
+![Instalando create-vue](/blog/getting-started-vue-vite/shared/install-create-vue-package.webp)
 _Instalando paquete: create-vue_
 
 Nos preguntará por el nombre del proyecto, escribe el nombre que quieras:
 
-![Nombre del proyecto](/blog/getting-started-vue-vite/shared/project-name.png)
+![Nombre del proyecto](/blog/getting-started-vue-vite/shared/project-name.webp)
 _Asígnale un nombre a tu proyecto_
 
 Luego selecciona las opciones que necesites:
 
-![Opciones del proyecto](/blog/getting-started-vue-vite/shared/project-options.png)
+![Opciones del proyecto](/blog/getting-started-vue-vite/shared/project-options.webp)
 _Features disponibles al crear una app Vue_
 
 Vamos punto por punto (tal como se muestra en la imagen, nos movemos con las flechas y seleccionamos con la barra espaciadora):
@@ -79,7 +79,7 @@ Vamos punto por punto (tal como se muestra en la imagen, nos movemos con las fle
 
 Presionamos ENTER y ahora nos preguntará sobre algunas features experimentales de Vite:
 
-![Features experimentales de Vite](/blog/getting-started-vue-vite/shared/project-experimental-options.png)
+![Features experimentales de Vite](/blog/getting-started-vue-vite/shared/project-experimental-options.webp)
 _Features experimentales de Vite_
 
 1. **Oxlint**: es un nuevo linter, parte de <a target="_blank" href="https://oxc.rs/" rel="noopener noreferrer">OXC</a>, una nueva colección de herramientas de javascript escritas en Rust, Oxlint es en extremo rápido y promete bastante, sin embargo como se menciona en su web, aún tiene sus detalles, así que por ahora recomiendo seguir usando ESLint. Ignoramos esta opción.
@@ -91,7 +91,7 @@ Nos preguntará si queremos empezar con un proyecto totalmente en blanco o con e
 
 Vite creará la estructura inicial del proyecto y nos dará algunos comandos útiles, vamos ejecutando uno por uno:
 
-![Proyecto creado](/blog/getting-started-vue-vite/shared/project-created.png)
+![Proyecto creado](/blog/getting-started-vue-vite/shared/project-created.webp)
 _Proyecto creado_
 
 1. Primero navegamos a la carpeta del proyecto:
@@ -118,7 +118,7 @@ npm run format
 npm run dev
 ```
 
-![Servidor de desarrollo corriendo](/blog/getting-started-vue-vite/shared/dev-server-running.png)
+![Servidor de desarrollo corriendo](/blog/getting-started-vue-vite/shared/dev-server-running.webp)
 _Servidor de desarrollo levantado_
 
 Vite corre el servidor de desarrollo en `http://localhost:5173/` (el puerto puede variar si el 5173 ya está en uso (5174, 5175, etc.) ).
@@ -134,7 +134,7 @@ Vite corre el servidor de desarrollo en `http://localhost:5173/` (el puerto pued
 
 Si entramos a esa URL en nuestro navegador, veremos la app Vue corriendo:
 
-![App Vue corriendo](/blog/getting-started-vue-vite/shared/vue-app-running.png)
+![App Vue corriendo](/blog/getting-started-vue-vite/shared/vue-app-running.webp)
 _App Vue corriendo_
 
 El equipo de Vue comparte varios recursos oficiales para aprender más sobre el framework, comenzando por la <a target="_blank" href="https://vuejs.org/guide/introduction.html" rel="noopener noreferrer">documentación oficial</a>. Explora cada enlace para aprender y conocer sobre todo el ecosistema.
@@ -173,7 +173,7 @@ my-vue-app/
 
 La estructura puede variar ligeramente dependiendo de las opciones seleccionadas al crear el proyecto (por ejemplo, si se incluye o no ESLint o Pinia). Además, si estás usando VS Code es probable que veas la carpeta `.vscode/` con configuraciones específicas para el editor y que algunos archivos los veas "agrupados":
 
-![Estructura del proyecto en VS Code](/blog/getting-started-vue-vite/shared/project-structure-nested.png)
+![Estructura del proyecto en VS Code](/blog/getting-started-vue-vite/shared/project-structure-nested.webp)
 _Estructura del proyecto en VS Code_
 
 Esto es solo una forma visual que tiene VS Code para organizar los archivos, puedes mostrarlos individualmente (opción que prefiero) cambiando el valor de `"explorer.fileNesting.enabled"` a `false` en el archivo `.vscode\settings.json`.
@@ -418,7 +418,7 @@ Repasemos el flujo completo:
 2. En `main.js`, se crea la aplicación Vue con `App.vue` como componente raíz (a parte de importar estilos, configurar Pinia, Vue Router y otras configuraciones).
 3. `App.vue` define la estructura principal de la aplicación (como un layout principal) y utiliza `<RouterView />` para renderizar las vistas según la ruta actual.
 
-![Flujo de una app Vue](/blog/getting-started-vue-vite/es/explaining-vue-app.png)
+![Flujo de una app Vue](/blog/getting-started-vue-vite/es/explaining-vue-app.webp)
 _Flujo de una app Vue_
 
 Esto quiere decir que todo lo que veas dentro de `App.vue` estará siempre presente (como el header y el menú de navegación), mientras que el contenido principal se mostrará dentro de `<RouterView />` y cambiará dependiendo de la ruta actual, gracias a nuestro router.
@@ -621,7 +621,7 @@ Lecturas recomendadas:
 
 <a href="https://vueuse.org/" target="_blank" rel="noopener noreferrer">VueUse</a> es una colección de composables para Vue 3. Proporciona una amplia gama de funcionalidades listas para usar, desde manejo de estado hasta interacciones con el DOM y APIs del navegador. Puedes explorar la documentación oficial para ver todos los composables disponibles y cómo usarlos en tus proyectos.
 
-![VueUse](/blog/getting-started-vue-vite/shared/vue-use.png)
+![VueUse](/blog/getting-started-vue-vite/shared/vue-use.webp)
 _VueUse_
 
 Algunos ejemplos populares de composables en VueUse incluyen:

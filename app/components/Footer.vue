@@ -15,7 +15,7 @@
           <NuxtLink :to="localePath('/projects')">
             {{ t('footer.links.projects') }}
           </NuxtLink>
-          <NuxtLink :to="localePath('/resources')">{{ t('footer.links.ues') }}</NuxtLink>
+          <NuxtLink :to="localePath('/resources')">{{ t('footer.links.resources') }}</NuxtLink>
         </div>
       </div>
 

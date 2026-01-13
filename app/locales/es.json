@@ -56,7 +56,7 @@
         "DDeras"
       ],
       "author": "David Deras",
-      "ogImage": "https://deras.dev/punpun_OG.jpg",
+      "ogImage": "https://deras.dev/punpun_OG.webp",
       "ogImageAlt": "Proyectos y artículos técnicos"
     },
     "pages": {
@@ -419,7 +419,7 @@
         "description": "Un espacio dedicado al aprendizaje continuo. Aquí centralizo mis notas de estudio, enlaces, bookmarks y recursos de desarrollo.",
         "link": "https://deras.notion.site/DV-Learning-2d841cf3400a80e189d2d3c977c7c262",
         "linkText": "Explorar Notion",
-        "image": "/img/resources/dv-learning.png"
+        "image": "/img/resources/dv-learning.webp"
       },
       {
         "type": "study",
@@ -427,7 +427,7 @@
         "description": "Material académico colaborativo para Ingeniería de Sistemas: parciales, laboratorios, tutorías y guías organizadas por modalidad.",
         "link": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
         "linkText": "Abrir repositorio",
-        "image": "/img/resources/ues-wall.jpg",
+        "image": "/img/resources/ues-wall.webp",
         "subcategories": [
           {
             "name": "Modalidad presencial",
@@ -451,7 +451,7 @@
         "type": "books",
         "title": "Libros recomendados",
         "description": "Lecturas técnicas fundamentales que han moldeado mi criterio como desarrollador.",
-        "image": "/img/resources/books.jpg",
+        "image": "/img/resources/books.webp",
         "items": [
           {
             "title": "System Design Interview",

@@ -18,7 +18,7 @@
       >
         <div class="card-image-container">
           <v-img
-            :src="media(project)[0] || '/img/placeholder.jpg'"
+            :src="media(project)[0] || '/img/placeholder.webp'"
             :alt="project.name"
             class="card-image"
             cover
