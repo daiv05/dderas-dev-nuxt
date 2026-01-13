@@ -1,67 +1,132 @@
 <template>
-  <section class="ues-section">
-    <div class="ues-header">
-      <p ref="label" class="eyebrow">{{ t('ues.eyebrow') }}</p>
-      <h2 ref="titleEl" class="section-title">{{ t('ues.title') }}</h2>
+  <section class="resources-section">
+    <!-- Header -->
+    <div class="resources-header">
+      <div ref="label" class="eyebrow-container">
+        <p class="eyebrow">{{ t('resources.eyebrow') }}</p>
+      </div>
+      <h2 ref="titleEl" class="section-title">{{ t('resources.title') }}</h2>
       <p ref="descriptionEl" class="section-lead">
-        {{ t('ues.lead') }}
+        {{ t('resources.lead') }}
       </p>
     </div>
 
-    <div ref="gridRef" class="ues-grid">
-      <v-sheet
+    <!-- Main Grid -->
+    <div ref="gridRef" class="resources-grid">
+      <div
         v-for="category in categories"
-        :key="category.title"
+        :key="category.type"
         :ref="setPanelRef"
-        class="ues-panel"
-        elevation="0"
-        rounded="xl"
+        class="resource-card-wrapper"
       >
-        <div class="panel-head">
-          <span class="mono">{{ category.mode }}</span>
-          <strong>{{ category.title }}</strong>
+        <div v-if="category.type !== 'tools'" :class="['resource-block', `type-${category.type}`]">
+          <!-- Illustration Area (Left/Top) -->
+          <div class="block-visual">
+            <img 
+              v-if="category.image" 
+              :src="category.image" 
+              :alt="category.title" 
+              class="block-image"
+            />
+          </div>
+
+          <!-- Content Area -->
+          <div class="block-content">
+            <h3 class="block-title">{{ category.title }}</h3>
+            <p class="block-desc">{{ category.description }}</p>
+
+            <!-- Subcategories for Study -->
+            <div v-if="category.subcategories" class="list-preview">
+               <span v-for="sub in category.subcategories" :key="sub.name" class="list-chip">
+                  <v-icon start size="14" :icon="mdiFolderOutline"></v-icon>
+                  {{ sub.name }}
+               </span>
+            </div>
+
+            <!-- Enhanced Book List -->
+             <div v-if="category.items" class="books-grid">
+                <a
+                  v-for="book in category.items" 
+                  :key="book.title" 
+                  :href="book.link"
+                  target="_blank"
+                  class="book-item-card"
+                >
+                  <div class="book-cover-placeholder">
+                    <img v-if="book.image" :src="book.image" :alt="book.title" class="book-cover-img" />
+                    <v-icon v-else size="24" :icon="mdiBookOutline" class="book-icon"></v-icon>
+                  </div>
+                  <div class="book-details">
+                    <strong class="book-title">{{ book.title }}</strong>
+                    <span class="book-author">{{ book.author }}</span>
+                    <p v-if="book.recommendation" class="book-rec">
+                      "{{ book.recommendation }}"
+                    </p>
+                  </div>
+                </a>
+             </div>
+            
+            <v-btn
+              v-if="category.link"
+              class="block-action mt-4"
+              variant="text"
+              color="primary"
+              :href="category.link"
+              target="_blank"
+              rounded="pill"
+            >
+              {{ category.linkText || t('common.viewMore') }}
+              <v-icon end :icon="mdiArrowRight"></v-icon>
+            </v-btn>
+          </div>
         </div>
-        <p>{{ category.description }}</p>
-        <ul class="resource-list">
-          <li v-for="item in category.featured" :key="item.name">
-            <a :href="item.link" target="_blank">{{ item.name }}</a>
-          </li>
-        </ul>
-        <v-btn class="text-none" variant="outlined" rounded="pill" :href="category.driveLink" target="_blank">
-          {{ t('ues.buttons.openFolder') }}
-        </v-btn>
-      </v-sheet>
+      </div>
     </div>
 
-    <v-sheet class="ues-disclaimer" elevation="0">
+    <v-sheet ref="ctaSection" class="collab-panel" elevation="0">
       <div>
-        <h3>{{ t('ues.noteBlock.title') }}</h3>
+        <h3>{{ t('resources.noteBlock.title') }}</h3>
         <p>
-          {{ t('ues.noteBlock.body') }}
+          {{ t('resources.noteBlock.body') }}
         </p>
       </div>
-      <v-btn class="text-none" variant="text" rounded="pill" :href="`mailto:${contactInfo.email}`">
-        {{ t('ues.buttons.share') }}
+      <v-btn class="text-none" variant="outlined" rounded="pill" size="large" :href="`mailto:${contactInfo.email}`">
+        {{ t('about.buttons.contact') }}
       </v-btn>
     </v-sheet>
   </section>
 </template>
 
 <script setup lang="ts">
-import { useEnterAnimations } from '~/composables/useEnterAnimations';
-import { contactInfo } from '~/data/contact';
+import { mdiArrowRight, mdiBookOutline, mdiFolderOutline } from '@mdi/js'
+import { useEnterAnimations } from '~/composables/useEnterAnimations'
+import { contactInfo } from '~/data/contact'
 
-interface ResourceItem {
-  name: string;
-  link: string;
-}
-
-interface Category {
-  title: string;
-  mode: string;
-  description: string;
-  featured: ResourceItem[];
-  driveLink: string;
+interface ResourceCategory {
+  type: string
+  title: string
+  description: string
+  image?: string // Agregado tipo image
+  link?: string
+  linkText?: string
+  tags?: string[]
+  subcategories?: Array<{
+    name: string
+    items: string[]
+  }>
+  items?: Array<{
+    title: string
+    author: string
+    description: string
+    recommendation?: string
+    image?: string
+    link: string
+  }>
+  links?: Array<{
+    name: string
+    description: string
+    url: string
+  }>
 }
 
 const {
@@ -72,30 +137,78 @@ const {
   resetPanelRefs,
   setupEnterAnimations,
   cleanupEnterAnimations,
-} = useEnterAnimations();
+} = useEnterAnimations()
 
-const gridRef = ref<HTMLElement | null>(null);
-const { t, tm, rt } = useI18n();
+const gridRef = ref<HTMLElement | null>(null)
+const { t, tm, rt } = useI18n()
 
-const categories = computed<Category[]>(() => {
-  const raw = tm('ues.categories');
-  if (!Array.isArray(raw)) return [];
-  
-  return raw.map((cat) => ({
-    title: rt(cat.title),
-    mode: rt(cat.mode),
-    description: rt(cat.description),
-    featured: (cat.featured).map((item) => ({
-      name: rt(item.name),
-      link: rt(item.link)
-    })),
-    driveLink: rt(cat.driveLink)
-  }));
-});
+const categories = computed<ResourceCategory[]>(() => {
+  const raw = tm('resources.categories')
+  if (!Array.isArray(raw)) return []
+
+  return raw.map((cat: any) => {
+    const base: any = {
+      type: rt(cat.type),
+      title: rt(cat.title),
+      description: rt(cat.description),
+    }
+
+    if (cat.image) {
+      base.image = rt(cat.image)
+    }
+
+    if (cat.link) {
+      Object.assign(base, {
+        link: rt(cat.link),
+        linkText: rt(cat.linkText),
+      })
+    }
+
+    if (cat.tags) {
+      Object.assign(base, {
+        tags: cat.tags.map((tag: any) => rt(tag)),
+      })
+    }
+
+    if (cat.subcategories) {
+      Object.assign(base, {
+        subcategories: cat.subcategories.map((sub: any) => ({
+          name: rt(sub.name),
+          items: sub.items.map((item: any) => rt(item)),
+        })),
+      })
+    }
+
+    if (cat.items) {
+      Object.assign(base, {
+        items: cat.items.map((item: any) => ({
+          title: rt(item.title),
+          author: rt(item.author),
+          description: rt(item.description),
+          recommendation: rt(item.recommendation),
+          image: item.image,
+          link: rt(item.link),
+        })),
+      })
+    }
+
+    if (cat.links) {
+      Object.assign(base, {
+        links: cat.links.map((link: any) => ({
+          name: rt(link.name),
+          description: rt(link.description),
+          url: rt(link.url),
+        })),
+      })
+    }
+
+    return base as ResourceCategory
+  })
+})
 
 onBeforeUpdate(() => {
-  resetPanelRefs();
-});
+  resetPanelRefs()
+})
 
 onMounted(() => {
   nextTick(() => {
@@ -104,74 +217,249 @@ onMounted(() => {
       panelsStart: 'top 85%',
       headerTrigger: titleEl.value,
       panelsTrigger: gridRef.value,
-    });
-  });
-});
+    })
+  })
+})
 
 onBeforeUnmount(() => {
-  cleanupEnterAnimations();
-});
+  cleanupEnterAnimations()
+})
+
+useSeoMeta({
+  title: () => t('seo.pages.resources.title'),
+  description: () => t('seo.pages.resources.description'),
+  ogTitle: () => t('seo.pages.resources.title'),
+  ogDescription: () => t('seo.pages.resources.description'),
+})
 </script>
 
 <style scoped lang="scss">
-.ues-section {
+.resources-section {
   padding: var(--section-gap) var(--shell-padding);
+  overflow: hidden;
 }
 
-.ues-header {
-  max-width: 780px;
-  margin: 0 auto 2.5rem;
+.resources-header {
+  max-width: 800px;
+  margin: 0 auto 5rem;
   text-align: center;
 }
 
-.ues-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.ues-panel {
-  border: 1px solid var(--line-soft) !important;
-  background: rgba(var(--v-theme-surface), 0.7);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
+.eyebrow-container {
+  display: inline-flex;
+  align-items: center;
   gap: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
-.panel-head {
+.eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgb(var(--v-theme-primary));
+}
+
+.resources-grid {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 6rem;
+  max-width: 900px;
+  margin: 0 auto 6rem;
 }
 
-.resource-list {
-  list-style: none;
-  padding: 0;
+.resource-card-wrapper {
+  width: 100%;
+}
+
+.resource-block {
+  display: grid;
+  gap: 2rem;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: 240px 1fr;
+    gap: 3rem;
+  }
+}
+
+// Visual Area
+.block-visual {
+  height: 200px;
+  background: var(--surface-faint);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  
+  @media (min-width: 768px) {
+    height: 240px;
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+.block-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+}
+
+// Content Area
+.block-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.block-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.block-desc {
+  color: var(--text-subtle);
+  line-height: 1.7;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.block-action {
+  align-self: flex-start;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 0 1.5rem;
+}
+
+// Subcategories chips
+.list-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.list-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line-soft);
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+// Books Grid
+.books-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.book-item-card {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--surface-faint);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--bg-elevated);
+    border-color: var(--line-soft);
+    transform: translateY(-2px);
+    
+    .book-title { color: rgb(var(--v-theme-primary)); }
+  }
+}
+
+.book-cover-placeholder {
+  width: 60px;
+  height: 80px;
+  background: var(--surface-mild);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-subtle);
+  overflow: hidden;
+}
+
+.book-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-title {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.book-author {
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  margin-bottom: 0.75rem;
+}
+
+.book-rec {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-subtle);
+  font-style: italic;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  position: relative;
+  padding-left: 0.75rem;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--line-soft);
+  }
 }
 
-.resource-list a {
-  text-decoration: underline;
-}
-
-.ues-disclaimer {
+.collab-panel {
   border: 1px solid var(--line-strong) !important;
   border-radius: var(--radius-lg);
   padding: 1.5rem 2rem;
-  background: rgba(var(--v-theme-surface), 0.7);
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 1.5rem;
+  background: rgba(var(--v-theme-surface), 0.7);
+}
+
+.collab-panel h3 {
+  margin-bottom: 0.5rem;
+}
+
+.collab-panel p {
+  color: var(--text-subtle);
+  max-width: 520px;
 }
 
 @media (max-width: 768px) {
-  .ues-disclaimer {
+  .collab-panel {
     flex-direction: column;
     align-items: flex-start;
   }

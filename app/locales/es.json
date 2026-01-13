@@ -22,7 +22,7 @@
       "about": "Sobre mí",
       "projects": "Proyectos",
       "blog": "Blog",
-      "ues": "Recursos UES"
+      "resources": "Recursos"
     },
     "backToMain": "Portafolio",
     "backToBlog": "Inicio",
@@ -99,14 +99,15 @@
           "Desarrollo web"
         ]
       },
-      "ues": {
-        "title": "Recursos UES",
-        "description": "Material académico organizado para estudiantes de Ingeniería de Sistemas.",
+      "resources": {
+        "title": "Recursos",
+        "description": "Colección de recursos útiles: Notion, material académico, libros y herramientas.",
         "keywords": [
           "Recursos",
-          "UES",
-          "Ingeniería",
-          "Ingeniería de Sistemas"
+          "Notion",
+          "Libros",
+          "Herramientas",
+          "UES"
         ]
       }
     }
@@ -407,80 +408,77 @@
       "year": "Año"
     }
   },
-  "ues": {
-    "eyebrow": "Recursos UES",
-    "title": "Repositorio colaborativo",
-    "lead": "Material académico para Ingeniería de Sistemas. Todo organizado por modalidad.",
+  "resources": {
+    "eyebrow": "Recursos útiles",
+    "title": "Herramientas y conocimiento",
+    "lead": "Colección de recursos que uso y recomiendo: desde mi sistema de organización hasta material académico y lecturas técnicas.",
     "categories": [
       {
-        "title": "Modalidad presencial",
-        "mode": "Campus",
-        "description": "Parciales, laboratorios y resúmenes de asignaturas impartidas en aula (ver materias sin '- D' al final).",
-        "driveLink": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
-        "featured": [
+        "type": "notion",
+        "title": "DV Learning (Notion)",
+        "description": "Un espacio dedicado al aprendizaje continuo. Aquí centralizo mis notas de estudio, enlaces, bookmarks y recursos de desarrollo.",
+        "link": "https://deras.notion.site/DV-Learning-2d841cf3400a80e189d2d3c977c7c262",
+        "linkText": "Explorar Notion",
+        "image": "/img/resources/dv-learning.png"
+      },
+      {
+        "type": "study",
+        "title": "Recursos UES",
+        "description": "Material académico colaborativo para Ingeniería de Sistemas: parciales, laboratorios, tutorías y guías organizadas por modalidad.",
+        "link": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
+        "linkText": "Abrir repositorio",
+        "image": "/img/resources/ues-wall.jpg",
+        "subcategories": [
           {
-            "name": "Estructura de Datos (ESD115) · Material",
-            "link": "https://drive.google.com/drive/folders/1_Wk8OUpedalm-nH1Hgzh4sVXz4bxP6hz?usp=drive_link"
+            "name": "Modalidad presencial",
+            "items": [
+              "Estructura de Datos (ESD115)",
+              "Herramientas de Productividad (HDP115)",
+              "Diseño de Sistemas I (DSI115)"
+            ]
           },
           {
-            "name": "Herramientas de Productividad (HDP115) · Clases",
-            "link": "https://drive.google.com/drive/folders/1KAQVYhFv5-3MWxEref72lUzQc-sOhFZn?usp=drive_link"
-          },
-          {
-            "name": "Diseño de Sistemas I (DSI115) · Material",
-            "link": "https://drive.google.com/drive/folders/1IG_0YzshQNSIfTUo3Zu_yH0GyrXOgwPw?usp=drive_link"
+            "name": "Modalidad a distancia",
+            "items": [
+              "Sistemas Operativos (SIO115-D)",
+              "Comercio Electrónico (CET115-D)",
+              "Comunicaciones I (COS115-D)"
+            ]
           }
         ]
       },
       {
-        "title": "Modalidad a distancia",
-        "mode": "Virtual",
-        "description": "Tutorías grabadas, guías y material diseñado para autoestudio (materias con '- D')",
-        "driveLink": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
-        "featured": [
+        "type": "books",
+        "title": "Libros recomendados",
+        "description": "Lecturas técnicas fundamentales que han moldeado mi criterio como desarrollador.",
+        "image": "/img/resources/books.jpg",
+        "items": [
           {
-            "name": "Sistemas Operativos (SIO115 -D)",
-            "link": "https://drive.google.com/drive/folders/1AqxsN-dWjaTkj7tI9WuEt6kgwglLip4I?usp=drive_link"
-          },
-          {
-            "name": "Comercio Electrónico (CET115 -D)",
-            "link": "https://drive.google.com/drive/folders/1DTjafl8XO2Ri__3DrA6BxQHV-WFtCvj1?usp=drive_link"
-          },
-          {
-            "name": "Comunicaciones I (COS115 -D)",
-            "link": "https://drive.google.com/drive/folders/1XAwcZE0ViAKgri47RQPtRicYSWbua1L3?usp=drive_link"
-          }
-        ]
-      },
-      {
-        "title": "Extras y utilidades",
-        "mode": "General",
-        "description": "Recursos adicionales: libros, formatos y guías sobre diversos temas.",
-        "driveLink": "https://drive.google.com/drive/folders/1jXPLOqIRuX-uvDZsgJUQJAujQY7NwMvL?usp=drive_link",
-        "featured": [
-          {
-            "name": "System Design Interview",
+            "title": "System Design Interview",
+            "author": "Alex Xu",
+            "description": "Guía práctica para diseñar sistemas escalables.",
+            "recommendation": "Indispensable para entender la 'big picture' de la arquitectura de software moderna. Explica conceptos complejos con diagramas muy claros.",
             "link": "https://drive.google.com/file/d/1c9iUwAf2KMpd7mvWbp7kJNDkscLAl0c2/view?usp=drive_link"
           },
           {
-            "name": "Frontend Development Projects with Vue.js 3",
-            "link": "https://drive.google.com/file/d/1caUfgKQcWmv-CGBo95FHyarBlx_Mo8Qd/view?usp=drive_link"
-          },
-          {
-            "name": "Laravel Up & Running 3rd Edition",
+            "title": "Laravel Up & Running",
+            "author": "Matt Stauffer",
+            "description": "Referencia completa para desarrollo con Laravel.",
+            "recommendation": "La biblia de Laravel. Aunque la documentación oficial es excelente, este libro profundiza en el 'por qué' de muchas cosas.",
             "link": "https://drive.google.com/file/d/1H4kBZhYmyzhfAwXGjLB_9XittuMJlKBq/view?usp=drive_link"
           }
         ]
       }
     ],
-    "buttons": {
-      "openFolder": "Abrir carpeta",
-      "share": "Compartir recurso"
-    },
     "noteBlock": {
-      "title": "Notas",
-      "body": "Este repositorio es comunitario y evoluciona con aportes estudiantiles. Si ves enlaces rotos o quieres sumar material, escríbeme."
+      "title": "Contribuciones",
+      "body": "El repositorio UES es comunitario. Si encuentras enlaces rotos o quieres aportar material, no dudes en contactarme."
     }
+  },
+  "ues": {
+    "eyebrow": "Recursos UES",
+    "title": "Repositorio colaborativo",
+    "lead": "Material académico para Ingeniería de Sistemas. Todo organizado por modalidad."
   },
   "footer": {
     "description": "Full Stack Developer. Diseñando soluciones simples y escalables.",
@@ -488,7 +486,7 @@
     "links": {
       "home": "Inicio",
       "projects": "Proyectos",
-      "ues": "Recursos UES"
+      "resources": "Recursos"
     },
     "contact": "Contacto",
     "builtWith": "Hecho con ❤️ usando Vue"

@@ -22,7 +22,7 @@
       "about": "About me",
       "projects": "Projects",
       "blog": "Blog",
-      "ues": "UES resources"
+      "resources": "Resources"
     },
     "backToMain": "Portfolio",
     "backToBlog": "Home",
@@ -86,14 +86,15 @@
         "description": "Notes, guides and solutions about web development that I use daily.",
         "keywords": ["Technical blog", "Vue", "Laravel", "Web development"]
       },
-      "ues": {
-        "title": "UES resources",
-        "description": "Academic material organized for Computer Systems Engineering students.",
+      "resources": {
+        "title": "Resources",
+        "description": "Collection of useful resources: Notion, academic material, books and tools.",
         "keywords": [
           "Resources",
-          "UES",
-          "Engineering",
-          "Computer Systems Engineering"
+          "Notion",
+          "Books",
+          "Tools",
+          "UES"
         ]
       }
     }
@@ -363,80 +364,77 @@
       "year": "Year"
     }
   },
-  "ues": {
-    "eyebrow": "UES resources",
-    "title": "Collaborative repository",
-    "lead": "Academic material for Computer Systems Engineering. Everything organized by modality.",
+  "resources": {
+    "eyebrow": "Useful resources",
+    "title": "Tools & knowledge",
+    "lead": "Collection of resources I use and recommend: from my organization system to academic material and technical reads.",
     "categories": [
       {
-        "title": "On-campus modality",
-        "mode": "Campus",
-        "description": "Tests, labs and summaries from in-person courses (see subjects without '- D' at the end).",
-        "driveLink": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
-        "featured": [
+        "type": "notion",
+        "title": "DV Learning (Notion)",
+        "description": "A space dedicated to continuous learning. Here I centralize my study notes, links, bookmarks and development resources.",
+        "link": "https://deras.notion.site/DV-Learning-2d841cf3400a80e189d2d3c977c7c262",
+        "linkText": "Explore Notion",
+        "image": "/img/resources/dv-learning.png"
+      },
+      {
+        "type": "study",
+        "title": "UES resources",
+        "description": "Collaborative academic material for Computer Systems Engineering: tests, labs, tutorials and guides organized by modality.",
+        "link": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
+        "linkText": "Open repository",
+        "image": "/img/resources/ues-wall.jpg",
+        "subcategories": [
           {
-            "name": "Data Structure (ESD115) · Material",
-            "link": "https://drive.google.com/drive/folders/1_Wk8OUpedalm-nH1Hgzh4sVXz4bxP6hz?usp=drive_link"
+            "name": "On-campus modality",
+            "items": [
+              "Data Structure (ESD115)",
+              "Productivity Tools (HDP115)",
+              "Systems Design I (DSI115)"
+            ]
           },
           {
-            "name": "Productivity Tools (HDP115) · Classes",
-            "link": "https://drive.google.com/drive/folders/1KAQVYhFv5-3MWxEref72lUzQc-sOhFZn?usp=drive_link"
-          },
-          {
-            "name": "Systems Design I (DSI115) · Material",
-            "link": "https://drive.google.com/drive/folders/1IG_0YzshQNSIfTUo3Zu_yH0GyrXOgwPw?usp=drive_link"
+            "name": "Distance modality",
+            "items": [
+              "Operating Systems (SIO115-D)",
+              "Electronic Commerce (CET115-D)",
+              "Communications I (COS115-D)"
+            ]
           }
         ]
       },
       {
-        "title": "Distance modality",
-        "mode": "Virtual",
-        "description": "Tutorials, guides and self-paced material (subjects with '- D').",
-        "driveLink": "https://drive.google.com/drive/folders/1w7WfrEShtjBharxYq_qDqs4lXH1Ao00h?usp=drive_link",
-        "featured": [
+        "type": "books",
+        "title": "Recommended books",
+        "description": "Selection of technical reads that have influenced how I develop software and understand systems.",
+        "image": "/img/resources/books.jpg",
+        "items": [
           {
-            "name": "Operating Systems (SIO115 -D)",
-            "link": "https://drive.google.com/drive/folders/1AqxsN-dWjaTkj7tI9WuEt6kgwglLip4I?usp=drive_link"
-          },
-          {
-            "name": "Electronic Commerce (CET115 -D)",
-            "link": "https://drive.google.com/drive/folders/1DTjafl8XO2Ri__3DrA6BxQHV-WFtCvj1?usp=drive_link"
-          },
-          {
-            "name": "Communications I (COS115 -D)",
-            "link": "https://drive.google.com/drive/folders/1XAwcZE0ViAKgri47RQPtRicYSWbua1L3?usp=drive_link"
-          }
-        ]
-      },
-      {
-        "title": "Extras & utilities",
-        "mode": "General",
-        "description": "Additional resources: books, formats and guides for various subjects.",
-        "driveLink": "https://drive.google.com/drive/folders/1jXPLOqIRuX-uvDZsgJUQJAujQY7NwMvL?usp=drive_link",
-        "featured": [
-          {
-            "name": "System Design Interview",
+            "title": "System Design Interview",
+            "author": "Alex Xu",
+            "description": "Practical guide to designing scalable systems.",
+            "recommendation": "Great for understanding high-level architecture.",
             "link": "https://drive.google.com/file/d/1c9iUwAf2KMpd7mvWbp7kJNDkscLAl0c2/view?usp=drive_link"
           },
           {
-            "name": "Frontend Development Projects with Vue.js 3",
-            "link": "https://drive.google.com/file/d/1caUfgKQcWmv-CGBo95FHyarBlx_Mo8Qd/view?usp=drive_link"
-          },
-          {
-            "name": "Laravel Up & Running 3rd Edition",
+            "title": "Laravel Up & Running (3rd Edition)",
+            "author": "Matt Stauffer",
+            "description": "Complete reference for Laravel development.",
+            "recommendation": "The Laravel bible. While the official documentation is excellent, this book delves into the 'why' behind many things.",
             "link": "https://drive.google.com/file/d/1H4kBZhYmyzhfAwXGjLB_9XittuMJlKBq/view?usp=drive_link"
           }
         ]
       }
     ],
-    "buttons": {
-      "openFolder": "Open folder",
-      "share": "Share resource"
-    },
     "noteBlock": {
-      "title": "Notes",
-      "body": "This repository is community driven and evolves with student contributions. If you see broken links or want to add material, reach out."
+      "title": "Contributions",
+      "body": "If you have useful resources to share, feel free to contact me so we can include them here."
     }
+  },
+  "ues": {
+    "eyebrow": "UES resources",
+    "title": "Collaborative repository",
+    "lead": "Academic material for Computer Systems Engineering. Everything organized by modality."
   },
   "footer": {
     "description": "Full Stack Developer. Designing simple and scalable solutions.",
@@ -444,7 +442,7 @@
     "links": {
       "home": "Home",
       "projects": "Projects",
-      "ues": "UES resources"
+      "resources": "Resources"
     },
     "contact": "Contact",
     "builtWith": "Made with ❤️ using Vue"
