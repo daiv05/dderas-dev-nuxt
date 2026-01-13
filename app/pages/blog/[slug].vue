@@ -54,6 +54,7 @@ const route = useRoute();
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const { getPost } = useBlog();
+const runtimeConfig = useRuntimeConfig()
 
 const slug = computed(() => route.params.slug as string);
 
@@ -66,40 +67,88 @@ const { data: post, pending } = await useAsyncData(
   }
 );
 
-// SEO
-useHead(() => ({
-  title: post.value?.title || t("seo.pages.blog.title"),
-  meta: [
-    {
-      name: "description",
-      content: post.value?.summary || t("seo.pages.blog.description"),
-    },
-    {
-      property: "og:title",
-      content: post.value?.title || t("seo.pages.blog.title"),
-    },
-    {
-      property: "og:description",
-      content: post.value?.summary || t("seo.pages.blog.description"),
-    },
-    {
-      property: "og:image",
-      content: post.value?.image || t("seo.defaults.ogImage"),
-    },
-    {
-      property: "article:published_time",
-      content: post.value?.date || "",
-    },
-    {
-      property: "article:modified_time",
-      content: post.value?.lastmod || post.value?.date || "",
-    },
-    {
-      property: "article:author",
-      content: post.value?.author || t("seo.defaults.author"),
-    },
-  ],
-}));
+const siteUrl = computed(() => String(runtimeConfig.public.siteUrl || ''))
+const canonicalUrl = computed(() => {
+  try {
+    return new URL(route.path, siteUrl.value).toString()
+  } catch {
+    return undefined
+  }
+})
+
+const seoTitle = computed(() => post.value?.title || t('seo.pages.blog.title'))
+const seoDescription = computed(() => post.value?.summary || t('seo.pages.blog.description'))
+const seoImage = computed(() => post.value?.image || t('seo.defaults.ogImage'))
+const seoKeywords = computed(() => (post.value?.tags?.length ? post.value.tags.join(', ') : undefined))
+
+useSeoMeta({
+  title: () => seoTitle.value,
+  description: () => seoDescription.value,
+  keywords: () => seoKeywords.value,
+
+  ogType: 'article',
+  ogUrl: () => canonicalUrl.value,
+  ogTitle: () => seoTitle.value,
+  ogDescription: () => seoDescription.value,
+  ogImage: () => seoImage.value,
+  ogImageAlt: () => t('seo.defaults.ogImageAlt'),
+
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => seoTitle.value,
+  twitterDescription: () => seoDescription.value,
+  twitterImage: () => seoImage.value,
+})
+
+useHead(() => {
+  const published = post.value?.date || ''
+  const modified = post.value?.lastmod || post.value?.date || ''
+  const author = post.value?.author || t('seo.defaults.author')
+  const tags = post.value?.tags || []
+
+  const articleTags = tags.map((tag) => ({
+    property: 'article:tag',
+    content: tag,
+  }))
+
+  const jsonLd = post.value
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: seoTitle.value,
+        description: seoDescription.value,
+        image: seoImage.value ? [seoImage.value] : undefined,
+        datePublished: published || undefined,
+        dateModified: modified || undefined,
+        author: {
+          '@type': 'Person',
+          name: author,
+        },
+        mainEntityOfPage: canonicalUrl.value
+          ? {
+              '@type': 'WebPage',
+              '@id': canonicalUrl.value,
+            }
+          : undefined,
+      }
+    : null
+
+  return {
+    meta: [
+      { property: 'article:published_time', content: published },
+      { property: 'article:modified_time', content: modified },
+      { property: 'article:author', content: author },
+      ...articleTags,
+    ],
+    script: jsonLd
+      ? [
+          {
+            type: 'application/ld+json',
+            children: JSON.stringify(jsonLd),
+          },
+        ]
+      : [],
+  }
+})
 </script>
 
 <style scoped>

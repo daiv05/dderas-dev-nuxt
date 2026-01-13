@@ -49,15 +49,16 @@
       </div>
     </footer>
 
-    <ClientOnly>
-      <v-btn
-        v-show="showScrollTop"
-        :icon="mdiArrowUp"
-        class="scroll-to-top"
-        size="large"
-        @click="scrollToTop"
-      ></v-btn>
-    </ClientOnly>
+    <v-btn
+      v-show="showScrollTop"
+      :icon="mdiArrowUp"
+      class="scroll-to-top"
+      size="small"
+      variant="tonal"
+      aria-label="Scroll to top"
+      title="Scroll to top"
+      @click="scrollToTop"
+    ></v-btn>
 
     <ImageViewer v-model="showImageViewer" :src="selectedImage.src" :alt="selectedImage.alt" />
   </v-app>
@@ -66,6 +67,7 @@
 <script setup lang="ts">
 import { mdiArrowUp, mdiGithub, mdiLinkedin, mdiEmail } from '@mdi/js'
 import { contactInfo } from '~/data/contact'
+import { getMainScroller } from '~/plugins/gsap'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -74,6 +76,17 @@ const showScrollTop = ref(false)
 const showImageViewer = ref(false)
 const selectedImage = ref({ src: '', alt: '' })
 const currentYear = new Date().getFullYear()
+
+const getScrollTop = () => {
+  if (!import.meta.client) return 0
+  const scroller = getMainScroller()
+  const containerTop = scroller instanceof HTMLElement ? scroller.scrollTop : 0
+  return Math.max(containerTop, globalThis.scrollY || 0)
+}
+
+const updateScrollTop = () => {
+  showScrollTop.value = getScrollTop() > 300
+}
 
 const handleImageClick = (event: MouseEvent) => {
   const target = event.target as HTMLElement
@@ -91,30 +104,37 @@ const handleImageClick = (event: MouseEvent) => {
 
 const scrollToTop = () => {
   if (import.meta.client) {
-    const scroller = document.querySelector('.blog-main')
-    if (scroller) {
+    const scroller = getMainScroller()
+    if (scroller instanceof HTMLElement) {
       scroller.scrollTo({ top: 0, behavior: 'smooth' })
+      return
     }
+    globalThis.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
 
 // Scroll to top functionality
-if (import.meta.client) {
-  onMounted(() => {
-    const scroller = document.querySelector('.blog-main')
-    if (!scroller) return
+onMounted(() => {
+  if (!import.meta.client) return
 
-    const handleScroll = () => {
-      showScrollTop.value = scroller.scrollTop > 300
+  // Listener sobre el scroller principal (blog-main) y fallback a window.
+  const scroller = getMainScroller()
+  if (scroller instanceof HTMLElement) {
+    scroller.addEventListener('scroll', updateScrollTop, { passive: true })
+  }
+  globalThis.addEventListener('scroll', updateScrollTop, { passive: true })
+
+  // Estado inicial (y post-hidratación)
+  updateScrollTop()
+  requestAnimationFrame(updateScrollTop)
+
+  onBeforeUnmount(() => {
+    if (scroller instanceof HTMLElement) {
+      scroller.removeEventListener('scroll', updateScrollTop)
     }
-
-    scroller.addEventListener('scroll', handleScroll)
-
-    onBeforeUnmount(() => {
-      scroller.removeEventListener('scroll', handleScroll)
-    })
+    globalThis.removeEventListener('scroll', updateScrollTop)
   })
-}
+})
 </script>
 
 <style scoped>
@@ -122,7 +142,8 @@ if (import.meta.client) {
   background: rgb(var(--v-theme-background));
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .blog-header {
@@ -222,6 +243,24 @@ if (import.meta.client) {
   bottom: 24px;
   right: 24px;
   z-index: 1000;
+  opacity: 0.72;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(var(--v-theme-surface), 0.78);
+  border: 1px solid rgba(var(--v-border-color), 0.25);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.scroll-to-top:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+  border-color: rgba(var(--v-border-color), 0.45);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
 }
 
 /* Responsive */
@@ -242,6 +281,10 @@ if (import.meta.client) {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+  .scroll-to-top {
+    bottom: 0.9rem;
+    right: 0.9rem;
   }
 }
 </style>

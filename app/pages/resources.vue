@@ -160,7 +160,7 @@ const categories = computed<ResourceCategory[]>(() => {
     if (cat.link) {
       Object.assign(base, {
         link: rt(cat.link),
-        linkText: rt(cat.linkText),
+        linkText: rt(cat?.linkText),
       })
     }
 
@@ -225,12 +225,7 @@ onBeforeUnmount(() => {
   cleanupEnterAnimations()
 })
 
-useSeoMeta({
-  title: () => t('seo.pages.resources.title'),
-  description: () => t('seo.pages.resources.description'),
-  ogTitle: () => t('seo.pages.resources.title'),
-  ogDescription: () => t('seo.pages.resources.description'),
-})
+usePageSeo('resources')
 </script>
 
 <style scoped lang="scss">

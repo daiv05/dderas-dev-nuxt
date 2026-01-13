@@ -46,6 +46,8 @@ defineProps<Props>()
 const activeId = ref('')
 const tocLinks = ref<Link[]>([])
 
+let observer: IntersectionObserver | null = null
+
 const scrollToHeading = (id: string) => {
   const element = document.getElementById(id)
   if (!element) return
@@ -84,8 +86,6 @@ const buildTocFromDom = () => {
 }
 
 onMounted(() => {
-  if (!import.meta.client) return
-
   // Esperar a que el contenido se renderice
   nextTick(() => {
     buildTocFromDom()
@@ -93,7 +93,7 @@ onMounted(() => {
     // Observar qué heading está visible
     const headings = document.querySelectorAll('.markdown-body h2[id], .markdown-body h3[id], .markdown-body h4[id]')
     
-    const observer = new IntersectionObserver(
+    observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -107,11 +107,12 @@ onMounted(() => {
       }
     )
 
-    headings.forEach((heading) => observer.observe(heading))
-
-    onBeforeUnmount(() => {
-      observer.disconnect()
-    })
+    headings.forEach((heading) => observer?.observe(heading))
   })
+})
+
+onBeforeUnmount(() => {
+  observer?.disconnect()
+  observer = null
 })
 </script>

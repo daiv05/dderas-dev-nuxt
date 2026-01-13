@@ -7,4 +7,6 @@
 definePageMeta({
   layout: "default",
 });
+
+usePageSeo('home')
 </script>

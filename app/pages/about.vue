@@ -125,6 +125,8 @@ interface ExperienceItem {
 const { t, tm, rt } = useI18n();
 const { setupAnimations } = useGsapAnimations();
 
+usePageSeo('me')
+
 const profileSection = ref<HTMLElement | null>(null);
 const detailsSection = ref<HTMLElement | null>(null);
 const quickFacts = computed(() => [

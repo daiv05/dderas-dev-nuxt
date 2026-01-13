@@ -121,7 +121,10 @@
       v-show="showScrollTop"
       :icon="mdiArrowUp"
       class="scroll-to-top"
-      size="large"
+      size="small"
+      variant="tonal"
+      aria-label="Scroll to top"
+      title="Scroll to top"
       @click="scrollToTop"
     ></v-btn>
   </v-app>
@@ -215,12 +218,22 @@ const isActive = (item: SidebarItem) => {
 
 const handleScroll = () => {
   if (import.meta.client) {
+    const scroller = document.querySelector('.shell-main')
+    if (scroller instanceof HTMLElement) {
+      showScrollTop.value = scroller.scrollTop > 500
+      return
+    }
     showScrollTop.value = globalThis.scrollY > 500
   }
 }
 
 const scrollToTop = () => {
   if (import.meta.client) {
+    const scroller = document.querySelector('.shell-main')
+    if (scroller instanceof HTMLElement) {
+      scroller.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
     globalThis.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
@@ -248,13 +261,22 @@ onMounted(() => {
   }
   // Setup scroll listener
   if (import.meta.client) {
-    globalThis.addEventListener('scroll', handleScroll)
+    const scroller = document.querySelector('.shell-main')
+    if (scroller instanceof HTMLElement) {
+      scroller.addEventListener('scroll', handleScroll, { passive: true })
+    } else {
+      globalThis.addEventListener('scroll', handleScroll, { passive: true })
+    }
   }
 })
 
 onBeforeUnmount(() => {
   if (import.meta.client) {
     globalThis.removeEventListener('resize', updateViewport)
+    const scroller = document.querySelector('.shell-main')
+    if (scroller instanceof HTMLElement) {
+      scroller.removeEventListener('scroll', handleScroll)
+    }
     globalThis.removeEventListener('scroll', handleScroll)
   }
 })
@@ -437,14 +459,35 @@ onBeforeUnmount(() => {
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
-  border: 1px solid var(--line-strong);
-  background: rgb(var(--v-theme-background));
+  z-index: 10;
+  opacity: 0.72;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(var(--v-theme-surface), 0.78);
+  border: 1px solid var(--line-soft);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.scroll-to-top:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+}
+
+.scroll-to-top:focus-visible {
+  opacity: 1;
 }
 
 @media (max-width: 600px) {
   .scroll-to-top {
-    bottom: 1rem;
-    right: 1rem;
+    bottom: 0.9rem;
+    right: 0.9rem;
   }
 }
 </style>

@@ -150,28 +150,57 @@
     "stackTitle": "Tech stack I use",
     "techStack": [
       {
+        "id": "frontend",
         "name": "Frontend",
-        "detail": "Vue 3 · TypeScript · Vite · Pinia"
+        "techs": [
+          { "id": "vue", "label": "Vue 3" },
+          { "id": "typescript", "label": "TypeScript" },
+          { "id": "vite", "label": "Vite" },
+          { "id": "pinia", "label": "Pinia" }
+        ]
       },
       {
+        "id": "backend",
         "name": "Backend",
-        "detail": "Laravel · PHP 8 · APIs REST"
+        "techs": [
+          { "id": "laravel", "label": "Laravel" },
+          { "id": "php", "label": "PHP 8" },
+          { "id": "api-rest", "label": "REST APIs" }
+        ]
       },
       {
+        "id": "infra",
         "name": "Infra",
-        "detail": "Vercel · Railway · GCP · Cloudflare"
+        "techs": [
+          { "id": "vercel", "label": "Vercel" },
+          { "id": "railway", "label": "Railway" },
+          { "id": "gcp", "label": "GCP" },
+          { "id": "cloudflare", "label": "Cloudflare" }
+        ]
       },
       {
+        "id": "ui",
         "name": "UI",
-        "detail": "Vuetify · PrimeVue · Figma"
+        "techs": [
+          { "id": "vuetify", "label": "Vuetify" },
+          { "id": "primevue", "label": "PrimeVue" },
+          { "id": "figma", "label": "Figma" }
+        ]
       },
       {
+        "id": "testing",
         "name": "Testing",
-        "detail": "Vitest"
+        "techs": [
+          { "id": "vitest", "label": "Vitest" }
+        ]
       },
       {
+        "id": "ai",
         "name": "AI Tools",
-        "detail": "Copilot · Claude · Codex"
+        "techs": [
+          { "id": "copilot", "label": "Copilot" },
+          { "id": "claude", "label": "Claude" }
+        ]
       }
     ],
     "agendaTitle": "What I am doing now",
@@ -231,9 +260,9 @@
       },
       {
         "label": "03",
-        "title": "UES resources",
-        "body": "Organized material for Computer Systems Engineering students.",
-        "tags": ["Guides", "Labs", "Classes"],
+        "title": "Resources",
+        "body": "Useful resources, bookmarks and academic material I use and recommend.",
+        "tags": ["Notion", "Books", "Tools"],
         "cta": "View resources",
         "to": "/resources"
       }
@@ -413,14 +442,14 @@
             "title": "System Design Interview",
             "author": "Alex Xu",
             "description": "Practical guide to designing scalable systems.",
-            "recommendation": "Great for understanding high-level architecture.",
+            "recommendation": "-",
             "link": "https://drive.google.com/file/d/1c9iUwAf2KMpd7mvWbp7kJNDkscLAl0c2/view?usp=drive_link"
           },
           {
             "title": "Laravel Up & Running (3rd Edition)",
             "author": "Matt Stauffer",
             "description": "Complete reference for Laravel development.",
-            "recommendation": "The Laravel bible. While the official documentation is excellent, this book delves into the 'why' behind many things.",
+            "recommendation": "-",
             "link": "https://drive.google.com/file/d/1H4kBZhYmyzhfAwXGjLB_9XittuMJlKBq/view?usp=drive_link"
           }
         ]
@@ -430,11 +459,6 @@
       "title": "Contributions",
       "body": "If you have useful resources to share, feel free to contact me so we can include them here."
     }
-  },
-  "ues": {
-    "eyebrow": "UES resources",
-    "title": "Collaborative repository",
-    "lead": "Academic material for Computer Systems Engineering. Everything organized by modality."
   },
   "footer": {
     "description": "Full Stack Developer. Designing simple and scalable solutions.",

@@ -93,21 +93,27 @@ const posts = computed(() => {
   return allPosts.value.slice(start, start + pageSize);
 });
 
+const scrollBlogTop = () => {
+  if (!import.meta.client) return
+  const scroller = document.querySelector('.blog-main')
+  if (scroller instanceof HTMLElement) {
+    scroller.scrollTo({ top: 0, behavior: 'smooth' })
+    return
+  }
+  globalThis.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 const prevPage = () => {
   if (page.value > 1) {
     page.value--;
-    if (import.meta.client) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    scrollBlogTop()
   }
 };
 
 const nextPage = () => {
   if (page.value < totalPages.value) {
     page.value++;
-    if (import.meta.client) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    scrollBlogTop()
   }
 };
 
@@ -126,11 +132,7 @@ definePageMeta({
   layout: "blog",
 });
 
-// SEO
-useHead({
-  title: t("seo.pages.blog.title"),
-  meta: [{ name: "description", content: t("seo.pages.blog.description") }],
-});
+usePageSeo('blog')
 </script>
 
 <style scoped>

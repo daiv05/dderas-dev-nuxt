@@ -206,24 +206,58 @@
   </section>
 </template>
 
-<script setup>
-import { mdiChevronLeft, mdiChevronRight, mdiClose, mdiOpenInNew, mdiGithub } from '@mdi/js';
-import { ref, computed, onMounted, onUnmounted, onBeforeUpdate, nextTick } from 'vue';
-import { useI18n } from 'vue-i18n';
+<script setup lang="ts">
+import { mdiChevronLeft, mdiChevronRight, mdiClose, mdiOpenInNew, mdiGithub } from '@mdi/js'
 
-import { useEnterAnimations } from '@/composables/useEnterAnimations.js';
-import { projectList } from '@/data/projects.js';
+import { projectList } from '~/data/projects'
+import { useEnterAnimations } from '~/composables/useEnterAnimations'
 
-const { t, locale } = useI18n();
-const projects = computed(() =>
-  projectList.map((project) => {
-    const translation = project.translations?.[locale.value] ?? project.translations?.en ?? {};
+definePageMeta({
+  layout: 'default',
+})
+
+usePageSeo('projects')
+
+type LocaleKey = 'en' | 'es'
+
+type ProjectTranslation = {
+  name: string
+  description: string
+  longDescription?: string
+  client?: string
+  category?: string
+  technologies?: string
+  features: readonly string[]
+}
+
+type ProjectBase = {
+  id: string
+  date: string
+  tags: readonly string[]
+  online: boolean
+  repo: boolean
+  images?: Record<number, string>
+  link: string | null
+  link_repo: string | null
+  translations: Record<LocaleKey, ProjectTranslation>
+}
+
+type Project = ProjectBase & ProjectTranslation
+
+const { t, locale } = useI18n()
+
+const projects = computed<Project[]>(() => {
+  const current = (locale.value as LocaleKey) || 'en'
+  return projectList.map((project) => {
+    const translation = project.translations?.[current] ?? project.translations?.en
     return {
       ...project,
       ...translation,
-    };
+      features: translation.features ?? [],
+    } as unknown as Project
   })
-);
+})
+
 const {
   label,
   titleEl,
@@ -232,73 +266,80 @@ const {
   resetPanelRefs,
   setupEnterAnimations,
   cleanupEnterAnimations,
-} = useEnterAnimations();
-const ledgerRef = ref(null);
-const gallery = ref({ open: false, images: [], project: null, index: 0 });
-const detailDialog = ref({ open: false, project: null });
-const projectPanels = ref([]);
+} = useEnterAnimations()
 
-const capturePanelRef = (el, index) => {
-  setPanelRef(el);
-  if (el) {
-    projectPanels.value[index] = el;
-  }
-};
+const ledgerRef = ref<HTMLElement | null>(null)
 
-const openProjectDetail = (project) => {
+const gallery = ref<{ open: boolean; images: string[]; project: Project | null; index: number }>({
+  open: false,
+  images: [],
+  project: null,
+  index: 0,
+})
+
+const detailDialog = ref<{ open: boolean; project: Project | null }>({
+  open: false,
+  project: null,
+})
+
+const capturePanelRef = (el: unknown, _index?: number) => {
+  setPanelRef(el)
+}
+
+const openProjectDetail = (project: Project) => {
   detailDialog.value = {
     open: true,
     project,
-  };
-};
+  }
+}
 
 const closeProjectDetail = () => {
-  detailDialog.value.open = false;
-  detailDialog.value.project = null;
-};
+  detailDialog.value.open = false
+  detailDialog.value.project = null
+}
 
 onBeforeUpdate(() => {
-  resetPanelRefs();
-  projectPanels.value = [];
-});
+  resetPanelRefs()
+})
 
-const media = (project) => {
-  if (!project.images) return [];
-  return Object.values(project.images);
-};
+const media = (project: Project): string[] => {
+  return project.images ? Object.values(project.images) : []
+}
 
-const openGallery = (project, idx = 0) => {
+const openGallery = (project: Project, idx = 0) => {
   gallery.value = {
     open: true,
     images: media(project),
     project,
     index: idx,
-  };
-};
+  }
+}
 
 const closeGallery = () => {
-  gallery.value.open = false;
-  gallery.value.index = 0;
-};
+  gallery.value.open = false
+  gallery.value.index = 0
+}
 
-const stepGallery = (direction) => {
-  if (!gallery.value.images.length) return;
-  const total = gallery.value.images.length;
-  gallery.value.index = (gallery.value.index + direction + total) % total;
-};
+const stepGallery = (direction: number) => {
+  if (!gallery.value.images.length) return
+  const total = gallery.value.images.length
+  gallery.value.index = (gallery.value.index + direction + total) % total
+}
 
-onMounted(async () => {
-  await nextTick();
-  setupEnterAnimations({
-    headerStart: 'top 85%',
-    panelsStart: 'top 85%',
-    headerTrigger: titleEl.value,
-    panelsTrigger: ledgerRef.value?.$el ?? ledgerRef.value,
-  });
-});
-onUnmounted(() => {
-  cleanupEnterAnimations();
-});
+onMounted(() => {
+  nextTick(() => {
+    setupEnterAnimations({
+      headerStart: 'top 85%',
+      panelsStart: 'top 85%',
+      headerTrigger: titleEl.value,
+      panelsTrigger: ledgerRef.value,
+    })
+  })
+})
+
+onBeforeUnmount(() => {
+  cleanupEnterAnimations()
+})
 </script>
 
 <style scoped lang="scss">
