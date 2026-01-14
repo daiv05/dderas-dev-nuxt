@@ -1,5 +1,3 @@
-const { url: siteUrl } = useSiteConfig()
-
 export const contactInfo = {
   name: '-',
   title: 'Full Stack Developer',
@@ -8,7 +6,7 @@ export const contactInfo = {
   country: 'El Salvador',
   countryCode: 'SV',
   email: 'davidderas50@gmail.com',
-  siteUrl: siteUrl,
+  siteUrl: import.meta.env.NUXT_PUBLIC_SITE_URL || 'https://deras.dev',
   socials: {
     github: 'https://github.com/daiv05',
     linkedin: 'https://linkedin.com/in/dderas',
