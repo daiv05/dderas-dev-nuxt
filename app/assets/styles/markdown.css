@@ -128,6 +128,9 @@
   font-size: 0.9em;
   font-family: "Consolas", "Monaco", "Courier New", monospace;
   color: var(--md-code-inline-text);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Bloques de código */

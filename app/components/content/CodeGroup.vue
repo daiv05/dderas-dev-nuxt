@@ -19,23 +19,6 @@
 </template>
 
 <script setup lang="ts">
-/**
- * CodeGroup - Componente para mostrar múltiples bloques de código con tabs
- * Uso en markdown:
- * 
- * :::code-group
- * ```js [npm]
- * npm install package
- * ```
- * ```js [yarn]
- * yarn add package
- * ```
- * ```js [pnpm]
- * pnpm add package
- * ```
- * :::
- */
-
 interface Tab {
   label: string
   index: number
@@ -46,7 +29,6 @@ const tabs = ref<Tab[]>([])
 
 onMounted(() => {
   nextTick(() => {
-    // Obtener todos los bloques de código del DOM
     const container = document.querySelector('.md-code-tabs__panels')
     if (!container) return
     
@@ -56,7 +38,6 @@ onMounted(() => {
     codeBlocks.forEach((block, index) => {
       const htmlBlock = block as HTMLElement
       
-      // Extraer label del filename o del data-lang
       const filenameEl = block.querySelector('.md-code-filename')
       const filename = filenameEl?.textContent?.trim() || ''
       const lang = htmlBlock.dataset.lang || ''
@@ -64,9 +45,8 @@ onMounted(() => {
       
       extractedTabs.push({ label, index })
       
-      // Agregar clase para mostrar/ocultar según tab activo
       htmlBlock.dataset.tabIndex = String(index)
-      htmlBlock.classList.add('in-code-group') // Marcar que está en un code group
+      htmlBlock.classList.add('in-code-group')
       if (index === 0) {
         htmlBlock.classList.add('is-active')
       }
@@ -77,7 +57,6 @@ onMounted(() => {
 })
 
 watch(activeTab, (newIndex) => {
-  // Actualizar qué bloque está visible
   const container = document.querySelector('.md-code-tabs__panels')
   if (!container) return
   

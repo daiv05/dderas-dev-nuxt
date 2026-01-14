@@ -1,5 +1,5 @@
 <template>
-  <v-app class="blog-layout">
+  <v-app>
     <v-app-bar flat scroll-behavior="hide" scroll-threshold="300" elevation="0" class="blog-header">
       <div class="blog-header-content">
         <NuxtLink :to="localePath('/blog')" class="blog-brand">
@@ -138,14 +138,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.blog-layout {
-  background: rgb(var(--v-theme-background));
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-}
-
 .blog-header {
   border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
   background: rgba(var(--v-theme-surface), 0.92) !important;
@@ -240,15 +232,14 @@ onMounted(() => {
 
 .scroll-to-top {
   position: fixed;
-  bottom: 24px;
+  bottom: 75px;
   right: 24px;
   z-index: 1000;
-  opacity: 0.72;
+  opacity: 0.5;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  background: rgba(var(--v-theme-surface), 0.78);
+  background: rgba(var(--v-theme-surface));
   border: 1px solid rgba(var(--v-border-color), 0.25);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
   transition:
     opacity 0.18s ease,
     transform 0.18s ease,
@@ -257,10 +248,9 @@ onMounted(() => {
 }
 
 .scroll-to-top:hover {
-  opacity: 1;
+  opacity: 0.7;
   transform: translateY(-1px);
-  border-color: rgba(var(--v-border-color), 0.45);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+  border-color: rgba(var(--v-border-color), 0.35);
 }
 
 /* Responsive */

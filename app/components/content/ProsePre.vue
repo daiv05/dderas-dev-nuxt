@@ -46,18 +46,13 @@
 </template>
 
 <script setup lang="ts">
-/**
- * ProsePre - Componente para bloques de código con highlighting y botón de copiar
- * Reemplaza el elemento <pre> en markdown
- * Props pasadas automáticamente por Nuxt Content
- */
 interface Props {
-  code?: string        // El código raw sin highlighting
-  language?: string    // Lenguaje del código (js, ts, vue, etc)
-  filename?: string    // Nombre del archivo [file.js]
-  highlights?: number[] // Líneas a resaltar {1,3-5}
-  meta?: string        // Metadata adicional
-  class?: string       // Clases CSS de Shiki
+  code?: string
+  language?: string
+  filename?: string
+  highlights?: number[]
+  meta?: string
+  class?: string
 }
 
 const props = defineProps<Props>()
@@ -88,7 +83,6 @@ const copyCode = async () => {
 }
 
 onMounted(() => {
-  // Guardar referencia al elemento code para fallback
   nextTick(() => {
     const parent = document.querySelector('.md-code-block')
     if (parent) {

@@ -172,7 +172,6 @@
       <div class="lightbox">
         <div class="lightbox-bar">
           <div>
-            <p class="eyebrow">{{ gallery.project?.category }}</p>
             <h3>{{ gallery.project?.name }}</h3>
           </div>
           <v-btn :icon="mdiClose" variant="text" @click="closeGallery"></v-btn>
@@ -481,6 +480,7 @@ onBeforeUnmount(() => {
 .detail-header {
   border-bottom: 1px solid var(--line-soft);
   padding: 1.5rem 2rem;
+  white-space: inherit;
 }
 
 .detail-header-content {

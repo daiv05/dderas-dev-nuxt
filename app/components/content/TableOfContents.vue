@@ -26,10 +26,6 @@
 </template>
 
 <script setup lang="ts">
-/**
- * TableOfContents - Componente para generar índice de contenidos automáticamente
- * Escanea los headings H2 y H3 del documento y crea navegación con scroll spy
- */
 interface Link {
   id: string
   text: string
@@ -86,11 +82,9 @@ const buildTocFromDom = () => {
 }
 
 onMounted(() => {
-  // Esperar a que el contenido se renderice
   nextTick(() => {
     buildTocFromDom()
     
-    // Observar qué heading está visible
     const headings = document.querySelectorAll('.markdown-body h2[id], .markdown-body h3[id], .markdown-body h4[id]')
     
     observer = new IntersectionObserver(
