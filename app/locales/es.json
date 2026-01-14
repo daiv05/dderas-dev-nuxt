@@ -143,7 +143,10 @@
     },
     "imageViewer": {
       "download": "Descargar imagen",
-      "close": "Cerrar"
+      "close": "Cerrar",
+      "zoomIn": "Acercar",
+      "zoomOut": "Alejar",
+      "resetZoom": "Restablecer zoom"
     },
     "constructionNotice": "Esta página está en construcción. Pronto habrá contenido real disponible."
   },

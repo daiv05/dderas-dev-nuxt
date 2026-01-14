@@ -130,7 +130,10 @@
     },
     "imageViewer": {
       "download": "Download image",
-      "close": "Close"
+      "close": "Close",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "resetZoom": "Reset zoom"
     },
     "constructionNotice": "This page is under construction. Real content will be available soon."
   },
