@@ -36,7 +36,7 @@ export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
     () => t(`seo.pages.${pageKey}.description`)
   )
 
-  const image = resolveSeoValue(options.image, () => t('seo.defaults.ogImage'))
+  const image = resolveSeoValue(options.image, () => siteUrl + t('seo.defaults.ogImage'))
 
   const keywords = resolveSeoValue(options.keywords, () => {
     const raw = tm(`seo.pages.${pageKey}.keywords`)
@@ -71,7 +71,7 @@ export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
     ogUrl: () => ogUrl.value,
     ogTitle: title,
     ogDescription: description,
-    ogImage: siteUrl + image,
+    ogImage: image,
     ogImageAlt: () => t('seo.defaults.ogImageAlt'),
 
     twitterCard: 'summary_large_image',
