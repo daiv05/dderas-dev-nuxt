@@ -34,6 +34,45 @@
       "email": "Correo"
     }
   },
+  "errors": {
+    "generic": {
+      "eyebrow": "Algo se rompió",
+      "title": "Error inesperado",
+      "lead": "Esta página tuvo un problema. Puedes recargar, volver atrás o ir al inicio."
+    },
+    "notFound": {
+      "eyebrow": "Ruta perdida",
+      "title": "Página no encontrada",
+      "lead": "Esta URL no existe (o cambió). Si la escribiste a mano, revisa la dirección."
+    },
+    "actions": {
+      "home": "Ir al inicio",
+      "back": "Volver",
+      "reload": "Recargar",
+      "report": "Reportar",
+      "showDetails": "Ver detalles",
+      "hideDetails": "Ocultar detalles"
+    },
+    "hint": {
+      "label": "Arreglo rápido",
+      "notFound": {
+        "0": "Prueba el menú — ahí están la mayoría de páginas.",
+        "1": "Si era un marcador, quizá la ruta cambió.",
+        "2": "Cambia de idioma e intenta de nuevo si el contenido está localizado."
+      },
+      "generic": {
+        "0": "Recarga la página — a veces es algo temporal.",
+        "1": "Vuelve atrás y prueba otra ruta.",
+        "2": "Si sigue pasando, repórtalo con los detalles."
+      }
+    },
+    "details": {
+      "path": "Ruta",
+      "message": "Mensaje",
+      "stack": "Stack (dev)",
+      "unknown": "(sin mensaje)"
+    }
+  },
   "seo": {
     "siteName": "DDeras",
     "twitterHandle": "daiv_09",

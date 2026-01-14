@@ -34,6 +34,45 @@
       "email": "Email"
     }
   },
+  "errors": {
+    "generic": {
+      "eyebrow": "Something went sideways",
+      "title": "Unexpected error",
+      "lead": "The page hit a problem. You can retry, go back, or return home."
+    },
+    "notFound": {
+      "eyebrow": "Lost route",
+      "title": "Page not found",
+      "lead": "This URL doesn’t exist (or it moved). If you typed it, double-check the address."
+    },
+    "actions": {
+      "home": "Go home",
+      "back": "Go back",
+      "reload": "Reload",
+      "report": "Report",
+      "showDetails": "Show details",
+      "hideDetails": "Hide details"
+    },
+    "hint": {
+      "label": "Quick fix",
+      "notFound": {
+        "0": "Try the navigation menu — most pages live there.",
+        "1": "If this was a bookmark, it may have changed.",
+        "2": "Switch language and retry if the content is localized."
+      },
+      "generic": {
+        "0": "Reload the page — transient issues happen.",
+        "1": "Go back and try a different path.",
+        "2": "If it keeps happening, report it with the details."
+      }
+    },
+    "details": {
+      "path": "Path",
+      "message": "Message",
+      "stack": "Stack (dev)",
+      "unknown": "(no message)"
+    }
+  },
   "seo": {
     "siteName": "DDeras",
     "twitterHandle": "daiv_09",
