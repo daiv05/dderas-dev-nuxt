@@ -1,13 +1,28 @@
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
-const SITE_URL =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ((globalThis as any).process?.env?.NUXT_PUBLIC_SITE_URL as string | undefined) ||
-  'https://deras.dev'
+const SITE_URL = import.meta.env.NUXT_PUBLIC_SITE_URL || "https://deras.dev";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+
+  site: {
+    url: SITE_URL,
+    name: "DDeras",
+    description:
+      "Personal website and blog of David Deras - Full-Stack Developer",
+  },
+
+  sitemap: {
+    xslColumns: [
+      { label: 'URL', width: '50%' },
+      { label: 'Last Modified', select: 'sitemap:lastmod', width: '25%' },
+      { label: 'Priority', select: 'sitemap:priority', width: '12.5%' },
+      { label: 'Change Frequency', select: 'sitemap:changefreq', width: '12.5%' },
+      { label: 'Hreflangs', select: 'count(xhtml:link)', width: '25%' },
+    ],
+    zeroRuntime: true,
+  },
 
   runtimeConfig: {
     public: {
@@ -17,13 +32,13 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'DDeras',
-      titleTemplate: '%s · DDeras',
+      title: "DDeras",
+      titleTemplate: "%s · DDeras",
       meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'color-scheme', content: 'dark light' },
-        { name: 'format-detection', content: 'telephone=no' },
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "color-scheme", content: "dark light" },
+        { name: "format-detection", content: "telephone=no" },
       ],
     },
   },
@@ -33,6 +48,7 @@ export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
     "@nuxtjs/i18n",
+    "@nuxtjs/sitemap",
     "@nuxt/content",
     "@nuxt/eslint",
     "@nuxt/fonts",
@@ -41,7 +57,7 @@ export default defineNuxtConfig({
   ],
   router: {
     options: {
-      scrollBehaviorType: 'smooth',
+      scrollBehaviorType: "smooth",
     },
   },
   content: {
@@ -59,7 +75,6 @@ export default defineNuxtConfig({
           searchDepth: 3,
         },
       },
-      
     },
   },
   i18n: {

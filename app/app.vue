@@ -9,20 +9,15 @@
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const route = useRoute()
-const runtimeConfig = useRuntimeConfig()
 
-const siteUrl = computed(() =>
-  typeof runtimeConfig.public.siteUrl === 'string' && runtimeConfig.public.siteUrl
-    ? runtimeConfig.public.siteUrl
-    : 'https://deras.dev'
-)
+const { url: siteUrl } = useSiteConfig()
 
 useHead(() => {
   const link: Array<Record<string, string>> = []
 
   const canonicalHref = (() => {
     try {
-      return new URL(route.path, siteUrl.value).toString()
+      return new URL(route.path, siteUrl).toString()
     } catch {
       return ''
     }
@@ -41,7 +36,7 @@ useHead(() => {
     if (!path) continue
 
     try {
-      link.push({ rel: 'alternate', hreflang: code, href: new URL(path, siteUrl.value).toString() })
+      link.push({ rel: 'alternate', hreflang: code, href: new URL(path, siteUrl).toString() })
     } catch {
       // noop
     }
@@ -50,7 +45,7 @@ useHead(() => {
   const defaultPath = switchLocalePath('en')
   if (defaultPath) {
     try {
-      link.push({ rel: 'alternate', hreflang: 'x-default', href: new URL(defaultPath, siteUrl.value).toString() })
+      link.push({ rel: 'alternate', hreflang: 'x-default', href: new URL(defaultPath, siteUrl).toString() })
     } catch {
       // noop
     }

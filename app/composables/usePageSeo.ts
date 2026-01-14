@@ -25,13 +25,9 @@ const joinKeywords = (keywords: unknown): string | undefined => {
 export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
   const { t, tm, locale } = useI18n()
   const route = useRoute()
-  const runtimeConfig = useRuntimeConfig()
 
-  const siteUrl = computed(() =>
-    typeof runtimeConfig.public.siteUrl === 'string' && runtimeConfig.public.siteUrl
-      ? runtimeConfig.public.siteUrl
-      : 'https://deras.dev'
-  )
+  const { url: siteUrl } = useSiteConfig()
+
   const ogLocale = computed(() => (locale.value === 'es' ? 'es_ES' : 'en_US'))
 
   const title = resolveSeoValue(options.title, () => t(`seo.pages.${pageKey}.title`))
@@ -58,7 +54,7 @@ export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
 
   const ogUrl = computed(() => {
     try {
-      return new URL(route.path, siteUrl.value).toString()
+      return new URL(route.path, siteUrl).toString()
     } catch {
       return undefined
     }
@@ -75,7 +71,7 @@ export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
     ogUrl: () => ogUrl.value,
     ogTitle: title,
     ogDescription: description,
-    ogImage: image,
+    ogImage: siteUrl + image,
     ogImageAlt: () => t('seo.defaults.ogImageAlt'),
 
     twitterCard: 'summary_large_image',

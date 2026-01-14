@@ -8,6 +8,10 @@ tags: ['Vue.js', 'Vite', 'Tailwind CSS']
 image: /blog/getting-started-vue-vite/shared/vite+vue.webp
 author: David Deras
 lastmod: 2025-12-22
+sitemap:
+  priority: 0.7
+  loc: /blog/getting-started-vue-vite
+  lastmod: 2025-12-22
 ---
 
 In this guide, we will explore how to start a modern project with Vue 3 and Vite, explain the project structure, how a Vue application works, the router, Pinia, composables, and we'll see some best practices for developing scalable and maintainable applications. As a bonus, we'll publish the project to GitHub and see how to install Tailwind CSS v4 to get fast and responsive styles.

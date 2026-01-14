@@ -15,13 +15,8 @@ const joinKeywords = (keywords: unknown): string | undefined => {
 export function useSiteSeoDefaults() {
   const { t, tm, rt, locale } = useI18n()
   const route = useRoute()
-  const runtimeConfig = useRuntimeConfig()
 
-  const siteUrl = computed(() =>
-    typeof runtimeConfig.public.siteUrl === 'string' && runtimeConfig.public.siteUrl
-      ? runtimeConfig.public.siteUrl
-      : 'https://deras.dev'
-  )
+  const { url: siteUrl } = useSiteConfig()
 
   const twitterHandle = computed(() => normalizeTwitterHandle(t('seo.twitterHandle')))
 
@@ -35,7 +30,7 @@ export function useSiteSeoDefaults() {
 
   const ogUrl = computed(() => {
     try {
-      return new URL(route.path, siteUrl.value).toString()
+      return new URL(route.path, siteUrl).toString()
     } catch {
       return undefined
     }
@@ -53,7 +48,7 @@ export function useSiteSeoDefaults() {
     ogUrl: () => ogUrl.value,
     ogTitle: () => t('seo.defaults.title'),
     ogDescription: () => t('seo.defaults.description'),
-    ogImage: () => t('seo.defaults.ogImage'),
+    ogImage: () => siteUrl + t('seo.defaults.ogImage'),
     ogImageAlt: () => t('seo.defaults.ogImageAlt'),
 
     twitterCard: 'summary_large_image',
@@ -61,7 +56,7 @@ export function useSiteSeoDefaults() {
     twitterCreator: () => twitterHandle.value,
     twitterTitle: () => t('seo.defaults.title'),
     twitterDescription: () => t('seo.defaults.description'),
-    twitterImage: () => t('seo.defaults.ogImage'),
+    twitterImage: () => siteUrl + t('seo.defaults.ogImage'),
 
     robots: 'index,follow',
   })

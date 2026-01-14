@@ -1,4 +1,5 @@
-import { defineContentConfig, defineCollection, z } from '@nuxt/content'
+import { defineContentConfig, defineCollection, z } from "@nuxt/content";
+import { asSitemapCollection } from "@nuxtjs/sitemap/content";
 
 // Schema común para todas las collections
 const blogSchema = z.object({
@@ -10,28 +11,32 @@ const blogSchema = z.object({
   author: z.string().optional(),
   tags: z.array(z.string()).optional(),
   summary: z.string().optional(),
-  image: z.string().optional()
-})
+  image: z.string().optional(),
+});
 
 export default defineContentConfig({
   collections: {
     // Collection para contenido en inglés
-    content_en: defineCollection({
-      type: 'page',
-      source: {
-        include: 'en/**/*.md',
-        prefix: '/blog'
-      },
-      schema: blogSchema
-    }),
+    content_en: defineCollection(
+      asSitemapCollection({
+        type: "page",
+        source: {
+          include: "en/**/*.md",
+          prefix: "/blog",
+        },
+        schema: blogSchema,
+      })
+    ),
     // Collection para contenido en español
-    content_es: defineCollection({
-      type: 'page',
-      source: {
-        include: 'es/**/*.md',
-        prefix: '/blog'
-      },
-      schema: blogSchema
-    })
-  }
-})
+    content_es: defineCollection(
+      asSitemapCollection({
+        type: "page",
+        source: {
+          include: "es/**/*.md",
+          prefix: "/blog",
+        },
+        schema: blogSchema,
+      })
+    ),
+  },
+});

@@ -310,7 +310,7 @@
   border: 0;
   padding: 0;
 }
-*/ html.dark .shiki,
+
 html.dark .shiki span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;

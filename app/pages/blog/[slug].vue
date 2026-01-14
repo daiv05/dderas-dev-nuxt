@@ -54,7 +54,6 @@ const route = useRoute();
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const { getPost } = useBlog();
-const runtimeConfig = useRuntimeConfig()
 
 const slug = computed(() => route.params.slug as string);
 
@@ -67,10 +66,10 @@ const { data: post, pending } = await useAsyncData(
   }
 );
 
-const siteUrl = computed(() => String(runtimeConfig.public.siteUrl || ''))
+const { url: siteUrl } = useSiteConfig()
 const canonicalUrl = computed(() => {
   try {
-    return new URL(route.path, siteUrl.value).toString()
+    return new URL(route.path, siteUrl).toString()
   } catch {
     return undefined
   }
@@ -78,7 +77,7 @@ const canonicalUrl = computed(() => {
 
 const seoTitle = computed(() => post.value?.title || t('seo.pages.blog.title'))
 const seoDescription = computed(() => post.value?.summary || t('seo.pages.blog.description'))
-const seoImage = computed(() => post.value?.image || t('seo.defaults.ogImage'))
+const seoImage = computed(() => post.value?.image || siteUrl + t('seo.defaults.ogImage'))
 const seoKeywords = computed(() => (post.value?.tags?.length ? post.value.tags.join(', ') : undefined))
 
 useSeoMeta({

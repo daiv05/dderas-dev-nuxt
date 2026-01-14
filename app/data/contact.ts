@@ -1,3 +1,5 @@
+const { url: siteUrl } = useSiteConfig()
+
 export const contactInfo = {
   name: '-',
   title: 'Full Stack Developer',
@@ -6,7 +8,7 @@ export const contactInfo = {
   country: 'El Salvador',
   countryCode: 'SV',
   email: 'davidderas50@gmail.com',
-  siteUrl: 'https://deras.dev',
+  siteUrl: siteUrl,
   socials: {
     github: 'https://github.com/daiv05',
     linkedin: 'https://linkedin.com/in/dderas',
