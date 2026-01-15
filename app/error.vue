@@ -98,8 +98,11 @@
 
 <script setup lang="ts">
 import type { NuxtError } from '#app'
+import { useTheme } from 'vuetify'
 
 const props = defineProps<{ error: NuxtError }>()
+
+const theme = useTheme()
 
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -223,14 +226,22 @@ const reload = () => {
   position: absolute;
   inset: -40px;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgb(var(--v-theme-on-surface), 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--v-theme-on-surface), 0.06) 1px, transparent 1px);
   background-size: 44px 44px;
   transform: perspective(900px) rotateX(55deg) translateY(-120px);
   transform-origin: center;
   opacity: 0.55;
   filter: blur(0.15px);
   animation: gridFloat 10s ease-in-out infinite;
+}
+
+@supports not (background-image: linear-gradient(to right, rgb(var(--v-theme-on-surface), 0.06) 1px, transparent 1px)) {
+  .error-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  }
 }
 
 .error-glow {
@@ -268,8 +279,14 @@ const reload = () => {
 .error-brand__name {
   font-weight: 700;
   letter-spacing: 0.2px;
-  color: var(--text-main);
+  color: rgb(var(--v-theme-on-background));
   font-size: 18px;
+}
+
+@supports not (color: rgb(var(--v-theme-on-background))) {
+  .error-brand__name {
+    color: #e4e4e7;
+  }
 }
 
 .error-brand__tag {
@@ -278,11 +295,19 @@ const reload = () => {
 }
 
 .error-card {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(18, 18, 22, 0.62);
+  border: 1px solid rgb(var(--v-theme-on-surface), 0.12);
+  background: rgba(var(--v-theme-surface), 0.62);
   backdrop-filter: blur(14px);
   border-radius: 18px;
   overflow: hidden;
+}
+
+/* Fallback para cuando no se carga el tema */
+@supports not (background: rgba(var(--v-theme-surface), 0.62)) {
+  .error-card {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(18, 18, 22, 0.62);
+  }
 }
 
 .error-card__top {
@@ -291,10 +316,16 @@ const reload = () => {
 
 .error-eyebrow {
   margin: 0 0 10px;
-  color: var(--text-muted);
+  color: rgb(var(--v-theme-on-surface));
   font-size: 13px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+}
+
+@supports not (color: rgb(var(--v-theme-on-surface))) {
+  .error-eyebrow {
+    color: #a1a1aa;
+  }
 }
 
 .error-code {
@@ -304,8 +335,14 @@ const reload = () => {
   line-height: 1;
   font-weight: 900;
   letter-spacing: -0.04em;
-  color: var(--text-main);
+  color: rgb(var(--v-theme-on-background));
   margin-bottom: 10px;
+}
+
+@supports not (color: rgb(var(--v-theme-on-background))) {
+  .error-code {
+    color: #fafafa;
+  }
 }
 
 .error-code::before,
@@ -335,32 +372,63 @@ const reload = () => {
   margin: 0 0 8px;
   font-size: 22px;
   font-weight: 750;
-  color: var(--text-main);
+  color: rgb(var(--v-theme-on-background));
+}
+
+@supports not (color: rgb(var(--v-theme-on-background))) {
+  .error-title {
+    color: #fafafa;
+  }
 }
 
 .error-lead {
   margin: 0 0 16px;
-  color: var(--text-muted);
+  color: rgb(var(--v-theme-on-surface));
   max-width: 70ch;
+}
+
+@supports not (color: rgb(var(--v-theme-on-surface))) {
+  .error-lead {
+    color: #a1a1aa;
+  }
 }
 
 .error-hint {
   margin: 0;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px dashed rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgb(var(--v-theme-on-surface), 0.14);
+  background: rgb(var(--v-theme-on-surface), 0.03);
   display: grid;
   gap: 6px;
 }
 
+@supports not (background: rgb(var(--v-theme-on-surface), 0.03)) {
+  .error-hint {
+    border: 1px dashed rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
 .error-hint__label {
   font-size: 12px;
-  color: var(--text-muted);
+  color: rgb(var(--v-theme-on-surface));
+}
+
+@supports not (color: rgb(var(--v-theme-on-surface))) {
+  .error-hint__label {
+    color: #a1a1aa;
+  }
 }
 
 .error-hint__text {
-  color: var(--text-main);
+  color: rgb(var(--v-theme-on-background));
+}
+
+@supports not (color: rgb(var(--v-theme-on-background))) {
+  .error-hint__text {
+    color: #e4e4e7;
+  }
 }
 
 .error-actions {
@@ -390,16 +458,28 @@ const reload = () => {
 }
 
 .error-details__k {
-  color: var(--text-muted);
+  color: rgb(var(--v-theme-on-surface));
   font-size: 12px;
 }
 
+@supports not (color: rgb(var(--v-theme-on-surface))) {
+  .error-details__k {
+    color: #a1a1aa;
+  }
+}
+
 .error-details__v {
-  color: var(--text-main);
+  color: rgb(var(--v-theme-on-background));
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
     monospace;
   font-size: 12.5px;
   overflow-wrap: anywhere;
+}
+
+@supports not (color: rgb(var(--v-theme-on-background))) {
+  .error-details__v {
+    color: #e4e4e7;
+  }
 }
 
 .error-details__stack {
@@ -411,12 +491,20 @@ const reload = () => {
   margin: 0;
   padding: 12px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgb(var(--v-theme-on-surface), 0.1);
+  background: rgb(var(--v-theme-surface), 0.25);
   overflow: auto;
   max-height: 240px;
   font-size: 12px;
-  color: var(--text-main);
+  color: rgb(var(--v-theme-on-surface));
+}
+
+@supports not (color: rgb(var(--v-theme-on-surface))) {
+  .error-details__pre {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.25);
+    color: #e4e4e7;
+  }
 }
 
 @keyframes gridFloat {
