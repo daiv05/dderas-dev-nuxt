@@ -55,6 +55,13 @@ const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const { getPost } = useBlog();
 
+const ogLocale = computed(() => (locale.value === 'es' ? 'es_ES' : 'en_US'))
+const twitterHandle = computed(() => {
+  const raw = t('seo.twitterHandle').trim()
+  if (!raw) return ''
+  return raw.startsWith('@') ? raw : `@${raw}`
+})
+
 const slug = computed(() => route.params.slug as string);
 
 // Obtener el post del blog
@@ -77,7 +84,15 @@ const canonicalUrl = computed(() => {
 
 const seoTitle = computed(() => post.value?.title || t('seo.pages.blog.title'))
 const seoDescription = computed(() => post.value?.summary || t('seo.pages.blog.description'))
-const seoImage = computed(() => post.value?.image || siteUrl + t('seo.defaults.ogImage'))
+const seoImage = computed(() => {
+  const raw = post.value?.image || siteUrl + t('seo.defaults.ogImage')
+  if (!raw) return raw
+  try {
+    return new URL(raw, siteUrl).toString()
+  } catch {
+    return raw
+  }
+})
 const seoKeywords = computed(() => (post.value?.tags?.length ? post.value.tags.join(', ') : undefined))
 
 useSeoMeta({
@@ -85,6 +100,8 @@ useSeoMeta({
   description: () => seoDescription.value,
   keywords: () => seoKeywords.value,
 
+  ogSiteName: () => t('seo.siteName'),
+  ogLocale: () => ogLocale.value,
   ogType: 'article',
   ogUrl: () => canonicalUrl.value,
   ogTitle: () => seoTitle.value,
@@ -93,6 +110,8 @@ useSeoMeta({
   ogImageAlt: () => t('seo.defaults.ogImageAlt'),
 
   twitterCard: 'summary_large_image',
+  twitterSite: () => twitterHandle.value,
+  twitterCreator: () => twitterHandle.value,
   twitterTitle: () => seoTitle.value,
   twitterDescription: () => seoDescription.value,
   twitterImage: () => seoImage.value,

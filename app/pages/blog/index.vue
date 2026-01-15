@@ -12,7 +12,7 @@
             class="post-card-link"
           >
             <div v-if="post.image" class="post-card-image">
-              <img :src="post.image" :alt="post.title" loading="lazy" />
+              <img :src="post.image" :alt="post.title" fetchpriority="high" />
             </div>
             <div class="post-card-content">
               <div class="post-card-meta">

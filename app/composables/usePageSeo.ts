@@ -8,6 +8,12 @@ type PageSeoOptions = {
   keywords?: SeoValue
 }
 
+const normalizeTwitterHandle = (handle: string): string => {
+  const trimmed = handle.trim()
+  if (!trimmed) return ''
+  return trimmed.startsWith('@') ? trimmed : `@${trimmed}`
+}
+
 const resolveSeoValue = (value: SeoValue | undefined, fallback: () => string): (() => string) => {
   if (typeof value === 'function') return value
   if (typeof value === 'string') return () => value
@@ -28,6 +34,8 @@ export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
 
   const { url: siteUrl } = useSiteConfig()
 
+  const twitterHandle = computed(() => normalizeTwitterHandle(t('seo.twitterHandle')))
+
   const ogLocale = computed(() => (locale.value === 'es' ? 'es_ES' : 'en_US'))
 
   const title = resolveSeoValue(options.title, () => t(`seo.pages.${pageKey}.title`))
@@ -36,7 +44,16 @@ export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
     () => t(`seo.pages.${pageKey}.description`)
   )
 
-  const image = resolveSeoValue(options.image, () => siteUrl + t('seo.defaults.ogImage'))
+  const rawImage = resolveSeoValue(options.image, () => siteUrl + t('seo.defaults.ogImage'))
+  const image = () => {
+    const resolved = rawImage()
+    if (!resolved) return resolved
+    try {
+      return new URL(resolved, siteUrl).toString()
+    } catch {
+      return resolved
+    }
+  }
 
   const keywords = resolveSeoValue(options.keywords, () => {
     const raw = tm(`seo.pages.${pageKey}.keywords`)
@@ -75,6 +92,8 @@ export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
     ogImageAlt: () => t('seo.defaults.ogImageAlt'),
 
     twitterCard: 'summary_large_image',
+    twitterSite: () => twitterHandle.value,
+    twitterCreator: () => twitterHandle.value,
     twitterTitle: title,
     twitterDescription: description,
     twitterImage: image,
