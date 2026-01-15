@@ -19,7 +19,7 @@ const enhanceAnchorLinks = (): void => {
     const element = document.querySelector(href)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      history.pushState(null, '', href)
+      history.pushState(history.state, '', href)
     }
   })
 }

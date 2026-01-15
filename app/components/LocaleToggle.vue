@@ -48,7 +48,16 @@ const languageOptions = computed<LanguageOption[]>(() => [
   },
 ]);
 
-const changeLocale = (newLocale: string) => {
+const changeLocale = async (newLocale: string) => {
+  const route = useRoute();
+  const router = useRouter();
+  
+  // Si estamos en una ruta con hash, navegar sin el hash al cambiar idioma
+  if (route.hash) {
+    const pathWithoutHash = route.path;
+    await router.replace(pathWithoutHash);
+  }
+  
   setLocale(newLocale as 'en' | 'es');
 };
 </script>
