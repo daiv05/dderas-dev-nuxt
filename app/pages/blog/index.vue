@@ -60,6 +60,7 @@
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const { getPosts } = useBlog();
+const { scrollToTop } = useBlogScroll();
 
 // Obtener posts del blog
 const { data: allPosts, pending } = await useAsyncData(
@@ -84,27 +85,17 @@ const posts = computed(() => {
   return allPosts.value.slice(start, start + pageSize);
 });
 
-const scrollBlogTop = () => {
-  if (!import.meta.client) return
-  const scroller = document.querySelector('.blog-main')
-  if (scroller instanceof HTMLElement) {
-    scroller.scrollTo({ top: 0, behavior: 'smooth' })
-    return
-  }
-  globalThis.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
 const prevPage = () => {
   if (page.value > 1) {
     page.value--;
-    scrollBlogTop()
+    scrollToTop()
   }
 };
 
 const nextPage = () => {
   if (page.value < totalPages.value) {
     page.value++;
-    scrollBlogTop()
+    scrollToTop()
   }
 };
 

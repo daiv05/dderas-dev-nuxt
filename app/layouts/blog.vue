@@ -67,22 +67,15 @@
 <script setup lang="ts">
 import { mdiArrowUp, mdiGithub, mdiLinkedin, mdiEmail } from '@mdi/js'
 import { contactInfo } from '~/data/contact'
-import { getMainScroller } from '~/plugins/gsap'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
+const { scrollToTop, getScrollTop, getScrollElement } = useBlogScroll()
 
 const showScrollTop = ref(false)
 const showImageViewer = ref(false)
 const selectedImage = ref({ src: '', alt: '' })
 const currentYear = new Date().getFullYear()
-
-const getScrollTop = () => {
-  if (!import.meta.client) return 0
-  const scroller = getMainScroller()
-  const containerTop = scroller instanceof HTMLElement ? scroller.scrollTop : 0
-  return Math.max(containerTop, globalThis.scrollY || 0)
-}
 
 const updateScrollTop = () => {
   showScrollTop.value = getScrollTop() > 300
@@ -102,37 +95,26 @@ const handleImageClick = (event: MouseEvent) => {
   }
 }
 
-const scrollToTop = () => {
-  if (import.meta.client) {
-    const scroller = getMainScroller()
-    if (scroller instanceof HTMLElement) {
-      scroller.scrollTo({ top: 0, behavior: 'smooth' })
-      return
-    }
-    globalThis.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-}
-
-// Scroll to top functionality
 onMounted(() => {
   if (!import.meta.client) return
 
-  // Listener sobre el scroller principal (blog-main) y fallback a window.
-  const scroller = getMainScroller()
+  const scroller = getScrollElement()
+  
   if (scroller instanceof HTMLElement) {
     scroller.addEventListener('scroll', updateScrollTop, { passive: true })
+  } else {
+    globalThis.addEventListener('scroll', updateScrollTop, { passive: true })
   }
-  globalThis.addEventListener('scroll', updateScrollTop, { passive: true })
 
-  // Estado inicial (y post-hidratación)
   updateScrollTop()
   requestAnimationFrame(updateScrollTop)
 
   onBeforeUnmount(() => {
     if (scroller instanceof HTMLElement) {
       scroller.removeEventListener('scroll', updateScrollTop)
+    } else {
+      globalThis.removeEventListener('scroll', updateScrollTop)
     }
-    globalThis.removeEventListener('scroll', updateScrollTop)
   })
 })
 </script>
