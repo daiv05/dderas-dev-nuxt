@@ -22,6 +22,10 @@
             :alt="project.name"
             class="card-image"
             cover
+            :eager="i < 2"
+            :fetchpriority="i === 0 ? 'high' : 'auto'"
+            :loading="i < 2 ? 'eager' : 'lazy'"
+            decoding="async"
           ></v-img>
         </div>
 
@@ -245,6 +249,26 @@ type Project = ProjectBase & ProjectTranslation
 
 const { t, locale } = useI18n()
 
+const firstProjectImage = computed(() => {
+  const first = projectList[0]
+  const images = first?.images ? Object.values(first.images) : []
+  return images[0] ?? null
+})
+
+useHead(() => {
+  if (!firstProjectImage.value) return {}
+  return {
+    link: [
+      {
+        rel: 'preload',
+        as: 'image',
+        href: firstProjectImage.value,
+        type: 'image/webp',
+      },
+    ],
+  }
+})
+
 const projects = computed<Project[]>(() => {
   const current = (locale.value as LocaleKey) || 'en'
   return projectList.map((project) => {
@@ -332,6 +356,8 @@ onMounted(() => {
       panelsStart: 'top 85%',
       headerTrigger: titleEl.value,
       panelsTrigger: ledgerRef.value,
+      fadeHeader: false,
+      fadePanels: false,
     })
   })
 })
@@ -375,6 +401,7 @@ onBeforeUnmount(() => {
   position: relative;
   width: 100%;
   overflow: hidden;
+  aspect-ratio: 16 / 9;
 }
 
 .card-image {
@@ -508,6 +535,9 @@ onBeforeUnmount(() => {
 }
 
 .detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   border-top: 1px solid var(--line-soft);
   padding: 1.5rem 2rem;
   gap: 0.75rem;

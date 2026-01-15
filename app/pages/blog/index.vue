@@ -19,15 +19,6 @@
                 <time v-if="post.date" :datetime="post.date" class="post-date">
                   {{ formatDate(post.date) }}
                 </time>
-                <div v-if="post.tags && post.tags.length" class="post-tags">
-                  <span
-                    v-for="tag in post.tags.slice(0, 3)"
-                    :key="tag"
-                    class="post-tag"
-                  >
-                    {{ tag }}
-                  </span>
-                </div>
               </div>
               <h2 class="post-card-title">{{ post.title }}</h2>
               <p v-if="post.summary" class="post-card-summary">

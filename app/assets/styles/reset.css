@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  font-family: var(--font-body);
+}
+
 body {
   font-family: var(--font-body);
   background-color: rgb(var(--v-theme-background));
@@ -31,6 +35,11 @@ h6 {
 code,
 pre {
   font-family: var(--font-mono);
+}
+
+.v-application [class^="text-"]:not(.mono),
+.v-application [class*=" text-"]:not(.mono) {
+  font-family: inherit !important;
 }
 
 img,

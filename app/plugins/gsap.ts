@@ -290,16 +290,13 @@ export function isElementInViewport(
   const scrollerEl = scroller || getMainScroller() || globalThis.window;
 
   if (scrollerEl === globalThis.window) {
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+    const viewportHeight = globalThis.innerHeight || document.documentElement.clientHeight;
+    const viewportWidth = globalThis.innerWidth || document.documentElement.clientWidth;
+    return rect.top < viewportHeight && rect.bottom > 0 && rect.left < viewportWidth && rect.right > 0;
   }
 
   const scrollerRect = (scrollerEl as HTMLElement).getBoundingClientRect();
-  return rect.top >= scrollerRect.top && rect.bottom <= scrollerRect.bottom;
+  return rect.top < scrollerRect.bottom && rect.bottom > scrollerRect.top;
 }
 
 export function clearGSAPProps(elements: HTMLElement | HTMLElement[]) {
@@ -371,7 +368,7 @@ export function animateInOnEnter(
       once,
     });
     if (visible) {
-      gsap.set(el, { clearProps: "all" });
+      gsap.set(el, { clearProps: "opacity,transform" });
     } else {
       gsap.set(el, { ...from });
     }
@@ -392,7 +389,7 @@ export function animateInOnEnter(
 export const gsapDefaults = {
   ease: "power3.out",
   duration: 0.8,
-  clearProps: "all",
+  clearProps: "opacity,transform",
 };
 
 export const scrollTriggerDefaults = {

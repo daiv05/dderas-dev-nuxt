@@ -1,8 +1,6 @@
 import 'vuetify/styles'
 
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
 import { createVuetify } from 'vuetify'
 
 import type { ThemeName } from '~/stores/app'
@@ -12,8 +10,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   
   const vuetify = createVuetify({
     ssr: true,
-    components,
-    directives,
     theme: {
       defaultTheme: appStore.theme, // Use theme from store (SSR-safe)
       themes: {

@@ -10,6 +10,8 @@ interface AnimationOptions {
   panelsStart?: string;
   headerTrigger?: HTMLElement | null;
   panelsTrigger?: HTMLElement | null;
+  fadeHeader?: boolean;
+  fadePanels?: boolean;
 }
 
 export function useEnterAnimations() {
@@ -36,6 +38,8 @@ export function useEnterAnimations() {
     panelsStart = 'top 80%',
     headerTrigger,
     panelsTrigger,
+    fadeHeader = true,
+    fadePanels = true,
   }: AnimationOptions = {}) => {
     const scroller = getMainScroller();
     const headerTargets = [label.value, titleEl.value, descriptionEl.value].filter(
@@ -46,8 +50,10 @@ export function useEnterAnimations() {
     ctx = gsap.context(() => {
       if (headerTargets.length) {
         animateInOnEnter(headerTargets, {
-          from: { opacity: 0, y: 24 },
-          to: { ...gsapDefaults, opacity: 1, y: 0, stagger: 0.15 },
+          from: fadeHeader ? { opacity: 0, y: 24 } : { y: 24 },
+          to: fadeHeader
+            ? { ...gsapDefaults, opacity: 1, y: 0, stagger: 0.15 }
+            : { ...gsapDefaults, y: 0, stagger: 0.15 },
           trigger: headerTrigger ?? titleEl.value,
           scroller,
           start: headerStart,
@@ -57,8 +63,10 @@ export function useEnterAnimations() {
 
       if (panels.length) {
         animateInOnEnter(panels, {
-          from: { opacity: 0, y: 30 },
-          to: { ...gsapDefaults, opacity: 1, y: 0, stagger: 0.1 },
+          from: fadePanels ? { opacity: 0, y: 30 } : { y: 30 },
+          to: fadePanels
+            ? { ...gsapDefaults, opacity: 1, y: 0, stagger: 0.1 }
+            : { ...gsapDefaults, y: 0, stagger: 0.1 },
           trigger: panelsTrigger,
           scroller,
           start: panelsStart,

@@ -115,14 +115,11 @@ import {
   mdiVuejs,
 } from "@mdi/js";
 
-import { codeToHtml } from "shiki";
-
 import { contactInfo } from "~/data/contact";
 import { gsap, gsapDefaults } from "~/plugins/gsap";
 
 const { t, tm, rt, locale } = useI18n();
 const localePath = useLocalePath();
-const appStore = useAppStore();
 
 // Refs del template
 const copyBlock = ref<HTMLElement | null>(null);
@@ -482,34 +479,6 @@ let charIndex = 0;
 let isDeleting = false;
 let typewriterTimeout: ReturnType<typeof setTimeout> | null = null;
 
-const codeSnippet = `const davidDeras = {
-  location: '${contactInfo.city}, ${contactInfo.countryCode}',
-  stack: ['Vue 3 + TS', 'Laravel 11', 'Node tooling'],
-  sectors: ['GovTech', 'Retail', 'Data Viz'],
-  currently: () => ['DTIC - MINSAL', 'MusyCharts OSS']
-}
-export default davidDeras;`;
-
-const highlightedSnippet = ref("");
-
-const escapeHtml = (str: string) =>
-  str.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-
-const highlightSnippet = async () => {
-  if (import.meta.server) return;
-
-  highlightedSnippet.value = `<pre class="code-pre"><code>${escapeHtml(codeSnippet)}</code></pre>`;
-
-  try {
-    highlightedSnippet.value = await codeToHtml(codeSnippet, {
-      lang: "js",
-      theme: appStore.theme === "dark" ? "github-dark-default" : "github-light",
-    });
-  } catch (error) {
-    console.warn("No se pudo cargar Shiki", error);
-  }
-};
-
 const typeWriter = () => {
   if (import.meta.server) return;
 
@@ -549,8 +518,6 @@ const goToProjects = () => {
 
 onMounted(() => {
   nextTick(() => {
-    highlightSnippet();
-
     ctx = gsap.context(() => {
       const copyTargets =
         copyBlock.value?.querySelectorAll("[data-animate]") ?? [];
@@ -560,7 +527,6 @@ onMounted(() => {
       if (copyTargets.length) {
         gsap.from(copyTargets, {
           ...gsapDefaults,
-          opacity: 0,
           y: 24,
           stagger: 0.15,
         });
@@ -569,7 +535,6 @@ onMounted(() => {
       if (ctaGroup.value) {
         gsap.from(ctaGroup.value, {
           ...gsapDefaults,
-          opacity: 0,
           y: 24,
           delay: 0.4,
         });
@@ -578,7 +543,6 @@ onMounted(() => {
       if (ledgerBlock.value) {
         gsap.from(ledgerBlock.value, {
           ...gsapDefaults,
-          opacity: 0,
           y: 24,
           delay: 0.5,
         });
@@ -606,13 +570,6 @@ onBeforeUnmount(() => {
     typewriterTimeout = null;
   }
 });
-
-watch(
-  () => appStore.theme,
-  () => {
-    highlightSnippet();
-  }
-);
 
 watch(
   () => locale.value,

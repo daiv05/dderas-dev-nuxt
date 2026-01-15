@@ -52,6 +52,28 @@ export default defineNuxtConfig({
 
   css: ["~/assets/styles/global.css"],
 
+  fonts: {
+    provider: 'google',
+    defaults: {
+      subsets: ['latin', 'latin-ext'],
+      styles: ['normal'],
+    },
+    families: [
+      {
+        name: 'Roboto',
+        provider: 'none',
+      },
+      {
+        name: 'Epilogue',
+        weights: [400, 500, 600, 700],
+      },
+      {
+        name: 'JetBrains Mono',
+        weights: [400, 600],
+      },
+    ],
+  },
+
   modules: [
     "@pinia/nuxt",
     "@nuxtjs/i18n",
