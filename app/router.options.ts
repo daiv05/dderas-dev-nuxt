@@ -27,6 +27,20 @@ const scrollContainerToHash = (scroller: HTMLElement, hash: string) => {
 const routeScrollTop = new Map<string, number>()
 
 export default {
+  routes(_routes) {
+    const redirects = [
+      {
+        path: "/tools",
+        redirect: "/",
+      },
+      {
+        path: "/es/tools",
+        redirect: "/es",
+      },
+    ];
+
+    return [..._routes, ...redirects];
+  },
   async scrollBehavior(to, from, savedPosition) {
     if (import.meta.server) {
       return savedPosition || { left: 0, top: 0 }
@@ -40,9 +54,6 @@ export default {
       routeScrollTop.set(from.fullPath, scroller.scrollTop)
     }
 
-    // Back/forward: restaurar posición.
-    // Nota: NO restaurar por "ruta visitada" en navegación normal,
-    // porque eso deja páginas (como Home) ligeramente abajo.
     if (savedPosition) {
       const rememberedTop = routeScrollTop.get(to.fullPath)
       const top = typeof rememberedTop === 'number' ? rememberedTop : savedPosition.top
@@ -70,7 +81,6 @@ export default {
 
     if (scroller) {
       scrollContainerTo(scroller, 0, 0, 'auto')
-      // En algunos casos hay layout shift post-navegación.
       requestAnimationFrame(() => scrollContainerTo(scroller, 0, 0, 'auto'))
       return false
     }

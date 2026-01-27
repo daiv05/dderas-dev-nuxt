@@ -64,14 +64,23 @@ const twitterHandle = computed(() => {
 
 const slug = computed(() => route.params.slug as string);
 
-// Obtener el post del blog
 const { data: post, pending } = await useAsyncData(
   () => `blog-post-${slug.value}-${locale.value}`,
   () => getPost(slug.value),
   {
-    watch: [slug, locale], // Re-fetch cuando cambie el idioma o el slug
+    watch: [slug, locale],
   }
 );
+
+watch(
+  () => [post.value, pending.value],
+  ([postValue, pendingValue]) => {
+    if (!pendingValue && !postValue) {
+      navigateTo(localePath('/blog'))
+    }
+  },
+  { immediate: true }
+)
 
 const { url: siteUrl } = useSiteConfig()
 const canonicalUrl = computed(() => {
