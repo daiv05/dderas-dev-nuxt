@@ -11,12 +11,11 @@
   },
   "dependencies": {
     "@mdi/js": "^7.4.47",
-    "@nuxt/a11y": "^1.0.0-alpha.1",
     "@nuxt/content": "^3.10.0",
     "@nuxt/eslint": "^1.12.1",
-    "@nuxt/fonts": "^0.12.1",
+    "@nuxt/fonts": "^0.14.0",
     "@nuxt/hints": "^1.0.0-alpha.5",
-    "@nuxtjs/i18n": "^9.0.0",
+    "@nuxtjs/i18n": "^10.2.3",
     "@nuxtjs/sitemap": "^7.5.2",
     "@pinia/nuxt": "^0.11.2",
     "better-sqlite3": "^12.5.0",
@@ -32,6 +31,6 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unused-imports": "^4.3.0",
     "vite-plugin-vuetify": "^2.1.2",
-    "vuetify": "^3.11.6"
+    "vuetify": "^4.0.1"
   }
 }

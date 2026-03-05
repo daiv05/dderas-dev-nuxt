@@ -172,7 +172,7 @@ const reportHref = computed(() => {
     ].join('\n')
   )
 
-  return `mailto:davidderas50@gmail.com?subject=${subject}&body=${body}`
+  return `mailto:david@deras.dev?subject=${subject}&body=${body}`
 })
 
 useHead(() => ({

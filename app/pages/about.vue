@@ -80,7 +80,7 @@
                 <p class="text-body-2 text-medium-emphasis mb-2">
                   {{ item.description }}
                 </p>
-                <div class="chipline">
+                <div class="chipline mt-2">
                   <span v-for="tag in item.tags" :key="tag">{{ tag }}</span>
                 </div>
               </div>

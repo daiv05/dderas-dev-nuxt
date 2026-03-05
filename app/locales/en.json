@@ -184,7 +184,7 @@
     "title": "David Deras",
     "highlight": "Full Stack Developer (Vue · Laravel · TypeScript)",
     "roleLabel": "Current role",
-    "lead": "I have over two years of experience building web applications for institutions and public projects. I enjoy working with Vue 3 and Laravel, focusing on UX and thorough documentation to ensure smooth scalability.",
+    "lead": "With experience building web applications for institutions and public projects. I enjoy working with Vue 3 and Laravel, focusing on UX and thorough documentation to ensure smooth scalability.",
     "ctas": {
       "primary": "View projects",
       "secondary": "Send me a message"
@@ -196,6 +196,7 @@
         "name": "Frontend",
         "techs": [
           { "id": "vue", "label": "Vue 3" },
+          { "id": "nuxt", "label": "Nuxt 4" },
           { "id": "typescript", "label": "TypeScript" },
           { "id": "vite", "label": "Vite" },
           { "id": "pinia", "label": "Pinia" }

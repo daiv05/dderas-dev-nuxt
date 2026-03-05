@@ -12,7 +12,7 @@ export default defineNuxtConfig({
       routes: ['/sitemap.xml', '/robots.txt'],
     },
   },
-  
+
   site: {
     url: SITE_URL,
     name: "DDeras",
@@ -82,7 +82,6 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/fonts",
     "@nuxt/hints",
-    "@nuxt/a11y",
   ],
   router: {
     options: {
@@ -111,7 +110,6 @@ export default defineNuxtConfig({
     defaultLocale: "en",
     restructureDir: "app",
     langDir: "locales",
-    lazy: false,
     baseUrl: SITE_URL,
     locales: [
       { code: "en", language: "en-US", name: "English", file: "en.json" },
@@ -124,9 +122,6 @@ export default defineNuxtConfig({
       alwaysRedirect: false,
       fallbackLocale: "en",
     },
-    bundle: {
-      optimizeTranslationDirective: false,
-    },
   },
   build: {
     transpile: ["vuetify"],
@@ -135,7 +130,10 @@ export default defineNuxtConfig({
     ssr: {
       noExternal: ["vuetify"],
     },
-    plugins: [vuetify({ autoImport: true })],
+    plugins: [
+      // @ts-expect-error
+      vuetify({ autoImport: true })
+    ],
     vue: {
       template: {
         transformAssetUrls,

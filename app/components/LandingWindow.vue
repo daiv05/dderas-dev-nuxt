@@ -113,6 +113,7 @@ import {
   mdiLanguagePhp,
   mdiLanguageTypescript,
   mdiVuejs,
+  mdiNuxt,
 } from "@mdi/js";
 
 import { contactInfo } from "~/data/contact";
@@ -307,6 +308,11 @@ const techPresets: Record<string, TechPreset> = {
     color: "#42B883",
     kind: "mdi",
     icon: mdiVuejs,
+  },
+  nuxt: {
+    color: "#42B883",
+    kind: "mdi",
+    icon: mdiNuxt,
   },
   typescript: {
     color: "#3178C6",
