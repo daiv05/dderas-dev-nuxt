@@ -1,75 +1,40 @@
-# Nuxt Minimal Starter
+# David Deras - Portfolio & Blog
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> Personal portfolio and full-stack development blog built with Vue.js 3 and Vuetify 4
 
-## Setup
+[![Vue.js](https://img.shields.io/badge/Vue.js-3.4-4FC08D?style=for-the-badge&logo=vue.js)](https://vuejs.org/)
+[![Vuetify](https://img.shields.io/badge/Vuetify-3.5-1867C0?style=for-the-badge&logo=vuetify)](https://vuetifyjs.com/)
+[![GSAP](https://img.shields.io/badge/GSAP-3.12-88CE02?style=for-the-badge&logo=greensock)](https://greensock.com/gsap/)
 
-Make sure to install dependencies:
+## ✨ Features
 
-```bash
-# npm
-npm install
+- 🌗 **Dark/Light Theme**: Dynamic theme system with smooth transitions
+- ⚡ **GSAP Animations**: Fluid micro-interactions and parallax effects
+- 📱 **Responsive Design**: Optimized for all devices
+- 🚀 **Performance**: Lazy loading, code splitting, and asset optimization
 
-# pnpm
-pnpm install
+## 🛠️ Technology Stack
 
-# yarn
-yarn install
+- **Vue.js 3** - Progressive JavaScript framework
+- **Vuetify 4** - Material Design component framework
+- **GSAP 3** - Professional animation library
+- **Vite 7** - Fast build tool
+- **Pinia 3** - State management
 
-# bun
-bun install
-```
+## 📄 Sections
 
-## Development Server
+- **Home**: Hero section with GSAP animations and typewriter effect
+- **About Me**: Personal introduction and skills
+- **Projects**: Showcase of projects with detailed descriptions
+- **Blog**: Full-stack development articles and tutorials
+- **Resources**: 
 
-Start the development server on `http://localhost:3000`:
+## 📧 Contact
 
-```bash
-# npm
-npm run dev
+David Deras - david@deras.dev
 
-# pnpm
-pnpm dev
+Portfolio: [https://deras.dev](https://deras.dev)
 
-# yarn
-yarn dev
+---
 
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Made with ❤️ by [David Deras](https://github.com/daiv05)
