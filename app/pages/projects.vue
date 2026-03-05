@@ -37,7 +37,7 @@
 
           <p class="card-description">{{ project.description }}</p>
 
-          <div class="card-footer">
+          <!-- <div class="card-footer">
             <div class="tech-preview">
               <v-chip
                 v-for="(tag, idx) in project.tags.slice(0, 3)"
@@ -52,7 +52,7 @@
                 +{{ project.tags.length - 3 }}
               </span>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
     "brand": {
       "name": "DDeras",
       "shortName": "DDeras",
-      "tagline": "Desarrollador Full Stack",
+      "tagline": "Ingeniero de Software · Full Stack",
       "blogTagline": "Tech blog"
     },
     "themeToggle": {
@@ -77,13 +77,16 @@
     "siteName": "DDeras",
     "twitterHandle": "daiv_09",
     "defaults": {
-      "title": "Desarrollador Full Stack con Vue, Laravel y TypeScript",
+      "title": "Ingeniero de Software · Full Stack Web y desarrollo asistido por IA",
       "description": "Portafolio personal, proyectos reales y artículos técnicos sobre Vue, Laravel y despliegues en la nube.",
       "keywords": [
         "David Deras",
+        "Ingeniero de Software",
         "Desarrollador Full Stack",
         "Frontend Developer",
         "Backend Developer",
+        "Desarrollo asistido por IA",
+        "IA aplicada al desarrollo",
         "Vue 3",
         "Vue 2",
         "Vue",
@@ -91,6 +94,8 @@
         "Vuetify",
         "PrimeVue",
         "TypeScript",
+        "GovTech",
+        "Sistemas full stack",
         "El Salvador",
         "DDeras"
       ],
@@ -195,9 +200,9 @@
   "hero": {
     "eyebrow": "Hola, soy",
     "title": "David Deras",
-    "highlight": "Full Stack Developer (Vue · Laravel · TypeScript)",
+    "highlight": "Ingeniero de Software",
     "roleLabel": "Rol actual",
-    "lead": "Con experiencia construyendo aplicaciones web para instituciones y proyectos públicos. Me gusta trabajar con Vue 3 y Laravel, cuidar el UX y dejar todo bien documentado para que escale sin problemas.",
+    "lead": "Desarrollando sistemas full-stack para instituciones públicas, retail y plataformas de datos.",
     "ctas": {
       "primary": "Ver proyectos",
       "secondary": "Escribirme"
@@ -263,11 +268,15 @@
     "agenda": [
       {
         "title": "MusyCharts v2",
-        "status": "Rediseño y SEO"
+        "status": "Rediseño completo: UI/UX, SSR y Core Web Vitals"
       },
       {
-        "title": "Aprendiendo React",
-        "status": "En progreso"
+        "title": "React + patrones con agentes",
+        "status": "Explorando React"
+      },
+      {
+        "title": "Portafolio DDeras",
+        "status": "Nuxt 4 y auditoría de rendimiento"
       }
     ],
     "snapshotTitle": "Datos rápidos",
@@ -278,18 +287,19 @@
       },
       {
         "label": "Experiencia",
-        "value": "+2 años"
+        "value": "+3 años en producción real"
       },
       {
-        "label": "Áreas",
-        "value": "GovTech · Retail · Analítica"
+        "label": "Enfoque",
+        "value": "Sistemas completos · IA en el proceso"
       }
     ],
     "codeLabel": "profile.js",
     "roles": [
-      "Full Stack Developer · MINSAL",
-      "Systems Designer",
-      "Software Engineer"
+      "Software Engineer · MINSAL",
+      "AI-Assisted Developer",
+      "Full Stack · Vue & Laravel",
+      "Systems Designer"
     ]
   },
   "overview": {
@@ -336,8 +346,8 @@
       }
     ],
     "collaboration": {
-      "title": "¿Tienes una idea?",
-      "body": "Si quieres colaborar o necesitas ayuda con un proyecto, escríbeme y lo vemos.",
+      "title": "¿Tienes algo que construir?",
+      "body": "¿Estás construyendo algo o tienes curiosidad de lo que la IA puede hacer en tu producto? Escríbeme",
       "cta": "Contactar"
     }
   },
@@ -356,8 +366,8 @@
       "contact": "Contactar"
     },
     "me": {
-      "title": "Sobre mi",
-      "body": "Desarrollador con más de dos años construyendo sistemas para gobierno, retail y plataformas colaborativas. Me enfoco en accesibilidad, SEO y despliegues cloud que mantienen el ritmo de equipos multidisciplinarios. La accesibilidad, el SEO y los despliegues en la nube son los pilares que moldean mi proceso de desarrollo. Priorizo la documentación clara y las entregas iterativas para asegurar que los productos no solo cumplan con las necesidades actuales, sino que también se adapten sin problemas a futuros desafíos."
+      "title": "Sobre mí",
+      "body": "Ingeniero de software con enfoque en aplicaciones web modernas. Trabajo desarrollando soluciones que abarcan desde APIs y lógica de negocio hasta interfaces de usuario eficientes. Me gusta construir software bien estructurado y mantenible, prestando atención tanto al diseño del sistema como a la experiencia del usuario. También tengo experiencia trabajando con entornos Linux, despliegues automatizados y herramientas de CI/CD. Disfruto aprender constantemente y enfrentar problemas técnicos que requieran análisis y buenas decisiones de arquitectura."
     },
     "skills": {
       "title": "Competencias principales",
@@ -393,12 +403,12 @@
           ]
         },
         {
-          "title": "Producto & Proceso",
+          "title": "Proceso e IA",
           "items": [
-            "Documentación técnica",
-            "Iteración por entregables",
-            "Trabajo con requerimientos reales",
-            "Mantenimiento y soporte"
+            "Desarrollo asistido por IA (Claude, Copilot, Cursor)",
+            "Documentación técnica que la gente realmente lee",
+            "Entregas iterativas con clientes y equipos reales",
+            "Soporte y mantenimiento en producción de verdad"
           ]
         }
       ]
@@ -418,8 +428,8 @@
         },
         {
           "date": "Ago 2024 - Dic 2025",
-          "title": "Proyecto Horas Sociales · FIA - UES",
-          "description": "Desarrollo de un sistema de gestión de incidencias y reportes para el programa de horas sociales de la Facultad de Ingeniería y Arquitectura.",
+          "title": "ReportFIA · FIA - Universidad de El Salvador",
+          "description": "Desarrollo de un sistema de gestión de incidencias y reportes para la Unidad de Planificación de la Facultad de Ingeniería y Arquitectura.",
           "tags": [
             "Laravel",
             "Vue",
@@ -444,24 +454,16 @@
             "Vue",
             "Agile"
           ]
-        },
-        {
-          "date": "2019 - Actualidad",
-          "title": "Ingeniería de Sistemas Informáticos · UES",
-          "description": "Último año de la carrera, reforzando algoritmos, bases de datos y liderazgo estudiantil en comunidades tech.",
-          "tags": [
-            "Academia",
-            "Liderazgo"
-          ]
         }
       ]
     },
     "interests": {
       "title": "Intereses actuales",
       "items": [
-        "Animaciones CSS",
-        "Desarrollo con React",
-        "Optimización SEO"
+        "Cómo encajan los agentes de IA en arquitecturas reales",
+        "React y qué de Vue realmente se traslada",
+        "Core Web Vitals y que los sitios se sientan rápidos, no solo que puntúen bien",
+        "Flujos con IA que sumen, no que estorben"
       ]
     }
   },
@@ -548,7 +550,7 @@
     }
   },
   "footer": {
-    "description": "Full Stack Developer. Diseñando soluciones simples y escalables.",
+    "description": "Ingeniero de software. Construyo soluciones modernas y escalables.",
     "quickMap": "Secciones",
     "links": {
       "home": "Inicio",

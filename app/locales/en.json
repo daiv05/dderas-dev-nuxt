@@ -3,7 +3,7 @@
     "brand": {
       "name": "DDeras",
       "shortName": "DDeras",
-      "tagline": "Full Stack Developer",
+      "tagline": "Software Engineer · Full Stack",
       "blogTagline": "Tech blog"
     },
     "themeToggle": {
@@ -77,13 +77,16 @@
     "siteName": "DDeras",
     "twitterHandle": "daiv_09",
     "defaults": {
-      "title": "Full Stack Developer with Vue, Laravel and TypeScript",
+      "title": "Software Engineer · Full Stack Web & AI-Assisted Development",
       "description": "Personal portfolio, real projects and technical articles about Vue, Laravel and cloud deployments.",
       "keywords": [
         "David Deras",
+        "Software Engineer",
         "Full Stack Developer",
         "Frontend Developer",
         "Backend Developer",
+        "AI-assisted development",
+        "Applied AI in development",
         "Vue 3",
         "Vue 2",
         "Vue",
@@ -91,6 +94,8 @@
         "Vuetify",
         "PrimeVue",
         "TypeScript",
+        "GovTech",
+        "End-to-end web systems",
         "El Salvador",
         "DDeras"
       ],
@@ -182,9 +187,9 @@
   "hero": {
     "eyebrow": "Hi, I am",
     "title": "David Deras",
-    "highlight": "Full Stack Developer (Vue · Laravel · TypeScript)",
+    "highlight": "Software Engineer",
     "roleLabel": "Current role",
-    "lead": "With experience building web applications for institutions and public projects. I enjoy working with Vue 3 and Laravel, focusing on UX and thorough documentation to ensure smooth scalability.",
+    "lead": "Shipping full-stack systems for public institutions, retail, and analytics platforms.",
     "ctas": {
       "primary": "View projects",
       "secondary": "Send me a message"
@@ -250,33 +255,38 @@
     "agenda": [
       {
         "title": "MusyCharts v2",
-        "status": "UI/UX and SEO redesign"
+        "status": "Full redesign: UI/UX, SSR & Core Web Vitals"
       },
       {
-        "title": "Learning React",
-        "status": "In progress"
+        "title": "React + agent patterns",
+        "status": "Exploring React"
+      },
+      {
+        "title": "DDeras portfolio",
+        "status": "Nuxt 4 migration & performance audit"
       }
     ],
     "snapshotTitle": "Quick facts",
     "focusNotes": [
       {
         "label": "Base",
-        "value": "San Salvador, SV"
+        "value": "San Salvador, SV (open to remote)"
       },
       {
         "label": "Experience",
-        "value": "2+ years"
+        "value": "3+ years in real production"
       },
       {
-        "label": "Areas",
-        "value": "GovTech · Retail · Analytics"
+        "label": "Focus",
+        "value": "End-to-end systems · AI in the workflow"
       }
     ],
     "codeLabel": "profile.js",
     "roles": [
-      "Full Stack Developer · MINSAL",
-      "Systems Designer",
-      "Software Engineer"
+      "Software Engineer · MINSAL",
+      "AI-Assisted Developer",
+      "Full Stack · Vue & Laravel",
+      "Systems Designer"
     ]
   },
   "overview": {
@@ -311,14 +321,14 @@
       }
     ],
     "collaboration": {
-      "title": "Do you have an idea?",
-      "body": "If you want to collaborate or need help with a project, write to me and we will see it.",
+      "title": "Got something to build?",
+      "body": "Building something? Curious what AI could do in your product? Send me a message.",
       "cta": "Contact"
     }
   },
   "about": {
-    "eyebrow": "Professional profile",
-    "title": "Full Stack centered on Vue y Laravel",
+    "eyebrow": "About",
+    "title": "Software Engineer. I build things end-to-end.",
     "lead": "",
     "facts": {
       "location": "Location",
@@ -335,7 +345,7 @@
     },
     "me": {
       "title": "About me",
-      "body": "Developer with more than two years building systems for government, retail and collaborative platforms. I focus on accessibility, SEO and cloud deployments that keep pace with multidisciplinary teams. Accessibility, SEO and cloud deployments are the pillars that shape my development process. I prioritize clear documentation and iterative deliveries to ensure that products not only meet current needs but also adapt seamlessly to future challenges."
+      "body": "Software engineer specializing in modern web applications. I develop solutions ranging from APIs and business logic to efficient user interfaces. I enjoy building well-structured and maintainable software, paying close attention to both system design and user experience. I also have experience working with Linux environments, automated deployments, and CI/CD tools. I enjoy continuous learning and tackling technical challenges that require analysis and sound architectural decisions."
     },
     "skills": {
       "title": "Core skills",
@@ -371,12 +381,12 @@
           ]
         },
         {
-          "title": "Product & Process",
+          "title": "Process & AI Tooling",
           "items": [
-            "Technical Documentation",
-            "Iteration by Deliverables",
-            "Working with Real Requirements",
-            "Maintenance & Support"
+            "AI-assisted development (Claude, Copilot, Cursor)",
+            "Technical docs that people actually read",
+            "Iterative delivery with real stakeholders",
+            "Production support & honest maintenance cycles"
           ]
         }
       ]
@@ -392,8 +402,8 @@
         },
         {
           "date": "Ago 2024 - Dic 2025",
-          "title": "Social Hours Project · FIA - UES",
-          "description": "Development of an incident management and reporting system for the social hours program of the Faculty of Engineering and Architecture.",
+          "title": "ReportFIA · FIA - Universidad de El Salvador",
+          "description": "Development of an incident management and reporting system for the Planning Unit of the Faculty of Engineering and Architecture.",
           "tags": ["Laravel", "Vue", "Incident Management"]
         },
         {
@@ -407,18 +417,17 @@
           "title": "Frontend Intern · Presidency / CASATIC",
           "description": "Digital skills program focused on testing, deployment and agile methodologies for public innovation.",
           "tags": ["Vue", "Testing", "Agile"]
-        },
-        {
-          "date": "2019 - Current",
-          "title": "Computer Systems Engineering · UES",
-          "description": "Final year of the degree, strengthening algorithms, databases and student leadership in tech communities.",
-          "tags": ["Academia", "Leadership"]
         }
       ]
     },
     "interests": {
       "title": "Current interests",
-      "items": ["CSS animations", "React development", "SEO optimization"]
+      "items": [
+        "How AI agents actually fit into real app architectures",
+        "React & learning what transfers from Vue",
+        "Core Web Vitals & making sites feel fast, not just score fast",
+        "AI-assisted workflows that don't just add noise"
+      ]
     }
   },
   "projects": {
@@ -504,7 +513,7 @@
     }
   },
   "footer": {
-    "description": "Full Stack Developer. Designing simple and scalable solutions.",
+    "description": "Software engineer. I build modern and scalable solutions.",
     "quickMap": "Sections",
     "links": {
       "home": "Home",
