@@ -77,8 +77,8 @@
     "siteName": "DDeras",
     "twitterHandle": "daiv_09",
     "defaults": {
-      "title": "Software Engineer · Full Stack Web & AI-Assisted Development",
-      "description": "Personal portfolio, real projects and technical articles about Vue, Laravel and cloud deployments.",
+      "title": "Software Engineer",
+      "description": "Personal portfolio, real projects and technical articles about software engineering, web development and cloud deployments.",
       "keywords": [
         "David Deras",
         "Software Engineer",
@@ -105,9 +105,28 @@
     },
     "pages": {
       "home": {
-        "title": "Developing with Vue and Laravel",
-        "description": "Projects, experiments and learnings using Vue 3, Laravel and TypeScript.",
-        "keywords": ["Web development", "Vue.js", "Laravel"]
+        "title": "Software Engineer",
+        "description": "Personal portfolio, real projects and technical articles about software engineering, web development and cloud deployments.",
+        "keywords": [
+          "David Deras",
+          "Software Engineer",
+          "Full Stack Developer",
+          "Frontend Developer",
+          "Backend Developer",
+          "AI-assisted development",
+          "Applied AI in development",
+          "Vue 3",
+          "Vue 2",
+          "Vue",
+          "Laravel 11",
+          "Vuetify",
+          "PrimeVue",
+          "TypeScript",
+          "GovTech",
+          "End-to-end web systems",
+          "El Salvador",
+          "DDeras"
+        ]
       },
       "me": {
         "title": "A bit about me",
@@ -123,12 +142,21 @@
       "projects": {
         "title": "Projects",
         "description": "Real applications I have worked on and how I built them.",
-        "keywords": ["Projects", "Case studies", "Portfolio"]
+        "keywords": [
+          "Projects",
+          "Case studies",
+          "Portfolio"
+        ]
       },
       "blog": {
         "title": "Blog & technical articles",
         "description": "Notes, guides and solutions about web development that I use daily.",
-        "keywords": ["Technical blog", "Vue", "Laravel", "Web development"]
+        "keywords": [
+          "Technical blog",
+          "Vue",
+          "Laravel",
+          "Web development"
+        ]
       },
       "resources": {
         "title": "Resources",
@@ -200,54 +228,108 @@
         "id": "frontend",
         "name": "Frontend",
         "techs": [
-          { "id": "vue", "label": "Vue 3" },
-          { "id": "nuxt", "label": "Nuxt 4" },
-          { "id": "typescript", "label": "TypeScript" },
-          { "id": "vite", "label": "Vite" },
-          { "id": "pinia", "label": "Pinia" }
+          {
+            "id": "vue",
+            "label": "Vue 3"
+          },
+          {
+            "id": "nuxt",
+            "label": "Nuxt 4"
+          },
+          {
+            "id": "typescript",
+            "label": "TypeScript"
+          },
+          {
+            "id": "vite",
+            "label": "Vite"
+          },
+          {
+            "id": "pinia",
+            "label": "Pinia"
+          }
         ]
       },
       {
         "id": "backend",
         "name": "Backend",
         "techs": [
-          { "id": "laravel", "label": "Laravel" },
-          { "id": "php", "label": "PHP 8" },
-          { "id": "api-rest", "label": "REST APIs" }
+          {
+            "id": "laravel",
+            "label": "Laravel"
+          },
+          {
+            "id": "php",
+            "label": "PHP 8"
+          },
+          {
+            "id": "api-rest",
+            "label": "REST APIs"
+          }
         ]
       },
       {
         "id": "infra",
         "name": "Infra",
         "techs": [
-          { "id": "vercel", "label": "Vercel" },
-          { "id": "railway", "label": "Railway" },
-          { "id": "gcp", "label": "GCP" },
-          { "id": "cloudflare", "label": "Cloudflare" }
+          {
+            "id": "vercel",
+            "label": "Vercel"
+          },
+          {
+            "id": "railway",
+            "label": "Railway"
+          },
+          {
+            "id": "gcp",
+            "label": "GCP"
+          },
+          {
+            "id": "cloudflare",
+            "label": "Cloudflare"
+          }
         ]
       },
       {
         "id": "ui",
         "name": "UI",
         "techs": [
-          { "id": "vuetify", "label": "Vuetify" },
-          { "id": "primevue", "label": "PrimeVue" },
-          { "id": "figma", "label": "Figma" }
+          {
+            "id": "vuetify",
+            "label": "Vuetify"
+          },
+          {
+            "id": "primevue",
+            "label": "PrimeVue"
+          },
+          {
+            "id": "figma",
+            "label": "Figma"
+          }
         ]
       },
       {
         "id": "testing",
         "name": "Testing",
         "techs": [
-          { "id": "vitest", "label": "Vitest" }
+          {
+            "id": "vitest",
+            "label": "Vitest"
+          }
         ]
       },
       {
         "id": "ai",
         "name": "AI Tools",
         "techs": [
-          { "id": "copilot", "label": "Copilot" },
-          { "id": "claude", "label": "Claude" }
+          {
+            "id": "copilot",
+            "label": "Copilot"
+          },
+          {
+            "id": "claude",
+            "label": "Claude"
+          }
         ]
       }
     ],
@@ -298,7 +380,11 @@
         "label": "01",
         "title": "Projects",
         "body": "Projects I have worked on, with technical decisions and what I learned in the process.",
-        "tags": ["Vue 3", "Laravel", "Full Stack"],
+        "tags": [
+          "Vue 3",
+          "Laravel",
+          "Full Stack"
+        ],
         "cta": "View projects",
         "to": "/projects"
       },
@@ -306,7 +392,11 @@
         "label": "02",
         "title": "Blog",
         "body": "Notes, short tutorials and practical solutions.",
-        "tags": ["Vue 3", "Laravel", "Cloud"],
+        "tags": [
+          "Vue 3",
+          "Laravel",
+          "Cloud"
+        ],
         "cta": "Go to blog",
         "to": "/blog",
         "openInNewTab": true
@@ -315,7 +405,11 @@
         "label": "03",
         "title": "Resources",
         "body": "Useful resources, bookmarks and academic material I use and recommend.",
-        "tags": ["Notion", "Books", "Tools"],
+        "tags": [
+          "Notion",
+          "Books",
+          "Tools"
+        ],
         "cta": "View resources",
         "to": "/resources"
       }
@@ -398,25 +492,41 @@
           "date": "Jan 2024 - Present",
           "title": "Full Stack Developer · DTIC - MINSAL",
           "description": "Development of public platforms and internal systems for the Ministry of Health: new features, integrations, monitoring and performance improvements in Vue 3 and Laravel.",
-          "tags": ["Vue 3", "Laravel", "GovTech"]
+          "tags": [
+            "Vue 3",
+            "Laravel",
+            "GovTech"
+          ]
         },
         {
           "date": "Ago 2024 - Dic 2025",
           "title": "ReportFIA · FIA - Universidad de El Salvador",
           "description": "Development of an incident management and reporting system for the Planning Unit of the Faculty of Engineering and Architecture.",
-          "tags": ["Laravel", "Vue", "Incident Management"]
+          "tags": [
+            "Laravel",
+            "Vue",
+            "Incident Management"
+          ]
         },
         {
           "date": "Mar 2023 - Jun 2023",
           "title": "Full Stack Developer · Carmencita Store",
           "description": "Built an ERP for inventory, HR and delivery on the coast. SCRUM planning, interfaces in Figma and deployments coordinated with the admin team.",
-          "tags": ["Laravel", "Vue", "ERP"]
+          "tags": [
+            "Laravel",
+            "Vue",
+            "ERP"
+          ]
         },
         {
           "date": "Jun 2023 - Dec 2023",
           "title": "Frontend Intern · Presidency / CASATIC",
           "description": "Digital skills program focused on testing, deployment and agile methodologies for public innovation.",
-          "tags": ["Vue", "Testing", "Agile"]
+          "tags": [
+            "Vue",
+            "Testing",
+            "Agile"
+          ]
         }
       ]
     },

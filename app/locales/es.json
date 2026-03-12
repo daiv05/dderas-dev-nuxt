@@ -77,8 +77,8 @@
     "siteName": "DDeras",
     "twitterHandle": "daiv_09",
     "defaults": {
-      "title": "Ingeniero de Software · Full Stack Web y desarrollo asistido por IA",
-      "description": "Portafolio personal, proyectos reales y artículos técnicos sobre Vue, Laravel y despliegues en la nube.",
+      "title": "Ingeniero de Software",
+      "description": "Portafolio personal, proyectos reales y artículos técnicos sobre ingeniería de software, desarrollo web y despliegues en la nube.",
       "keywords": [
         "David Deras",
         "Ingeniero de Software",
@@ -105,12 +105,27 @@
     },
     "pages": {
       "home": {
-        "title": "Desarrollando con Vue y Laravel",
-        "description": "Proyectos, experimentos y aprendizajes usando Vue 3, Laravel y TypeScript.",
+        "title": "Ingeniero de Software",
+        "description": "Portafolio personal, proyectos reales y artículos técnicos sobre ingeniería de software, desarrollo web y despliegues en la nube.",
         "keywords": [
-          "Desarrollo web",
-          "Vue.js",
-          "Laravel"
+          "David Deras",
+          "Ingeniero de Software",
+          "Desarrollador Full Stack",
+          "Frontend Developer",
+          "Backend Developer",
+          "Desarrollo asistido por IA",
+          "IA aplicada al desarrollo",
+          "Vue 3",
+          "Vue 2",
+          "Vue",
+          "Laravel 11",
+          "Vuetify",
+          "PrimeVue",
+          "TypeScript",
+          "GovTech",
+          "Sistemas full stack",
+          "El Salvador",
+          "DDeras"
         ]
       },
       "me": {
@@ -213,54 +228,108 @@
         "id": "frontend",
         "name": "Frontend",
         "techs": [
-          { "id": "vue", "label": "Vue 3" },
-          { "id": "nuxt", "label": "Nuxt 4" },
-          { "id": "typescript", "label": "TypeScript" },
-          { "id": "vite", "label": "Vite" },
-          { "id": "pinia", "label": "Pinia" }
+          {
+            "id": "vue",
+            "label": "Vue 3"
+          },
+          {
+            "id": "nuxt",
+            "label": "Nuxt 4"
+          },
+          {
+            "id": "typescript",
+            "label": "TypeScript"
+          },
+          {
+            "id": "vite",
+            "label": "Vite"
+          },
+          {
+            "id": "pinia",
+            "label": "Pinia"
+          }
         ]
       },
       {
         "id": "backend",
         "name": "Backend",
         "techs": [
-          { "id": "laravel", "label": "Laravel" },
-          { "id": "php", "label": "PHP 8" },
-          { "id": "api-rest", "label": "APIs REST" }
+          {
+            "id": "laravel",
+            "label": "Laravel"
+          },
+          {
+            "id": "php",
+            "label": "PHP 8"
+          },
+          {
+            "id": "api-rest",
+            "label": "APIs REST"
+          }
         ]
       },
       {
         "id": "infra",
         "name": "Infra",
         "techs": [
-          { "id": "vercel", "label": "Vercel" },
-          { "id": "railway", "label": "Railway" },
-          { "id": "gcp", "label": "GCP" },
-          { "id": "cloudflare", "label": "Cloudflare" }
+          {
+            "id": "vercel",
+            "label": "Vercel"
+          },
+          {
+            "id": "railway",
+            "label": "Railway"
+          },
+          {
+            "id": "gcp",
+            "label": "GCP"
+          },
+          {
+            "id": "cloudflare",
+            "label": "Cloudflare"
+          }
         ]
       },
       {
         "id": "ui",
         "name": "UI",
         "techs": [
-          { "id": "vuetify", "label": "Vuetify" },
-          { "id": "primevue", "label": "PrimeVue" },
-          { "id": "figma", "label": "Figma" }
+          {
+            "id": "vuetify",
+            "label": "Vuetify"
+          },
+          {
+            "id": "primevue",
+            "label": "PrimeVue"
+          },
+          {
+            "id": "figma",
+            "label": "Figma"
+          }
         ]
       },
       {
         "id": "testing",
         "name": "Testing",
         "techs": [
-          { "id": "vitest", "label": "Vitest" }
+          {
+            "id": "vitest",
+            "label": "Vitest"
+          }
         ]
       },
       {
         "id": "ai",
         "name": "AI Tools",
         "techs": [
-          { "id": "copilot", "label": "Copilot" },
-          { "id": "claude", "label": "Claude" }
+          {
+            "id": "copilot",
+            "label": "Copilot"
+          },
+          {
+            "id": "claude",
+            "label": "Claude"
+          }
         ]
       }
     ],
@@ -546,7 +615,7 @@
     ],
     "noteBlock": {
       "title": "Contribuciones",
-      "body": "Si tienes recursos útiles que compartir, no dudes en ponerte en contacto conmigo para que podamos incluirlos aquí."    
+      "body": "Si tienes recursos útiles que compartir, no dudes en ponerte en contacto conmigo para que podamos incluirlos aquí."
     }
   },
   "footer": {
