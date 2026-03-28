@@ -348,7 +348,6 @@ html.dark .shiki span {
   border: 1px solid var(--md-table-border);
   border-radius: var(--radius-sm);
   overflow: hidden;
-  display: block;
   max-width: 100%;
   overflow-x: auto;
 }
