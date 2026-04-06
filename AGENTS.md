@@ -41,6 +41,16 @@ Nuxt 4 auto-importa automáticamente:
 
 **No** es necesario importar estos explícitamente.
 
+### Fórmulas matemáticas en Markdown
+
+Usar `$$ ... $$` para fórmulas matemáticas con KaTeX:
+
+```markdown
+$$
+f(x) = ax^2 + bx + c
+$$
+```
+
 ### Internacionalización (i18n)
 
 #### Funciones clave:

@@ -27,7 +27,7 @@
 - **About Me**: Personal introduction and skills
 - **Projects**: Showcase of projects with detailed descriptions
 - **Blog**: Full-stack development articles and tutorials
-- **Resources**: 
+- **Resources**: Curated list of tools and libraries
 
 ## 📧 Contact
 

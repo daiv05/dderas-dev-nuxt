@@ -102,6 +102,14 @@ export default defineNuxtConfig({
           depth: 3,
           searchDepth: 3,
         },
+        remarkPlugins: {
+          "remark-math": {}
+        },
+        rehypePlugins: {
+          "rehype-katex": {
+            output: 'html'
+          }
+        }
       },
     },
   },
@@ -136,8 +144,14 @@ export default defineNuxtConfig({
     ],
     vue: {
       template: {
+        compilerOptions: {
+        },
         transformAssetUrls,
       },
+    },
+  },
+  vue: {
+    compilerOptions: {
     },
   },
 });

@@ -429,3 +429,12 @@ html.dark .shiki span {
   color: var(--link);
   text-decoration: underline;
 }
+
+.katex-html {
+  display: none;
+}
+
+/* Agregar espaciados para bloques de katex */
+.katex-display * {
+  margin-bottom: 5px;
+}
