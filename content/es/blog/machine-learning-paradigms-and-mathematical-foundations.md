@@ -23,7 +23,11 @@ Continuamos aprendiendo sobre Machine Learning, en esta ocasión nos adentraremo
 
 ## Paradigmas de Aprendizaje Automático
 
-En el articulo anterior ya mencionamos los tipos de aprendizaje automático, en esta sección haremos un repaso y luego pasaremos a los fundamentos matemáticos.
+El machine learning NO comienza con algoritmos. EL proceso comienza con una comprension profunda del problema antes de seleccionar cualquier técnica o modelo, además de tres criterios fundamentales para determinar que enfoque  y técnicas podemos usar:
+- **Naturaleza de los datos**: Analizar el tipo de datos disponibles (etiquetados o no etiquetados) y su estructura.
+- **Tipo de salida esperada**: ¿Qué tipo de resultado esperamos obtener? ¿Una
+categoría, un número continuo, o una estructura oculta?
+- **Interacción con el entorno**: ¿El modelo necesita aprender a través de la interacción con un entorno dinámico?
 
 ### Aprendizaje Supervisado
 
@@ -40,16 +44,22 @@ Dependiendo del tipo de salida, el aprendizaje supervisado se puede dividir en:
 - **Clasificación**: Cuando la salida Y es una categoría discreta (es decir, un valor categórico). Por ejemplo, clasificar si una imagen contiene un gato o un perro, si un número es par o impar, o si un correo electrónico es spam o no spam.
 - **Regresión**: Cuando la salida Y es un valor continuo (es decir, un número real). Por ejemplo, hacer una predicción de las ventas futuras basándose en datos históricos, predecir el precio de una casa basándose en sus características, o estimar la temperatura de una ciudad en función de factores climáticos.
 
+Una regla que nos puede servir para detectar si un problema es de clasificación o regresión es, si la respuesta es "¿Cuánto?" entonces es un problema de regresión, pero si la respuesta es "¿Cuál?" entonces es un problema de clasificación.
+
+> Objetivo: Aprender una función que mapee las entradas a las salidas correctas, minimizando el error entre las predicciones del modelo.
+
 ---
 
 ### Aprendizaje No Supervisado
 
-En el aprendizaje no supervisado, el modelo recibe solo las entradas X sin etiquetas asociadas: $$\{x_1, x_2, ..., x_n\}$$. El objetivo es encontrar patrones o estructuras subyacentes en los datos.
+En el aprendizaje no supervisado, el modelo recibe solo las entradas X sin etiquetas asociadas: $$\{x_1, x_2, ..., x_n\}$$. Lo que se busca es encontrar patrones o estructuras subyacentes en los datos.
 Algunos ejemplos de técnicas de aprendizaje no supervisado incluyen:
 
 - **Clustering**: Agrupar datos similares en clusters. Por ejemplo, segmentar clientes en grupos basados en sus comportamientos de compra.
 
 - **Reducción de Dimensionalidad**: Reducir el número de variables en un conjunto de datos mientras se conserva la mayor cantidad de información posible. Por ejemplo, usar PCA (Análisis de Componentes Principales) para visualizar datos en 2D o 3D.
+
+> Objetivo: Encontrar patrones o estructuras subyacentes en los datos sin etiquetas, como agrupamientos o representaciones más compactas.
 
 ---
 
@@ -65,6 +75,8 @@ En este paradigma, el agente aprende una política de acción que le permite tom
 
 Sus aplicaciones incluyen juegos, robótica y sistemas de recomendación.
 
+> Objetivo: Aprender a tomar decisiones óptimas mediante la interacción con un entorno, maximizando la recompensa acumulada a lo largo del tiempo.
+
 ---
 
 ## Fundamentos Matemáticos
@@ -72,6 +84,8 @@ Sus aplicaciones incluyen juegos, robótica y sistemas de recomendación.
 Es importante entender que el aprendizaje automático se basa en conceptos de álgebra lineal, cálculo, probabilidad y estadística. Estos fundamentos son esenciales para comprender cómo **funcionan** los modelos y cómo se **optimizan**.
 
 ### Regresión
+
+> Utilizado en el **aprendizaje supervisado**.
 
 ¿Qué es un problema de regresión? Es un tipo de problema donde el objetivo es predecir un valor continuo encontrando la mejor línea (o plano) que se ajuste a los datos. Ya hablamos de ejemplos de aplicación como el cálculo de precios, ventas, etc.
 
@@ -248,6 +262,8 @@ Para explorar más con la regresión puedes usar este Colab de Google que contie
 
 ### Clasificación
 
+> Utilizado en el **aprendizaje supervisado**.
+
 Un problema de clasificacion busca predecir una variable de salida categórica a partir de un conjunto de variables independientes. Por ejemplo, predecir si un correo electrónico es spam o no spam basándose en su contenido, o saber si en la foto hay un gato o un perro.
 
 Existen tres tipos principales de clasificación:
@@ -366,6 +382,7 @@ Para **regresión**, las métricas comunes incluyen:
 - **Error Cuadrático Medio (MSE)**: Promedio de los cuadrados de las diferencias entre los valores reales y las predicciones.
 - **Error Raíz Cuadrático Medio (RMSE)**: Raíz cuadrada del MSE, que tiene la misma unidad que la variable dependiente.
 - **Coeficiente de Determinación (R²)**: Proporción de la varianza en la variable dependiente que es explicada por el modelo.
+- **Error Absoluto Medio (MAE)**: Promedio de las diferencias absolutas entre los valores reales y las predicciones.
 
 Para **clasificación**, las métricas comunes incluyen:
 - **Exactitud (Accuracy)**: Proporción de predicciones correctas sobre el total de ejemplos.
