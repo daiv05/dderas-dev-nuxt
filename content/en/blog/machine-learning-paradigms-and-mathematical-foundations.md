@@ -16,6 +16,8 @@ sitemap:
 
 We continue learning about Machine Learning, this time we will delve into the different paradigms of machine learning and the mathematical foundations that support these models.
 
+Previous article: [Machine Learning Fundamentals](https://deras.dev/blog/machine-learning-fundamentals)
+
 ::table-of-contents
 ::
 

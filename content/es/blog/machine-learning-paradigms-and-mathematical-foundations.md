@@ -16,6 +16,8 @@ sitemap:
 
 Continuamos aprendiendo sobre Machine Learning, en esta ocasión nos adentraremos en los diferentes paradigmas de aprendizaje automático y los fundamentos matemáticos que sustentan estos modelos.
 
+Artículo anterior: [Fundamentos de Aprendizaje Automático](https://deras.dev/es/blog/machine-learning-fundamentals)
+
 ::table-of-contents
 ::
 
