@@ -18,8 +18,27 @@ export interface BlogPost {
   path?: string
 }
 
+interface AdjacentPosts {
+  prev: BlogPost | null
+  next: BlogPost | null
+}
+
 export function useBlog() {
   const { locale } = useI18n()
+
+  const getPostIdentifier = (post: BlogPost): string => {
+    return post.slug || post.id || ''
+  }
+
+  const toTimestamp = (value?: string): number => {
+    if (!value) return 0
+    const parsed = Date.parse(value)
+    return Number.isNaN(parsed) ? 0 : parsed
+  }
+
+  const sortPostsByDateDesc = (posts: BlogPost[]): BlogPost[] => {
+    return [...posts].sort((a, b) => toTimestamp(b.date) - toTimestamp(a.date))
+  }
 
   /**
    * Obtiene el nombre de la collection basado en el idioma actual
@@ -61,6 +80,24 @@ export function useBlog() {
     } catch (error) {
       console.error('Error fetching post:', error)
       return null
+    }
+  }
+
+  /**
+   * Obtiene los posts adyacentes al post actual dentro del idioma activo.
+   * El orden se basa en fecha descendente (más reciente primero).
+   */
+  const getAdjacentPosts = async (slug: string): Promise<AdjacentPosts> => {
+    const posts = sortPostsByDateDesc(await getPosts())
+    const index = posts.findIndex((p) => getPostIdentifier(p) === slug)
+
+    if (index === -1) {
+      return { prev: null, next: null }
+    }
+
+    return {
+      prev: posts[index + 1] || null,
+      next: posts[index - 1] || null,
     }
   }
 
@@ -111,6 +148,7 @@ export function useBlog() {
   return {
     getPosts,
     getPost,
+    getAdjacentPosts,
     findEquivalentPost,
     getRecentPosts,
     getPostsByTag,
