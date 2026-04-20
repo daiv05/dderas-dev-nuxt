@@ -32,6 +32,7 @@ Why is it important to understand the workflow of a machine learning project?
 In general, machine learning is a process that is **part of a system**, with an **iterative cycle** and **value-driven approach** that consists of several stages, each with their own tasks and challenges.
 
 ![Integrated View of the Machine Learning Cycle](/blog/workflow-machine-learning-projects/shared/machine-learning-cycle.webp)
+_Machine Learning Cycle_
 
 ---
 

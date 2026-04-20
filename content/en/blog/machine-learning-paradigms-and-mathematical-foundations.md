@@ -97,6 +97,7 @@ The **slope** is represented by the remaining coefficients in the vector $$\bold
 Graphically we can see it as follows:
 
 ![Linear regression graph](/blog/machine-learning-paradigms-and-mathematical-foundations/shared/regression-model.webp)
+_Linear Regression Graph_
 
 Each black point represents a training data point, and the red line represents the model.
 
@@ -307,6 +308,7 @@ Where:
 
 Visually it looks something like this (with z on the X-axis and $$\sigma(z)$$ on the Y-axis):
 ![Sigmoid Function Graph](/blog/machine-learning-paradigms-and-mathematical-foundations/shared/sigmoid-function.webp)
+_Sigmoid Function Graph_
 
 From this we can draw some important conclusions:
 - When z is very negative, $$\sigma(z)$$ approaches 0, indicating a low probability that the class is 1.
@@ -347,6 +349,7 @@ Why is cross-entropy used?
 The behavior of the loss function is shown in the following graph:
 
 ![Cross-Entropy Loss Function Graph](/blog/machine-learning-paradigms-and-mathematical-foundations/shared/cross-entropy.webp)
+_Cross-Entropy Loss Function Graph_
 
 The function penalizes more heavily the incorrect predictions with high confidence, which is reflected in the shape of the curve.
 1. When the true label is 1 (y=1) (blue line):
@@ -399,6 +402,7 @@ The optimization process continues until a convergence criterion is met, such as
 Graphically:
 
 ![Graphical representation of the gradient descent optimization process](/blog/machine-learning-paradigms-and-mathematical-foundations/shared/gradient-descent.webp)
+_Optimization with Gradient Descent_
 
 1. The process starts with a random point on the loss function (INITIAL POINT).
 2. The gradient is calculated at that point, indicating the direction of greatest increase in the loss.

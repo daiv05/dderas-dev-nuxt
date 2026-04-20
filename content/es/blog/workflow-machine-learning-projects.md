@@ -33,6 +33,7 @@ proceso bien estructurado. Un Random Forest con datos limpios y bien preparados 
 De forma general el aprendizaje automático es un proceso que es **parte de un sistema**, con un **ciclo iterativo** y **orientado a generar valor** que consta de varias etapas, cada una con sus propias tareas y desafíos.
 
 ![Visión integradora del ciclo en Machine Learning](/blog/workflow-machine-learning-projects/shared/machine-learning-cycle.webp)
+_Ciclo en Machine Learning_
 
 ---
 

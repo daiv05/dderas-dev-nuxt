@@ -111,6 +111,7 @@ La **pendiente** se representa por los coeficientes restantes en el vector $$\bo
 Gráficamente podemos verlo de la siguiente manera:
 
 ![Gráfico de regresión lineal](/blog/machine-learning-paradigms-and-mathematical-foundations/shared/regression-model.webp)
+_Gráfico de Regresión Lineal_
 
 Cada punto negro representa un dato de entrenamiento, y la línea roja el modelo.
 
@@ -323,6 +324,7 @@ Donde:
 
 Visualmente es algo así (con z en el eje X y $$\sigma(z)$$ en el eje Y):
 ![Gráfico de la función sigmoide](/blog/machine-learning-paradigms-and-mathematical-foundations/shared/sigmoid-function.webp)
+_Gráfico de la Función Sigmoide_
 
 De aqui podemos sacar algunas conclusiones importantes:
 - Cuando z es muy negativo, $$\sigma(z)$$ se acerca a 0, lo que indica una baja probabilidad de que la clase sea 1.
@@ -363,6 +365,7 @@ Donde:
 El comportamiento de la función de pérdida se muestra en la siguiente gráfica:
 
 ![Gráfico de la función de pérdida de entropía cruzada](/blog/machine-learning-paradigms-and-mathematical-foundations/shared/cross-entropy.webp)
+_Gráfico de la Función de Pérdida de Entropía Cruzada_
 
 La función penaliza más las predicciones incorrectas con alta confianza, lo que se refleja en la forma de la curva.
 1. Cuando la etiqueta real es 1 (y=1) (línea azul):
@@ -416,6 +419,7 @@ El proceso de optimización continúa hasta que se alcanza un criterio de conver
 Gráficamente:
 
 ![Gráfico del proceso de optimización con descenso de gradiente](/blog/machine-learning-paradigms-and-mathematical-foundations/shared/gradient-descent.webp)
+_Optimización con Descenso de Gradiente_
 
 1. Se inicia con un punto aleatorio en la función de pérdida (INITIAL POINT).
 2. Se calcula el gradiente en ese punto, que indica la dirección de mayor aumento de la pérdida.

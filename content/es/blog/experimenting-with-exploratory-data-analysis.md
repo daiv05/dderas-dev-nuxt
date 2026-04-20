@@ -93,7 +93,7 @@ print(df.describe())
 
 Dando como resultado lo siguiente:
 
-```
+```sh
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 365 entries, 0 to 364
 Data columns (total 6 columns):
@@ -162,6 +162,7 @@ plt.show()
 ```
 
 ![Distribución de ventas diarias](/blog/experimenting-with-exploratory-data-analysis/shared/sales_distribution.webp)
+_Histograma de Ventas_
 
 Comencemos con el **histograma**, que nos permite visualizar cómo se distribuyen las ventas diarias a lo largo del tiempo. En este caso, observamos que las ventas siguen una **distribución aproximadamente normal**, con una media cercana a $800. Esto significa que la mayoría de los días las ventas se concentran alrededor de ese valor promedio, y que los días con ventas muy bajas o muy altas son menos frecuentes y se distribuyen de manera relativamente simétrica a ambos lados.
 
@@ -184,7 +185,7 @@ Si los datos **no** siguen una distribución normal, puede ser necesario aplicar
 
 La asimetría es importante porque los modelos sensibles a valores extremos pueden verse distorsionados.
 
-Supongamos que la mayoría de los días las ventas están entre $700 y $900, pero en tres días especiales (por ejemplo, promociones o feriados) las ventas alcanzan $2,500.
+Supongamos que la mayoría de los días las ventas están entre `$700` y `$900`, pero en tres días especiales (por ejemplo, promociones o feriados) las ventas alcanzan `$2,500`.
 
 Si entrenamos una regresión lineal directamente con esos datos:
 
@@ -199,6 +200,7 @@ En cambio, si aplicamos una transformación logarítmica antes de entrenar el mo
 * El modelo aprende un patrón más representativo del comportamiento general.
 
 ![Publicidad vs Ventas](/blog/experimenting-with-exploratory-data-analysis/shared/ads_vs_sales.webp)
+_Dispersión entre Inversión en Publicidad y Ventas_
 
 Los puntos según el clima son de diferentes colores: Azul-Soleado, Naranja-Nublado, Verde-Lluvioso
 
@@ -268,6 +270,7 @@ El modelo podrá:
 * Reducir varianza del error (porque la varianza, es decir, la dispersión de los puntos alrededor de la línea de regresión, se reduce al explicar más factores).
 
 ![Matriz de Correlación Cafetería](/blog/experimenting-with-exploratory-data-analysis/shared/cafeteria_correlation_matrix.webp)
+_Heatmap de Correlación_
 
 Vamos a descomponer la matriz de correlación, interpretando cada valor, pero antes recordemos qué significa cada número:
 
@@ -475,13 +478,28 @@ print(f"Puntuación R²: {r2:.2f}")
 
 Dando como resultado:
 
-```
 MAE: $55.39
+
 RMSE: $74.51
-R²: 0.88
-```
+
+$R^2$: 0.88
 
 ¿Qué significan estos números?
 * **MAE (Error Absoluto Medio)**: En promedio, nuestras predicciones se desvían de las ventas reales por aproximadamente $55.39. Esto nos da una idea de la magnitud del error en términos monetarios.
 * **RMSE (Error Cuadrático Medio)**: Al penalizar más los errores grandeses, el RMSE de $74.51 indica que, aunque la mayoría de las predicciones están cerca, hay algunos casos donde el modelo se equivoca más significativamente.
-* **R² (Puntuación de Determinación)**: Un R² de 0.88 significa que el modelo explica el 88% de la variabilidad en las ventas diarias. Esto es un resultado bastante bueno, indicando que el modelo captura la mayoría de los patrones presentes en los datos.
+* **$R^2$ (Puntuación de Determinación)**: Un $R^2$ de 0.88 significa que el modelo explica el 88% de la variabilidad en las ventas diarias. Esto es un resultado bastante bueno, indicando que el modelo captura la mayoría de los patrones presentes en los datos.
+
+**Grafico de Predicciones vs Realidad**
+
+```python
+plt.figure(figsize=(8,5))
+sns.scatterplot(x=y_test, y=predictions)
+plt.plot([y.min(), y.max()], [y.min(), y.max()], 'r--')  # Perfect reference line
+plt.title("Predictions vs Actual Sales")
+plt.xlabel("Actual Sales ($)")
+plt.ylabel("Model Predictions ($)")
+plt.show()
+```
+
+![Predicciones vs Realidad](/blog/experimenting-with-exploratory-data-analysis/shared/predictions_vs_actual_sales.webp)
+_Gráfico de Predicciones vs Ventas Reales_
