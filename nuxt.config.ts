@@ -96,7 +96,7 @@ export default defineNuxtConfig({
             default: "vitesse-light",
             dark: "vitesse-dark",
           },
-          preload: ["vue", "javascript", "typescript", "json", "bash", "shell"],
+          preload: ["vue", "javascript", "typescript", "json", "bash", "shell", "python"],
         },
         toc: {
           depth: 3,

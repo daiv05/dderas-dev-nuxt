@@ -1,0 +1,192 @@
+Predicción del precio de alquiler de viviendas en San Salvador 
+ 
+1. Importar librerías 
+import pandas as pd 
+import numpy as np 
+import random 
+ 
+import matplotlib.pyplot as plt 
+import seaborn as sns 
+ 
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression 
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score 
+ 
+ 
+2. Generación del dataset (300 viviendas) 
+n = 300 
+ 
+zonas = [ 
+    "SanSalvador", 
+    "SantaTecla", 
+    "AntiguoCuscatlan", 
+    "Soyapango", 
+    "Mejicanos", 
+    "Apopa" 
+] 
+ 
+data = [] 
+ 
+for i in range(n): 
+ 
+    tamano = random.randint(50,200) 
+    habitaciones = random.randint(2,6) 
+    banos = random.randint(1,4) 
+    parqueos = random.randint(0,3) 
+    distancia = random.uniform(1,10) 
+    seguridad = random.randint(0,1) 
+    edad = random.randint(0,30) 
+    zona = random.choice(zonas) 
+ 
+    precio = ( 
+        tamano*3.5 + 
+        habitaciones*40 + 
+        banos*35 + 
+        parqueos*25 - 
+        distancia*15 + 
+        seguridad*120 - 
+        edad*2 
+    ) 
+ 
+    precio += np.random.normal(0,40) 
+ 
+    data.append([ 
+        tamano, 
+        habitaciones, 
+        banos, 
+        parqueos, 
+        distancia, 
+        seguridad, 
+        edad, 
+        zona, 
+        precio 
+    ]) 
+ 
+columns = [ 
+    "tamano_m2", 
+    "habitaciones", 
+    "banos", 
+    "parqueos", 
+    "distancia_centro", 
+    "seguridad", 
+    "edad_propiedad", 
+    "zona", 
+    "precio" 
+] 
+ 
+df = pd.DataFrame(data, columns=columns) 
+ 
+df.to_csv("dataset_viviendas_sv.csv", index=False) 
+ 
+print(df.head()) 
+ 
+3. Análisis exploratorio de datos (EDA) 
+Información del dataset 
+print(df.info()) 
+print(df.describe()) 
+Distribución de precios 
+plt.hist(df["precio"], bins=20) 
+plt.title("Distribución de precios de alquiler") 
+plt.xlabel("Precio") 
+plt.ylabel("Frecuencia") 
+plt.show() 
+Relación tamaño vs precio 
+plt.scatter(df["tamano_m2"], df["precio"]) 
+plt.xlabel("Tamaño (m2)") 
+plt.ylabel("Precio") 
+plt.title("Tamaño vs Precio") 
+plt.show() 
+Matriz de correlación 
+plt.figure(figsize=(10,6)) 
+sns.heatmap(df.corr(numeric_only=True), annot=True) 
+plt.title("Correlación entre variables") 
+plt.show() 
+4. Preparación de datos 
+Convertir variable categórica zona. 
+df = pd.get_dummies(df, columns=["zona"]) 
+X = df.drop("precio", axis=1) 
+y = df["precio"] 
+5. División de entrenamiento y prueba 
+X_train, X_test, y_train, y_test = train_test_split( 
+X, y, 
+test_size=0.2, 
+random_state=42 
+) 
+6. Entrenamiento del modelo 
+modelo = LinearRegression() 
+modelo.fit(X_train, y_train) 
+7. Predicciones 
+predicciones = modelo.predict(X_test) 
+8. Evaluación del modelo 
+mae = mean_absolute_error(y_test, predicciones) 
+rmse = np.sqrt(mean_squared_error(y_test, predicciones)) 
+r2 = r2_score(y_test, predicciones) 
+print("MAE:", mae) 
+print("RMSE:", rmse) 
+print("R2:", r2) 
+Interpretación: 
+Métrica 
+Significado 
+MAE 
+error promedio 
+RMSE error penaliza errores grandes 
+R² 
+porcentaje explicado por el modelo 
+9. Gráfico Predicción vs Real 
+plt.scatter(y_test, predicciones) 
+plt.xlabel("Precio real") 
+plt.ylabel("Precio predicho") 
+plt.title("Predicción vs Real") 
+plt.show() 
+10. Importancia de variables 
+coeficientes = pd.DataFrame({ 
+"Variable":X.columns, 
+"Coeficiente":modelo.coef_ 
+}) 
+print(coeficientes.sort_values(by="Coeficiente", ascending=False)) 
+Esto permite interpretar qué variables influyen más en el precio. 
+Ejemplo esperado: 
+Variable 
+seguridad 
+Impacto 
+tamano_m2 alto 
+alto 
+habitaciones 
+distancia_centro negativo 
+medio 
+11. Predicción de una nueva vivienda 
+Ejemplo: 
+Casa en San Salvador con: 
+120 m² 
+4 habitaciones 
+3 baños 
+2 parqueos 
+3 km del centro 
+seguridad 
+5 años de antigüedad 
+nueva = pd.DataFrame([{ 
+"tamano_m2":120, 
+"habitaciones":4, 
+"banos":3, 
+"parqueos":2, 
+"distancia_centro":3, 
+"seguridad":1, 
+"edad_propiedad":5, 
+"zona_AntiguoCuscatlan":0, 
+"zona_Apopa":0, 
+"zona_Mejicanos":0, 
+"zona_SanSalvador":1, 
+"zona_SantaTecla":0, 
+"zona_Soyapango":0 
+}]) 
+precio_estimado = modelo.predict(nueva) 
+print("Precio estimado:", precio_estimado) 
+Resultado aproximado: 
+Precio estimado ≈ $700 - $750 
+Posibles mejoras del proyecto 
+Para una versión más avanzada del proyecto: 
+Agregar variables como: 
+criminalidad 
+acceso a transporte 
+cercanía a centros comerciales 
+cercanía a universidades 
