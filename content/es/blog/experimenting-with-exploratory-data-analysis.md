@@ -121,10 +121,10 @@ max        35.000000     149.780000     1.000000   20.000000  1337.220000
 
 Exploremos un poco los resultados:
 *   La temperatura promedio es de 24.65°C, con un rango entre 15.1°C y 35°C.
-*   La inversión en publicidad varía ampliamente, con un promedio de \$82.49 y un máximo de \$149.78.
+*   La inversión en publicidad varía ampliamente, con un promedio de `$82.49` y un máximo de `$149.78`.
 *   El 56.16% de los días tuvieron un evento local.
 *   El descuento aplicado varía, con un promedio de 11.68% y un máximo de 20%.
-*   Las ventas diarias tienen un promedio de \$735.93, con una amplia variabilidad, desde un mínimo de \$226.62 hasta un máximo de \$1337.22.
+*   Las ventas diarias tienen un promedio de `$735.93`, con una amplia variabilidad, desde un mínimo de `$226.62` hasta un máximo de `$1337.22`.
 
 Además, no hay valores nulos en el dataset, lo que es una buena señal para el análisis posterior. 
 La amplia variabilidad en las ventas diarias sugiere que hay factores significativos que afectan las ventas, lo que hace que el análisis exploratorio de datos sea aún más crucial para entender estas relaciones.
@@ -164,7 +164,7 @@ plt.show()
 ![Distribución de ventas diarias](/blog/experimenting-with-exploratory-data-analysis/shared/sales_distribution.webp)
 _Histograma de Ventas_
 
-Comencemos con el **histograma**, que nos permite visualizar cómo se distribuyen las ventas diarias a lo largo del tiempo. En este caso, observamos que las ventas siguen una **distribución aproximadamente normal**, con una media cercana a $800. Esto significa que la mayoría de los días las ventas se concentran alrededor de ese valor promedio, y que los días con ventas muy bajas o muy altas son menos frecuentes y se distribuyen de manera relativamente simétrica a ambos lados.
+Comencemos con el **histograma**, que nos permite visualizar cómo se distribuyen las ventas diarias a lo largo del tiempo. En este caso, observamos que las ventas siguen una **distribución aproximadamente normal**, con una media cercana a `$800`. Esto significa que la mayoría de los días las ventas se concentran alrededor de ese valor promedio, y que los días con ventas muy bajas o muy altas son menos frecuentes y se distribuyen de manera relativamente simétrica a ambos lados.
 
 - ¿Por qué es importante identificar una distribución normal?
 
@@ -219,7 +219,7 @@ Aunque la tendencia es positiva, los puntos están bastante dispersos verticalme
 
 Por ejemplo:
 
-Con una inversión de $100, las ventas pueden variar entre aproximadamente $400 y $1,100 dependiendo de otros factores.
+Con una inversión de `$100`, las ventas pueden variar entre aproximadamente `$400` y `$1,100` dependiendo de otros factores.
 
 Esto nos dice algo muy importante:
 
@@ -240,10 +240,10 @@ Observando los colores:
 Esto sugiere que el clima actúa como una **variable moderadora**.
 
 Por ejemplo:
-Con una inversión de $120:
+Con una inversión de `$120`:
 
-* Día soleado → ventas alrededor de $500–900
-* Día lluvioso → ventas alrededor de $700–1,200
+* Día soleado → ventas alrededor de `$500–900`
+* Día lluvioso → ventas alrededor de `$700–1,200`
 
 En un modelo de regresión simple que solo use inversión, estas diferencias generarían errores grandes.
 
@@ -478,15 +478,15 @@ print(f"R^2: {r2:.2f}")
 
 Dando como resultado:
 
-MAE: $55.39
+MAE: `$55.39`
 
-RMSE: $74.51
+RMSE: `$74.51`
 
 $R^2$: 0.88
 
 ¿Qué significan estos números?
-* **MAE (Error Absoluto Medio)**: En promedio, nuestras predicciones se desvían de las ventas reales por aproximadamente $55.39. Esto nos da una idea de la magnitud del error en términos monetarios.
-* **RMSE (Error Cuadrático Medio)**: Al penalizar más los errores grandeses, el RMSE de $74.51 indica que, aunque la mayoría de las predicciones están cerca, hay algunos casos donde el modelo se equivoca más significativamente.
+* **MAE (Error Absoluto Medio)**: En promedio, nuestras predicciones se desvían de las ventas reales por aproximadamente `$55.39`. Esto nos da una idea de la magnitud del error en términos monetarios.
+* **RMSE (Error Cuadrático Medio)**: Al penalizar más los errores grandeses, el RMSE de `$74.51` indica que, aunque la mayoría de las predicciones están cerca, hay algunos casos donde el modelo se equivoca más significativamente.
 * **$R^2$ (Puntuación de Determinación)**: Un $R^2$ de 0.88 significa que el modelo explica el 88% de la variabilidad en las ventas diarias. Esto es un resultado bastante bueno, indicando que el modelo captura la mayoría de los patrones presentes en los datos.
 
 **Grafico de Predicciones vs Realidad**
@@ -504,7 +504,7 @@ plt.show()
 ![Predicciones vs Realidad](/blog/experimenting-with-exploratory-data-analysis/shared/predictions_vs_actual_sales.webp)
 _Gráfico de Predicciones vs Ventas Reales_
 
-Como se observa, tenemos una línea de referencia (en rojo) que representa la perfección: si todas las predicciones estuvieran exactamente en esa línea, el modelo sería perfecto, pero la realidad nunca será asi de ideal. Sin embargo, la mayoría de los puntos se agrupan alrededor de esa línea, lo que indica que el modelo tiene un buen desempeño general. Algunos puntos se alejan más, lo que refleja los casos donde el modelo no predice tan bien, posiblemente debido a factores no capturados en el dataset o a la variabilidad inherente en las ventas diarias.
+Como se observa, tenemos una línea de referencia (en rojo) que representa la perfección: si todas las ventas estuvieran exactamente en esa línea, el modelo sería perfecto, pero la realidad nunca será asi de ideal. Aún así, la mayoría de los puntos se agrupan alrededor de esa línea, lo que indica que el modelo tiene un buen desempeño general. Algunos puntos se alejan más, lo que refleja los casos donde el modelo no predice tan bien, posiblemente debido a factores no capturados en el dataset o a la variabilidad inherente en las ventas diarias.
 
 Podemos también obtener los coeficientes del modelo para entender la importancia de cada variable:
 
@@ -529,13 +529,13 @@ Esto nos arroja el siguiente resultado:
   | weather_Sunny   | -96.421386  |
 
 Lo que nos dice cada coeficiente es el impacto que tiene esa variable en las ventas diarias, manteniendo las demás constantes. Por ejemplo:
-* Un evento local (local_event) aumenta las ventas en aproximadamente $261.84.
-* Un día lluvioso (weather_Rainy) aumenta las ventas en aproximadamente $124.57.
-* Un descuento (discount) aumenta las ventas en aproximadamente $4.84 por cada punto porcentual de descuento.
-* Cada dólar adicional invertido en publicidad (ad_investment) aumenta las ventas en aproximadamente $2.48.
-* Cada grado Celsius adicional (temperature_c) disminuye las ventas en aproximadamente $8.58
-* Un día nublado (weather_Cloudy) disminuye las ventas en aproximadamente $28.15.
-* Un día soleado (weather_Sunny) disminuye las ventas en aproximadamente $96.42.
+* Un evento local (local_event) aumenta las ventas en aproximadamente `$261.84`.
+* Un día lluvioso (weather_Rainy) aumenta las ventas en aproximadamente `$124.57`.
+* Un descuento (discount) aumenta las ventas en aproximadamente `$4.84` por cada punto porcentual de descuento.
+* Cada dólar adicional invertido en publicidad (ad_investment) aumenta las ventas en aproximadamente `$2.48`.
+* Cada grado Celsius adicional (temperature_c) disminuye las ventas en aproximadamente `$8.58`
+* Un día nublado (weather_Cloudy) disminuye las ventas en aproximadamente `$28.15`.
+* Un día soleado (weather_Sunny) disminuye las ventas en aproximadamente `$96.42`.
 
 ¿Qué mejoras podemos hacer al modelo?
 

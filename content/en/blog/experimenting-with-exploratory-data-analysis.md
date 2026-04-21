@@ -116,10 +116,10 @@ max        35.000000     149.780000     1.000000   20.000000  1337.220000
 
 Let's explore the results:
 * The average temperature is 24.65°C, with a range between 15.1°C and 35°C.
-* Advertising investment varies widely, averaging $82.49 and reaching a maximum of $149.78.
+* Advertising investment varies widely, averaging `$82.49` and reaching a maximum of `$149.78`.
 * 56.16% of the days had a local event.
 * The discount applied varies, averaging 11.68% and reaching a maximum of 20%.
-* Daily sales average $735.93, with wide variability, ranging from a minimum of $226.62 to a maximum of $1337.22.
+* Daily sales average `$735.93`, with wide variability, ranging from a minimum of `$226.62` to a maximum of `$1337.22`.
 
 Furthermore, there are no null values ​​in the dataset, which is a good sign for further analysis. The wide variability in daily sales suggests that there are significant factors affecting sales, making exploratory data analysis even more crucial for understanding these relationships.
 
@@ -158,7 +158,7 @@ plt.show()
 ![Daily sales distribution](/blog/experimenting-with-exploratory-data-analysis/shared/sales_distribution.webp)
 _Sales Histogram_
 
-Let's start with the histogram, which allows us to visualize how daily sales are distributed over time. In this case, we observe that sales follow an approximately normal distribution, with a mean close to $800. This means that most days sales are concentrated around this average value, and that days with very low or very high sales are less frequent and are distributed relatively symmetrically on both sides.
+Let's start with the histogram, which allows us to visualize how daily sales are distributed over time. In this case, we observe that sales follow an approximately normal distribution, with a mean close to `$800`. This means that most days sales are concentrated around this average value, and that days with very low or very high sales are less frequent and are distributed relatively symmetrically on both sides.
 
 - Why is it important to identify a normal distribution?
 
@@ -179,7 +179,7 @@ If the data **does not** follow a normal distribution, it may be necessary to ap
 
 Skewness is important because models sensitive to extreme values ​​can become distorted.
 
-Let's assume that most days sales are between $700 and $900, but on three special days (for example, promotions or holidays) sales reach $2,500.
+Let's assume that most days sales are between `$700` and `$900`, but on three special days (for example, promotions or holidays) sales reach `$2,500`.
 
 If we train a linear regression directly with this data:
 
@@ -214,7 +214,7 @@ Although the trend is positive, the points are quite dispersed vertically.
 
 For example:
 
-With an investment of $100, sales can vary between approximately $400 and $1,100 depending on other factors.
+With an investment of `$100`, sales can vary between approximately `$400` and `$1,100` depending on other factors.
 
 This tells us something very important:
 
@@ -236,10 +236,10 @@ This suggests that weather acts as a **moderating variable**.
 
 For example:
 
-With an investment of $120:
+With an investment of `$120`:
 
-* Sunny day → sales around $500–900
-* Rainy day → sales around $700–1,200
+* Sunny day → sales around `$500–900`
+* Rainy day → sales around `$700–1,200`
 
 In a simple regression model that only uses investment, these differences would generate large errors.
 
@@ -473,15 +473,15 @@ print(f"R^2: {r2:.2f}")
 
 Resulting in:
 
-MAE: $55.39
+MAE: `$55.39`
 
-RMSE: $74.51
+RMSE: `$74.51`
 
 $R^2$: 0.88
 
 What do these numbers mean?
-* **MAE (Mean Absolute Error)**: On average, our predictions deviate from actual sales by approximately $55.39. This gives us an idea of ​​the magnitude of the error in monetary terms.
-* **RMSE (Mean Squared Error)**: By penalizing larger errors more, the RMSE of $74.51 indicates that, although most predictions are close, there are some cases where the model is significantly off.
+* **MAE (Mean Absolute Error)**: On average, our predictions deviate from actual sales by approximately `$55.39`. This gives us an idea of ​​the magnitude of the error in monetary terms.
+* **RMSE (Mean Squared Error)**: By penalizing larger errors more, the RMSE of `$74.51` indicates that, although most predictions are close, there are some cases where the model is significantly off.
 * **R² (Determination Score)**: An R² of 0.88 means that the model explains 88% of the variability in daily sales. This is a pretty good result, indicating that the model captures most of the patterns present in the data.
 
 **Predictions vs. Actual Chart**
@@ -524,13 +524,13 @@ This gives us the following result:
   | weather_Sunny   | -96.421386  |
 
 This tells us the impact of each variable on daily sales, holding the others constant. For example:
-* A local event (local_event) increases sales by approximately $261.84.
-* A rainy day (weather_Rainy) increases sales by approximately $124.57.
-* A discount (discount) increases sales by approximately $4.84 for each percentage point of discount.
-* Each additional dollar invested in advertising (ad_investment) increases sales by approximately $2.48.
-* Each additional degree Celsius (temperature_c) decreases sales by approximately $8.58.
-* A cloudy day (weather_Cloudy) decreases sales by approximately $28.15.
-* A sunny day (weather_Sunny) decreases sales by approximately $96.42.
+* A local event (local_event) increases sales by approximately `$261.84`.
+* A rainy day (weather_Rainy) increases sales by approximately `$124.57`.
+* A discount (discount) increases sales by approximately `$4.84` for each percentage point of discount.
+* Each additional dollar invested in advertising (ad_investment) increases sales by approximately `$2.48`.
+* Each additional degree Celsius (temperature_c) decreases sales by approximately `$8.58`.
+* A cloudy day (weather_Cloudy) decreases sales by approximately `$28.15`.
+* A sunny day (weather_Sunny) decreases sales by approximately `$96.42`.
 
 What improvements can we make to the model?
 
