@@ -482,15 +482,10 @@ Data was divided as follows:
 The following were tested:
 
 | Model | AUC-ROC | Recall churn |
-
 | ------------------- | ------- | ------------ |
-
 | Logistic Regression | 0.76 | 0.58 |
-
 | Random Forest | 0.84 | 0.71 |
-
 | XGBoost | 0.87 | 0.78 |
-
 | Neural Network | 0.85 | 0.73 |
 
 Although XGBoost had better metrics, **Random Forest** was initially chosen because:

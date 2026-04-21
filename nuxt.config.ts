@@ -82,6 +82,7 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/fonts",
     "@nuxt/hints",
+    "nuxt-gtag",
   ],
   router: {
     options: {
@@ -131,6 +132,9 @@ export default defineNuxtConfig({
       fallbackLocale: "en",
     },
   },
+  gtag: {
+    id: 'G-BQT0XQVMC0',
+  },
   build: {
     transpile: ["vuetify"],
   },
@@ -148,6 +152,9 @@ export default defineNuxtConfig({
         },
         transformAssetUrls,
       },
+    },
+    optimizeDeps: {
+      include: ["vue-mermaid-render"],
     },
   },
   vue: {
