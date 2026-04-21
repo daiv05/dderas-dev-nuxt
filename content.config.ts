@@ -7,6 +7,7 @@ const blogSchema = z.object({
   title: z.string(),
   slug: z.string().optional(), // El slug puede ser opcional, se generará automáticamente
   date: z.string(),
+  order: z.number().optional(),
   lastmod: z.string().optional(),
   author: z.string().optional(),
   tags: z.array(z.string()).optional(),

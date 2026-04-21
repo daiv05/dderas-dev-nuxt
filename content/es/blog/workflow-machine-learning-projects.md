@@ -2,6 +2,7 @@
 id: 'workflow-machine-learning-projects'
 title: 'El flujo en proyectos de aprendizaje automático'
 slug: 'workflow-machine-learning-projects'
+order: 4
 date: 2026-04-18
 summary: 'Descubre el flujo típico de un proyecto de aprendizaje automático, desde la recopilación de datos hasta la implementación del modelo, y aprende sobre las mejores prácticas y desafíos comunes en el campo de la ciencia de datos.'
 tags: ['Machine Learning', 'Data Science', 'Proyectos de ML', 'Flujo de trabajo']

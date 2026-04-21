@@ -2,6 +2,7 @@
 id: 'getting-started-vue-vite'
 title: 'Getting Started with Vue 3 and Vite'
 slug: 'getting-started-vue-vite'
+order: 1
 date: 2025-12-04
 summary: 'A complete guide to configure your first Vue 3 project with Vite, including best practices and modern tools.'
 tags: ['Vue.js', 'Vite', 'Tailwind CSS']

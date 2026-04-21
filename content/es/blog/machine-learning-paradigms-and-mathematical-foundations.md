@@ -2,6 +2,7 @@
 id: 'machine-learning-paradigms-and-mathematical-foundations'
 title: 'Paradigmas de aprendizaje automático y fundamentos matemáticos'
 slug: 'machine-learning-paradigms-and-mathematical-foundations'
+order: 3
 date: 2026-04-06
 summary: 'Tipos de aprendizaje automático, algoritmos comunes y fundamentos matemáticos esenciales para entender cómo funcionan los modelos de machine learning.'
 tags: ['Machine Learning', 'Inteligencia Artificial', 'Matemáticas para Machine Learning']

@@ -9,6 +9,7 @@ export interface BlogPost {
   slug?: string
   title: string
   date: string
+  order?: number
   lastmod?: string
   author?: string
   tags?: string[]
@@ -37,7 +38,17 @@ export function useBlog() {
   }
 
   const sortPostsByDateDesc = (posts: BlogPost[]): BlogPost[] => {
-    return [...posts].sort((a, b) => toTimestamp(b.date) - toTimestamp(a.date))
+    return [...posts].sort((a, b) => {
+      // Priorizar orden numérico si existe (mayor a menor, ej: 3, 2, 1...)
+      if (a.order !== undefined || b.order !== undefined) {
+        if (a.order === undefined) return 1;
+        if (b.order === undefined) return -1;
+        return b.order - a.order;
+      }
+      
+      // Fallback a ordenar por fecha descendiente (más recientes primero)
+      return toTimestamp(b.date) - toTimestamp(a.date)
+    })
   }
 
   /**
@@ -51,9 +62,10 @@ export function useBlog() {
    * Obtiene todos los posts del blog filtrados por idioma actual
    * Retorna directamente la promesa para ser usada con useAsyncData
    */
-  const getPosts = (): Promise<BlogPost[]> => {
+  const getPosts = async (): Promise<BlogPost[]> => {
     const collection = getCollectionName()
-    return queryCollection(collection).all()
+    const posts = await queryCollection(collection).all()
+    return sortPostsByDateDesc(posts as BlogPost[])
   }
 
   /**
@@ -117,18 +129,18 @@ export function useBlog() {
    * Obtiene los posts más recientes (limitado a N posts)
    * Retorna directamente la promesa para ser usada con useAsyncData
    */
-  const getRecentPosts = (limit = 5): Promise<BlogPost[]> => {
-    const collection = getCollectionName()
-    return queryCollection(collection).limit(limit).all()
+  const getRecentPosts = async (limit = 5): Promise<BlogPost[]> => {
+    const posts = await getPosts()
+    return posts.slice(0, limit)
   }
 
   /**
    * Obtiene posts por tag
    * Retorna directamente la promesa para ser usada con useAsyncData
    */
-  const getPostsByTag = (tag: string): Promise<BlogPost[]> => {
-    const collection = getCollectionName()
-    return queryCollection(collection).where('tags', 'LIKE', `%${tag}%`).all()
+  const getPostsByTag = async (tag: string): Promise<BlogPost[]> => {
+    const posts = await getPosts()
+    return posts.filter(post => post.tags?.some(t => t.toLowerCase().includes(tag.toLowerCase())))
   }
 
   /**

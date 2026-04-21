@@ -2,6 +2,7 @@
 id: 'machine-learning-paradigms-and-mathematical-foundations'
 title: 'Machine learning paradigms and mathematical foundations'
 slug: 'machine-learning-paradigms-and-mathematical-foundations'
+order: 3
 date: 2026-04-06
 summary: 'Types of machine learning, common algorithms and essential mathematical foundations for understanding how machine learning models work.'
 tags: ['Machine Learning', 'Artificial Intelligence', 'Python', 'Data Science', 'Machine Learning']

@@ -9,6 +9,7 @@
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const route = useRoute()
+const appStore = useAppStore()
 
 const { url: siteUrl } = useSiteConfig()
 
@@ -54,10 +55,12 @@ useHead(() => {
   return {
     htmlAttrs: {
       lang: locale.value,
+      class: appStore.theme === 'dark' ? 'dark' : ''
     },
     link,
   }
 })
 
+// Initialize app defaults
 useSiteSeoDefaults()
 </script>

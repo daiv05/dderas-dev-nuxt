@@ -2,6 +2,7 @@
 id: 'machine-learning-fundamentals'
 title: 'Fundamentos de Aprendizaje Automático'
 slug: 'machine-learning-fundamentals'
+order: 2
 date: 2026-03-30
 summary: 'Conceptos básicos para iniciar en el mundo del aprendizaje automático'
 tags: ['Aprendizaje Automático', 'Inteligencia Artificial', 'Python', 'Data Science', 'Machine Learning']

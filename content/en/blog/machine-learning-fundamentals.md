@@ -2,6 +2,7 @@
 id: 'machine-learning-fundamentals'
 title: 'Machine Learning Fundamentals'
 slug: 'machine-learning-fundamentals'
+order: 2
 date: 2026-03-30
 summary: 'Basic concepts for starting in the world of machine learning'
 tags: ['Machine Learning', 'Artificial Intelligence', 'Python', 'Data Science', 'Machine Learning']

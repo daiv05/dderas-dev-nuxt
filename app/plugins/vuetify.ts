@@ -82,7 +82,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         if (newTheme) {
           applyTheme(newTheme)
         }
-      }
+      },
+      { immediate: true }
     )
   }
 })

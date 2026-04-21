@@ -2,6 +2,7 @@
 id: 'experimenting-with-exploratory-data-analysis'
 title: 'Experimenting with Exploratory Data Analysis'
 slug: 'experimenting-with-exploratory-data-analysis'
+order: 5
 date: 2026-04-19
 summary: 'In this article, we will explore the process of exploratory data analysis (EDA) in the context of machine learning projects.'
 tags: ['machine learning', 'data analysis', 'EDA', 'machine learning projects', 'exploratory analysis']

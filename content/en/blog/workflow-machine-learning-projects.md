@@ -2,6 +2,7 @@
 id: 'workflow-machine-learning-projects'
 title: 'The workflow in Machine Learning projects'
 slug: 'workflow-machine-learning-projects'
+order: 4
 date: 2026-04-18
 summary: 'Discover the typical workflow of a machine learning project, from data collection to model implementation, and learn about best practices and common challenges in the field of data science.'
 tags: ['Machine Learning', 'Data Science', 'ML Projects', 'Workflow']

@@ -2,6 +2,7 @@
 id: 'experimenting-with-exploratory-data-analysis'
 title: 'Experimentando con el análisis exploratorio de datos'
 slug: 'experimenting-with-exploratory-data-analysis'
+order: 5
 date: 2026-04-19
 summary: 'En este artículo, exploraremos el proceso de análisis exploratorio de datos (EDA) en el contexto de proyectos de aprendizaje automático.'
 tags: ['aprendizaje automático', 'análisis de datos', 'EDA', 'proyectos de machine learning', 'análisis exploratorio']
