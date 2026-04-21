@@ -458,7 +458,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 modelo_cafeteria = LinearRegression()
 modelo_cafeteria.fit(X_train, y_train)
 
-# Dejamos que el modelo adivine sobre los datos ocultos
+# Hacemos predicciones con el modelo entrenado
 predicciones = modelo_cafeteria.predict(X_test)
 ```
 
@@ -471,9 +471,9 @@ mae = mean_absolute_error(y_test, predicciones)
 rmse = np.sqrt(mean_squared_error(y_test, predicciones))
 r2 = r2_score(y_test, predicciones)
 
-print(f"MAE (Error Absoluto Medio): ${mae:.2f}")
-print(f"RMSE (Error Cuadrático Medio): ${rmse:.2f}")
-print(f"Puntuación R²: {r2:.2f}")
+print(f"MAE: ${mae:.2f}")
+print(f"RMSE: ${rmse:.2f}")
+print(f"R^2: {r2:.2f}")
 ```
 
 Dando como resultado:
@@ -503,3 +503,45 @@ plt.show()
 
 ![Predicciones vs Realidad](/blog/experimenting-with-exploratory-data-analysis/shared/predictions_vs_actual_sales.webp)
 _Gráfico de Predicciones vs Ventas Reales_
+
+Como se observa, tenemos una línea de referencia (en rojo) que representa la perfección: si todas las predicciones estuvieran exactamente en esa línea, el modelo sería perfecto, pero la realidad nunca será asi de ideal. Sin embargo, la mayoría de los puntos se agrupan alrededor de esa línea, lo que indica que el modelo tiene un buen desempeño general. Algunos puntos se alejan más, lo que refleja los casos donde el modelo no predice tan bien, posiblemente debido a factores no capturados en el dataset o a la variabilidad inherente en las ventas diarias.
+
+Podemos también obtener los coeficientes del modelo para entender la importancia de cada variable:
+
+```python
+coeficientes = pd.DataFrame({
+    'Variable': X.columns,
+    'Coeficiente': modelo_cafeteria.coef_
+})
+display(coeficientes.sort_values(by='Coeficiente', ascending=False))
+```
+
+Esto nos arroja el siguiente resultado:
+
+  | Feature         | Coefficient |
+  |-----------------|------------ |
+  | local_event     | 261.839739  |
+  | weather_Rainy   | 124.573377  |
+  | discount        | 4.837618    |
+  | ad_investment   | 2.482678    |
+  | temperature_c   | -8.578684   |
+  | weather_Cloudy  | -28.151991  |
+  | weather_Sunny   | -96.421386  |
+
+Lo que nos dice cada coeficiente es el impacto que tiene esa variable en las ventas diarias, manteniendo las demás constantes. Por ejemplo:
+* Un evento local (local_event) aumenta las ventas en aproximadamente $261.84.
+* Un día lluvioso (weather_Rainy) aumenta las ventas en aproximadamente $124.57.
+* Un descuento (discount) aumenta las ventas en aproximadamente $4.84 por cada punto porcentual de descuento.
+* Cada dólar adicional invertido en publicidad (ad_investment) aumenta las ventas en aproximadamente $2.48.
+* Cada grado Celsius adicional (temperature_c) disminuye las ventas en aproximadamente $8.58
+* Un día nublado (weather_Cloudy) disminuye las ventas en aproximadamente $28.15.
+* Un día soleado (weather_Sunny) disminuye las ventas en aproximadamente $96.42.
+
+¿Qué mejoras podemos hacer al modelo?
+
+* **Feature Engineering**: Explorar la creación de nuevas características a partir de las existentes. Por ejemplo, los términos de interacción entre `ad_investment` y `discount`, o `temperature_c` y `weather`, podrían capturar relaciones más complejas.
+* **Relaciones no lineales**: El modelo actual es lineal. Si los diagramas de dispersión sugieren relaciones no lineales (p. ej., ventas que alcanzan su máximo a cierta temperatura y luego disminuyen), las características polinómicas u otros modelos no lineales (como Random Forest o Gradient Boosting) podrían capturarlas mejor.
+* **Aspectos de series temporales**: Dado que los datos son de ventas diarias, podría haber patrones temporales (p. ej., efectos del día de la semana, estacionalidad no capturada completamente por `weather`). Incorporar características como el día de la semana, el mes o utilizar modelos específicos para series temporales podría ser beneficioso.
+* **Detección de valores atípicos**: Investigar cualquier valor atípico potencial en los datos que pueda estar influyendo desproporcionadamente en los coeficientes y predicciones del modelo.
+* **Más datos**: Si bien no siempre es factible, contar con puntos de datos más diversos (por ejemplo, de diferentes cafeterías, durante un período más prolongado y con condiciones más variadas) podría ayudar a que el modelo se generalice mejor.
+
