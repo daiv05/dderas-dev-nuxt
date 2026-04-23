@@ -28,7 +28,7 @@ Artículo anterior: [El flujo en proyectos de aprendizaje automático](https://d
 
 Para entender el verdadero impacto de un Análisis Exploratorio de Datos (EDA), salgamos de la teoría y vayamos a la práctica con un escenario comercial: **Estimar cuántos ingresos generará una cafetería al mes**. Este tipo de ejercicios permite que gerentes y dueños de negocio tomen decisiones basadas en datos (Data-Driven) y no en corazonadas.
 
-Puedes seguir este ejercicio interactivo en Google Colab: [EDA para Estimar Ventas de una Cafetería](https://colab.research.google.com/drive/12NPwGTp9JE0Vl926_ODlqpDRLkbnJimz?usp=sharing)
+Puedes seguir este ejercicio interactivo en Google Colab: <a href="https://colab.research.google.com/drive/12NPwGTp9JE0Vl926_ODlqpDRLkbnJimz?usp=sharing" target="_blank" rel="noopener noreferrer">EDA para Estimar Ventas de una Cafetería</a>
 
 ### Paso 1: Generación y Carga de Datos
 

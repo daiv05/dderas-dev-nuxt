@@ -341,15 +341,19 @@ html.dark .shiki span {
   color: var(--md-muted);
 }
 
-.markdown-body table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+.markdown-body .md-table-wrap {
+  max-width: 100%;
   border: 1px solid var(--md-table-border);
   border-radius: var(--radius-sm);
-  overflow: hidden;
-  max-width: 100%;
   overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+
+.markdown-body .md-table-wrap > table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .markdown-body thead th {
