@@ -5,7 +5,7 @@ slug: "vectors-matrices-machine-learning"
 order: 7
 date: 2026-04-25
 summary: "Los vectores son una parte esencial del aprendizaje automático, ya que permiten representar datos y parámetros de modelos de manera eficiente. En este artículo, exploraremos su definición y aplicación en algoritmos de machine learning."
-tags: ["aprendizaje automático", "vectores", "matrices", "álgebra lineal"]
+tags: ["aprendizaje automático", "vectores", "matrices", "álgebra lineal", "machine learning", "linear algebra"]
 image: /blog/vectors-matrices-machine-learning/shared/vectors-matrices.webp
 author: David Deras
 lastmod: 2026-04-25
@@ -249,7 +249,7 @@ En este ejemplo, las predicciones `ŷ` para cada instancia de datos se calculan
 
 Si el problema que estamos tratando es de clasificación, podríamos aplicar una función de activación (como la función sigmoide) a las predicciones para obtener probabilidades de clase, si es regresión podríamos usar las predicciones directamente para evaluar el rendimiento del modelo (el valor podría representar tal vez un índice de riesgo o X variable continua estimada a partir de las características).
 
-### Uso en Algoritmos y Librerias
+## Uso en Algoritmos y Librerias
 
 Hablando de forma puntual, las operaciones matriciales son la base de muchos algoritmos de aprendizaje automático:
 
@@ -270,7 +270,7 @@ y_hat = X.dot(w)
 print(y_hat)
 ```
 
-### Recopilación de ejercicios
+## Recopilación de ejercicios
 
 En este Colab puedes practicar operaciones con vectores y matrices utilizando NumPy: <a href="https://colab.research.google.com/drive/1P7gBDg7b6wVl1EMlCDf0UCWy5UBJ6b6N?usp=sharing" target="_blank" rel="noopener noreferrer">Ejercicios de Vectores y Matrices en Machine Learning</a>
 

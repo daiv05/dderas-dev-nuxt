@@ -250,7 +250,7 @@ In this example, the predictions `ŷ` for each data instance are calculated as a
 
 If the problem we are dealing with is classification, we could apply an activation function (such as the sigmoid function) to the predictions to obtain class probabilities, whereas for regression we could use the predictions directly to evaluate the model's performance (the value could represent perhaps a risk index or a continuous variable estimated from the features).
 
-### Use in Algorithms and Libraries
+## Use in Algorithms and Libraries
 
 Specifically, matrix operations are the foundation of many machine learning algorithms:
 
@@ -271,7 +271,7 @@ y_hat = X.dot(w)
 print(y_hat)
 ```
 
-### Practice Exercises
+## Practice Exercises
 
 In this Colab you can practice operations with vectors and matrices using NumPy: <a href="https://colab.research.google.com/drive/1P7gBDg7b6wVl1EMlCDf0UCWy5UBJ6b6N?usp=sharing" target="_blank" rel="noopener noreferrer">Vector and Matrix Exercises in Machine Learning</a>
 
