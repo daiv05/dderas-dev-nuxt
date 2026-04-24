@@ -17,7 +17,7 @@ sitemap:
 
 In the previous article of this series, we continued experimenting with the workflow in machine learning projects. In this article, we will take a pause to discuss a fundamental topic in machine learning: vectors and matrices. These concepts are essential for understanding how data is represented and how machine learning algorithms function.
 
-Previous article: [Experimenting with the Titanic Survival Dataset](https://deras.dev/en/blog/experimenting-with-titanic-dataset)
+Previous article: [Experimenting with the Titanic Survival Dataset](https://deras.dev/blog/experimenting-with-titanic-dataset)
 
 ::table-of-contents
 ::
