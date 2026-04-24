@@ -1,6 +1,6 @@
 ---
 id: "vectors-matrices-machine-learning"
-title: "Vectores y Matrices en Aprendizaje Automático"
+title: "Vectores y Aprendizaje Automático"
 slug: "vectors-matrices-machine-learning"
 order: 7
 date: 2026-04-25
@@ -15,7 +15,7 @@ sitemap:
   lastmod: 2026-04-25
 ---
 
-En el artículo anterior de esta serie seguíamos experimentando con el flujo en proyectos de aprendizaje automático. En este artículo, haremos una pausa para hablar sobre un tema fundamental en el aprendizaje automático: los vectores y matrices. Estos conceptos son esenciales para entender cómo se representan los datos y cómo funcionan los algoritmos de machine learning.
+En el artículo anterior de esta serie seguíamos experimentando con el flujo en proyectos de aprendizaje automático. Haremos una pausa para hablar sobre un tema fundamental: los vectores y matrices. Estos conceptos son esenciales para entender cómo se representan los datos y cómo funcionan los algoritmos de machine learning.
 
 Artículo anterior: [Experimentando con el dataset de supervivencia del Titanic](https://deras.dev/es/blog/experimenting-with-titanic-dataset)
 

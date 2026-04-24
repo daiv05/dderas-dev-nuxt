@@ -1,6 +1,6 @@
 ---
 id: "vectors-matrices-machine-learning"
-title: "Vectors and Matrices in Machine Learning"
+title: "Vectors and Machine Learning"
 slug: "vectors-matrices-machine-learning"
 order: 7
 date: 2026-04-25
@@ -15,7 +15,7 @@ sitemap:
   lastmod: 2026-04-25
 ---
 
-In the previous article of this series, we continued experimenting with the workflow in machine learning projects. In this article, we will take a pause to discuss a fundamental topic in machine learning: vectors and matrices. These concepts are essential for understanding how data is represented and how machine learning algorithms function.
+In the previous article of this series, we continued experimenting with the workflow in machine learning projects. We will take a pause to discuss a fundamental topic: vectors and matrices. These concepts are essential for understanding how data is represented and how machine learning algorithms function.
 
 Previous article: [Experimenting with the Titanic Survival Dataset](https://deras.dev/blog/experimenting-with-titanic-dataset)
 
