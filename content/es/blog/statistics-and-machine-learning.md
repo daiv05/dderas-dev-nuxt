@@ -22,9 +22,9 @@ sitemap:
   lastmod: 2026-04-25
 ---
 
-Ya hemos explorado el flujo de trabajo de un proyecto de aprendizaje automático, y hemos experimentado con el análisis exploratorio de datos (EDA) y la ingeniería de características (FE). En este artículo, profundizaremos un poco más en algunos conceptos estadísticos que son fundamentales para el EDA, y veremos que debemos tener en cuenta al analizar nuestros datos para asegurarnos de que nuestros modelos de aprendizaje automático tengan el mejor desempeño posible.
+Ya hemos explorado el flujo de trabajo de un proyecto de aprendizaje automático, y hemos experimentado con el análisis exploratorio de datos (EDA) y la ingeniería de características (FE). Ahora profundizaremos un poco más en algunos conceptos estadísticos que son fundamentales para el EDA, y veremos que deberíamos tener en cuenta al analizar nuestros datos con el fin de asegurar que nuestros modelos tengan el mejor desempeño posible.
 
-Artículo anterior: [Vectores y Aprendizaje Automático](https://deras.dev/es/blog/vectors-matrices-machine-learning)
+Artículo anterior de esta serie: [Vectores y Aprendizaje Automático](https://deras.dev/es/blog/vectors-matrices-machine-learning)
 
 ::table-of-contents
 ::
@@ -33,26 +33,26 @@ Artículo anterior: [Vectores y Aprendizaje Automático](https://deras.dev/es/bl
 
 ## Estadística Descriptiva
 
-La **estadística descriptiva** es la rama de la estadística que se centra en recolectar, organizar, resumir y visualizar un conjunto de datos. Su objetivo principal es transformar datos brutos en información estructurada y comprensible, permitiéndonos entender "qué pasó" con la información que estamos analizando.
+La **estadística descriptiva** es la rama de la estadística que se centra en **recolectar**, **organizar**, **resumir** y **visualizar** un conjunto de datos. Su objetivo principal es transformar datos brutos en información estructurada y comprensible, permitiéndonos entender "qué pasó" con la información que estamos analizando.
 
 Podemos dividir sus tareas principales en tres pasos fundamentales:
 
-1. **Organizar:** Transformar los datos recolectados en estructuras tabulares o matrices. Por ejemplo, pasar de archivos en bruto a un `DataFrame` bien estructurado, o construir tablas de frecuencias agrupando categorías.
+1. **Organizar:** Transformar los datos recolectados en estructuras tabulares o matrices. Por ejemplo, pasar de archivos en bruto a un `DataFrame` bien estructurado.
 2. **Resumir:** Utilizar métricas numéricas para describir grandes volúmenes de datos con unos pocos valores clave. Aquí es donde destacan las medidas de tendencia central y dispersión.
-3. **Visualizar:** Representar los datos de forma gráfica (ej. histogramas, diagramas de caja o gráficos de dispersión) para facilitar el reconocimiento de patrones y valores anómalos a simple vista.
+3. **Visualizar:** Representar los datos de forma gráfica (por ejemplo, histogramas, diagramas de caja o gráficos de dispersión) para facilitar el reconocimiento de patrones y valores atípicos (outliers).
 
 ### Medidas Estadísticas
 
-Para resumir los datos numéricos, empleamos principalmente dos familias de métricas:
+Para resumir los datos numéricos, se emplean principalmente dos familias de métricas:
 
 - **Medidas de Tendencia Central:** Indican hacia dónde se agrupan los datos.
   - **Media (Promedio):** La suma de todos los valores dividida por el total de datos. Es sensible a valores extremos (outliers).
-    > **¿Por qué es importante?** Porque si tenemos un conjunto de datos con valores atípicos, la media puede darnos una impresión errónea del "centro" de los datos. Por ejemplo, si la mayoría de los empleados gana entre `$2K` y `$3.5K`, pero hay un directivo que gana `$15K`, la media se elevará significativamente, dando la falsa impresión de que el salario típico es mucho más alto de lo que realmente es para la mayoría.
-  - **Mediana:** El valor central de los datos una vez ordenados. Es robusta y no se deja engañar fácilmente por anomalías.
-    > **¿Por qué es importante?** Porque la mediana nos da una mejor idea del salario típico en el ejemplo anterior, si tenemos valores como `$2K`, `$2.2K`, `$2.5K`, `$2.5K`, `$2.8K`, `$3.1K`, `$3.5K` y un outlier de `$15K`, la mediana sería `$2.65K`, reflejando mejor el salario típico de la mayoría de los empleados.
-  - **Moda:** El valor (o valores) que más se repite en el conjunto.
-- **Medidas de Dispersión:** Proporcionan información sobre la variabilidad o qué tan separados están los datos.
-  - **Rango:** La diferencia directa entre el valor máximo y el mínimo.
+    > **¿Como afectan los outliers?** Si tenemos un conjunto de datos con valores atípicos, la media puede darnos una impresión errónea del "centro" de los datos. Por ejemplo, si la mayoría de los empleados gana entre `$2K` y `$3.5K`, pero hay un directivo que gana `$15K`, la media se elevará, dando la falsa impresión de que el salario típico es mucho más alto de lo que realmente es para la mayoría.
+  - **Mediana:** Es el valor central de un conjunto de datos ordenados de menor a mayor. Es robusta y no se deja engañar fácilmente por anomalías.
+    > **¿Cómo se protege de los outliers?** La mediana nos da una mejor idea del salario típico en el ejemplo anterior, si tenemos valores como `$2K`, `$2.2K`, `$2.5K`, `$2.5K`, `$2.8K`, `$3.1K`, `$3.5K` y un outlier de `$15K`, la mediana sería `$2.65K`, reflejando mejor el salario típico de la mayoría de los empleados.
+  - **Moda:** El valor (o valores) que más se repite en el conjunto de datos.
+- **Medidas de Dispersión:** Proporcionan información sobre la **variabilidad** o qué tan separados están los datos.
+  - **Rango:** La diferencia entre el valor máximo y el mínimo.
   - **Varianza:** Mide el promedio de las desviaciones al cuadrado respecto a la media.
       > **¿Por qué al cuadrado?** Porque si simplemente sumamos las desviaciones (valores - media), estas se cancelarán entre sí, dando un resultado de cero. Al elevar al cuadrado, todas las desviaciones se vuelven positivas, permitiendo medir la dispersión sin que los valores se anulen.
   - **Desviación Estándar:** La raíz cuadrada de la varianza. Se usa comúnmente porque devuelve la medida a sus unidades originales.
