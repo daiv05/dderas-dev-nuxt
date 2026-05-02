@@ -194,9 +194,9 @@ Very useful in linear models.
 
 Convert numbers into categories:
 
-- **Binning uniforme**
-- **Binning por cuantiles**
-- **Binning basado en negocio**
+- **Uniform Binning**
+- **Quantile Binning**
+- **Business-Based Binning**
 
 Example:
 
