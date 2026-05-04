@@ -106,3 +106,241 @@ print(f"IQR: ${iqr:.2f}")
 
 
 ## Estadística Inferencial
+
+Otra rama muy importante es la **estadística inferencial**. Mientras que la estadística descriptiva se limita a describir los datos que tenemos, la inferencial nos permite **sacar conclusiones sobre una población a partir de una muestra**. Esto es crucial en el aprendizaje automático, ya que a menudo trabajamos con conjuntos de datos limitados y queremos generalizar nuestros hallazgos a un contexto más amplio.
+
+Empecemos por definir algunos conceptos clave:
+
+1. **Población**
+
+Lo entenderemos como el conjunto total de individuos o elementos que queremos estudiar. Por ejemplo todos los estudiantes de una universidad.
+
+2. **Muestra**
+
+Un subconjunto de la población que realmente se está estudiando. De todos los estudiantes, tomamos 200 seleccionados al azar.
+
+3. **Parámetro**
+
+Es un valor numérico que describe una característica de la población. Podríamos tomar la media de estatura de todos los estudiantes.
+
+4. **Estadístico**
+
+Al contrario del parámetro, el estadístico es calculado a partir de la muestra. Tendríamos la media de estatura de los 200 estudiantes.
+
+5. **Error muestral**
+
+Diferencia entre el parámetro real y el estadístico estimado. Si la media real de estatura de la población es 1.70m y la media de nuestra muestra es 1.68m, el error muestral sería 0.02m. PERO, en la práctica, no conocemos el parámetro real, por lo que el error muestral no puede calcularse directamente. En su lugar, se suele calcular el error estándar, que es una estimación de la variabilidad del estadístico debido al muestreo aleatorio. El error estándar se calcula como: 
+$$
+SE = \frac{\sigma}{\sqrt{n}}
+$$
+Donde $\sigma$ es la desviación estándar de la población (o una estimación basada en la muestra) y $n$ es el tamaño de la muestra.
+
+6. **Nivel de confianza**
+
+Probabilidad de que una estimación contenga el verdadero parámetro. Si decimos que tenemos un intervalo de confianza del 95%, significa que si repitiéramos el proceso de muestreo muchas veces, aproximadamente el 95% de esos intervalos incluirían el verdadero parámetro poblacional. Es una medida de cuán seguros estamos de nuestras estimaciones.
+
+---
+
+### Intervalo de confianza
+
+Un **intervalo de confianza (IC)** es un rango de valores dentro del cual se espera que esté el parámetro poblacional con cierto nivel de confianza. En términos simples, es una forma de expresar la incertidumbre de nuestras estimaciones. Por ejemplo, si calculamos un intervalo de confianza del 95% para la media de estatura de los estudiantes y obtenemos (1.65m, 1.75m), podemos decir que estamos 95% seguros de que la verdadera media de estatura de todos los estudiantes está entre esos dos valores.
+
+Fórmula básica:
+
+$$
+IC = \bar{x} \pm Z \left(\frac{\sigma}{\sqrt{n}}\right)
+$$
+
+Donde:
+
+* $\bar{x}$ = media muestral
+* $Z$ = valor crítico (1.96 para 95%)
+* $\sigma$ = desviación estándar
+* $n$ = tamaño de muestra
+
+Esta fórmula se utiliza para calcular el intervalo de confianza para la media de una población cuando la desviación estándar es conocida y la muestra es suficientemente grande (n > 30).
+
+En la práctica, a menudo no conocemos la desviación estándar de la población, por lo que utilizamos la desviación estándar muestral y el valor crítico de la distribución t de Student en lugar de Z. La fórmula se ajusta a:
+
+$$
+IC = \bar{x} \pm t \left(\frac{s}{\sqrt{n}}\right)
+$$
+
+Donde:
+
+* $\bar{x}$ = media muestral
+* $t$ = valor crítico de la distribución t de Student
+* $s$ = desviación estándar muestral
+* $n$ = tamaño de muestra
+
+Con eso aclarado, veámos un ejemplo práctico:
+
+Se encuesta a **100 personas** y se obtiene que la media de gasto mensual es **\$50**, con una desviación estándar de **\$10** y con un nivel de confianza del **95%**.
+
+Sabemos que:
+
+$$
+Z = 1.96
+$$
+
+Para un nivel de confianza del 95%, el valor crítico Z es aproximadamente 1.96 (esto se obtiene de la tabla de distribución normal estándar).
+
+> Puedes buscar más sobre como obtener este valor investigando sobre la distribución normal estándar y las tablas Z (espero publicar un artículo sobre esto pronto).
+
+Calculamos:
+
+$$
+IC = 50 \pm 1.96 \left(\frac{10}{\sqrt{100}}\right)
+$$
+
+$$
+IC = 50 \pm 1.96 (1)
+$$
+
+$$
+IC = 50 \pm 1.96
+$$
+
+Resultado:
+
+$$
+IC = (48.04 , 51.96)
+$$
+
+Interpretación:
+Con 95% de confianza, el verdadero gasto promedio poblacional está entre **\$48.04 y \$51.96**.
+
+---
+
+### Pruebas de hipótesis
+
+Estas pruebas sirven para **tomar decisiones** sobre una afirmación respecto a la población. Vamos parte por parte:
+
+1. **Componentes básicos**
+
+**Hipótesis nula ($H_0$)**
+
+Una afirmación que ponemos a prueba, generalmente una afirmación de "no diferencia", "no efecto" o igualdad. Ejemplo: "La media es igual a 50".
+
+**Hipótesis alternativa ($H_1$)**
+
+Lo que queremos comprobar. Usualmente contraria a la hipótesis nula. Por ejemplo: "La media es diferente de 50".
+
+**Nivel de significancia ($\alpha$)**
+
+Esta es la probabilidad de rechazar $H_0$ cuando es verdadera. Es decir, el riesgo que estamos dispuestos a asumir de cometer un error tipo I (falso positivo). Comúnmente: **0.05 (5%)**
+
+**Estadístico de prueba**
+
+Valor calculado para decidir si rechazamos $H_0$.
+
+**Valor p**
+
+Probabilidad de obtener un resultado tan extremo como el observado si $H_0$ fuera verdadera. Si el valor p es menor que $\alpha$, rechazamos $H_0$, caso contrario, no rechazamos $H_0$.
+
+> **¿Por qué no se debe decir "aceptar $H_1$"?** Porque en estadística, no se puede afirmar con certeza que $H_1$ es verdadera, solo podemos decir que hay suficiente evidencia para rechazar o no rechazar $H_0$. Decir "aceptar $H_1$" implicaría una certeza que no tenemos, ya que siempre existe la posibilidad de error.
+
+Hagámos un ejemplo práctico:
+
+Una empresa afirma que el tiempo promedio de entrega es **30 minutos**.
+
+Se toma una muestra y se obtiene:
+
+* n = 36
+* media = 32 minutos
+* desviación estándar = 6
+* $\alpha$ = 0.05
+
+1. Plantear hipótesis
+
+$$
+H_0: \mu = 30
+$$
+
+$$
+H_1: \mu \neq 30
+$$
+
+2. Calcular estadístico Z
+
+$$
+Z = \frac{\bar{x} - \mu}{\sigma/\sqrt{n}}
+$$
+
+$$
+Z = \frac{32 - 30}{6/\sqrt{36}}
+$$
+
+$$
+Z = \frac{2}{1}
+$$
+
+$$
+Z = 2
+$$
+
+3. Comparar con valor crítico
+
+Para $\alpha$ = 0.05 (bilateral):
+
+Z crítico = $\pm1.96$
+
+Como:
+
+$$
+2 > 1.96
+$$
+
+**Se rechaza H₀**
+
+Lo que quiere decir que hay suficiente evidencia para afirmar que el tiempo promedio de entrega es diferente a 30 minutos.
+
+### Sobre los tipos de errores
+
+- **Error tipo I (falso positivo)** Rechazar $H_0$ cuando es verdadera. Por ejemplo, concluir que el tiempo de entrega es diferente a 30 minutos cuando en realidad sí lo es.
+- **Error tipo II (falso negativo)** No rechazar $H_0$ cuando es falsa. Por ejemplo, concluir que el tiempo de entrega es igual a 30 minutos cuando en realidad es diferente.
+
+### Importancia en el aprendizaje automático
+
+¿Cómo se conecta esto con el aprendizaje automático?
+
+En el desarrollo de modelos, a menudo queremos evaluar si un modelo es significativamente mejor que otro o si una característica tiene un impacto significativo en la predicción. Las pruebas de hipótesis nos permiten tomar decisiones informadas sobre la inclusión de características, la selección de modelos y la interpretación de resultados, buscando asegurar que nuestras conclusiones no se basen en el azar sino en evidencia estadística sólida.
+
+Como siempre, veámos un ejemplo práctico:
+
+Supongamos que estamos comparando dos modelos de clasificación y queremos saber si la diferencia en sus precisiones es estadísticamente significativa.
+Modelo A: Precisión = 0.85
+Modelo B: Precisión = 0.80
+1. Plantear hipótesis
+$$
+H_0: p_A = p_B
+$$
+$$
+H_1: p_A \neq p_B
+$$
+2. Calcular estadístico Z para proporciones
+$$
+Z = \frac{p_A - p_B}{\sqrt{p(1-p)(\frac{1}{n_A} + \frac{1}{n_B})}}
+$$
+Donde $p$ es la proporción combinada:
+$$
+p = \frac{n_A p_A + n_B p_B}{n_A + n_B}
+$$
+Si ambos modelos se evaluaron en 1000 muestras:
+$$
+p = \frac{1000*0.85 + 1000*0.80}{2000} = 0.825
+$$
+$$
+Z = \frac{0.85 - 0.80}{\sqrt{0.825*0.175*(\frac{1}{1000} + \frac{1}{1000})}} = \frac{0.05}{\sqrt{0.144375*0.002}} = \frac{0.05}{\sqrt{0.00028875}} = \frac{0.05}{0.017} \approx 2.94
+$$
+3. Comparar con valor crítico
+Para $\alpha$ = 0.05 (bilateral):
+Z crítico = $\pm1.96$
+Como:
+$$
+2.94 > 1.96
+$$
+**Se rechaza H₀**
+Lo que quiere decir que hay suficiente evidencia para afirmar que el Modelo A tiene una precisión significativamente diferente (y mejor) que el Modelo B. Esto nos ayuda a tomar decisiones informadas sobre qué modelo elegir para nuestro proyecto de aprendizaje automático, basándonos en evidencia estadística sólida en lugar de suposiciones o azar.
+
+---
