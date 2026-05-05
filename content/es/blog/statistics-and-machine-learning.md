@@ -3,7 +3,7 @@ id: "statistics-and-machine-learning"
 title: "Estadística y Aprendizaje Automático"
 slug: "statistics-and-machine-learning"
 order: 8
-date: 2026-04-25
+date: 2026-05-05
 summary: "La estadística es una parte esencial del aprendizaje automático, ya que permite analizar y entender los datos y los modelos. En este artículo, exploraremos un poco más sobre como realizar un buen análisis de datos"
 tags:
   [
@@ -15,11 +15,11 @@ tags:
   ]
 image: /blog/statistics-and-machine-learning/shared/statistics-machine-learning.webp
 author: David Deras
-lastmod: 2026-04-25
+lastmod: 2026-05-05
 sitemap:
   priority: 0.7
   loc: /es/blog/statistics-and-machine-learning
-  lastmod: 2026-04-25
+  lastmod: 2026-05-05
 ---
 
 Ya hemos explorado el flujo de trabajo de un proyecto de aprendizaje automático, y hemos experimentado con el análisis exploratorio de datos (EDA) y la ingeniería de características (FE). Ahora profundizaremos un poco más en algunos conceptos estadísticos que son fundamentales para el EDA, y veremos que deberíamos tener en cuenta al analizar nuestros datos con el fin de asegurar que nuestros modelos tengan el mejor desempeño posible.
@@ -224,7 +224,7 @@ Una afirmación que ponemos a prueba, generalmente una afirmación de "no difere
 
 **Hipótesis alternativa ($H_1$)**
 
-Lo que queremos comprobar. Usualmente contraria a la hipótesis nula. Por ejemplo: "La media es diferente de 50".
+Representa la afirmación para la cuál buscamos evidencia. Contraria a la hipótesis nula. Por ejemplo: "La media es diferente de 50".
 
 **Nivel de significancia ($\alpha$)**
 
@@ -238,7 +238,7 @@ Valor calculado para decidir si rechazamos $H_0$.
 
 Probabilidad de obtener un resultado tan extremo como el observado si $H_0$ fuera verdadera. Si el valor p es menor que $\alpha$, rechazamos $H_0$, caso contrario, no rechazamos $H_0$.
 
-> **¿Por qué no se debe decir "aceptar $H_1$"?** Porque en estadística, no se puede afirmar con certeza que $H_1$ es verdadera, solo podemos decir que hay suficiente evidencia para rechazar o no rechazar $H_0$. Decir "aceptar $H_1$" implicaría una certeza que no tenemos, ya que siempre existe la posibilidad de error.
+> Para explicarlo de forma sencilla, el valor p nos dice qué tan probable es obtener los resultados que tenemos (o más extremos) si la hipótesis nula fuera cierta. Si esta probabilidad es muy baja (menor que nuestro nivel de significancia), entonces tenemos suficiente evidencia para rechazar la hipótesis nula. Por dar un ejemplo, si obtenemos un valor p de 0.03 y nuestro nivel de significancia es 0.05, esto significa que hay solo un 3% de probabilidad de obtener esos resultados si la hipótesis nula fuera verdadera, lo que nos lleva a rechazar $H_0$ y aceptar que hay una diferencia significativa.
 
 Hagámos un ejemplo práctico:
 
@@ -291,7 +291,9 @@ $$
 2 > 1.96
 $$
 
-**Se rechaza H₀**
+**Se rechaza $H_0$**
+
+> También podríamos (y quizás de forma más común) haber calculado el valor p para este estadístico Z. Para Z = 2, el valor p sería aproximadamente 0.0455 (usando una tabla de distribución normal estándar o una calculadora estadística). Dado que 0.0455 < 0.05, también llegaríamos a la conclusión de rechazar $H_0$.
 
 Lo que quiere decir que hay suficiente evidencia para afirmar que el tiempo promedio de entrega es diferente a 30 minutos.
 
@@ -302,45 +304,18 @@ Lo que quiere decir que hay suficiente evidencia para afirmar que el tiempo prom
 
 ### Importancia en el aprendizaje automático
 
-¿Cómo se conecta esto con el aprendizaje automático?
+En aprendizaje automático no es suficiente con comparar métricas y elegir el modelo que tenga el valor más alto. Las métricas que obtenemos (accuracy, precisión, recall, AUC, etc.) son estimaciones muestrales del rendimiento real del modelo.
 
-En el desarrollo de modelos, a menudo queremos evaluar si un modelo es significativamente mejor que otro o si una característica tiene un impacto significativo en la predicción. Las pruebas de hipótesis nos permiten tomar decisiones informadas sobre la inclusión de características, la selección de modelos y la interpretación de resultados, buscando asegurar que nuestras conclusiones no se basen en el azar sino en evidencia estadística sólida.
+Es decir:
+- El dataset que usamos es una **muestra del mundo real**.
+- La métrica calculada es un **estadístico**.
+- El rendimiento real en producción es un **parámetro poblacional desconocido**.
 
-Como siempre, veámos un ejemplo práctico:
+Entonces, toda comparación entre modelos está sujeta a variabilidad muestral (la métrica obtenida puede variar si se toma una muestra diferente). La estadística inferencial nos permite determinar si una diferencia observada es real o si puede explicarse por azar.
 
-Supongamos que estamos comparando dos modelos de clasificación y queremos saber si la diferencia en sus precisiones es estadísticamente significativa.
-Modelo A: Precisión = 0.85
-Modelo B: Precisión = 0.80
-1. Plantear hipótesis
-$$
-H_0: p_A = p_B
-$$
-$$
-H_1: p_A \neq p_B
-$$
-2. Calcular estadístico Z para proporciones
-$$
-Z = \frac{p_A - p_B}{\sqrt{p(1-p)(\frac{1}{n_A} + \frac{1}{n_B})}}
-$$
-Donde $p$ es la proporción combinada:
-$$
-p = \frac{n_A p_A + n_B p_B}{n_A + n_B}
-$$
-Si ambos modelos se evaluaron en 1000 muestras:
-$$
-p = \frac{1000*0.85 + 1000*0.80}{2000} = 0.825
-$$
-$$
-Z = \frac{0.85 - 0.80}{\sqrt{0.825*0.175*(\frac{1}{1000} + \frac{1}{1000})}} = \frac{0.05}{\sqrt{0.144375*0.002}} = \frac{0.05}{\sqrt{0.00028875}} = \frac{0.05}{0.017} \approx 2.94
-$$
-3. Comparar con valor crítico
-Para $\alpha$ = 0.05 (bilateral):
-Z crítico = $\pm1.96$
-Como:
-$$
-2.94 > 1.96
-$$
-**Se rechaza H₀**
-Lo que quiere decir que hay suficiente evidencia para afirmar que el Modelo A tiene una precisión significativamente diferente (y mejor) que el Modelo B. Esto nos ayuda a tomar decisiones informadas sobre qué modelo elegir para nuestro proyecto de aprendizaje automático, basándonos en evidencia estadística sólida en lugar de suposiciones o azar.
+Supongamos que estamos comparando dos modelos de clasificación binaria y para un conjunto de datos de prueba de 1000 obtenemos un accuracy de 0.85 para el modelo A y 0.80 para el modelo B. ¿Es esta diferencia del 5% significativa o podría ser simplemente una fluctuación aleatoria debido a la muestra de datos que usamos?
+
+En la práctica ambos modelos se suelen evaluar sobre el mismo dataset de prueba, lo que introduce dependencia entre las métricas, y para comparar modelos en este contexto, se pueden usar pruebas estadísticas específicas para muestras dependientes, como la prueba de McNemar para accuracy o t-test pareado (que ya lo veremos en un próximo artículo). Estas pruebas nos ayudarán a determinar si la diferencia observada en las métricas es estadísticamente significativa o si podría ser atribuible al azar.
+
 
 ---
