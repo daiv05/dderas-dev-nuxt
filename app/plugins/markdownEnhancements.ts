@@ -1,9 +1,4 @@
 /**
- * Plugin para mejorar el contenido de Markdown con funcionalidades interactivas
- * - Smooth scroll para anchor links
- */
-
-/**
  * Agrega smooth scroll a los anchor links
  */
 const enhanceAnchorLinks = (): void => {
