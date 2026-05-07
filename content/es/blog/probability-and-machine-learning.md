@@ -211,6 +211,17 @@ En cambio, sus desventajas incluyen la suposición fuerte de independencia entre
 
 > ¿Por qué funciona si la independencia es irreal? Porque en clasificación, muchas veces **no necesitamos que las probabilidades sean perfectas**, solo necesitamos que la clase correcta tenga la probabilidad más alta. Naive Bayes suele acertar en la comparación relativa, aunque el valor exacto no sea completamente preciso.
 
+#### Ejercicio práctico
+
+Haremos un ejercicio con un dataset de correos electrónicos para clasificar si son spam o no spam usando Naive Bayes. Para esto, usaremos el dataset "SMS Spam Collection" que contiene mensajes de texto etiquetados como "ham" (no spam) o "spam".
+
+> Puedes ver el código y seguir el ejercicio en esta <a rel="noopener noreferrer" href="https://colab.research.google.com/drive/1X9n8s5j6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2a3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q9r0s1t2u3v4w5x6y7z8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q5r6s7t8u9v0w1x2y3z4a5b6c7d8e9f0g1h2i3j4k5l6m7n8o9p0q1r2s3t4u5v6w7x8y9z0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z" target="_blank">notebook de Google Colab</a>.
+
+Dataset: https://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection
+
+<!-- ANALISIS Y EXPLORACION -->
+
+
 ## Árboles de probabilidad
 
 Los árboles de probabilidad son una herramienta visual que se utiliza para representar y calcular probabilidades de eventos compuestos. Se construyen a partir de un nodo raíz que representa el evento inicial, y a partir de ahí se ramifican en nodos hijos que representan eventos posteriores o condiciones adicionales. Cada rama del árbol representa una posible secuencia de eventos, y se asigna una probabilidad a cada rama.
