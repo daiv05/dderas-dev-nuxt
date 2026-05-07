@@ -18,7 +18,7 @@ author: David Deras
 lastmod: 2026-05-05
 sitemap:
   priority: 0.7
-  loc: /es/blog/probability-and-machine-learning
+  loc: /blog/probability-and-machine-learning
   lastmod: 2026-05-05
 ---
 

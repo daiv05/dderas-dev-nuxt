@@ -11,7 +11,7 @@ author: David Deras
 lastmod: 2026-04-06
 sitemap:
   priority: 0.7
-  loc: /es/blog/machine-learning-paradigms-and-mathematical-foundations
+  loc: /blog/machine-learning-paradigms-and-mathematical-foundations
   lastmod: 2026-04-06
 ---
 

@@ -11,7 +11,7 @@ author: David Deras
 lastmod: 2026-03-30
 sitemap:
   priority: 0.7
-  loc: /es/blog/machine-learning-fundamentals
+  loc: /blog/machine-learning-fundamentals
   lastmod: 2026-03-30
 ---
 
