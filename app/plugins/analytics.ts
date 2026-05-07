@@ -1,5 +1,5 @@
 export default defineNuxtPlugin(() => {
-  if (import.meta.env.PROD) {
+  if (import.meta.env.PROD && import.meta.client) {
     const script = document.createElement('script')
     script.defer = true
     script.src = 'https://static.cloudflareinsights.com/beacon.min.js'
