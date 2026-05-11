@@ -283,7 +283,7 @@ If we look at it with numbers, out of every 100,000 people, 100 will have the di
 
 ## Naive Bayes in Practice
 
-The notebook [`Naive Bayes and Spam Dataset`](https://colab.research.google.com/drive/1cPc735Pqffpx2NwGM8wkMPr36arkIari?usp=sharing) walks through every variant covered above, with decision boundaries, posterior probability charts, and a full NLP pipeline.
+In the notebook [`Naive Bayes and the Spam Dataset`](https://colab.research.google.com/drive/1cPc735Pqffpx2NwGM8wkMPr36arkIari?usp=sharing) we analyzed each of the variants mentioned above, and we will briefly explain each of them here.
 
 ### GaussianNB
 
@@ -383,7 +383,7 @@ The independence assumption discussed in the [Independent Events](#independent-e
 
 ### SMS Spam Classifier
 
-The notebook closes with the [SMS Spam Collection](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset) - 5,572 messages labeled ham or spam. The preprocessing pipeline mirrors the theoretical steps:
+The notebook closes with the [SMS Spam Collection](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset) - 5572 messages labeled ham or spam. The preprocessing pipeline mirrors the theoretical steps:
 
 ```python
 # 1. Clean - letters only, lowercase
@@ -408,12 +408,12 @@ _SMS dataset: heavily imbalanced toward ham ($\approx$ 87% ham, $\approx$ 13% sp
 | KNeighbors | $\approx$ 0.92 | $\approx$ 0.79 | $\approx$ 0.85 | $\approx$ 0.91 |
 | SVC | $\approx$ 0.98 | $\approx$ 0.96 | $\approx$ 0.97 | $\approx$ 0.97 |
 
-MultinomialNB matches Random Forest and SVC at a fraction of the training time. Its `feature_log_prob_` parameters are also directly interpretable - you can read off exactly which words drove a spam prediction.
+MultinomialNB performs competitively against Random Forest and SVC while requiring only a fraction of the training time. Its `feature_log_prob_` parameters are directly interpretable, allowing inspection of which words contributed most to a spam prediction.
 
 ![Confusion matrices for all four classifiers](/blog/probability-and-machine-learning/shared/nb_spam_confusion_matrices.webp)
-_Confusion matrices: MultinomialNB and SVC both minimize false negatives (missed spam)_
+_Confusion matrices: Random Forest achieves the best overall balance and produces no false positives, while MultinomialNB and SVC remain highly competitive. KNN performs substantially worse due to poor recall on the minority class._
 
- Naive Bayes is the right baseline to beat before reaching for more complex models. It is fast, interpretable, and surprisingly competitive on text classification tasks - precisely the application where the "naive" independence assumption is least damaging.
+Naive Bayes is the right baseline to beat before reaching for more complex models. It is fast, interpretable, and surprisingly competitive on text classification tasks—precisely the application where the “naive” independence assumption tends to be least harmful.
 
 ---
 

@@ -295,7 +295,140 @@ Si lo vemos con números, de cada 100,000 personas, 100 tendrán la enfermedad (
 
 ---
 
-La probabilidad es aplicada en muchas áreas del aprendizaje automático, es la base de algoritmos como Naive Bayes, modelos de Markov ocultos, redes bayesianas, etc., y es fundamental para la evaluación de modelos, la toma de decisiones bajo incertidumbre y la interpretación de resultados.
+
+## Naive Bayes en práctica
+
+En el notebook [`Naive Bayes y el Dataset de Spam`](https://colab.research.google.com/drive/1cPc735Pqffpx2NwGM8wkMPr36arkIari?usp=sharing) analizamos cada una de las variantes mencionadas anteriormente, explicaremos de manera resumen cada una de ellas aquí.
+
+### GaussianNB
+
+El dataset Iris se adapta perfectamente a GaussianNB: cuatro mediciones continuas de flores con distribuciones aproximadamente gaussianas por clase. Primero, analizamos las distribuciones condicionales a la clase:
+
+```python
+for cls in range(3):
+    sns.kdeplot(X_train[y_train == cls, feat_idx],
+                label=iris.target_names[cls], ax=ax, fill=True, alpha=0.3)
+```
+
+Los gráficos KDE confirman una forma de campana para cada especie, exactamente lo que GaussianNB presupone. Tras el ajuste a la longitud y el ancho de los pétalos, los límites de decisión son **curvos** (cuadráticos), no rectos. Esto sucede porque GaussianNB asigna a cada clase su propia gaussiana con media y varianza independientes:
+
+$$
+P(x_i \mid C) = \frac{1}{\sqrt{2\pi\sigma_{C,i}^2}} \exp\!\left(-\frac{(x_i - \mu_{C,i})^2}{2\sigma_{C,i}^2}\right)
+$$
+
+![Límites de decisión de GaussianNB en características de pétalos de iris](/blog/probability-and-machine-learning/shared/nb_gaussian_boundary.webp)
+_Límites de decisión de GaussianNB - Iris (longitud del pétalo vs. anchura del pétalo)_
+
+El gráfico de probabilidad posterior para una sola muestra de prueba nos dice con qué confianza el modelo asigna probabilidades. Aunque se incumple el supuesto de independencia (la longitud y el ancho del pétalo tienen una correlación de aproximadamente 0,96), GaussianNB alcanza una precisión de validación 5-fold CV Accuracy de aproximadamente el 96 %.
+
+```
+GaussianNB 5-fold CV Accuracy: 0.953 +/- 0.027
+Individual fold scores: [0.933 0.967 0.933 0.933 1.   ]
+```
+
+### MultinomialNB
+
+Para la clasificación de texto, las características son recuentos de palabras: números enteros no negativos que se ajustan a la verosimilitud multinomial:
+
+$$
+P(x_i \mid C) = \frac{N_{C,i} + \alpha}{N_C + \alpha \cdot |V|}
+$$
+
+El parámetro de suavizado de Laplace (**Laplace smoothing**) $\alpha$ evita el problema de la frecuencia cero: si una palabra nunca aparece en los datos de entrenamiento de la clase $C$, de lo contrario, anularía toda la distribución posterior. El notebook demuestra esto en el conjunto de datos de 20 grupos de noticias (4 categorías: béisbol, espacio, política/armas, gráficos por computadora):
+
+```python
+vec = CountVectorizer(stop_words='english', max_features=10_000)
+X_train_counts = vec.fit_transform(news_train.data)
+
+mnb = MultinomialNB(alpha=1.0)
+mnb.fit(X_train_counts, news_train.target)
+```
+
+Al analizar `feature_log_prob_` se revelan las palabras más informativas de cada categoría. Las palabras principales para `sci.space` incluyen términos específicos del dominio como "nasa", "órbita" y "transbordador": el modelo aprende señales lingüísticas reales, no ruido.
+
+![Palabras más informativas por categoría](/blog/probability-and-machine-learning/shared/nb_multinomial_top_words.webp)
+_Palabras más informativas por categoría - MultinomialNB en 20 grupos de noticias_
+
+Un barrido alfa muestra cómo la intensidad del suavizado afecta la precisión: un suavizado insuficiente (alfa cercano a 0) provoca sobreajuste en palabras poco frecuentes; un suavizado excesivo diluye la señal. El valor óptimo suele estar entre 0,1 y 1,0.
+
+![Efecto del Laplace smoothing en la precisión de la validación cruzada](/blog/probability-and-machine-learning/shared/nb_multinomial_alpha.webp)
+_Barrido de parámetros de Laplace smoothing: precisión de la validación cruzada de 5 pliegues_
+
+### BernoulliNB
+
+BernoulliNB trata cada característica como un indicador binario: ¿estaba presente (1) o ausente (0) esta palabra?
+
+$$
+P(x_i \mid C) = P(i \mid C)^{x_i} \cdot \bigl(1 - P(i \mid C)\bigr)^{1 - x_i}
+$$
+
+La diferencia más importante con respecto a MultinomialNB es en el término $(1 - P(i \mid C))^{1-x_i}$, que **penaliza la ausencia** de una palabra. Si "gol" está fuertemente asociado con la clase de deportes, pero no aparece en un documento, BernoulliNB lo considera evidencia en contra de la clase de deportes. En el caso de MultinomialNB simplemente ignora las palabras ausentes.
+
+El notebook ilustra esto con un vocabulario sencillo de cinco palabras: un documento que contiene solo "juego" (ambiguo) se clasifica de manera diferente según si las palabras de la clase de deportes están presentes o no.
+
+| Model | Behavior for absent features | Best for |
+|-------|------------------------------|---------|
+| MultinomialNB | Ignores absent features | Long documents, articles |
+| BernoulliNB | Penalizes absent features | Short texts, tweets, profiles |
+
+En el subconjunto de 4 categorías de 20 grupos de noticias:
+
+| Model | Test Accuracy | CV Accuracy (5-fold) |
+|-------|--------------|---------------------|
+| MultinomialNB | ~0.93 | ~0.92 |
+| BernoulliNB | ~0.88 | ~0.88 |
+
+El método MultinomialNB resulta ventajoso en documentos más largos (las publicaciones en grupos de noticias tienen un promedio de cientos de palabras), pero el método BernoulliNB puede superarlo en textos muy cortos donde la frecuencia no aporta información relevante.
+
+### Comparación de los tres
+
+| Propiedad | GaussianNB | MultinomialNB | BernoulliNB | ComplementNB |
+|----------|-----------|--------------|------------|-------------|
+| Tipo de característica | Continua | Recuentos no negativos | Binaria (0/1) | Recuentos no negativos |
+| Probabilidad | PDF Gaussiana | Multinomial | Bernoulli | Multinomial Complementario |
+| ¿Penaliza la ausencia? | N/A | No | **Sí** | No |
+| Ideal para | Biología, sensores | Texto largo | Texto corto, perfiles | Texto desequilibrado |
+
+Las distribuciones posteriores de Naive Bayes suelen ser **demasiado optimistas**, ya que el modelo asigna probabilidades muy altas incluso cuando hay incertidumbre. Cuando las probabilidades calibradas son importantes (por ejemplo, para la clasificación o la aplicación de umbrales), es mejor utilizar `CalibratedClassifierCV` de scikit-learn.
+
+![Efecto de la calibración de probabilidad en el método MultinomialNB](/blog/probability-and-machine-learning/shared/nb_calibration.webp)
+_Las distribuciones posteriores de NB sin procesar se agrupan cerca de 1.0; la calibración las dispersa en una distribución más realista._
+
+La suposición de independencia que vimos en la sección [Eventos independientes](#eventos-independientes) anterior es precisamente lo que hace que NB sea "ingenuo" y precisamente por eso sigue funcionando: en la clasificación, solo necesitamos que la clase correcta ocupe el puesto más alto, no que las probabilidades sean exactas.
+
+### SMS Spam Classifier
+
+En el notebook finalizamos con el [SMS Spam Collection](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset), que contiene 5572 mensajes etiquetados como legítimos o spam. El proceso de preprocesamiento reproduce los pasos teóricos:
+
+```python
+# 1. Clean - letters only, lowercase
+text = re.sub('[^a-zA-Z]', ' ', text).lower().split()
+# 2. Remove stopwords
+text = [w for w in text if w not in stop_words]
+# 3. Lemmatize
+text = [lemmatizer.lemmatize(w, pos='v') for w in text]
+# 4. TF-IDF vectorization
+X = TfidfVectorizer(max_features=3000).fit_transform(corpus)
+```
+
+Se comparan cuatro clasificadores utilizando las mismas características:
+
+![Distribución de clases de spam en SMS](/blog/probability-and-machine-learning/shared/nb_spam_distribution.webp)
+_SMS dataset: muy desequilibrado hacia los mensajes legítimos (aproximadamente 87 % legítimos, aproximadamente 13 % spam)._
+
+| Model | Precision | Recall | F1 | CV Accuracy (10×) |
+|-------|-----------|--------|----|-------------------|
+| MultinomialNB | $\approx$ 0.97 | $\approx$ 0.94 | $\approx$ 0.95 | $\approx$ 0.97 |
+| RandomForest | $\approx$ 0.98 | $\approx$ 0.94 | $\approx$ 0.96 | $\approx$ 0.97 |
+| KNeighbors | $\approx$ 0.92 | $\approx$ 0.79 | $\approx$ 0.85 | $\approx$ 0.91 |
+| SVC | $\approx$ 0.98 | $\approx$ 0.96 | $\approx$ 0.97 | $\approx$ 0.97 |
+
+MultinomialNB ofrece un rendimiento competitivo frente a Random Forest y SVC, requiriendo solo una fracción del tiempo de entrenamiento. Sus parámetros `feature_log_prob_` son directamente interpretables, lo que permite analizar qué palabras contribuyeron en mayor medida a la predicción de spam.
+
+![Matrices de confusión para los cuatro clasificadores](/blog/probability-and-machine-learning/shared/nb_spam_confusion_matrices.webp)
+_Matrices de confusión: Random Forest logra el mejor equilibrio general y no produce falsos positivos, mientras que MultinomialNB y SVC siguen siendo altamente competitivos. KNN tiene un rendimiento sustancialmente peor debido a su baja precisión en la clase minoritaria._
+
+Naive Bayes es el punto de partida ideal antes de recurrir a modelos más complejos. Es rápido, interpretable y sorprendentemente competitivo en tareas de clasificación de texto, precisamente la aplicación donde la suposición de independencia "ingenua" tiende a ser menos perjudicial.
 
 ---
 
