@@ -374,12 +374,7 @@ MultinomialNB wins on longer documents (newsgroup posts average hundreds of word
 | Penalizes absence? | N/A | No | **Yes** | No |
 | Best for | Biology, sensors | Long text | Short text, profiles | Imbalanced text |
 
-A practical note: NB posteriors are often **overconfident** - the model assigns very high probabilities even when uncertain. When calibrated probabilities matter (e.g. ranking or thresholding), use `CalibratedClassifierCV` from scikit-learn.
-
-![Effect of probability calibration on MultinomialNB](/blog/probability-and-machine-learning/shared/nb_calibration.webp)
-_Raw NB posteriors cluster near 1.0; calibration spreads them into a more realistic distribution_
-
-The independence assumption discussed in the [Independent Events](#independent-events) section above is exactly what makes NB "naive" - and exactly why it still works: in classification, we only need the correct class to rank highest, not for probabilities to be exact.
+> The independence assumption discussed in the [Independent Events](#independent-events) section is exactly what makes NB "naive" - and exactly why it still works: in classification, we only need the correct class to rank highest, not for probabilities to be exact.
 
 ### SMS Spam Classifier
 

@@ -389,12 +389,7 @@ El método MultinomialNB resulta ventajoso en documentos más largos (las public
 | ¿Penaliza la ausencia? | N/A | No | **Sí** | No |
 | Ideal para | Biología, sensores | Texto largo | Texto corto, perfiles | Texto desequilibrado |
 
-Las distribuciones posteriores de Naive Bayes suelen ser **demasiado optimistas**, ya que el modelo asigna probabilidades muy altas incluso cuando hay incertidumbre. Cuando las probabilidades calibradas son importantes (por ejemplo, para la clasificación o la aplicación de umbrales), es mejor utilizar `CalibratedClassifierCV` de scikit-learn.
-
-![Efecto de la calibración de probabilidad en el método MultinomialNB](/blog/probability-and-machine-learning/shared/nb_calibration.webp)
-_Las distribuciones posteriores de NB sin procesar se agrupan cerca de 1.0; la calibración las dispersa en una distribución más realista._
-
-La suposición de independencia que vimos en la sección [Eventos independientes](#eventos-independientes) anterior es precisamente lo que hace que NB sea "ingenuo" y precisamente por eso sigue funcionando: en la clasificación, solo necesitamos que la clase correcta ocupe el puesto más alto, no que las probabilidades sean exactas.
+> La suposición de independencia que vimos en la sección [Eventos independientes](#eventos-independientes) es lo que hace que NB sea "ingenuo" y precisamente por eso sigue funcionando: en la clasificación, solo necesitamos que la clase correcta ocupe el puesto más alto, no que las probabilidades sean exactas.
 
 ### SMS Spam Classifier
 
