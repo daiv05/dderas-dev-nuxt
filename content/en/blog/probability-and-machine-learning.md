@@ -15,11 +15,11 @@ tags:
   ]
 image: /blog/probability-and-machine-learning/shared/probability-machine-learning.webp
 author: David Deras
-lastmod: 2026-05-08
+lastmod: 2026-05-12
 sitemap:
   priority: 0.7
   loc: /blog/probability-and-machine-learning
-  lastmod: 2026-05-08
+  lastmod: 2026-05-12
 ---
 
 After exploring statistics and its relationship to machine learning, it's time to delve into another fundamental concept: probability.

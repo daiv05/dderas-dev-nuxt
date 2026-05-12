@@ -15,11 +15,11 @@ tags:
   ]
 image: /blog/probability-and-machine-learning/shared/probability-machine-learning.webp
 author: David Deras
-lastmod: 2026-05-05
+lastmod: 2026-05-12
 sitemap:
   priority: 0.7
   loc: /es/blog/probability-and-machine-learning
-  lastmod: 2026-05-05
+  lastmod: 2026-05-12
 ---
 
 Luego de explorar la estadística y su relación con el aprendizaje automático, es hora de adentrarnos en otro concepto fundamental: la probabilidad.
