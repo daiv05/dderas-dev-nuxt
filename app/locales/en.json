@@ -56,12 +56,12 @@
     "hint": {
       "label": "Quick fix",
       "notFound": {
-        "0": "Try the navigation menu — most pages live there.",
+        "0": "Try the navigation menu - most pages live there.",
         "1": "If this was a bookmark, it may have changed.",
         "2": "Switch language and retry if the content is localized."
       },
       "generic": {
-        "0": "Reload the page — transient issues happen.",
+        "0": "Reload the page - transient issues happen.",
         "1": "Go back and try a different path.",
         "2": "If it keeps happening, report it with the details."
       }

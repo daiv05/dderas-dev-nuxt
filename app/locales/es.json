@@ -56,12 +56,12 @@
     "hint": {
       "label": "Arreglo rápido",
       "notFound": {
-        "0": "Prueba el menú — ahí están la mayoría de páginas.",
+        "0": "Prueba el menú - ahí están la mayoría de páginas.",
         "1": "Si era un marcador, quizá la ruta cambió.",
         "2": "Cambia de idioma e intenta de nuevo si el contenido está localizado."
       },
       "generic": {
-        "0": "Recarga la página — a veces es algo temporal.",
+        "0": "Recarga la página - a veces es algo temporal.",
         "1": "Vuelve atrás y prueba otra ruta.",
         "2": "Si sigue pasando, repórtalo con los detalles."
       }

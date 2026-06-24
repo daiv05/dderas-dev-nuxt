@@ -573,7 +573,7 @@ Nuevo modelo:
 
 ---
 
-¿Que podemos aprender de este caso? Primero, **el modelo no era el centro — el proceso sí**. El éxito no vino de un algoritmo sofisticado, sino de un proceso bien ejecutado que incluyó:
+¿Que podemos aprender de este caso? Primero, **el modelo no era el centro - el proceso sí**. El éxito no vino de un algoritmo sofisticado, sino de un proceso bien ejecutado que incluyó:
 
 * Buen EDA
 * Buen feature engineering

@@ -565,7 +565,7 @@ New model:
 
 ---
 
-What can we learn from this case? First, **the model wasn't the focus—the process was**. Success didn't come from a sophisticated algorithm, but from a well-executed process that included:
+What can we learn from this case? First, **the model wasn't the focus-the process was**. Success didn't come from a sophisticated algorithm, but from a well-executed process that included:
 
 * Good EDA (Engineering Development Analysis)
 * Good feature engineering

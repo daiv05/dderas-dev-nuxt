@@ -408,7 +408,7 @@ MultinomialNB performs competitively against Random Forest and SVC while requiri
 ![Confusion matrices for all four classifiers](/blog/probability-and-machine-learning/shared/nb_spam_confusion_matrices.webp)
 _Confusion matrices: Random Forest achieves the best overall balance and produces no false positives, while MultinomialNB and SVC remain highly competitive. KNN performs substantially worse due to poor recall on the minority class._
 
-Naive Bayes is the right baseline to beat before reaching for more complex models. It is fast, interpretable, and surprisingly competitive on text classification tasks—precisely the application where the “naive” independence assumption tends to be least harmful.
+Naive Bayes is the right baseline to beat before reaching for more complex models. It is fast, interpretable, and surprisingly competitive on text classification tasks-precisely the application where the “naive” independence assumption tends to be least harmful.
 
 ---
 
