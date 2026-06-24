@@ -221,8 +221,11 @@
     "eyebrow": "Hi, I am",
     "title": "David Deras",
     "highlight": "Software Engineer",
-    "roleLabel": "Current role",
-    "lead": "Shipping full-stack systems for public institutions, retail, and analytics platforms.",
+    "availability": "Available for work",
+    "headline": "I design and ship",
+    "headlineAccent": "full-stack software",
+    "roleLabel": "Now",
+    "lead": "Full-stack systems for public institutions, retail, and analytics platforms - with AI in the workflow.",
     "ctas": {
       "primary": "View projects",
       "secondary": "Send me a message"

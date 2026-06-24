@@ -69,6 +69,7 @@
     </v-navigation-drawer>
 
     <v-main class="shell-main">
+      <div class="shell-glow" aria-hidden="true"></div>
       <div class="shell-main-inner">
         <!-- Mobile top bar - hidden by CSS on desktop -->
         <div class="mobile-top">
@@ -389,12 +390,25 @@ onBeforeUnmount(() => {
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Glow ambiental anclado a la parte superior del viewport de contenido */
+.shell-glow {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: min(720px, 90vh);
+  background: var(--glow);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .shell-main-inner {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 .shell-content {

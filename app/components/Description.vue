@@ -1,34 +1,34 @@
 ﻿<template>
   <section ref="sectionRef" class="overview-section">
-    <div ref="gridRef" class="overview-grid">
-      <v-sheet
-        v-for="area in areas"
-        :key="area.title"
-        class="overview-panel"
-        elevation="0"
-        rounded="xl"
-        tabindex="0"
-        @click="goTo(area)"
-        @keyup.enter="goTo(area)"
-        @keyup.space.prevent="goTo(area)"
-      >
-        <div class="panel-top">
-          <span class="mono"></span>
-          <span class="panel-link"><v-icon :icon="mdiArrowTopRight"></v-icon></span>
-        </div>
-        <h3>{{ area.title }}</h3>
-        <p>{{ area.body }}</p>
-      </v-sheet>
+    <div class="now-header">
+      <span class="now-label mono">{{ t('hero.agendaTitle') }}</span>
     </div>
 
-    <v-sheet ref="ctaSection" class="collab-panel" elevation="0">
+    <div ref="gridRef" class="now-grid">
+      <div v-for="item in agenda" :key="item.title" class="now-panel">
+        <span class="now-bar" aria-hidden="true"></span>
+        <div class="now-content">
+          <h3 class="now-title">{{ item.title }}</h3>
+          <p class="now-status">{{ item.status }}</p>
+        </div>
+      </div>
+    </div>
+
+    <v-sheet ref="ctaSection" class="collab-panel glass" elevation="0">
       <div>
         <h3>{{ collaboration.title }}</h3>
         <p>
           {{ collaboration.body }}
         </p>
       </div>
-      <v-btn class="text-none" variant="outlined" rounded="pill" size="large" :href="`mailto:${contactInfo.email}`">
+      <v-btn
+        class="text-none"
+        color="primary"
+        variant="flat"
+        rounded="pill"
+        size="large"
+        :href="`mailto:${contactInfo.email}`"
+      >
         {{ collaboration.cta }}
       </v-btn>
     </v-sheet>
@@ -36,7 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import { mdiArrowTopRight } from '@mdi/js';
 import { contactInfo } from '~/data/contact';
 import {
   getMainScroller,
@@ -45,37 +44,20 @@ import {
 } from '~/plugins/gsap';
 import { useGsapAnimations } from '~/composables/useEnterAnimations';
 
-interface Area {
-  title: string;
-  body: string;
-  to: string;
-  openInNewTab?: boolean;
-}
-
-interface Collaboration {
-  title: string;
-  body: string;
-  cta: string;
-}
-
 const { t, tm, rt } = useI18n();
-const localePath = useLocalePath();
-const router = useRouter();
 const { setupAnimations } = useGsapAnimations();
 
 // Refs del template
 const gridRef = ref<HTMLElement | null>(null);
 const ctaSection = ref<HTMLElement | null>(null);
 
-// Computed que obtiene las traducciones
-const areas = computed(() => {
-  const raw = tm('overview.cards');
+// "En qué estoy ahora": trabajo en curso
+const agenda = computed(() => {
+  const raw = tm('hero.agenda');
   if (Array.isArray(raw)) {
     return raw.map((item) => ({
       title: rt(item.title),
-      body: rt(item.body),
-      to: rt(item.to),
-      openInNewTab: item.openInNewTab
+      status: rt(item.status),
     }));
   }
   return [];
@@ -93,26 +75,12 @@ const collaboration = computed(() => {
   return {};
 });
 
-const goTo = (area: Area) => {
-  const path = localePath(area.to);
-  
-  if (area.openInNewTab) {
-    if (import.meta.client) {
-      const route = router.resolve(path);
-      globalThis.open(route.href, '_blank');
-    }
-  } else {
-    navigateTo(path);
-  }
-};
-
-
 const initAnimations = () => {
   setupAnimations(() => {
     const scroller = getMainScroller();
-    
+
     // Obtener panels directamente del DOM
-    const panels = gridRef.value?.querySelectorAll('.overview-panel') ?? [];
+    const panels = gridRef.value?.querySelectorAll('.now-panel') ?? [];
     const ctaEl = ctaSection.value;
 
     // Animar cada panel individualmente cuando entra en viewport
@@ -155,86 +123,87 @@ onMounted(() => {
   border-bottom: 1px solid var(--line-soft);
 }
 
-.overview-header {
-  max-width: 720px;
-  margin: 0 auto 3rem;
-  text-align: center;
+.overview-section {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
 }
 
-.overview-grid {
+.now-header {
+  margin-bottom: 1.25rem;
+}
+
+.now-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.now-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  gap: 1rem;
   margin-bottom: 2.5rem;
 }
 
-.overview-panel {
-  border: 1px solid var(--line-soft) !important;
-  background: rgba(var(--v-theme-surface), 0.7);
-  padding: 1.5rem;
+.now-panel {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  cursor: pointer;
+  gap: 1rem;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  background: rgba(var(--v-theme-surface), 0.5);
+  padding: 1.25rem 1.4rem;
   transition:
     border-color var(--transition-base),
     transform var(--transition-base);
 }
 
-.overview-panel:focus-visible {
-  outline: none;
-  border-color: var(--line-strong) !important;
+.now-panel:hover {
+  transform: translateY(-3px);
+  border-color: rgba(var(--brand-from), 0.45);
 }
 
-.overview-panel:hover {
-  transform: translateY(-4px);
-  border-color: var(--line-strong) !important;
+.now-bar {
+  flex-shrink: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--brand-gradient);
 }
 
-.panel-top {
+.now-content {
   display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  color: var(--text-subtle);
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-.panel-link {
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.overview-panel h3 {
-  font-size: 1.4rem;
+.now-title {
+  font-size: 1.1rem;
+  font-weight: 600;
   margin: 0;
 }
 
-.overview-panel p {
+.now-status {
+  font-size: 0.9rem;
+  line-height: 1.45;
   color: var(--text-subtle);
-}
-
-.panel-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: auto;
-}
-
-.panel-tags span {
-  border: 1px solid var(--line-soft);
-  border-radius: 999px;
-  padding: 0.3rem 0.9rem;
-  font-size: 0.85rem;
+  margin: 0;
 }
 
 .collab-panel {
-  border: 1px solid var(--line-strong) !important;
+  border: 1px solid var(--line-soft) !important;
   border-radius: var(--radius-lg);
-  padding: 1.5rem 2rem;
+  padding: 1.75rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  background: rgba(var(--v-theme-surface), 0.7);
+  box-shadow: var(--shadow-md);
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .collab-panel h3 {

@@ -221,8 +221,11 @@
     "eyebrow": "Hola, soy",
     "title": "David Deras",
     "highlight": "Ingeniero de Software",
-    "roleLabel": "Rol actual",
-    "lead": "Desarrollando sistemas full-stack para instituciones públicas, retail y plataformas de datos.",
+    "availability": "Disponible para proyectos",
+    "headline": "Diseño y desarrollo",
+    "headlineAccent": "software full-stack",
+    "roleLabel": "Ahora",
+    "lead": "Sistemas full-stack para instituciones públicas, retail y plataformas de datos - con IA en el proceso.",
     "ctas": {
       "primary": "Ver proyectos",
       "secondary": "Escribirme"

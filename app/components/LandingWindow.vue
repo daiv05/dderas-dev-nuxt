@@ -1,113 +1,114 @@
 <template>
   <section class="hero-shell">
-    <v-container fluid class="hero-grid">
-      <v-row class="hero-row" align="stretch">
-        <v-col cols="12" md="6" class="hero-col">
-          <div ref="copyBlock" class="hero-copy">
-            <p class="eyebrow" data-animate>{{ t("hero.eyebrow") }}</p>
-            <h1 class="hero-title" data-animate>
-              {{ t("hero.title") }}
-              <span class="hero-emphasis">
-                {{ t("hero.highlight") }}
+    <div class="hero-grid">
+      <div class="hero-layout">
+        <!-- Intro: que hago -->
+        <div ref="copyBlock" class="hero-copy">
+          <p class="eyebrow" data-animate>
+            <span class="status-dot" aria-hidden="true"></span>
+            {{ t("hero.availability") }}
+          </p>
+
+          <h1 class="hero-title" data-animate>
+            {{ t("hero.headline") }}
+            <span class="hero-grad">{{ t("hero.headlineAccent") }}</span>
+          </h1>
+
+          <p class="role-line" data-animate>
+            <span class="role-label mono">{{ t("hero.roleLabel") }}</span>
+            <span ref="roleTicker" class="role-value mono">{{
+              currentRole
+            }}</span>
+          </p>
+
+          <p class="hero-lead" data-animate>{{ t("hero.lead") }}</p>
+
+          <div ref="ctaGroup" class="hero-actions">
+            <v-btn
+              color="primary"
+              variant="flat"
+              rounded="pill"
+              size="large"
+              class="text-none cta-primary"
+              @click="goToProjects"
+            >
+              {{ t("hero.ctas.primary") }}
+            </v-btn>
+            <v-btn
+              variant="text"
+              rounded="pill"
+              size="large"
+              class="text-none"
+              :href="`mailto:${contactInfo.email}`"
+            >
+              {{ t("hero.ctas.secondary") }}
+            </v-btn>
+          </div>
+
+          <!-- <div ref="factsBlock" class="hero-facts">
+            <div v-for="fact in focusNotes" :key="fact.label" class="fact">
+              <span class="fact-label mono">{{ fact.label }}</span>
+              <span class="fact-value">{{ fact.value }}</span>
+            </div>
+          </div> -->
+        </div>
+
+        <!-- Mapa de contenido: que encuentras aqui (protagonista, glass) -->
+        <div ref="boardBlock" class="hero-board glass">
+          <div class="board-head" data-animate>
+            <span class="ledger-title">{{ t("overview.eyebrow") }}</span>
+            <p class="board-lead">{{ t("overview.lead") }}</p>
+          </div>
+
+          <div class="map-list">
+            <button
+              v-for="(card, i) in contentCards"
+              :key="card.title"
+              type="button"
+              class="map-item"
+              data-animate
+              @click="goToCard(card)"
+            >
+              <span class="map-index mono">{{
+                String(i + 1).padStart(2, "0")
+              }}</span>
+              <span class="map-body">
+                <span class="map-title">{{ card.title }}</span>
+                <span class="map-desc">{{ card.body }}</span>
               </span>
-            </h1>
-            <p class="role-line" data-animate>
-              <span class="role-label mono">{{ t("hero.roleLabel") }}</span>
-              <span ref="roleTicker" class="role-value">{{ currentRole }}</span>
-            </p>
-            <p class="hero-lead" data-animate>
-              {{ t("hero.lead") }}
-            </p>
-
-            <div ref="ctaGroup" class="hero-actions">
-              <v-btn
-                color="primary"
-                variant="flat"
-                rounded="pill"
-                size="large"
-                class="text-none"
-                @click="goToProjects"
-              >
-                {{ t("hero.ctas.primary") }}
-              </v-btn>
-              <v-btn
-                variant="outlined"
-                rounded="pill"
-                size="large"
-                class="text-none"
-                :href="`mailto:${contactInfo.email}`"
-              >
-                {{ t("hero.ctas.secondary") }}
-              </v-btn>
-            </div>
-
-            <div ref="ledgerBlock" class="hero-ledger">
-              <div class="ledger-title">{{ t("hero.agendaTitle") }}</div>
-              <div class="ledger-grid no-auto-fit">
-                <div
-                  v-for="item in agenda"
-                  :key="item.title"
-                  class="ledger-item"
-                >
-                  <span class="label">{{ item.status }}</span>
-                  <span class="value mono">{{ item.title }}</span>
-                </div>
-              </div>
-            </div>
+              <v-icon class="map-arrow" :icon="mdiArrowRight" size="20" />
+            </button>
           </div>
-        </v-col>
+        </div>
+      </div>
 
-        <v-col cols="12" md="6" class="hero-col">
-          <div ref="boardBlock" class="hero-board">
-            <div class="board-section" data-animate>
-              <div class="ledger-title">{{ t("hero.stackTitle") }}</div>
-              <div class="stack-groups">
-                <div
-                  v-for="group in stackGroups"
-                  :key="group.name"
-                  class="stack-group"
-                >
-                  <div class="stack-group-title">
-                    <span
-                      class="stack-group-dot"
-                      :style="{ background: group.color }"
-                    ></span>
-                    <span class="mono">{{ group.name }}</span>
-                  </div>
-
-                  <div class="tech-cloud">
-                    <component
-                      is="div"
-                      v-for="tech in group.techs"
-                      :key="tech.id"
-                      :class="['tech-badge', { 'is-svg': tech.kind === 'svg' }]"
-                      :style="{ '--tech-color': tech.color }"
-                      :aria-label="tech.label"
-                    >
-                      <span class="tech-icon" aria-hidden="true">
-                        <v-icon
-                          v-if="tech.kind === 'mdi'"
-                          :icon="tech.icon"
-                          size="18"
-                        />
-                        <span v-else class="tech-svg" v-html="tech.icon"></span>
-                      </span>
-                      <span class="tech-name mono">{{ tech.label }}</span>
-                    </component>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <!-- Stack: tira discreta -->
+      <div ref="stackStrip" class="stack-strip" data-animate>
+        <span class="stack-strip-label mono">{{ t("hero.stackTitle") }}</span>
+        <div class="stack-marquee">
+          <div
+            v-for="tech in flatTechs"
+            :key="tech.id"
+            :class="['chip', { 'is-svg': tech.kind === 'svg' }]"
+            :style="{ '--tech-color': tech.color }"
+            :title="tech.label"
+          >
+            <span class="chip-icon" aria-hidden="true">
+              <v-icon v-if="tech.kind === 'mdi'" :icon="tech.icon" size="16" />
+              <span v-else class="tech-svg" v-html="tech.icon"></span>
+            </span>
+            <span class="chip-name mono">{{ tech.label }}</span>
           </div>
-        </v-col>
-      </v-row>
-    </v-container>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import {
   mdiApi,
+  mdiArrowRight,
   mdiCodeBraces,
   mdiLaravel,
   mdiLanguagePhp,
@@ -121,11 +122,12 @@ import { gsap, gsapDefaults } from "~/plugins/gsap";
 
 const { t, tm, rt, locale } = useI18n();
 const localePath = useLocalePath();
+const router = useRouter();
 
 // Refs del template
 const copyBlock = ref<HTMLElement | null>(null);
 const boardBlock = ref<HTMLElement | null>(null);
-const ledgerBlock = ref<HTMLElement | null>(null);
+const stackStrip = ref<HTMLElement | null>(null);
 const ctaGroup = ref<HTMLElement | null>(null);
 const roleTicker = ref<HTMLElement | null>(null);
 
@@ -459,16 +461,42 @@ const stackGroups = computed<StackGroup[]>(() => {
   });
 });
 
-const agenda = computed(() => {
-  const raw = tm("hero.agenda");
+// Tira plana de tecnologias (para el strip discreto)
+const flatTechs = computed<TechBadge[]>(() =>
+  stackGroups.value.flatMap((group) => group.techs)
+);
+
+// Mapa de contenido: que encuentras aqui
+type ContentCard = {
+  title: string;
+  body: string;
+  to: string;
+  openInNewTab?: boolean;
+};
+
+const contentCards = computed<ContentCard[]>(() => {
+  const raw = tm("overview.cards");
   if (Array.isArray(raw)) {
     return raw.map((item) => ({
-      status: rt(item.status),
       title: rt(item.title),
+      body: rt(item.body),
+      to: rt(item.to),
+      openInNewTab: item.openInNewTab,
     }));
   }
   return [];
 });
+
+const goToCard = (card: ContentCard) => {
+  const path = localePath(card.to);
+  if (card.openInNewTab) {
+    if (import.meta.client) {
+      globalThis.open(router.resolve(path).href, "_blank");
+    }
+    return;
+  }
+  navigateTo(path);
+};
 
 const roles = computed(() => {
   const raw = tm("hero.roles");
@@ -534,23 +562,7 @@ onMounted(() => {
         gsap.from(copyTargets, {
           ...gsapDefaults,
           y: 24,
-          stagger: 0.15,
-        });
-      }
-
-      if (ctaGroup.value) {
-        gsap.from(ctaGroup.value, {
-          ...gsapDefaults,
-          y: 24,
-          delay: 0.4,
-        });
-      }
-
-      if (ledgerBlock.value) {
-        gsap.from(ledgerBlock.value, {
-          ...gsapDefaults,
-          y: 24,
-          delay: 0.5,
+          stagger: 0.12,
         });
       }
 
@@ -558,9 +570,18 @@ onMounted(() => {
         gsap.from(boardTargets, {
           ...gsapDefaults,
           opacity: 0,
-          y: 30,
-          stagger: 0.2,
-          delay: 0.3,
+          y: 26,
+          stagger: 0.12,
+          delay: 0.25,
+        });
+      }
+
+      if (stackStrip.value) {
+        gsap.from(stackStrip.value, {
+          ...gsapDefaults,
+          opacity: 0,
+          y: 16,
+          delay: 0.6,
         });
       }
     });
@@ -590,219 +611,313 @@ watch(
 
 <style scoped lang="scss">
 .hero-shell {
-  padding: clamp(2rem, 6vw, 4rem) 0;
+  padding: clamp(2.5rem, 7vw, 5rem) var(--shell-padding)
+    clamp(2rem, 5vw, 3.5rem);
   border-bottom: 1px solid var(--line-soft);
 }
 
 .hero-grid {
   max-width: var(--page-max-width);
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.hero-row {
-  display: flex;
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: stretch;
 }
 
-.hero-col {
+/* ---- Columna izquierda: intro ---- */
+.hero-copy {
   display: flex;
   flex-direction: column;
+  gap: 1.35rem;
+  padding: clamp(0.5rem, 1vw, 1rem) 0;
 }
 
-.hero-copy,
-.hero-board {
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 3vw, 2.75rem);
-  background: rgba(var(--v-theme-surface), 0.7);
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  height: 100%;
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: fit-content;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgb(var(--v-theme-success));
+  box-shadow: 0 0 0 3px rgba(var(--v-theme-success), 0.18);
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 6vw, 3.75rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  font-weight: 700;
 }
 
-.hero-emphasis {
-  display: block;
-  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-  font-weight: 500;
-  color: var(--text-subtle);
+.hero-grad {
+  display: inline;
+  color: rgb(var(--v-theme-primary));
+  /* Subrayado degradado decorativo (no rellena el texto, evita el look plano) */
+  background-image: var(--brand-gradient);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.12em;
+  padding-bottom: 0.04em;
 }
 
 .role-line {
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  height: 5.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
 }
 
 .role-label {
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--text-subtle);
 }
 
 .role-value {
-  font-size: 1.5rem;
-  border-bottom: 1px solid var(--line-soft);
-  padding-bottom: 0.35rem;
-  height: 2.2rem;
+  font-size: 1.05rem;
+  color: rgb(var(--v-theme-primary));
+  min-height: 1.5rem;
+}
+
+.role-value::after {
+  content: "▌";
+  margin-left: 1px;
+  opacity: 0.65;
+  animation: caret 1s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
 }
 
 .hero-lead {
-  font-size: 1.1rem;
+  font-size: 1.08rem;
+  line-height: 1.6;
   color: var(--text-subtle);
+  max-width: 38ch;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
-.hero-ledger {
+.cta-primary {
+  box-shadow: var(--shadow-md);
+}
+
+.hero-facts {
+  margin-top: auto;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--line-soft);
-  padding-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fact-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.fact-value {
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+/* ---- Columna derecha: mapa de contenido (glass, protagonista) ---- */
+.hero-board {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-lg);
+}
+
+.board-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .ledger-title {
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
-}
-
-.ledger-grid:not(.no-auto-fit) {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.ledger-grid.no-auto-fit {
-  display: grid;
-  gap: 0.75rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.ledger-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-sm);
-  padding: 0.85rem 1rem;
-}
-
-.ledger-item .label {
-  font-size: 0.85rem;
   color: var(--text-subtle);
 }
 
-.hero-board {
-  gap: 1.5rem;
-}
-
-.board-section {
-  border-radius: var(--radius-md);
-  padding: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.board-label {
+.board-lead {
   font-size: 0.95rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  line-height: 1.5;
   color: var(--text-subtle);
 }
 
-.board-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.map-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
-.board-list li {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--line-soft);
-  padding-bottom: 0.5rem;
-}
-
-.board-list li:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.stack-groups {
-  display: grid;
-  gap: 1rem;
-}
-
-.stack-group {
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-md);
-  padding: 1rem;
-  background: rgba(var(--v-theme-surface), 0.35);
-}
-
-.stack-group-title {
+.map-item {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  margin-bottom: 0.75rem;
-  opacity: 0.9;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  background: rgba(var(--v-theme-surface), 0.45);
+  padding: 1rem 1.15rem;
+  cursor: pointer;
+  color: inherit;
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
-.stack-group-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  box-shadow: 0 0 0 4px var(--line-soft);
+.map-item:hover,
+.map-item:focus-visible {
+  outline: none;
+  transform: translateY(-2px);
+  border-color: rgba(var(--brand-from), 0.55);
+  background: rgba(var(--v-theme-surface), 0.7);
+  box-shadow: var(--shadow-sm);
 }
 
-.tech-cloud {
+.map-index {
+  font-size: 0.8rem;
+  color: rgb(var(--v-theme-primary));
+  opacity: 0.85;
+}
+
+.map-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.map-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.map-desc {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-subtle);
+}
+
+.map-arrow {
+  color: var(--text-subtle);
+  transition:
+    transform var(--transition-base),
+    color var(--transition-base);
+}
+
+.map-item:hover .map-arrow,
+.map-item:focus-visible .map-arrow {
+  color: rgb(var(--v-theme-primary));
+  transform: translateX(3px);
+}
+
+/* ---- Tira de stack discreta ---- */
+.stack-strip {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--line-soft);
+  border-radius: 33px;
+  padding: 0.6rem 1rem;
+  background: rgba(var(--v-theme-surface), 0.4);
+  overflow: hidden;
+}
+
+.stack-strip-label {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.stack-marquee {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-.tech-badge {
+.stack-marquee::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
   --tech-color: #94a3b8;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0.7rem;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  padding: 0.35rem 0.65rem;
   border-radius: 999px;
   border: 1px solid var(--line-soft);
-  background: rgba(var(--v-theme-surface), 0.5);
-  text-decoration: none;
-  color: rgb(var(--v-theme-on-surface));
+  background: rgba(var(--v-theme-surface), 0.55);
   transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    background-color 0.18s ease,
-    box-shadow 0.18s ease;
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-.tech-icon {
+.chip:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+.chip-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--tech-color);
-}
-
-.tech-badge.is-svg .tech-icon {
-  border-radius: 8px;
-  padding: 2px 4px;
 }
 
 .tech-svg {
@@ -812,35 +927,24 @@ watch(
   line-height: 0;
 }
 
-.tech-name {
-  font-size: 0.85rem;
-  letter-spacing: 0.02em;
-}
-
-.code-area {
-  gap: 1rem;
-}
-
-.code-highlight {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  border-radius: var(--radius-sm);
-  overflow-x: auto;
-}
-
-.code-highlight :deep(code) {
-  text-shadow: none;
-}
-
-.code-pre {
-  margin: 0;
+.chip-name {
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
 }
 
 @media (max-width: 959px) {
-  .hero-col:not(:last-child) {
-    margin-bottom: 1.5rem;
+  .hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-facts {
+    margin-top: 0.5rem;
+  }
+
+  .stack-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: var(--radius-md);
   }
 }
 </style>
