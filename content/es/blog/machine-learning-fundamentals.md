@@ -5,7 +5,7 @@ slug: 'machine-learning-fundamentals'
 order: 2
 date: 2026-03-30
 summary: 'Conceptos básicos para iniciar en el mundo del aprendizaje automático'
-tags: ['Aprendizaje Automático', 'Inteligencia Artificial', 'Python', 'Data Science', 'Machine Learning']
+tags: ['aprendizaje automático', 'inteligencia artificial', 'python', 'data science', 'machine learning', 'fundamentos de machine learning', 'aprendizaje supervisado', 'aprendizaje no supervisado', 'aprendizaje por refuerzo']
 image: /blog/machine-learning-fundamentals/shared/ml-fundamentals.webp
 author: David Deras
 lastmod: 2026-03-30

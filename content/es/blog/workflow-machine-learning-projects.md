@@ -5,7 +5,7 @@ slug: 'workflow-machine-learning-projects'
 order: 4
 date: 2026-04-18
 summary: 'Descubre el flujo típico de un proyecto de aprendizaje automático, desde la recopilación de datos hasta la implementación del modelo, y aprende sobre las mejores prácticas y desafíos comunes en el campo de la ciencia de datos.'
-tags: ['Machine Learning', 'Data Science', 'Proyectos de ML', 'Flujo de trabajo']
+tags: ['machine learning', 'data science', 'proyectos de ml', 'flujo de trabajo']
 image: /blog/workflow-machine-learning-projects/shared/workflow.webp
 author: David Deras
 lastmod: 2026-04-18
@@ -338,19 +338,19 @@ Una fintech de suscripciones digitales tiene:
 Eso significa que cada mes:
 
 ```
-120,000 × 8% = 9,600 usuarios cancelan
+120,000 x 8% = 9,600 usuarios cancelan
 ```
 
 Pérdida mensual estimada:
 
 ```
-9,600 × $25 = $240,000
+9,600 x $25 = $240,000
 ```
 
 La empresa quiere reducir el churn al **6%**, lo que implicaría ahorrar:
 
 ```
-2% × 120,000 × $25 = $60,000 mensuales
+2% x 120,000 x $25 = $60,000 mensuales
 ```
 
 El objetivo del proyecto de Machine Learning es **identificar usuarios con alta probabilidad de cancelar en los próximos 30 días**, para enviarles una campaña de retención personalizada.
@@ -466,7 +466,7 @@ Se crearon variables como:
 También se creó:
 
 ```
-riesgo_inactividad = dias_desde_ultimo_login × (1 / promedio_uso)
+riesgo_inactividad = dias_desde_ultimo_login x (1 / promedio_uso)
 ```
 Esta variable compuesta puede ser un indicador poderoso del riesgo de churn, ya que combina la información sobre la inactividad del usuario (días desde el último login) con su nivel de compromiso (promedio de uso semanal). Un valor alto de `riesgo_inactividad` indicaría que un usuario no ha iniciado sesión en mucho tiempo y tiene un bajo nivel de uso, lo que podría ser un fuerte indicador de que está en riesgo de cancelar su suscripción.
 
@@ -517,19 +517,19 @@ De esos:
 Costo campaña:
 
 ```
-11,000 × $2 = $22,000
+11,000 x $2 = $22,000
 ```
 
 Clientes salvados (tasa de éxito campaña 40%):
 
 ```
-6,800 × 40% = 2,720 clientes retenidos
+6,800 x 40% = 2,720 clientes retenidos
 ```
 
 Ingreso recuperado mensual:
 
 ```
-2,720 × $25 = $68,000
+2,720 x $25 = $68,000
 ```
 
 ROI mensual:

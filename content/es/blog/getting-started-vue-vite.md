@@ -5,7 +5,7 @@ slug: 'getting-started-vue-vite'
 order: 1
 date: 2025-12-04
 summary: 'Una guía completa para configurar tu primer proyecto Vue 3 con Vite, incluyendo mejores prácticas y herramientas modernas.'
-tags: ['Vue.js', 'Vite', 'Tailwind CSS']
+tags: ['vue.js', 'vite', 'tailwind css', 'javascript', 'frontend development', 'vue router', 'pinia']
 image: /blog/getting-started-vue-vite/shared/vite+vue.webp
 author: David Deras
 lastmod: 2025-12-22

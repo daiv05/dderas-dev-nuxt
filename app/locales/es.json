@@ -207,7 +207,12 @@
       "zoomOut": "Alejar",
       "resetZoom": "Restablecer zoom"
     },
-    "constructionNotice": "Esta página está en construcción. Pronto habrá contenido real disponible."
+    "constructionNotice": "Esta página está en construcción. Pronto habrá contenido real disponible.",
+    "filter": {
+      "tags": "Filtrar por etiqueta",
+      "clear": "Limpiar",
+      "results": "resultado | resultados"
+    }
   },
   "loader": {
     "message": "Cargando…"

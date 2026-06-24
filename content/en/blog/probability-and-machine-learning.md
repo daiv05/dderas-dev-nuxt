@@ -396,7 +396,7 @@ Four classifiers are then benchmarked on the same features:
 ![SMS spam class distribution](/blog/probability-and-machine-learning/shared/nb_spam_distribution.webp)
 _SMS dataset: heavily imbalanced toward ham ($\approx$ 87% ham, $\approx$ 13% spam)_
 
-| Model | Precision | Recall | F1 | CV Accuracy (10×) |
+| Model | Precision | Recall | F1 | CV Accuracy (10x) |
 |-------|-----------|--------|----|-------------------|
 | MultinomialNB | $\approx$ 0.97 | $\approx$ 0.94 | $\approx$ 0.95 | $\approx$ 0.97 |
 | RandomForest | $\approx$ 0.98 | $\approx$ 0.94 | $\approx$ 0.96 | $\approx$ 0.97 |

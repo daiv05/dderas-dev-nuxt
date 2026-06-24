@@ -5,7 +5,7 @@ slug: 'machine-learning-fundamentals'
 order: 2
 date: 2026-03-30
 summary: 'Basic concepts for starting in the world of machine learning'
-tags: ['Machine Learning', 'Artificial Intelligence', 'Python', 'Data Science', 'Machine Learning']
+tags: ['machine learning', 'artificial intelligence', 'python', 'data science', 'machine learning fundamentals', 'supervised learning', 'unsupervised learning', 'reinforcement learning']
 image: /blog/machine-learning-fundamentals/shared/ml-fundamentals.webp
 author: David Deras
 lastmod: 2026-03-30

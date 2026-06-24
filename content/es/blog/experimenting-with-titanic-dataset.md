@@ -9,7 +9,7 @@ tags:
   [
     "aprendizaje automático",
     "análisis de datos",
-    "EDA",
+    "eda",
     "proyectos de machine learning",
     "análisis exploratorio",
   ]

@@ -9,7 +9,7 @@ tags:
   [
     "machine learning",
     "data analysis",
-    "EDA",
+    "eda",
     "machine learning projects",
     "exploratory data analysis",
   ]

@@ -5,7 +5,7 @@ slug: 'machine-learning-paradigms-and-mathematical-foundations'
 order: 3
 date: 2026-04-06
 summary: 'Tipos de aprendizaje automático, algoritmos comunes y fundamentos matemáticos esenciales para entender cómo funcionan los modelos de machine learning.'
-tags: ['Machine Learning', 'Inteligencia Artificial', 'Matemáticas para Machine Learning']
+tags: ['machine learning', 'inteligencia artificial', 'matemáticas para machine learning', 'fundamentos de aprendizaje automático', 'aprendizaje supervisado', 'aprendizaje no supervisado', 'aprendizaje por refuerzo']
 image: /blog/machine-learning-paradigms-and-mathematical-foundations/shared/ml-paradigms.webp
 author: David Deras
 lastmod: 2026-04-06

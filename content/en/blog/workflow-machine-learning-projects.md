@@ -5,7 +5,7 @@ slug: 'workflow-machine-learning-projects'
 order: 4
 date: 2026-04-18
 summary: 'Discover the typical workflow of a machine learning project, from data collection to model implementation, and learn about best practices and common challenges in the field of data science.'
-tags: ['Machine Learning', 'Data Science', 'ML Projects', 'Workflow']
+tags: ['machine learning', 'data science', 'ml projects', 'workflow']
 image: /blog/workflow-machine-learning-projects/shared/workflow.webp
 author: David Deras
 lastmod: 2026-04-18
@@ -335,19 +335,19 @@ A digital subscription fintech company has:
 This means that each month:
 
 ```
-120,000 × 8% = 9,600 users cancel
+120,000 x 8% = 9,600 users cancel
 ```
 
 Estimated monthly loss:
 
 ```
-9,600 × $25 = $240,000
+9,600 x $25 = $240,000
 ```
 
 The company wants to reduce churn to **6%**, which would mean saving:
 
 ```
-2% × 120,000 × $25 = $60,000 per month
+2% x 120,000 x $25 = $60,000 per month
 ```
 
 The goal of the Machine Learning project is to **identify users with a high probability of canceling within the next 30 days**, to send them a personalized retention campaign.
@@ -468,7 +468,7 @@ Variables such as the following were created:
 Also created:
 
 ```
-inactivity_risk = days_since_last_login × (1 / average_usage)
+inactivity_risk = days_since_last_login x (1 / average_usage)
 ```
 This composite variable can be a powerful indicator of churn risk, as it combines information about user inactivity (days since last login) with their engagement level (average weekly usage). A high `risk_inactivity` value would indicate that a user has not logged in for a long time and has a low level of usage, which could be a strong indicator that they are at risk of canceling their subscription.
 ### Model Training
@@ -517,15 +517,15 @@ Of those:
 
 Campaign cost:
 
-11,000 × $2 = $22,000
+11,000 x $2 = $22,000
 
 Customers saved (campaign success rate 40%):
 
-6,800 × 40% = 2,720 retained customers
+6,800 x 40% = 2,720 retained customers
 
 Monthly revenue recovered:
 
-2,720 × $25 = $68,000
+2,720 x $25 = $68,000
 
 Monthly ROI:
 

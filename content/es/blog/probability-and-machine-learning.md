@@ -411,7 +411,7 @@ Se comparan cuatro clasificadores utilizando las mismas características:
 ![Distribución de clases de spam en SMS](/blog/probability-and-machine-learning/shared/nb_spam_distribution.webp)
 _SMS dataset: muy desequilibrado hacia los mensajes legítimos (aproximadamente 87 % legítimos, aproximadamente 13 % spam)._
 
-| Model | Precision | Recall | F1 | CV Accuracy (10×) |
+| Model | Precision | Recall | F1 | CV Accuracy (10x) |
 |-------|-----------|--------|----|-------------------|
 | MultinomialNB | $\approx$ 0.97 | $\approx$ 0.94 | $\approx$ 0.95 | $\approx$ 0.97 |
 | RandomForest | $\approx$ 0.98 | $\approx$ 0.94 | $\approx$ 0.96 | $\approx$ 0.97 |

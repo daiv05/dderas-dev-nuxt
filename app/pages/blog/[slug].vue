@@ -10,7 +10,7 @@
           <NuxtLink :to="localePath('/blog')">
             {{ t("navigation.backToBlog") }}
           </NuxtLink>
-          <span class="separator">/</span>
+          <span class="separator">·</span>
           <span class="current">{{ post.title }}</span>
         </nav>
 
@@ -303,26 +303,20 @@ useHead(() => {
   margin-top: 3rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 2rem;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 2rem;
 }
 
 .post-navigation-card {
-  min-height: 110px;
-  padding: 1rem 1.2rem;
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-md);
-  background: var(--bg-soft);
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
   text-decoration: none;
-  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
 }
 
-.post-navigation-card:hover {
-  border-color: var(--line-strong);
-  background: var(--bg-mute);
-  transform: translateY(-2px);
+.post-navigation-card:hover .post-navigation-title {
+  color: rgb(var(--v-theme-primary));
 }
 
 .post-navigation-label {
@@ -337,7 +331,8 @@ useHead(() => {
   font-size: 0.95rem;
   line-height: 1.35;
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 500;
+  transition: color var(--transition-fast);
 }
 
 .post-navigation-next {
@@ -359,14 +354,13 @@ useHead(() => {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--accent);
+  color: var(--text-subtle);
   text-decoration: none;
-  font-weight: 600;
-  transition: transform 0.2s ease;
+  transition: color var(--transition-fast);
 }
 
 .back-to-blog:hover {
-  transform: translateX(-4px);
+  color: var(--text-primary);
 }
 
 @media (max-width: 768px) {

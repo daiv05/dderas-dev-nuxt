@@ -4,10 +4,11 @@
       <div class="blog-header-content">
         <NuxtLink :to="localePath('/blog')" class="blog-brand">
           <span class="blog-brand-name">{{ t('navigation.brand.name') }}</span>
+          <span v-if="postCount" class="blog-edition">no.{{ String(postCount).padStart(2, '0') }}</span>
         </NuxtLink>
         <div class="blog-header-actions">
-          <v-btn rounded="pill" size="small" class="text-none" :to="localePath('/')">
-            {{ t('navigation.backToMain') }}
+          <v-btn variant="text" size="small" class="text-none back-btn" :to="localePath('/')">
+            ← {{ t('navigation.backToMain') }}
           </v-btn>
           <div class="blog-controls">
             <ThemeToggle />
@@ -68,9 +69,17 @@
 import { mdiArrowUp, mdiGithub, mdiLinkedin, mdiEmail } from '@mdi/js'
 import { contactInfo } from '~/data/contact'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
 const { scrollToTop, getScrollTop, getScrollElement } = useBlogScroll()
+const { getPosts } = useBlog()
+
+const { data: allPosts } = await useAsyncData(
+  () => `blog-layout-count-${locale.value}`,
+  () => getPosts(),
+  { watch: [locale] }
+)
+const postCount = computed(() => allPosts.value?.length ?? 0)
 
 const showScrollTop = ref(false)
 const showImageViewer = ref(false)
@@ -139,7 +148,8 @@ onMounted(() => {
 
 .blog-brand {
   display: flex;
-  flex-direction: column;
+  align-items: baseline;
+  gap: 0.6rem;
   text-decoration: none;
   color: rgb(var(--v-theme-on-surface));
   margin-left: 1rem;
@@ -149,6 +159,22 @@ onMounted(() => {
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.2;
+}
+
+.blog-edition {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  opacity: 0.35;
+  font-weight: 400;
+}
+
+.back-btn {
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+.back-btn:hover {
+  opacity: 1;
 }
 
 .blog-header-actions {
