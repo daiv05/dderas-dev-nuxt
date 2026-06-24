@@ -87,7 +87,8 @@ definePageMeta({
 const route = useRoute();
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
-const { getPost, getAdjacentPosts } = useBlog();
+const { getPost, getAdjacentPosts } = useBlog()
+const { scrollToTop } = useBlogScroll();
 
 const ogLocale = computed(() => (locale.value === 'es' ? 'es_ES' : 'en_US'))
 const twitterHandle = computed(() => {
@@ -118,6 +119,14 @@ const getPostLink = (blogPost: { slug?: string; id?: string }): string => {
   const target = blogPost.slug || blogPost.id
   return target ? localePath(`/blog/${target}`) : localePath('/blog')
 }
+
+watch(slug, () => {
+  scrollToTop()
+})
+
+onMounted(() => {
+  scrollToTop()
+})
 
 watch(
   () => [post.value, pending.value],

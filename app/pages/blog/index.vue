@@ -15,18 +15,18 @@
               <img :src="post.image" :alt="post.title" fetchpriority="high" />
             </div>
             <div class="post-card-content">
-              <div class="post-card-meta">
+              <!-- <div class="post-card-meta">
                 <time v-if="post.date" :datetime="post.date" class="post-date">
                   {{ formatDate(post.date) }}
                 </time>
-              </div>
+              </div> -->
               <h2 class="post-card-title">{{ post.title }}</h2>
               <p v-if="post.summary" class="post-card-summary">
                 {{ post.summary }}
               </p>
-              <span class="post-card-cta">
+              <!-- <span class="post-card-cta">
                 {{ t("blog.post.readMore") }} →
-              </span>
+              </span> -->
             </div>
           </NuxtLink>
         </article>
