@@ -8,11 +8,11 @@ summary: 'Descubre el flujo típico de un proyecto de aprendizaje automático, d
 tags: ['machine learning', 'data science', 'proyectos de ml', 'flujo de trabajo']
 image: /blog/workflow-machine-learning-projects/shared/workflow.webp
 author: David Deras
-lastmod: 2026-04-18
+lastmod: 2026-04-25
 sitemap:
   priority: 0.7
   loc: /es/blog/workflow-machine-learning-projects
-  lastmod: 2026-04-18
+  lastmod: 2026-04-25
 ---
 
 Continuamos aprendiendo sobre el mundo del aprendizaje automático, y en esta ocasión, nos adentraremos en el flujo típico de un proyecto de aprendizaje automático.
@@ -259,11 +259,15 @@ Para el entrenamiento del modelo, se selecciona un algoritmo de aprendizaje auto
 ## 7. Evaluación del modelo
 
 Una vez que el modelo ha sido entrenado, es crucial evaluar su rendimiento utilizando el conjunto de validación y el conjunto de prueba. La evaluación del modelo implica medir su capacidad para hacer predicciones precisas y generalizar a datos no vistos.
-Las métricas de evaluación varían según el tipo de problema que se esté abordando. Para problemas de clasificación, algunas métricas comunes incluyen:
+
+Las métricas de evaluación varían según el tipo de problema que se esté abordando. 
+
+Para problemas de clasificación, algunas métricas comunes incluyen:
 - **Precisión**: Proporción de predicciones correctas sobre el total de predicciones realizadas.
 - **Recall (Sensibilidad)**: Proporción de verdaderos positivos sobre el total de positivos reales.
 - **F1-score**: La media armónica de la precisión y el recall, útil cuando hay un desequilibrio entre clases.
 - **AUC-ROC**: Área bajo la curva ROC, que mide la capacidad del modelo para distinguir entre clases.
+
 Para problemas de regresión, algunas métricas comunes incluyen:
 - **Error cuadrático medio (MSE)**: Promedio de los cuadrados de los errores entre las predicciones y los valores reales.
 - **Error absoluto medio (MAE)**: Promedio de los valores absolutos de los errores entre las predicciones y los valores reales.
