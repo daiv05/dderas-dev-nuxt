@@ -64,7 +64,7 @@ Algunas respuestas contienen el valor de: 1.7976931348623157E+308, que represent
 Dividiremos los objetivos en 3 puntos principales:
 
 1. **Limpieza y análisis de datos**: Se hará un análisis exploratorio de los datos para seleccionar las variables más relevantes para cada modelo, así como tener en cuenta la colinealidad entre las variables y la importancia de cada una en los modelos de predicción.
-2. **Modelo de predicción del IMC (Índice de Masa Corporal)**: Utilizando los hábitos de alimentación y actividad física de los adolescentes, construiremos un modelo de regresión para predecir el IMC, pero, sin usar las variables de peso y altura directamente.
+2. **Modelo de predicción del IMC (Índice de Masa Corporal)**: Utilizando los hábitos de alimentación y actividad física de los adolescentes, construiremos (o intentaremos crear) un modelo de regresión para predecir el IMC, pero, sin usar las variables de peso y altura directamente.
 3. **Modelo de predicción del riesgo de salud mental**: Utilizando algúnos factores de riesgo, como ideas de suicidio, consumo de sustancias, violencia, entre otros, construiremos un modelo de clasificación para predecir el riesgo de salud mental en los adolescentes.
 
 ## Limpieza y análisis de datos
@@ -139,7 +139,7 @@ Lo interesante, y lo que queremos averiguar, es cuánto del IMC podemos explicar
 
 El dataset no tiene una única columna de "riesgo grave de salud mental", así que tenemos que construirla.
 
-Analizando las preguntas, encontramos cuatro indicadores que nos dan señales de riesgo de salud mental:
+Analizando las preguntas, encontramos tres indicadores que nos dan señales de riesgo de salud mental:
 
 | Columna | Significado                                                         |
 | ------- | ------------------------------------------------------------------- |
@@ -157,17 +157,6 @@ df["mental_health_risk"] = (df[suicidality] == 1).any(axis=1).astype(int)
 Ya sea que el estudiante mostró ideación, plan o intento de suicidio, cualquiera es una definición interpretable de riesgo de salud mental.
 
 > No olvidemos que al hacer esto, estas mismas variables deben excluirse de las features (si no, le estaríamos filtrando la respuesta al modelo)
-
-### Variables resumidas
-
-Siguiendo con el feature engineering y analizando las demás preguntas, creamos cuatro variables resumidas que capturan los factores de riesgo más importantes:
-
-| Score                     | Rango | Resume                                                      |
-| ------------------------- | ----- | ----------------------------------------------------------- |
-| `dietary_risk_score`      | 0–4   | Bebidas azucaradas, poca fruta, poca verdura, comida rápida |
-| `physical_activity_score` | 0–3   | Actividad ≥60 min, transporte activo, educación física      |
-| `substance_risk_score`    | 0–3   | Alcohol reciente, embriaguez, problemas por alcohol         |
-| `social_support_score`    | 0–4   | Compañeros amables, supervisión y comprensión parental      |
 
 ## Preprocesamiento dentro del pipeline
 
@@ -238,13 +227,13 @@ Para esta tarea también comparamos dos modelos: **Regresión Logística** (line
 
 ### Ajuste de hiperparámetros
 
-Cada modelo tiene hiperparámetros que ajustar. Usamos **GridSearchCV** para la regresión (espacio de búsqueda pequeño, prueba todas las combinaciones) y **RandomizedSearchCV** para la clasificación (espacio mayor, prueba combinaciones aleatorias de forma más eficiente).
+Cada modelo tiene hiperparámetros que ajustar. Usamos **GridSearchCV** integrado directamente en el pipeline de entrenamiento, de modo que cada vez que se entrena un modelo se buscan automáticamente los mejores hiperparámetros. La regresión lineal, al no tener hiperparámetros, se entrena directamente.
 
-| Modelo                   | Hiperparámetros explorados                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------ |
-| `RandomForestRegressor`  | `n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features` |
-| `LogisticRegression`     | `C`, `penalty` (`l1`/`l2`), `solver=saga`                                            |
-| `RandomForestClassifier` | `n_estimators`, `max_depth`, `min_samples_leaf`, `max_features`                      |
+| Modelo                   | Hiperparámetros explorados                                                           | Mejores encontrados                                                   |
+| ------------------------ | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| `RandomForestRegressor`  | `n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features` | max_depth=10, max_features=sqrt, min_samples_leaf=2, n_estimators=100 |
+| `LogisticRegression`     | `C`, `l1_ratio`                                                                      | C=0.1, l1_ratio=1.0                                                   |
+| `RandomForestClassifier` | `n_estimators`, `max_depth`, `min_samples_leaf`, `max_features`                      | max_depth=10, max_features=sqrt, min_samples_leaf=4, n_estimators=200 |
 
 ### Evaluando los resultados
 
@@ -254,10 +243,10 @@ Para la regresión reportamos MAE, RMSE y $R^2$. Para la clasificación, además
 
 Las métricas sobre el conjunto de prueba, son, bastante reveladoras:
 
-| Modelo | MAE | RMSE | $R^2$ |
-| --- | --- | --- | --- |
-| Regresión Lineal | 2.95 | 3.89 | −0.00 |
-| Random Forest | 3.19 | 4.08 | −0.10 |
+| Modelo                  | MAE  | RMSE | $R^2$ |
+| ----------------------- | ---- | ---- | ----- |
+| Regresión Lineal        | 2.95 | 3.89 | −0.00 |
+| Random Forest (tuneado) | 3.04 | 3.94 | −0.03 |
 
 El **$R^2$ es prácticamente cero (o incluso negativo)**. Un $R^2$ negativo significa que el modelo predice *peor* que simplemente usar siempre el IMC promedio. En otras palabras: los hábitos de alimentación, higiene y actividad física que reportaron los estudiantes **no contienen información suficiente para predecir su IMC**.
 
@@ -269,12 +258,12 @@ El modelo nos confirma, con datos, que **el estilo de vida autorreportado explic
 
 Aquí los resultados son mucho más útiles:
 
-| Modelo | Accuracy | F1 (clase en riesgo) | AUC-ROC |
-| --- | --- | --- | --- |
-| Regresión Logística | 0.76 | **0.56** | **0.79** |
-| Random Forest | 0.82 | 0.40 | 0.76 |
+| Modelo                        | Accuracy | F1 (clase en riesgo) | Recall (clase en riesgo) | AUC-ROC  |
+| ----------------------------- | -------- | -------------------- | ------------------------ | -------- |
+| Regresión Logística (tuneada) | 0.78     | **0.54**             | **0.62**                 | **0.81** |
+| Random Forest (tuneado)       | 0.82     | 0.43                 | 0.32                     | 0.81     |
 
-Aunque el Random Forest tiene mayor *accuracy* (0.82), eso es engañoso: alcanza esa cifra prediciendo bien la clase mayoritaria (sin riesgo) pero fallando en la que importa. La **Regresión Logística es el mejor modelo** para nuestro objetivo, con un F1 de la clase minoritaria de 0.56 y un AUC-ROC de 0.79, buena capacidad de discriminar entre estudiantes en riesgo y sin riesgo. Este es justo el caso donde elegir la métrica correcta cambia qué modelo consideramos "mejor".
+Aunque el Random Forest tiene mayor *accuracy* (0.82), eso es engañoso: alcanza esa cifra prediciendo bien la clase mayoritaria (sin riesgo) pero fallando en la que importa — su recall sobre la clase en riesgo es apenas 0.32 (solo detecta 1 de cada 3 estudiantes en riesgo). La **Regresión Logística es el mejor modelo** para nuestro objetivo, con un recall de 0.62 sobre la clase en riesgo y un AUC-ROC de 0.81. Este es justo el caso donde elegir la métrica correcta cambia qué modelo consideramos "mejor".
 
 La **matriz de confusión** del modelo logístico muestra el balance entre detectar verdaderos casos de riesgo y las falsas alarmas:
 
@@ -292,27 +281,27 @@ Los factores afectivos (soledad frecuente e insomnio por preocupación) y el con
 
 Como análisis complementario hacemos un estudio de **ablación leave-one-group-out**. Agrupamos las variables por dominio (demografía, dieta, violencia, sustancias, apoyo social, etc.) y entrenamos el modelo quitando un grupo a la vez. Comparando la caída de desempeño respecto al modelo completo, medimos cuánto aporta cada dominio.
 
-Partiendo de un F1 base de **0.491**, esto fue lo que pasó al retirar cada grupo:
+Partiendo de un F1 base de **0.498**, esto fue lo que pasó al retirar cada grupo:
 
-| Grupo retirado | F1 resultante | Δ vs. base |
-| --- | --- | --- |
-| _(ninguno - base)_ | 0.491 | - |
-| **affective** (soledad, insomnio) | 0.437 | **−0.054** |
-| substance_use (alcohol, drogas, sexo) | 0.471 | −0.020 |
-| demographics (edad, sexo, grado) | 0.486 | −0.005 |
-| violence_bullying | 0.491 | 0.000 |
-| social_support | 0.494 | +0.003 |
-| physical_activity | 0.500 | +0.008 |
-| diet_nutrition | 0.502 | +0.011 |
+| Grupo retirado                        | F1 resultante | Δ vs. base |
+| ------------------------------------- | ------------- | ---------- |
+| _(ninguno - base)_                    | 0.498         | -          |
+| **affective** (soledad, insomnio)     | 0.444         | **−0.054** |
+| substance_use (alcohol, drogas, sexo) | 0.479         | −0.019     |
+| violence_bullying                     | 0.495         | −0.003     |
+| diet_nutrition                        | 0.497         | −0.001     |
+| demographics (edad, sexo, grado)      | 0.498         | +0.000     |
+| physical_activity                     | 0.503         | +0.005     |
+| social_support                        | 0.507         | +0.009     |
 
-El resultado más claro: el grupo **afectivo** (soledad e insomnio por preocupación) es con diferencia el más valioso, quitarlo hace caer el F1 en 0.054. Esto valida que a pesar de que usamos (y por ende ignoramos después para evitar data leakage) las variables de suicidalidad, dejamos libres la soledad y el insomnio para usarlas como predictores, y resultaron ser justo las más informativos. El consumo de sustancias también aporta. En cambio, retirar dieta o actividad física *mejora* ligeramente el modelo, lo que sugiere que esos grupos aportan más ruido que señal para predecir riesgo.
+El resultado más claro: el grupo **afectivo** (soledad e insomnio por preocupación) es con diferencia el más valioso, quitarlo hace caer el F1 en 0.054. Esto valida que a pesar de que usamos (y por ende ignoramos después para evitar data leakage) las variables de suicidalidad, dejamos libres la soledad y el insomnio para usarlas como predictores, y resultaron ser justo las más informativos. El consumo de sustancias también aporta. En cambio, retirar actividad física o apoyo social *mejora* ligeramente el modelo, lo que sugiere que esos grupos aportan más ruido que señal para predecir riesgo.
 
 ## Conclusión
 
 A lo largo de este pipeline construimos dos modelos sobre los mismos datos pero con propósitos muy distintos, y obtuvimos dos resultados muy diferentes:
 
-- El **modelo de IMC fracasó en predecir** ($R^2$ = 0), y nos hace concluir que el comportamiento autorreportado de alimentación e higiene no basta para inferir el IMC de un adolescente.
-- El **modelo de riesgo de salud mental funcionó razonablemente bien** (AUC-ROC de 0.79, F1 de 0.56 sobre la clase en riesgo), y la ablación nos mostró que los síntomas afectivos son sus predictores más fuertes.
+- El **modelo de IMC fracasó en predecir** ($R^2$ ≈ 0), y nos hace concluir que el comportamiento autorreportado de alimentación e higiene no basta para inferir el IMC de un adolescente.
+- El **modelo de riesgo de salud mental funcionó razonablemente bien** (AUC-ROC de 0.81, recall de 0.62 sobre la clase en riesgo), y la ablación nos mostró que los síntomas afectivos son sus predictores más fuertes.
 
 También resaltar algunas decisiones técnicas que tomamos en el camino:
 
