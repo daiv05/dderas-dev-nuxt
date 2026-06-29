@@ -8,7 +8,7 @@
         </NuxtLink>
         <div class="blog-header-actions">
           <v-btn variant="text" size="small" class="text-none back-btn" :to="localePath('/')">
-            ← {{ t('navigation.backToMain') }}
+            {{ t('navigation.backToMain') }}
           </v-btn>
           <div class="blog-controls">
             <ThemeToggle />

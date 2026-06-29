@@ -214,7 +214,7 @@ watch(locale, () => {
 
 // Paginación
 const page = ref(1);
-const pageSize = 6;
+const pageSize = 10;
 
 const totalPages = computed(() =>
   Math.max(1, Math.ceil(filteredPosts.value.length / pageSize)),
