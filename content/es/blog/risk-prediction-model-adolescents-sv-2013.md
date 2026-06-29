@@ -27,6 +27,8 @@ sitemap:
 
 Sería de mayor utilidad si tuviésemos datos más recientes pero desafortunadamente, el conjunto de datos más reciente disponible para El Salvador es del año 2013. A pesar de esto, haremos este ejercicio con el fin de ejemplificar como la inteligencia artificial puede ser un gran apoyo en la resolución de problemas críticos para la sociedad, como lo es la salud de los adolescentes. En este artículo, crearemos dos modelos dentro de un mismo pipeline:
 
+> El código completo de este proyecto está disponible en el repositorio: [model-risk-factors-adolescents-sv-2013](https://github.com/daiv05/model-risk-factors-adolescents-sv-2013){target="_blank" rel="noopener noreferrer"}
+
 - Uno para predecir el IMC (Índice de Masa Corporal) basado en los hábitos de alimentación y actividad física de los adolescentes.
 - Otro para predecir el riesgo de salud mental basado en factores de riesgo psicosociales y de comportamiento.
 
