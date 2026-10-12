@@ -9,23 +9,21 @@ description: Per-page SEO with usePageSeo() and useSiteSeoDefaults(). Use when s
 
 ## Key files
 
-- `app/composables/usePageSeo.ts` - main composable
-- `app/composables/useSiteSeoDefaults.ts` - global defaults (app.vue only)
-- `app/locales/en.json` → `seo.*` section
-- `app/locales/es.json` → `seo.*` section
+- `app/composables/usePageSeo.ts` - per-page composable
+- `app/composables/useSiteSeoDefaults.ts` - global defaults (`app.vue` only)
+- `app/app.vue` - canonical and hreflang links
+- `app/locales/en.json`, `app/locales/es.json` - `seo.*` section
 
 ## Static pages
 
 ```ts
-// In <script setup> of the page - reads seo.pages.[pageKey].* from the active locale
 usePageSeo('home')
-usePageSeo('me')
-usePageSeo('projects')
+usePageSeo('work')
 usePageSeo('blog')
 usePageSeo('resources')
 ```
 
-## PageSeoOptions type
+## PageSeoOptions
 
 ```ts
 type SeoValue = string | (() => string)
@@ -33,67 +31,55 @@ type SeoValue = string | (() => string)
 type PageSeoOptions = {
   title?: SeoValue
   description?: SeoValue
-  ogType?: 'website' | 'article'   // default: 'website'
-  image?: SeoValue                  // absolute or relative URL (resolved automatically)
+  ogType?: 'website' | 'article'
+  image?: SeoValue
   keywords?: SeoValue
 }
 ```
 
-## Blog article (dynamic SEO)
+`ogType` defaults to `'website'`. Relative images are resolved against the site URL.
+
+## Dynamic pages
 
 ```ts
-const { data: post } = await useAsyncData(...)
-
-usePageSeo('blog', {
-  title: () => post.value?.title || t('seo.pages.blog.title'),
-  description: () => post.value?.summary || t('seo.pages.blog.description'),
-  ogType: 'article',
-  image: () => post.value?.image,
-  keywords: () => post.value?.tags?.join(', '),
+usePageSeo('work', {
+  title: () => copy.value.name,
+  description: () => copy.value.description,
 })
 ```
 
-## SEO key structure in locales
+## Locale structure
 
 ```json
 {
   "seo": {
     "siteName": "DDeras",
-    "twitterHandle": "daiv_09",
-    "defaults": {
-      "title": "Software Engineer",
-      "description": "...",
-      "keywords": ["Vue", "TypeScript", "..."],
-      "author": "David Deras",
-      "ogImage": "/punpun_OG.webp",
-      "ogImageAlt": "..."
-    },
+    "twitterHandle": "",
+    "defaults": { "title": "", "description": "", "keywords": [], "author": "", "ogImage": "", "ogImageAlt": "" },
     "pages": {
-      "home":      { "title": "...", "description": "...", "keywords": ["..."] },
-      "me":        { "title": "...", "description": "...", "keywords": ["..."] },
-      "projects":  { "title": "...", "description": "...", "keywords": ["..."] },
-      "blog":      { "title": "...", "description": "...", "keywords": ["..."] },
-      "resources": { "title": "...", "description": "...", "keywords": ["..."] }
+      "home": { "title": "", "description": "", "keywords": [] },
+      "blog": { "title": "", "description": "", "keywords": [] },
+      "resources": { "title": "", "description": "", "keywords": [] },
+      "work": { "title": "", "description": "", "keywords": [] }
     }
   }
 }
 ```
 
-## What usePageSeo() generates
+## Generated meta
 
-- `useSeoMeta()` with: title, description, keywords
-- OG: `og:site_name`, `og:locale`, `og:type`, `og:url`, `og:title`, `og:description`, `og:image`, `og:image:alt`
-- Twitter: `twitter:card` (summary_large_image), `twitter:site`, `twitter:creator`, `twitter:title`, `twitter:description`, `twitter:image`
+- `title`, `description`, `keywords`
+- Open Graph: `og:site_name`, `og:locale`, `og:type`, `og:url`, `og:title`, `og:description`, `og:image`, `og:image:alt`
+- Twitter: `twitter:card` (`summary_large_image`), `twitter:title`, `twitter:description`, `twitter:image`, plus `twitter:site` and `twitter:creator` only when `seo.twitterHandle` is not empty (the handle is normalized to start with `@`)
 
-## Adding a new pageKey
+## Adding a pageKey
 
-1. Add `seo.pages.[newKey]` in `app/locales/en.json`
-2. Add `seo.pages.[newKey]` in `app/locales/es.json`
-3. Call `usePageSeo('newKey')` in the page
+1. Add `seo.pages.<key>` in `en.json` and `es.json`
+2. Call `usePageSeo('<key>')` in the page
 
 ## Restrictions
 
-- `useSiteSeoDefaults()` only call in `app/app.vue` (once at startup)
+- Call `useSiteSeoDefaults()` only in `app/app.vue`
 - Do not call `useSeoMeta()` directly in pages; use `usePageSeo()`
-- Options may be strings or functions - use functions when the value is reactive
-- The image is resolved as an absolute URL automatically (siteUrl is prepended if relative)
+- Use functions for options that depend on reactive values
+- Every `pageKey` needs `title` and `description` in both locales

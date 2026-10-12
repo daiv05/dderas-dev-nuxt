@@ -77,10 +77,13 @@ export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
     }
   })
 
+  useHead({
+    meta: [{ name: 'keywords', content: () => keywords() || undefined }],
+  })
+
   useSeoMeta({
     title,
     description,
-    keywords,
 
     ogSiteName: () => t('seo.siteName'),
     ogLocale: () => ogLocale.value,
@@ -92,8 +95,8 @@ export function usePageSeo(pageKey: string, options: PageSeoOptions = {}) {
     ogImageAlt: () => t('seo.defaults.ogImageAlt'),
 
     twitterCard: 'summary_large_image',
-    twitterSite: () => twitterHandle.value,
-    twitterCreator: () => twitterHandle.value,
+    twitterSite: () => twitterHandle.value || undefined,
+    twitterCreator: () => twitterHandle.value || undefined,
     twitterTitle: title,
     twitterDescription: description,
     twitterImage: image,

@@ -1,124 +1,84 @@
 ---
 name: gsap-animations
-description: GSAP + ScrollTrigger - animateInOnEnter, getMainScroller, useGsapAnimations. Use when adding enter/scroll animations.
+description: GSAP, ScrollTrigger and Lenis plugins, $gsap/$ScrollTrigger/$lenis injections and data-reveal animations. Use when adding enter or scroll animations, using ScrollTrigger, or touching smooth scrolling.
 ---
 
-# GSAP Animations
+# GSAP, ScrollTrigger and Lenis
 
-> GSAP + ScrollTrigger plugin and animation composables for the project.
+> Animation plugins are client-only and provide helpers through the Nuxt app.
 
 ## Key files
 
-- `app/plugins/gsap.ts` - plugin, exports and helpers
-- `app/composables/useEnterAnimations.ts` - animation composables (see the `composables` skill)
+- `app/plugins/gsap.client.ts` - registers ScrollTrigger, provides `$gsap` and `$ScrollTrigger`
+- `app/plugins/lenis.client.ts` - Lenis smooth scrolling on `window`, provides `$lenis`
+- `app/composables/useReveal.ts` - `data-reveal` animations (see the `composables` skill)
+- `app/composables/useScrollStory.ts` - scroll-driven cluster selection (see the `embedding-space` skill)
+- `app/composables/useMotionPreference.ts` - motion gating
+- `app/router.options.ts` - hash scrolling with a 72px nav offset
 
-## Imports from the plugin
-
-```ts
-import {
-  gsap,
-  ScrollTrigger,
-  getMainScroller,       // () => HTMLElement | null
-  animateInOnEnter,      // ScrollTrigger helper
-  isElementInViewport,   // (el, scroller?) => boolean
-  clearGSAPProps,        // (elements) => void
-  gsapDefaults,          // { ease: 'power3.out', duration: 0.8, clearProps: 'opacity,transform' }
-  scrollTriggerDefaults, // { start: 'top 80%', once: true }
-} from '~/plugins/gsap'
-```
-
-## getMainScroller()
+## Plugins
 
 ```ts
-const scroller = getMainScroller()
-// default layout → document.querySelector('.shell-main')
-// blog layout    → document.querySelector('.blog-main')
-// SSR            → null
-```
+export default defineNuxtPlugin({
+  name: 'gsap',
+  setup(nuxtApp) {
+    gsap.registerPlugin(ScrollTrigger)
 
-ScrollTrigger.defaults({ scroller }) is configured automatically in `app:mounted` and `page:finish`.
+    nuxtApp.hook('page:finish', () => {
+      requestAnimationFrame(() => ScrollTrigger.refresh())
+    })
 
-## animateInOnEnter(targets, options)
-
-```ts
-type AnimateInOnEnterOptions = {
-  from?: gsap.TweenVars    // initial state (applied if the element is not in viewport)
-  to?: gsap.TweenVars      // final state (include ease, duration, etc.)
-  trigger?: HTMLElement | null
-  scroller?: HTMLElement | null
-  start?: string           // default: 'top 80%'
-  once?: boolean           // default: true
-}
-
-animateInOnEnter(element, {
-  from: { opacity: 0, y: 30 },
-  to: { ...gsapDefaults, opacity: 1, y: 0 },
-  scroller: getMainScroller(),
-  start: 'top 80%',
-  once: true,
+    return {
+      provide: {
+        gsap,
+        ScrollTrigger,
+      },
+    }
+  },
 })
 ```
 
-If the element is already visible in the viewport, `from` is ignored and it is cleared directly.
+The `lenis` plugin depends on `gsap`. It creates `new Lenis({ lerp: 0.12 })`, forwards `scroll` events to `ScrollTrigger.update`, drives `lenis.raf` from `gsap.ticker`, and on `page:finish` calls `lenis.resize()` and `ScrollTrigger.refresh()`. With `prefers-reduced-motion: reduce` it provides `$lenis` as `null`.
 
-## gsapDefaults
-
-```ts
-const gsapDefaults = {
-  ease: 'power3.out',
-  duration: 0.8,
-  clearProps: 'opacity,transform',
-}
-```
-
-## Pattern 1: useEnterAnimations (header + panels)
-
-See the `composables` skill → `useEnterAnimations()` section.
-
-```vue
-<script setup>
-const { label, titleEl, descriptionEl, setPanelRef, setupEnterAnimations, cleanupEnterAnimations } = useEnterAnimations()
-onMounted(() => nextTick(() => setupEnterAnimations()))
-onUnmounted(() => cleanupEnterAnimations())
-</script>
-```
-
-## Pattern 2: useGsapAnimations (custom animations)
-
-See the `composables` skill → `useGsapAnimations()` section. Automatic cleanup in `onBeforeUnmount`.
+## Usage in components
 
 ```ts
-const { setupAnimations } = useGsapAnimations()
+const nuxtApp = useNuxtApp()
+const { allowMotion } = useMotionPreference()
+const root = ref<HTMLElement | null>(null)
+let ctx: { revert: () => void } | null = null
 
 onMounted(() => {
-  nextTick(() => {
-    setupAnimations(() => {
-      const scroller = getMainScroller()
-      gsap.from('.my-element', {
-        ...gsapDefaults,
-        opacity: 0, y: 20,
-        scrollTrigger: {
-          trigger: '.my-element',
-          scroller,
-          start: 'top 80%',
-          once: true,
-        }
-      })
+  const gsap = nuxtApp.$gsap
+  const ScrollTrigger = nuxtApp.$ScrollTrigger
+  if (!allowMotion.value || !gsap || !ScrollTrigger || !root.value) return
+  ctx = gsap.context(() => {
+    gsap.from('.item', {
+      opacity: 0,
+      y: '0.6em',
+      scrollTrigger: { trigger: root.value, start: 'top 88%', once: true },
     })
-  })
+  }, root.value)
 })
+
+onBeforeUnmount(() => ctx?.revert())
 ```
 
-## Debug
+For standard fade-ins, lines and counters use `useReveal(root)` with `data-reveal` attributes. `line` and `rule` targets that already sit inside the first viewport are left static (`shouldReveal(documentTop, innerHeight)` in `app/utils/motion.ts`), so above-the-fold content such as the hero paints immediately and is never hidden waiting for JavaScript.
 
-- URL: `?gsapDebug=1`
-- localStorage: `localStorage.setItem('gsap:debug', '1')`
-- `[gsap]` logs in the console with setup, fallback and animation events
+Programmatic scrolling:
+
+```ts
+const { $lenis } = useNuxtApp()
+if ($lenis) $lenis.scrollTo(0)
+else globalThis.scrollTo({ top: 0, behavior: 'smooth' })
+```
 
 ## Restrictions
 
-- GSAP only runs on the client - do not call outside of `onMounted` or `import.meta.client`
-- Always use `useGsapAnimations()` or `useEnterAnimations()` (they create `gsap.context()` for cleanup)
-- Call `setupAnimations` inside `nextTick()` within `onMounted` (layout ready)
-- After DOM changes: `ScrollTrigger.refresh()`
-- Do not call `gsap.set()` with clearProps before hydration (causes SSR mismatch)
+- All scrolling happens on `window`; never set a custom `scroller` on ScrollTrigger
+- Do not import `gsap` or `ScrollTrigger` per component; use `useNuxtApp().$gsap` and `$ScrollTrigger`
+- Always wrap animations in `gsap.context()` and call `revert()` in `onBeforeUnmount`
+- Only start animations when `allowMotion` is true
+- `$lenis` can be `null`; always provide a `window.scrollTo` fallback
+- Do not run animation code during SSR; the plugins are `.client` only

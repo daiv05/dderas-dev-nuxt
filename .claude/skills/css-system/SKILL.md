@@ -1,119 +1,63 @@
 ---
 name: css-system
-description: CSS custom properties, utility classes and theme colors. Use when editing styles, working in app/assets/styles/*, writing <style scoped>, or touching colors, spacing or typography.
+description: Field Notes CSS tokens, global stylesheets and utility classes. Use when editing styles, working in app/assets/styles/*, writing <style scoped>, or touching colors, spacing, typography or dark mode.
 ---
 
-# CSS Style System
+# CSS System
 
-> Global CSS variables, utility classes and styling conventions of the project.
+> Global stylesheets and conventions. Token values and design rules live in the `design-system` skill.
 
 ## Key files
 
-- `app/assets/styles/variables.css` - global custom properties
-- `app/assets/styles/reset.css` - base reset (box-sizing, fonts, body colors)
-- `app/assets/styles/layout.css` - layout classes (`.page-frame`, `.page-frame-blog`, `.section-stack`)
-- `app/assets/styles/components.css` - reusable component classes
-- `app/assets/styles/utilities.css` - micro-utilities
+- `app/assets/styles/tokens.css` - design tokens (light on `:root`, dark on `html.dark`) and legacy aliases
+- `app/assets/styles/reset.css` - box-sizing, body font and colors, headings, links, selection, scrollbar, reduced motion
+- `app/assets/styles/layout.css` - `.page-frame`, `.page-frame-blog`, `.section-stack`, `.grid-duo`, `.sticky-panel`
+- `app/assets/styles/components.css` - `.eyebrow`, `.section-title`, `.section-lead`, `.inline-meta`, `.plain-sheet`, `.list-rows`, `.chipline`, `.no-outline-button`
+- `app/assets/styles/utilities.css` - `.text-muted`, `.mono`
 - `app/assets/styles/markdown.css` - styles for `.markdown-body`
-- `app/assets/styles/global.css` - imports all of the above (the only global CSS in nuxt.config)
+- `app/assets/styles/global.css` - imports tokens, reset, layout, components, markdown and utilities in that order (the only global CSS in `nuxt.config.ts`)
 
-## CSS variables (variables.css)
+## Usage
 
-### Typography
 ```css
---font-display: 'Epilogue', sans-serif
---font-body: 'Epilogue', sans-serif
---font-mono: 'JetBrains Mono', monospace
+.card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--ink-2);
+  color: var(--ink);
+  transition: border-color var(--transition-fast);
+}
+
+.card:hover {
+  border-color: var(--terra);
+}
 ```
 
-### Layout
+```vue
+<p class="eyebrow">{{ t('work.eyebrow') }}</p>
+<h1 class="section-title">{{ t('work.title') }}</h1>
+<p class="section-lead">{{ t('work.lead') }}</p>
+```
+
+Component-specific styles go in `<style scoped>` using the tokens.
+
+## Dark mode
+
+The theme class is applied to `<html>` through `useHead` in `app/app.vue`, so dark values are plain overrides under `html.dark`.
+
 ```css
---page-max-width: 1200px
---shell-padding: clamp(1.5rem, 2vw, 2.5rem)
---section-gap: clamp(4rem, 8vw, 6rem)
+html.dark {
+  --paper: #15140f;
+  --ink: #ede6d6;
+}
 ```
 
-### Borders and surfaces (theme-reactive)
-```css
---line-soft: rgba(var(--v-theme-on-surface), 0.15)
---line-strong: rgba(var(--v-theme-on-surface), 0.35)
---surface-faint: rgba(var(--v-theme-on-surface), 0.05)
---surface-mild: rgba(var(--v-theme-on-surface), 0.10)
---text-subtle: rgba(var(--v-theme-on-surface), 0.75)
-```
-
-### Semantic colors (mapped to Vuetify)
-```css
---text-primary: rgb(var(--v-theme-on-surface))
---bg-soft: rgba(var(--v-theme-surface), 0.85)
---bg-muted: rgba(var(--v-theme-surface), 0.65)
---bg-elevated: rgb(var(--v-theme-surface))
---link: rgb(var(--v-theme-primary))
---link-hover: rgb(var(--v-theme-primary))
-```
-
-### Radii
-```css
---radius-lg: 28px
---radius-md: 18px
---radius-sm: 10px
-```
-
-### Transitions
-```css
---transition-fast: 160ms cubic-bezier(0.4, 0, 0.2, 1)
---transition-base: 240ms cubic-bezier(0.4, 0, 0.2, 1)
---transition-slow: 360ms cubic-bezier(0.4, 0, 0.2, 1)
-```
-
-### Markdown variables
-```css
---md-text, --md-muted, --md-bg
---md-code-bg, --md-code-border, --md-code-inline-text
---md-blockquote-bg, --md-blockquote-border
---md-table-border
-```
-
-## Utility classes
-
-### components.css
-| Class | Description |
-|-------|-------------|
-| `.eyebrow` | Uppercase monospace label, text-subtle color |
-| `.section-title` | `font-size: clamp(2.25rem, 6vw, 3.4rem)`, `letter-spacing: -0.02em` |
-| `.section-lead` | `font-size: 1.15rem`, text-subtle color |
-| `.inline-meta` | Flex wrap with gap, `font-size: 0.95rem` |
-| `.plain-sheet` | Card with border, radius-md, padding 1.5rem |
-| `.list-rows` | Grid with border-bottom separators on each `li` |
-| `.chipline` | Flex wrap of chips with pill border |
-| `.no-outline-button` | Pill button with border, no background (hover: surface-faint) |
-
-### utilities.css
-| Class | Description |
-|-------|-------------|
-| `.text-muted` | `color: var(--text-subtle)` |
-| `.mono` | `font-family: var(--font-mono)` |
-
-## Vuetify theme colors
-
-### Dark (default)
-```
-primary: #859FFF    secondary: #5C7EFF    accent: #A785FF
-background: #0B0E14  surface: #151920    surface-variant: #1F252C
-on-surface: #EDF2F7
-```
-
-### Light
-```
-primary: #3451D9    secondary: #2F29B0    accent: #6600A3
-background: #F8F9FC  surface: #FFFFFF    surface-variant: #E8EBF0
-on-surface: #0F1419
-```
+Components never branch on the theme in CSS; they only reference tokens.
 
 ## Restrictions
 
-- Do not create your own colors; always map from `rgb(var(--v-theme-*))` to respect dark/light
-- Do not add new global CSS without updating `global.css`
-- Use `<style scoped lang="scss">` in Vue components (scss available)
-- Do not use `!important` outside of Vuetify overrides
-- The dark theme adds the `.dark` class to `<html>` (see `plugins/vuetify.ts`)
+- Do not hardcode hex colors in components; use the tokens from `tokens.css`
+- Do not add new global CSS files; import them from `global.css` only if they are genuinely global
+- Do not use `--v-theme-*` variables or any UI-framework class; they do not exist
+- Prefer the token names (`--ink`, `--rule`, `--terra`) over the legacy aliases (`--text-subtle`, `--line-soft`, `--md-*`) in new code
+- Respect `prefers-reduced-motion`; `reset.css` already disables transitions and animations globally

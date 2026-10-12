@@ -36,10 +36,13 @@ export function useSiteSeoDefaults() {
     }
   })
 
+  useHead({
+    meta: [{ name: 'keywords', content: () => keywords.value || undefined }],
+  })
+
   useSeoMeta({
     title: () => t('seo.defaults.title'),
     description: () => t('seo.defaults.description'),
-    keywords: () => keywords.value,
     author: () => t('seo.defaults.author'),
 
     ogSiteName: () => t('seo.siteName'),

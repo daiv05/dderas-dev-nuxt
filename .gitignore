@@ -28,3 +28,6 @@ logs
 .devdbrc
 
 **.local.**
+.superpowers/
+scripts/.venv/
+scripts/.cache/

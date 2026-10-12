@@ -2,70 +2,21 @@
   <transition name="fade">
     <div v-if="modelValue" class="image-viewer-overlay" @click="close">
       <div class="viewer-toolbar" @click.stop>
-        <v-btn
-          icon
-          variant="text"
-          color="white"
-          class="viewer-btn"
-          density="compact"
-          size="small"
-          :title="t('blog.imageViewer.zoomOut')"
-          :disabled="scale <= MIN_SCALE"
-          @click.stop="zoomOut"
-        >
-          <v-icon :icon="mdiMagnifyMinus" size="22"></v-icon>
-        </v-btn>
-        <v-btn
-          icon
-          variant="text"
-          color="white"
-          class="viewer-btn"
-          density="compact"
-          size="small"
-          :title="t('blog.imageViewer.zoomIn')"
-          :disabled="scale >= MAX_SCALE"
-          @click.stop="zoomIn"
-        >
-          <v-icon :icon="mdiMagnifyPlus" size="22"></v-icon>
-        </v-btn>
-        <v-btn
-          icon
-          variant="text"
-          color="white"
-          class="viewer-btn"
-          density="compact"
-          size="small"
-          :title="t('blog.imageViewer.resetZoom')"
-          :disabled="scale === 1 && translateX === 0 && translateY === 0"
-          @click.stop="resetView"
-        >
-          <v-icon :icon="mdiRestore" size="22"></v-icon>
-        </v-btn>
-
-        <v-btn
-          icon
-          variant="text"
-          color="white"
-          class="viewer-btn"
-          density="compact"
-          size="small"
-          :title="t('blog.imageViewer.download')"
-          @click.stop="download"
-        >
-          <v-icon :icon="mdiDownload" size="22"></v-icon>
-        </v-btn>
-        <v-btn
-          icon
-          variant="text"
-          color="white"
-          class="viewer-btn"
-          density="compact"
-          size="small"
-          :title="t('blog.imageViewer.close')"
-          @click.stop="close"
-        >
-          <v-icon :icon="mdiClose" size="22"></v-icon>
-        </v-btn>
+        <button type="button" class="viewer-btn" :title="t('blog.imageViewer.zoomOut')" :aria-label="t('blog.imageViewer.zoomOut')" :disabled="scale <= MIN_SCALE" @click.stop="zoomOut">
+          <UiIcon name="zoom-out" :size="22" />
+        </button>
+        <button type="button" class="viewer-btn" :title="t('blog.imageViewer.zoomIn')" :aria-label="t('blog.imageViewer.zoomIn')" :disabled="scale >= MAX_SCALE" @click.stop="zoomIn">
+          <UiIcon name="zoom-in" :size="22" />
+        </button>
+        <button type="button" class="viewer-btn" :title="t('blog.imageViewer.resetZoom')" :aria-label="t('blog.imageViewer.resetZoom')" :disabled="scale === 1 && translateX === 0 && translateY === 0" @click.stop="resetView">
+          <UiIcon name="restore" :size="22" />
+        </button>
+        <button type="button" class="viewer-btn" :title="t('blog.imageViewer.download')" :aria-label="t('blog.imageViewer.download')" @click.stop="download">
+          <UiIcon name="download" :size="22" />
+        </button>
+        <button type="button" class="viewer-btn" :title="t('blog.imageViewer.close')" :aria-label="t('blog.imageViewer.close')" @click.stop="close">
+          <UiIcon name="close" :size="22" />
+        </button>
       </div>
 
       <div
@@ -93,8 +44,6 @@
 </template>
 
 <script setup lang="ts">
-import { mdiClose, mdiDownload, mdiMagnifyMinus, mdiMagnifyPlus, mdiRestore } from '@mdi/js';
-
 interface Props {
   modelValue: boolean;
   src: string;
@@ -331,10 +280,26 @@ const download = async () => {
 }
 
 .viewer-btn {
-  min-width: 32px;
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.viewer-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.viewer-btn:focus-visible {
+  outline: 2px solid var(--maize);
 }
 
 .viewer-btn:hover {

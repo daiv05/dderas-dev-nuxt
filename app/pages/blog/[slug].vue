@@ -160,10 +160,13 @@ const seoImage = computed(() => {
 })
 const seoKeywords = computed(() => (post.value?.tags?.length ? post.value.tags.join(', ') : undefined))
 
+useHead({
+  meta: [{ name: 'keywords', content: () => seoKeywords.value }],
+})
+
 useSeoMeta({
   title: () => seoTitle.value,
   description: () => seoDescription.value,
-  keywords: () => seoKeywords.value,
 
   ogSiteName: () => t('seo.siteName'),
   ogLocale: () => ogLocale.value,
@@ -226,7 +229,7 @@ useHead(() => {
       ? [
           {
             type: 'application/ld+json',
-            children: JSON.stringify(jsonLd),
+            innerHTML: JSON.stringify(jsonLd),
           },
         ]
       : [],
@@ -316,7 +319,7 @@ useHead(() => {
 }
 
 .post-navigation-card:hover .post-navigation-title {
-  color: rgb(var(--v-theme-primary));
+  color: var(--terra);
 }
 
 .post-navigation-label {

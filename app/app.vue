@@ -1,5 +1,4 @@
 <template>
-  <SplashScreen />
   <NuxtRouteAnnouncer />
   <NuxtLayout>
     <NuxtPage />
@@ -7,6 +6,8 @@
 </template>
 
 <script setup lang="ts">
+import { themeBootScript } from '~/utils/theme'
+
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const route = useRoute()
@@ -15,7 +16,7 @@ const appStore = useAppStore()
 const { url: siteUrl } = useSiteConfig()
 
 useHead(() => {
-  const link: Array<Record<string, string>> = []
+  const link: Array<{ rel: 'canonical'; href: string } | { rel: 'alternate'; hreflang: string; href: string }> = []
 
   const canonicalHref = (() => {
     try {
@@ -30,7 +31,7 @@ useHead(() => {
   }
 
   const localeEntries = Array.isArray(locales.value) ? locales.value : []
-  for (const entry of localeEntries as any[]) {
+  for (const entry of localeEntries as Array<"en" | "es" | { code?: "en" | "es" }>) {
     const code = typeof entry === 'string' ? entry : entry?.code
     if (!code) continue
 
@@ -58,6 +59,7 @@ useHead(() => {
       lang: locale.value,
       class: appStore.theme === 'dark' ? 'dark' : ''
     },
+    script: [{ key: 'theme-boot', innerHTML: themeBootScript, tagPosition: 'head' as const }],
     link,
   }
 })

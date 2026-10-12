@@ -1,6 +1,8 @@
-import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+import { projectList } from "./app/data/projects";
 
 const SITE_URL = import.meta.env.NUXT_PUBLIC_SITE_URL || "https://deras.dev";
+
+const workRoutes = projectList.flatMap((p) => [`/work/${p.id}`, `/es/work/${p.id}`]);
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -9,15 +11,22 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/sitemap.xml', '/robots.txt'],
+      routes: ['/sitemap.xml', '/robots.txt', ...workRoutes],
     },
+  },
+
+  routeRules: {
+    '/about': { redirect: '/#experience' },
+    '/es/about': { redirect: '/es#experience' },
+    '/projects': { redirect: '/work' },
+    '/es/projects': { redirect: '/es/work' },
   },
 
   site: {
     url: SITE_URL,
     name: "DDeras",
     description:
-      "Personal website and blog of David Deras - Full-Stack Developer",
+      "David Deras - Software Engineer building AI agents, LLM and RAG systems, and machine learning.",
   },
 
   sitemap: {
@@ -52,6 +61,12 @@ export default defineNuxtConfig({
 
   css: ["~/assets/styles/global.css"],
 
+  components: [{ path: "~/components", pathPrefix: false }],
+
+  features: {
+    inlineStyles: true,
+  },
+
   fonts: {
     provider: 'google',
     defaults: {
@@ -60,16 +75,13 @@ export default defineNuxtConfig({
     },
     families: [
       {
-        name: 'Roboto',
-        provider: 'none',
-      },
-      {
-        name: 'Epilogue',
-        weights: [400, 500, 600, 700],
+        name: 'Fraunces',
+        weights: [400, 600, 700],
+        styles: ['normal', 'italic'],
       },
       {
         name: 'JetBrains Mono',
-        weights: [400, 600],
+        weights: [400, 500],
       },
     ],
   },
@@ -131,30 +143,9 @@ export default defineNuxtConfig({
       fallbackLocale: "en",
     },
   },
-  build: {
-    transpile: ["vuetify"],
-  },
   vite: {
-    ssr: {
-      noExternal: ["vuetify"],
-    },
-    plugins: [
-      // @ts-expect-error
-      vuetify({ autoImport: true })
-    ],
-    vue: {
-      template: {
-        compilerOptions: {
-        },
-        transformAssetUrls,
-      },
-    },
     optimizeDeps: {
       include: ["vue-mermaid-render"],
-    },
-  },
-  vue: {
-    compilerOptions: {
     },
   },
 });

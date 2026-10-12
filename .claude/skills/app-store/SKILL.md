@@ -1,55 +1,56 @@
 ---
 name: app-store
-description: Global Pinia store (useAppStore) for theme and language with cookie persistence. Use when changing theme or language, or touching app/stores/app.ts.
+description: Global Pinia store (useAppStore) for theme and language with cookie persistence. Use when changing theme or language, or touching app/stores/app.ts or the theme class in app.vue.
 ---
 
 # App Store (Pinia)
 
-> Global app store: theme and language with SSR-safe cookie persistence.
+> Global store for theme and language with SSR-safe cookie persistence.
 
 ## Key files
 
 - `app/stores/app.ts` - store definition
+- `app/app.vue` - applies the theme class to `<html>` through `useHead` and injects `themeBootScript` in the head
+- `app/utils/theme.ts` - `readThemeCookie(cookie)` and `themeBootScript`
+- `app/plugins/theme.client.ts` - restores the saved theme into the store before hydration
+- `app/components/ThemeToggle.vue`, `app/components/LocaleToggle.vue` - consumers
 
 ## API
 
 ```ts
-const appStore = useAppStore()  // auto-imported by Nuxt
+const appStore = useAppStore()
 
-// Types
 type ThemeName = 'dark' | 'light'
 type LanguageCode = 'en' | 'es'
 
-// Reactive state (backed by useCookie)
-appStore.theme     // ThemeName - default: 'dark'
-appStore.language  // LanguageCode - default: 'en'
+appStore.theme
+appStore.language
 
-// Methods
 appStore.setTheme('light')
 appStore.toggleTheme()
 appStore.setLanguage('es')
 ```
 
-## Persistence
+`theme` defaults to `'dark'` and `language` to `'en'`; both are `useCookie` refs with `sameSite: 'lax'` (cookies `theme` and `language`).
 
-- `theme` and `language` use `useCookie()` - SSR-safe, no hydration mismatch
-- Cookies: `theme` and `language`, both with `sameSite: 'lax'`
-- The store is initialized before Vuetify (`app:mounted` hook)
-
-## Theme change
+## Theme application
 
 ```ts
-// Change theme (Vuetify syncs automatically via watch in plugins/vuetify.ts)
-appStore.toggleTheme()
-appStore.setTheme('light')
-
-// The plugin also adds/removes the .dark class on <html>
+useHead(() => {
+  return {
+    htmlAttrs: {
+      lang: locale.value,
+      class: appStore.theme === 'dark' ? 'dark' : ''
+    },
+  }
+})
 ```
+
+The `dark` class on `<html>` activates the `html.dark` overrides in `tokens.css`. The site is prerendered with the default `dark` theme, so two client pieces restore the visitor's choice: `themeBootScript` toggles the class from the `theme` cookie before the first paint, and `theme.client.ts` (which depends on the `pinia` plugin) writes the cookie value into the store, overriding the prerendered payload state. The embedding canvas observes `class` attribute changes on `<html>` to repaint.
 
 ## Language change
 
 ```ts
-// ALWAYS call setLocale() in addition to setLanguage() to sync i18n
 const { setLocale } = useI18n()
 const appStore = useAppStore()
 
@@ -57,9 +58,12 @@ appStore.setLanguage('es')
 setLocale('es')
 ```
 
+`LocaleToggle` navigates with `switchLocalePath` instead.
+
 ## Restrictions
 
-- Do not call `vuetify.theme.change()` or `vuetify.theme.global.name` directly from components
+- Do not toggle the `dark` class manually; change the store
 - Do not read `localStorage` for the theme; use the store
-- Changing language requires both `setLanguage()` (store) and `setLocale()` (i18n)
-- Do not import the store with `import { useAppStore } from '~/stores/app'` - Nuxt auto-imports it
+- Changing language programmatically requires both `setLanguage()` and `setLocale()`
+- Do not import the store manually; Nuxt auto-imports `useAppStore`
+- Wrap theme-dependent icons in `ClientOnly` with a fallback, as `ThemeToggle` does

@@ -1,22 +1,22 @@
 <template>
-  <section class="resources-section">
+  <section ref="pageRoot" class="resources-section">
     <!-- Header -->
     <div class="resources-header">
-      <div ref="label" class="eyebrow-container">
+      <div class="eyebrow-container" data-reveal="line">
         <p class="eyebrow">{{ t('resources.eyebrow') }}</p>
       </div>
-      <h2 ref="titleEl" class="section-title">{{ t('resources.title') }}</h2>
-      <p ref="descriptionEl" class="section-lead">
+      <h1 class="section-title" data-reveal="line">{{ t('resources.title') }}</h1>
+      <p class="section-lead" data-reveal="line">
         {{ t('resources.lead') }}
       </p>
     </div>
 
     <!-- Main Grid -->
-    <div ref="gridRef" class="resources-grid">
+    <div class="resources-grid">
       <div
         v-for="category in categories"
         :key="category.type"
-        :ref="setPanelRef"
+        data-reveal="line"
         class="resource-card-wrapper"
       >
         <div v-if="category.type !== 'tools'" :class="['resource-block', `type-${category.type}`]">
@@ -38,7 +38,7 @@
             <!-- Subcategories for Study -->
             <div v-if="category.subcategories" class="list-preview">
                <span v-for="sub in category.subcategories" :key="sub.name" class="list-chip">
-                  <v-icon start size="14" :icon="mdiFolderOutline"></v-icon>
+                  <UiIcon name="folder" :size="14" />
                   {{ sub.name }}
                </span>
             </div>
@@ -54,7 +54,7 @@
                 >
                   <div class="book-cover-placeholder">
                     <img v-if="book.image" :src="book.image" :alt="book.title" class="book-cover-img" />
-                    <v-icon v-else size="24" :icon="mdiBookOutline" class="book-icon"></v-icon>
+                    <UiIcon v-else name="book" :size="24" class="book-icon" />
                   </div>
                   <div class="book-details">
                     <strong class="book-title">{{ book.title }}</strong>
@@ -66,40 +66,35 @@
                 </a>
              </div>
             
-            <v-btn
+            <UiButton
               v-if="category.link"
-              class="block-action mt-4"
-              variant="text"
-              color="primary"
+              class="block-action"
+              variant="ghost"
               :href="category.link"
-              target="_blank"
-              rounded="pill"
             >
-              {{ category.linkText || t('common.viewMore') }}
-              <v-icon end :icon="mdiArrowRight"></v-icon>
-            </v-btn>
+              {{ category.linkText || t('resources.viewMore') }}
+              <UiIcon name="arrow-right" :size="16" />
+            </UiButton>
           </div>
         </div>
       </div>
     </div>
 
-    <v-sheet ref="ctaSection" class="collab-panel" elevation="0">
+    <div class="collab-panel" data-reveal="line">
       <div>
         <h3>{{ t('resources.noteBlock.title') }}</h3>
         <p>
           {{ t('resources.noteBlock.body') }}
         </p>
       </div>
-      <v-btn class="text-none" variant="outlined" rounded="pill" size="large" :href="`mailto:${contactInfo.email}`">
-        {{ t('about.buttons.contact') }}
-      </v-btn>
-    </v-sheet>
+      <UiButton variant="outline" :href="`mailto:${contactInfo.email}`">
+        {{ t('resources.noteBlock.cta') }}
+      </UiButton>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { mdiArrowRight, mdiBookOutline, mdiFolderOutline } from '@mdi/js'
-import { useEnterAnimations } from '~/composables/useEnterAnimations'
 import { contactInfo } from '~/data/contact'
 
 interface ResourceCategory {
@@ -129,100 +124,63 @@ interface ResourceCategory {
   }>
 }
 
-const {
-  label,
-  titleEl,
-  descriptionEl,
-  setPanelRef,
-  resetPanelRefs,
-  setupEnterAnimations,
-  cleanupEnterAnimations,
-} = useEnterAnimations()
-
-const gridRef = ref<HTMLElement | null>(null)
+const pageRoot = ref<HTMLElement | null>(null)
+useReveal(pageRoot)
 const { t, tm, rt } = useI18n()
+
+type Raw = Record<string, unknown>
 
 const categories = computed<ResourceCategory[]>(() => {
   const raw = tm('resources.categories')
   if (!Array.isArray(raw)) return []
 
-  return raw.map((cat: any) => {
-    const base: any = {
-      type: rt(cat.type),
-      title: rt(cat.title),
-      description: rt(cat.description),
+  const text = (value: unknown) => (value == null ? '' : rt(value as Parameters<typeof rt>[0]))
+  const list = (value: unknown) => (Array.isArray(value) ? (value as Raw[]) : [])
+
+  return (raw as Raw[]).map((cat) => {
+    const base: ResourceCategory = {
+      type: text(cat.type),
+      title: text(cat.title),
+      description: text(cat.description),
     }
 
-    if (cat.image) {
-      base.image = rt(cat.image)
-    }
+    if (cat.image) base.image = text(cat.image)
 
     if (cat.link) {
-      Object.assign(base, {
-        link: rt(cat.link),
-        linkText: rt(cat?.linkText),
-      })
+      base.link = text(cat.link)
+      base.linkText = text(cat.linkText)
     }
 
-    if (cat.tags) {
-      Object.assign(base, {
-        tags: cat.tags.map((tag: any) => rt(tag)),
-      })
-    }
+    if (cat.tags) base.tags = list(cat.tags).map((tag) => text(tag))
 
     if (cat.subcategories) {
-      Object.assign(base, {
-        subcategories: cat.subcategories.map((sub: any) => ({
-          name: rt(sub.name),
-          items: sub.items.map((item: any) => rt(item)),
-        })),
-      })
+      base.subcategories = list(cat.subcategories).map((sub) => ({
+        name: text(sub.name),
+        items: list(sub.items).map((item) => text(item)),
+      }))
     }
 
     if (cat.items) {
-      Object.assign(base, {
-        items: cat.items.map((item: any) => ({
-          title: rt(item.title),
-          author: rt(item.author),
-          description: rt(item.description),
-          recommendation: rt(item.recommendation),
-          image: item.image,
-          link: rt(item.link),
-        })),
-      })
+      base.items = list(cat.items).map((item) => ({
+        title: text(item.title),
+        author: text(item.author),
+        description: text(item.description),
+        recommendation: text(item.recommendation),
+        image: typeof item.image === 'string' ? item.image : undefined,
+        link: text(item.link),
+      }))
     }
 
     if (cat.links) {
-      Object.assign(base, {
-        links: cat.links.map((link: any) => ({
-          name: rt(link.name),
-          description: rt(link.description),
-          url: rt(link.url),
-        })),
-      })
+      base.links = list(cat.links).map((link) => ({
+        name: text(link.name),
+        description: text(link.description),
+        url: text(link.url),
+      }))
     }
 
-    return base as ResourceCategory
+    return base
   })
-})
-
-onBeforeUpdate(() => {
-  resetPanelRefs()
-})
-
-onMounted(() => {
-  nextTick(() => {
-    setupEnterAnimations({
-      headerStart: 'top 80%',
-      panelsStart: 'top 85%',
-      headerTrigger: titleEl.value,
-      panelsTrigger: gridRef.value,
-    })
-  })
-})
-
-onBeforeUnmount(() => {
-  cleanupEnterAnimations()
 })
 
 usePageSeo('resources')
@@ -251,7 +209,7 @@ usePageSeo('resources')
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: rgb(var(--v-theme-primary));
+  background-color: var(--terra);
 }
 
 .resources-grid {
@@ -373,7 +331,7 @@ usePageSeo('resources')
     border-color: var(--line-soft);
     transform: translateY(-2px);
     
-    .book-title { color: rgb(var(--v-theme-primary)); }
+    .book-title { color: var(--terra); }
   }
 }
 
@@ -441,7 +399,7 @@ usePageSeo('resources')
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  background: rgba(var(--v-theme-surface), 0.7);
+  background: color-mix(in srgb, var(--paper) 70%, transparent);
 }
 
 .collab-panel h3 {

@@ -1,108 +1,101 @@
 ---
 name: data-files
-description: Static data - contact.ts, projects.ts, sidebar-items.ts. Use when displaying contact/projects info or adding navigation items.
+description: Static data - contact.ts, projects.ts, experience.ts and the generated embedding-space.json. Use when displaying contact, project or experience info, adding a project, or touching app/data.
 ---
 
 # Data Files (app/data/)
 
-> Static TypeScript data for contact, projects and navigation.
+> Static TypeScript data for contact, projects and experience, plus the generated embedding space.
 
-## Files
+## Key files
 
 - `app/data/contact.ts` - owner contact information
-- `app/data/projects.ts` - array of projects with translations
-- `app/data/sidebar-items.ts` - sidebar navigation items
-
----
+- `app/data/projects.ts` - projects with translations and `getProject`
+- `app/data/experience.ts` - experience entries
+- `app/data/embedding-space.json` - generated, see the `embedding-space` skill
 
 ## contact.ts
 
 ```ts
 import { contactInfo } from '~/data/contact'
 
-// Available fields
-contactInfo.name          // string
-contactInfo.title         // 'Full Stack Developer'
-contactInfo.location      // 'San Salvador, El Salvador'
-contactInfo.city          // 'San Salvador'
-contactInfo.country       // 'El Salvador'
-contactInfo.countryCode   // 'SV'
-contactInfo.email         // 'david@deras.dev'
-contactInfo.siteUrl       // 'https://deras.dev' (or NUXT_PUBLIC_SITE_URL)
-contactInfo.socials.github    // 'https://github.com/daiv05'
-contactInfo.socials.linkedin  // 'https://linkedin.com/in/dderas'
-contactInfo.socials.twitter   // 'https://twitter.com/daiv_09'
+contactInfo.name
+contactInfo.title
+contactInfo.location
+contactInfo.city
+contactInfo.country
+contactInfo.countryCode
+contactInfo.email
+contactInfo.siteUrl
+contactInfo.socials.github
+contactInfo.socials.linkedin
 ```
 
-Do not hardcode these values in components; always import from this file.
-
----
-
-## sidebar-items.ts
-
-```ts
-import { sidebarItems, type SidebarItem } from '~/data/sidebar-items'
-
-interface SidebarItem {
-  titleKey: string       // i18n key, e.g. 'navigation.items.home'
-  value: string          // unique identifier, e.g. 'home'
-  icon: string           // SVG path from @mdi/js
-  to: string             // route without localePath (applied in the layout)
-  openInNewTab?: boolean
-}
-```
-
-### Current items
-
-| value | to | titleKey |
-|-------|----|----|
-| `home` | `/` | `navigation.items.home` |
-| `about` | `/about` | `navigation.items.about` |
-| `projects` | `/projects` | `navigation.items.projects` |
-| `blog` | `/blog` | `navigation.items.blog` |
-| `resources` | `/resources` | `navigation.items.resources` |
-
-### Adding a new item
-
-```ts
-// 1. In sidebar-items.ts:
-import { mdiNewIcon } from '@mdi/js'
-
-{ titleKey: 'navigation.items.new', value: 'new', icon: mdiNewIcon, to: '/new' }
-
-// 2. In app/locales/en.json and es.json → navigation.items.new: "..."
-```
-
----
+There is no `twitter` field.
 
 ## projects.ts
 
 ```ts
-import { projects } from '~/data/projects'
+import { projectList, getProject } from '~/data/projects'
 
-// Structure (with en/es translations)
-interface Project {
+export type ProjectCluster = 'agents' | 'rag' | 'ml' | 'fullstack'
+
+export interface ProjectTranslation {
+  name: string
+  description: string
+  longDescription: string
+  client: string
+  category: string
+  technologies: string
+  features: string[]
+  metricLabel?: string
+}
+
+export interface Project {
   id: string
-  title: string
-  description: { en: string; es: string }
+  date: string
   tags: string[]
-  url?: string
-  github?: string
-  image?: string
-  featured?: boolean
+  featured: boolean
+  cluster: ProjectCluster
+  metric: { value: string } | null
+  images: Record<number, string>
+  links: { live: string | null; repo: string | null; dataset: string | null }
+  translations: Record<'en' | 'es', ProjectTranslation>
 }
 ```
 
-To display with the current locale:
 ```ts
 const { locale } = useI18n()
-const description = project.description[locale.value as 'en' | 'es']
+const lang = computed(() => (locale.value === 'es' ? 'es' : 'en'))
+const project = getProject(String(route.params.slug))
+const copy = computed(() => project?.translations[lang.value])
 ```
 
----
+`getProject(id)` returns `Project | undefined`. `longDescription` paragraphs are separated by blank lines. `nuxt.config.ts` prerenders `/work/<id>` and `/es/work/<id>` for every entry in `projectList`.
+
+## experience.ts
+
+```ts
+export interface ExperienceEntry {
+  id: string
+  start: string
+  end: string | null
+  translations: Record<'en' | 'es', { role: string; org: string; bullets: string[] }>
+}
+```
+
+`experienceList: ExperienceEntry[]`; `start` and `end` use `YYYY-MM` and `end: null` means present.
+
+## Adding a project
+
+1. Add an entry to `projectList` with both `en` and `es` translations, a `cluster`, `featured`, `metric` (or `null`) and `links`
+2. Regenerate the embedding space (see the `embedding-space` skill)
+3. Run `npm test` (`test/unit/projects.test.ts` validates the list)
 
 ## Restrictions
 
-- Do not hardcode email, social network URLs or siteUrl - import from `contact.ts`
-- Do not modify `sidebar-items.ts` without adding the corresponding i18n key in both locales
-- The data in `projects.ts` is static; do not use `useBlog()` for projects
+- Do not hardcode email or social URLs; import `contactInfo`
+- Every project and experience entry needs both `en` and `es` translations
+- `cluster` must be one of `agents`, `rag`, `ml`, `fullstack`
+- Do not use `useBlog()` for projects; they are static
+- Do not edit `embedding-space.json` by hand

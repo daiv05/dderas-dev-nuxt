@@ -1,11 +1,9 @@
 // @ts-check
 import withNuxt from "./.nuxt/eslint.config.mjs";
-import importPlugin from "eslint-plugin-import";
 import unusedImports from "eslint-plugin-unused-imports";
 
 export default withNuxt({
   plugins: {
-    import: importPlugin,
     "unused-imports": unusedImports,
   },
   settings: {
@@ -40,7 +38,7 @@ export default withNuxt({
     "import/no-unresolved": [
       "error",
       {
-        ignore: ["^~/", "^@/", "^#app", "^#imports", "^node:", "^virtual:"],
+        ignore: ["^~/", "^@/", "^#app", "^#imports", "^node:", "^virtual:", "^[.]/app/"],
       },
     ],
     "import/newline-after-import": ["warn", { count: 1 }],
@@ -58,5 +56,10 @@ export default withNuxt({
     "vue/multi-word-component-names": "off",
     "vue/html-self-closing": "off",
     "vue/no-v-html": "off",
+  },
+}, {
+  files: ["**/*.d.ts"],
+  rules: {
+    "@typescript-eslint/no-empty-object-type": "off",
   },
 });

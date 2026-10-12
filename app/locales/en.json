@@ -4,7 +4,8 @@
       "name": "DDeras",
       "shortName": "DDeras",
       "tagline": "Software Engineer",
-      "blogTagline": "Tech blog"
+      "blogTagline": "Tech blog",
+      "blogName": "Field notes"
     },
     "themeToggle": {
       "toLight": "Light mode",
@@ -18,11 +19,11 @@
       "es": "ES"
     },
     "items": {
-      "home": "Home",
-      "about": "About me",
-      "projects": "Projects",
-      "blog": "Blog",
-      "resources": "Resources"
+      "work": "work",
+      "experience": "experience",
+      "writing": "writing",
+      "resources": "resources",
+      "blog": "Blog"
     },
     "backToMain": "Portfolio",
     "backToBlog": "Home",
@@ -32,7 +33,12 @@
       "github": "GitHub",
       "linkedin": "LinkedIn",
       "email": "Email"
-    }
+    },
+    "label": "Main navigation",
+    "open": "Open menu",
+    "close": "Close menu",
+    "skip": "Skip to content",
+    "scrollTop": "Back to top"
   },
   "errors": {
     "generic": {
@@ -75,87 +81,72 @@
   },
   "seo": {
     "siteName": "DDeras",
-    "twitterHandle": "daiv_09",
+    "twitterHandle": "",
     "defaults": {
-      "title": "Software Engineer",
-      "description": "Personal portfolio, real projects and technical articles about software engineering, web development and cloud deployments.",
+      "title": "Software Engineer — AI Agents, LLM & RAG Systems",
+      "description": "David Deras builds AI agents, retrieval-augmented generation pipelines and the full-stack platforms that run them. Case studies, experience and technical writing on machine learning.",
       "keywords": [
         "David Deras",
         "Software Engineer",
-        "Full Stack Developer",
-        "Frontend Developer",
-        "Backend Developer",
-        "AI-assisted development",
-        "Applied AI in development",
+        "AI Engineer",
+        "LLM",
+        "Large Language Models",
+        "RAG",
+        "Retrieval-Augmented Generation",
+        "AI Agents",
+        "Model Context Protocol",
+        "MCP",
+        "Machine Learning",
+        "Computer Vision",
+        "Embeddings",
+        "pgvector",
+        "Laravel",
         "Vue 3",
-        "Vue 2",
-        "Vue",
-        "Laravel 11",
-        "Vuetify",
-        "PrimeVue",
-        "TypeScript",
-        "GovTech",
-        "End-to-end web systems",
-        "El Salvador",
-        "DDeras"
+        "Python",
+        "FastAPI",
+        "Google Cloud",
+        "El Salvador"
       ],
       "author": "David Deras",
       "ogImage": "/punpun_OG.webp",
-      "ogImageAlt": "Projects and tutorials"
+      "ogImageAlt": "David Deras — AI agents, LLM and RAG systems"
     },
     "pages": {
       "home": {
-        "title": "Software Engineer",
-        "description": "Personal portfolio, real projects and technical articles about software engineering, web development and cloud deployments.",
+        "title": "Software Engineer — AI Agents, LLM & RAG Systems",
+        "description": "David Deras builds AI agents, retrieval-augmented generation pipelines and the full-stack platforms that run them. Case studies, experience and technical writing on machine learning.",
         "keywords": [
           "David Deras",
           "Software Engineer",
-          "Full Stack Developer",
-          "Frontend Developer",
-          "Backend Developer",
-          "AI-assisted development",
-          "Applied AI in development",
+          "AI Engineer",
+          "LLM",
+          "Large Language Models",
+          "RAG",
+          "Retrieval-Augmented Generation",
+          "AI Agents",
+          "Model Context Protocol",
+          "MCP",
+          "Machine Learning",
+          "Computer Vision",
+          "Embeddings",
+          "pgvector",
+          "Laravel",
           "Vue 3",
-          "Vue 2",
-          "Vue",
-          "Laravel 11",
-          "Vuetify",
-          "PrimeVue",
-          "TypeScript",
-          "GovTech",
-          "End-to-end web systems",
-          "El Salvador",
-          "DDeras"
-        ]
-      },
-      "me": {
-        "title": "A bit about me",
-        "description": "My experience, learning, and what I have worked on.",
-        "keywords": [
-          "David Deras",
-          "Professional profile",
-          "Experience",
-          "DDeras",
-          "daiv05"
-        ]
-      },
-      "projects": {
-        "title": "Projects",
-        "description": "Real applications I have worked on and how I built them.",
-        "keywords": [
-          "Projects",
-          "Case studies",
-          "Portfolio"
+          "Python",
+          "FastAPI",
+          "Google Cloud",
+          "El Salvador"
         ]
       },
       "blog": {
         "title": "Blog & technical articles",
-        "description": "Notes, guides and solutions about web development that I use daily.",
+        "description": "Technical notes on machine learning, statistics, evaluation and the engineering behind AI systems.",
         "keywords": [
-          "Technical blog",
-          "Vue",
-          "Laravel",
-          "Web development"
+          "Machine Learning",
+          "Statistics",
+          "Model evaluation",
+          "AI",
+          "Blog"
         ]
       },
       "resources": {
@@ -167,6 +158,19 @@
           "Books",
           "Tools",
           "UES"
+        ]
+      },
+      "work": {
+        "title": "Work",
+        "description": "Case studies: offline maize disease classifier, incident management PWA, a Windows annotation app and more.",
+        "keywords": [
+          "David Deras",
+          "Case studies",
+          "Machine Learning",
+          "Edge AI",
+          "Laravel",
+          "Vue 3",
+          "Tauri"
         ]
       }
     }
@@ -212,355 +216,6 @@
       "tags": "Filter by tag",
       "clear": "Clear",
       "results": "result | results"
-    }
-  },
-  "loader": {
-    "message": "Loading…"
-  },
-  "hero": {
-    "eyebrow": "Hi, I am",
-    "title": "David Deras",
-    "highlight": "Software Engineer",
-    "availability": "Available for work",
-    "headline": "I design and ship",
-    "headlineAccent": "full-stack software",
-    "roleLabel": "Now",
-    "lead": "Full-stack systems for public institutions, retail, and analytics platforms - with AI in the workflow.",
-    "ctas": {
-      "primary": "View projects",
-      "secondary": "Send me a message"
-    },
-    "stackTitle": "Tech stack I use",
-    "techStack": [
-      {
-        "id": "frontend",
-        "name": "Frontend",
-        "techs": [
-          {
-            "id": "vue",
-            "label": "Vue 3"
-          },
-          {
-            "id": "nuxt",
-            "label": "Nuxt 4"
-          },
-          {
-            "id": "typescript",
-            "label": "TypeScript"
-          },
-          {
-            "id": "vite",
-            "label": "Vite"
-          },
-          {
-            "id": "pinia",
-            "label": "Pinia"
-          }
-        ]
-      },
-      {
-        "id": "backend",
-        "name": "Backend",
-        "techs": [
-          {
-            "id": "laravel",
-            "label": "Laravel"
-          },
-          {
-            "id": "php",
-            "label": "PHP 8"
-          },
-          {
-            "id": "api-rest",
-            "label": "REST APIs"
-          }
-        ]
-      },
-      {
-        "id": "infra",
-        "name": "Infra",
-        "techs": [
-          {
-            "id": "vercel",
-            "label": "Vercel"
-          },
-          {
-            "id": "railway",
-            "label": "Railway"
-          },
-          {
-            "id": "gcp",
-            "label": "GCP"
-          },
-          {
-            "id": "cloudflare",
-            "label": "Cloudflare"
-          }
-        ]
-      },
-      {
-        "id": "ui",
-        "name": "UI",
-        "techs": [
-          {
-            "id": "vuetify",
-            "label": "Vuetify"
-          },
-          {
-            "id": "primevue",
-            "label": "PrimeVue"
-          },
-          {
-            "id": "figma",
-            "label": "Figma"
-          }
-        ]
-      },
-      {
-        "id": "testing",
-        "name": "Testing",
-        "techs": [
-          {
-            "id": "vitest",
-            "label": "Vitest"
-          }
-        ]
-      },
-      {
-        "id": "ai",
-        "name": "AI Tools",
-        "techs": [
-          {
-            "id": "copilot",
-            "label": "Copilot"
-          },
-          {
-            "id": "claude",
-            "label": "Claude"
-          }
-        ]
-      }
-    ],
-    "agendaTitle": "What I am doing now",
-    "agenda": [
-      {
-        "title": "MusyCharts v2",
-        "status": "Full redesign: UI/UX, SSR & Core Web Vitals"
-      },
-      {
-        "title": "React + agent patterns",
-        "status": "Exploring React"
-      },
-      {
-        "title": "DDeras portfolio",
-        "status": "Nuxt 4 migration & performance audit"
-      }
-    ],
-    "snapshotTitle": "Quick facts",
-    "focusNotes": [
-      {
-        "label": "Base",
-        "value": "San Salvador, SV (open to remote)"
-      },
-      {
-        "label": "Experience",
-        "value": "3+ years in real production"
-      },
-      {
-        "label": "Focus",
-        "value": "End-to-end systems · AI in the workflow"
-      }
-    ],
-    "codeLabel": "profile.js",
-    "roles": [
-      "Software Engineer · MINSAL",
-      "AI-Assisted Developer",
-      "Full Stack · Vue & Laravel",
-      "Systems Designer"
-    ]
-  },
-  "overview": {
-    "eyebrow": "Content map",
-    "title": "Spaces in constant iteration",
-    "lead": "Projects, guides and resources that keep growing with every delivery. Everything is divided into clear paths so you can explore what you need.",
-    "cards": [
-      {
-        "label": "01",
-        "title": "Projects",
-        "body": "Projects I have worked on, with technical decisions and what I learned in the process.",
-        "tags": [
-          "Vue 3",
-          "Laravel",
-          "Full Stack"
-        ],
-        "cta": "View projects",
-        "to": "/projects"
-      },
-      {
-        "label": "02",
-        "title": "Blog",
-        "body": "Notes, short tutorials and practical solutions.",
-        "tags": [
-          "Vue 3",
-          "Laravel",
-          "Cloud"
-        ],
-        "cta": "Go to blog",
-        "to": "/blog",
-        "openInNewTab": true
-      },
-      {
-        "label": "03",
-        "title": "Resources",
-        "body": "Useful resources, bookmarks and academic material I use and recommend.",
-        "tags": [
-          "Notion",
-          "Books",
-          "Tools"
-        ],
-        "cta": "View resources",
-        "to": "/resources"
-      }
-    ],
-    "collaboration": {
-      "title": "Got something to build?",
-      "body": "Building something? Curious what AI could do in your product? Send me a message.",
-      "cta": "Contact"
-    }
-  },
-  "about": {
-    "eyebrow": "About",
-    "title": "Software Engineer. I build things end-to-end.",
-    "lead": "",
-    "facts": {
-      "location": "Location",
-      "locationValue": "San Salvador, El Salvador",
-      "github": "GitHub",
-      "email": "Email",
-      "languages": "Languages",
-      "languagesValue": "Spanish (native) · English (A2)",
-      "mode": "Availability",
-      "modeValue": "Remote · Hybrid · On-site"
-    },
-    "buttons": {
-      "contact": "Contact"
-    },
-    "me": {
-      "title": "About me",
-      "body": "Software engineer specializing in modern web applications. I develop solutions ranging from APIs and business logic to efficient user interfaces. I enjoy building well-structured and maintainable software, paying close attention to both system design and user experience. I also have experience working with Linux environments, automated deployments, and CI/CD tools. I enjoy continuous learning and tackling technical challenges that require analysis and sound architectural decisions."
-    },
-    "skills": {
-      "title": "Core skills",
-      "groups": [
-        {
-          "title": "Frontend",
-          "items": [
-            "Vue 3 · TypeScript · Vite",
-            "Component Architecture",
-            "Pinia & State Management",
-            "SEO & SSR in SPAs",
-            "Accessibility (a11y)"
-          ]
-        },
-        {
-          "title": "Backend",
-          "items": [
-            "Laravel 10/11/12 · PHP 8",
-            "REST API Design",
-            "Roles & Permissions (Spatie)",
-            "Data Modeling & Relations",
-            "Performance Optimization"
-          ]
-        },
-        {
-          "title": "Infra & Deploy",
-          "items": [
-            "Vercel · Railway · GCP",
-            "Basic Nginx",
-            "HTTPS, Domains & Redirects",
-            "Simple CI/CD with GitHub",
-            "Dev / Prod Environments"
-          ]
-        },
-        {
-          "title": "Process & AI Tooling",
-          "items": [
-            "AI-assisted development (Claude, Copilot, Cursor)",
-            "Technical docs that people actually read",
-            "Iterative delivery with real stakeholders",
-            "Production support & honest maintenance cycles"
-          ]
-        }
-      ]
-    },
-    "experience": {
-      "title": "Experience & deliverables",
-      "timeline": [
-        {
-          "date": "Jan 2024 - Present",
-          "title": "Full Stack Developer · DTIC - MINSAL",
-          "description": "Development of public platforms and internal systems for the Ministry of Health: new features, integrations, monitoring and performance improvements in Vue 3 and Laravel.",
-          "tags": [
-            "Vue 3",
-            "Laravel",
-            "GovTech"
-          ]
-        },
-        {
-          "date": "Ago 2024 - Dic 2025",
-          "title": "ReportFIA · FIA - Universidad de El Salvador",
-          "description": "Development of an incident management and reporting system for the Planning Unit of the Faculty of Engineering and Architecture.",
-          "tags": [
-            "Laravel",
-            "Vue",
-            "Incident Management"
-          ]
-        },
-        {
-          "date": "Mar 2023 - Jun 2023",
-          "title": "Full Stack Developer · Carmencita Store",
-          "description": "Built an ERP for inventory, HR and delivery on the coast. SCRUM planning, interfaces in Figma and deployments coordinated with the admin team.",
-          "tags": [
-            "Laravel",
-            "Vue",
-            "ERP"
-          ]
-        },
-        {
-          "date": "Jun 2023 - Dec 2023",
-          "title": "Frontend Intern · Presidency / CASATIC",
-          "description": "Digital skills program focused on testing, deployment and agile methodologies for public innovation.",
-          "tags": [
-            "Vue",
-            "Testing",
-            "Agile"
-          ]
-        }
-      ]
-    },
-    "interests": {
-      "title": "Current interests",
-      "items": [
-        "How AI agents actually fit into real app architectures",
-        "React & learning what transfers from Vue",
-        "Core Web Vitals & making sites feel fast, not just score fast",
-        "AI-assisted workflows that don't just add noise"
-      ]
-    }
-  },
-  "projects": {
-    "eyebrow": "Selected work",
-    "title": "My projects",
-    "lead": "Some projects I have worked on, with comments on technical decisions and learnings.",
-    "labels": {
-      "summary": "Summary",
-      "deliverables": "Key deliverables",
-      "client": "Client",
-      "technologies": "Technologies",
-      "captures": "Screens",
-      "viewOnline": "Visit",
-      "viewRepo": "Review code",
-      "year": "Year"
     }
   },
   "resources": {
@@ -627,18 +282,120 @@
     ],
     "noteBlock": {
       "title": "Contributions",
-      "body": "If you have useful resources to share, feel free to contact me so we can include them here."
-    }
+      "body": "If you have useful resources to share, feel free to contact me so we can include them here.",
+      "cta": "Get in touch"
+    },
+    "viewMore": "View more"
   },
   "footer": {
-    "description": "Software engineer. I build modern and scalable solutions.",
-    "quickMap": "Sections",
-    "links": {
-      "home": "Home",
-      "projects": "Projects",
-      "resources": "Resources"
+    "role": "Software Engineer · AI agents, LLM & RAG systems",
+    "label": "Footer links"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Software Engineer · San Salvador, El Salvador",
+      "title": "I build AI agents and RAG systems",
+      "titleAccent": "that ship.",
+      "lead": "Agent harnesses, retrieval pipelines and the full-stack platforms that run them, for public-sector services. Currently pursuing a Machine Learning specialization.",
+      "cta": "Get in touch",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "queryNote": "This is a real similarity search over embeddings of my work."
     },
-    "contact": "Contact",
-    "builtWith": "Made with ❤️ using Vue"
+    "build": {
+      "title": "What I build",
+      "note": "the camera travels to each cluster as you scroll",
+      "clusters": {
+        "agents": {
+          "title": "Agent harnesses",
+          "body": "Runtimes with administrable skills, tool registries, lifecycle hooks and MCP clients, with queued executions, guardrails and human handoff.",
+          "evidence": [
+            "MCP",
+            "Tool calling",
+            "Claude · Gemini",
+            "Guardrails"
+          ],
+          "tag": "Agents"
+        },
+        "rag": {
+          "title": "Retrieval systems",
+          "body": "Layout-aware chunking with Docling, embeddings indexed with HNSW in pgvector, and hybrid semantic and full-text search.",
+          "evidence": [
+            "Docling",
+            "pgvector",
+            "Hybrid search",
+            "FastAPI"
+          ],
+          "tag": "RAG"
+        },
+        "ml": {
+          "title": "Applied ML",
+          "body": "Computer vision with honest evaluation: source-grouped splits, fairness audits and int8 models running offline on a phone.",
+          "evidence": [
+            "PyTorch",
+            "TFLite int8",
+            "Optuna",
+            "OOD detection"
+          ],
+          "tag": "ML"
+        },
+        "fullstack": {
+          "title": "Platforms",
+          "body": "Laravel, Node.js and Vue 3 services on Google Cloud, built for thousands of interactions across web, Telegram and WhatsApp.",
+          "evidence": [
+            "Laravel",
+            "Vue 3",
+            "Cloud Run",
+            "Pub/Sub"
+          ],
+          "tag": "Full stack"
+        }
+      }
+    },
+    "work": {
+      "title": "Selected work",
+      "all": "All work",
+      "caseStudy": "Case study"
+    },
+    "experience": {
+      "title": "Experience",
+      "present": "now"
+    },
+    "writing": {
+      "title": "Writing",
+      "all": "All articles"
+    },
+    "contact": {
+      "title": "Let's build something",
+      "titleAccent": "useful.",
+      "lead": "Open to roles building LLM agents, RAG systems and applied machine learning."
+    },
+    "space": {
+      "legend": "Clusters in the embedding space"
+    },
+    "query": {
+      "label": "Search my work by meaning",
+      "placeholder": "ask something…",
+      "results": "Nearest neighbors",
+      "suggested": "Suggested queries"
+    }
+  },
+  "work": {
+    "eyebrow": "Archive",
+    "title": "Work",
+    "lead": "Systems, products and experiments, from edge AI on a phone to public-sector platforms.",
+    "back": "All work",
+    "client": "Context",
+    "year": "Year",
+    "result": "Result",
+    "links": "Links",
+    "live": "Live",
+    "repo": "Code",
+    "dataset": "Dataset",
+    "features": "Highlights",
+    "stack": "Stack"
+  },
+  "loader": {
+    "message": "Loading…"
   }
 }

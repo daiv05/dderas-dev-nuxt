@@ -1,187 +1,120 @@
 ---
 name: composables
-description: Project composables - useBlog, usePageSeo, useEnterAnimations, useBlogScroll, useGsapAnimations. Use when consuming blog/SEO/animation logic.
+description: Project composables - useBlog, usePageSeo, useSiteSeoDefaults, useBlogScroll, useReveal, useMotionPreference, useEmbeddingSpace, useScrollStory. Use when consuming blog, SEO, motion, reveal or embedding space logic.
 ---
 
 # Composables
 
-> All project composables in `app/composables/`. Auto-imported by Nuxt.
+> All project composables in `app/composables/`, auto-imported by Nuxt.
 
-## Files
+## Key files
 
 - `app/composables/useBlog.ts`
 - `app/composables/usePageSeo.ts`
 - `app/composables/useSiteSeoDefaults.ts`
 - `app/composables/useBlogScroll.ts`
-- `app/composables/useEnterAnimations.ts`
-
----
+- `app/composables/useReveal.ts`
+- `app/composables/useMotionPreference.ts`
+- `app/composables/useEmbeddingSpace.ts`
+- `app/composables/useScrollStory.ts`
 
 ## useBlog()
 
-Blog logic. Uses the active locale internally.
+Blog logic for the active locale.
 
 ```ts
 const {
-  getPosts,           // () => Promise<BlogPost[]> - all posts of the active locale, sorted
-  getPost,            // (slug: string) => Promise<BlogPost | null> - falls back to EN if missing in ES
-  getAdjacentPosts,   // (slug: string) => Promise<{ prev: BlogPost|null, next: BlogPost|null }>
-  findEquivalentPost, // (currentPath: string, toLocale: string) => Promise<BlogPost | null>
-  getRecentPosts,     // (limit?: number) => Promise<BlogPost[]> - default 5
-  getPostsByTag,      // (tag: string) => Promise<BlogPost[]> - case-insensitive partial search
-  getAllTags,          // () => Promise<string[]> - unique tags, alphabetically sorted
+  getPosts,
+  getPost,
+  getAdjacentPosts,
+  findEquivalentPost,
+  getRecentPosts,
+  getPostsByTag,
+  getAllTags,
 } = useBlog()
 ```
 
-### BlogPost type
-
-```ts
-interface BlogPost {
-  slug?: string
-  title: string
-  date: string          // 'YYYY-MM-DD'
-  order?: number
-  lastmod?: string
-  author?: string
-  tags?: string[]
-  summary?: string
-  image?: string        // path from /public
-  id?: string
-  path?: string
-}
-```
-
-### Usage with useAsyncData
+- `getPosts(): Promise<BlogPost[]>` - all posts of the active locale, sorted by `order` descending, then date descending
+- `getPost(slug): Promise<BlogPost | null>` - falls back to the English collection
+- `getAdjacentPosts(slug): Promise<{ prev, next }>`
+- `findEquivalentPost(currentPath, toLocale): Promise<BlogPost | null>`
+- `getRecentPosts(limit = 5)`, `getPostsByTag(tag)`, `getAllTags()`
 
 ```ts
 const { locale } = useI18n()
 const { getPosts } = useBlog()
 
-const { data: posts, pending } = await useAsyncData(
-  () => `blog-index-${locale.value}`,
-  () => getPosts(),
-  { watch: [locale] }
-)
-
-// For a specific post:
-const { data: post } = await useAsyncData(
-  () => `blog-post-${slug}-${locale.value}`,
-  () => getPost(slug),
-  { watch: [locale] }
-)
-```
-
----
-
-## usePageSeo(pageKey, options?)
-
-Configures all the SEO of a page (title, description, OG, Twitter).
-
-```ts
-// Static page - reads seo.pages.[pageKey].* from the locale
-usePageSeo('home')
-usePageSeo('me')
-usePageSeo('projects')
-usePageSeo('blog')
-usePageSeo('resources')
-
-// With dynamic options (overrides those from the locale)
-usePageSeo('blog', {
-  title: () => post.value?.title,        // string or () => string
-  description: () => post.value?.summary,
-  ogType: 'article',                      // 'website' | 'article', default: 'website'
-  image: () => post.value?.image,
-  keywords: () => post.value?.tags?.join(', '),
+const { data: posts } = await useAsyncData(() => `home-writing-${locale.value}`, () => getPosts(), {
+  watch: [locale],
 })
 ```
 
----
+## usePageSeo(pageKey, options?)
+
+See the `seo` skill.
+
+```ts
+usePageSeo('home')
+usePageSeo('work', {
+  title: () => copy.value.name,
+  description: () => copy.value.description,
+})
+```
 
 ## useSiteSeoDefaults()
 
-Only call in `app/app.vue`. Configures robots, canonical and global site defaults.
-
-```ts
-useSiteSeoDefaults()  // no parameters
-```
-
----
+Called once in `app/app.vue`. No parameters.
 
 ## useBlogScroll()
 
 ```ts
 const { scrollToTop, getScrollTop, getScrollElement } = useBlogScroll()
-
-scrollToTop()         // smooth scroll to the top of the blog
-getScrollTop()        // number - current position
-getScrollElement()    // HTMLElement | Window - the blog scroller
 ```
 
----
+All three operate on `window`: `scrollToTop()` smooth-scrolls to the top, `getScrollTop()` returns `window.scrollY` (0 on the server), `getScrollElement()` returns `window`.
 
-## useEnterAnimations()
-
-Header pattern (label + title + description) + panels with GSAP.
+## useMotionPreference()
 
 ```ts
-const {
-  label,                   // ref<HTMLElement | null> - eyebrow label
-  titleEl,                 // ref<HTMLElement | null> - main title
-  descriptionEl,           // ref<HTMLElement | null> - description/lead
-  setPanelRef,             // (el: any) => void - use as :ref in v-for
-  resetPanelRefs,          // () => void
-  setupEnterAnimations,    // (options?: AnimationOptions) => void
-  cleanupEnterAnimations,  // () => void
-} = useEnterAnimations()
+const { allowMotion, allow3d, ready } = useMotionPreference()
 ```
 
+Three `useState` booleans (`motion:allow`, `motion:allow3d`, `motion:ready`), all `false` during SSR. On the first mount in the client it reads reduced motion, WebGL support, `saveData` and `hardwareConcurrency`, passes them to `decideMotion` from `app/utils/motion.ts` and sets `ready`.
+
 ```ts
-// AnimationOptions (all optional)
-{
-  headerStart?: string          // default: 'top 80%'
-  panelsStart?: string          // default: 'top 80%'
-  headerTrigger?: HTMLElement | null
-  panelsTrigger?: HTMLElement | null
-  fadeHeader?: boolean          // default: true - animates opacity
-  fadePanels?: boolean          // default: true
-}
+decideMotion({ reducedMotion, webgl, saveData, cores })
+```
+
+Reduced motion disables both flags; otherwise `allowMotion` is true and `allow3d` requires WebGL, no `saveData` and more than 4 cores (a `null` core count counts as capable).
+
+## useReveal(root)
+
+```ts
+const root = ref<HTMLElement | null>(null)
+useReveal(root)
 ```
 
 ```vue
-<script setup>
-const { label, titleEl, descriptionEl, setPanelRef, setupEnterAnimations, cleanupEnterAnimations } = useEnterAnimations()
-onMounted(() => nextTick(() => setupEnterAnimations()))
-onUnmounted(() => cleanupEnterAnimations())
-</script>
-
-<template>
-  <p ref="label" class="eyebrow">Label</p>
-  <h1 ref="titleEl">Title</h1>
-  <p ref="descriptionEl">Description</p>
-  <div v-for="item in items" :key="item.id" :ref="setPanelRef">...</div>
-</template>
+<div ref="root">
+  <h1 data-reveal="line">{{ title }}</h1>
+  <div data-reveal="rule"></div>
+  <span data-reveal="count">0.947</span>
+</div>
 ```
 
----
+- `line` - fades and lifts the element when it reaches `top 88%`
+- `rule` - scales a line from the left when it reaches `top 90%`
+- `count` - animates the first number found in the text from 0 when it reaches `top 90%`, keeping prefix, suffix, decimals and thousands separators
 
-## useGsapAnimations()
+It runs inside `gsap.context()` scoped to `root`, uses `$gsap` and `$ScrollTrigger`, does nothing while `allowMotion` is false, starts when it becomes true, and reverts on unmount.
 
-For custom animations without the header/panels pattern. Automatic cleanup in `onBeforeUnmount`.
+## useEmbeddingSpace() and useScrollStory()
 
-```ts
-const { setupAnimations, cleanup } = useGsapAnimations()
+See the `embedding-space` skill.
 
-onMounted(() => {
-  nextTick(() => {
-    setupAnimations(() => {
-      // GSAP code here - automatically inside gsap.context()
-      const scroller = getMainScroller()
-      animateInOnEnter(document.querySelector('.my-el'), {
-        from: { opacity: 0, y: 30 },
-        to: { ...gsapDefaults, opacity: 1, y: 0 },
-        scroller,
-      })
-    })
-  })
-})
-```
+## Restrictions
+
+- Do not call `useSiteSeoDefaults()` outside `app/app.vue`
+- Do not use `useSeoMeta()` directly in pages; use `usePageSeo()`
+- Call `useReveal` inside a component setup with a template ref that exists after mount
+- Always pass `watch: [locale]` to `useAsyncData` calls that depend on the language

@@ -1,5 +1,5 @@
 <template>
-  <v-app class="error-app">
+  <div class="error-app">
     <main class="error-stage">
       <div class="error-bg" aria-hidden="true">
         <div class="error-grid"></div>
@@ -7,12 +7,12 @@
         <div class="error-noise"></div>
       </div>
 
-      <v-container class="error-container">
+      <div class="error-container">
         <NuxtLink :to="homeHref" class="error-brand">
           <span class="error-brand__name">{{ t('navigation.brand.name') }}</span>
         </NuxtLink>
 
-        <v-card class="error-card" elevation="0">
+        <div class="error-card">
           <div class="error-card__top">
             <p class="error-eyebrow">
               {{ t(isNotFound ? 'errors.notFound.eyebrow' : 'errors.generic.eyebrow') }}
@@ -35,34 +35,27 @@
             </p>
           </div>
 
-          <v-divider />
+          <hr class="error-divider" />
 
           <div class="error-actions">
-            <v-btn class="text-none" color="primary" variant="flat" rounded="pill" @click="goHome">
+            <UiButton variant="solid" @click="goHome">
               {{ t('errors.actions.home') }}
-            </v-btn>
+            </UiButton>
 
-            <v-btn class="text-none" variant="tonal" rounded="pill" @click="goBack">
+            <UiButton variant="outline" @click="goBack">
               {{ t('errors.actions.back') }}
-            </v-btn>
+            </UiButton>
 
-            <v-btn class="text-none" variant="text" rounded="pill" @click="reload">
+            <UiButton variant="ghost" @click="reload">
               {{ t('errors.actions.reload') }}
-            </v-btn>
+            </UiButton>
 
-            <v-btn
-              class="text-none"
-              variant="text"
-              rounded="pill"
-              :href="reportHref"
-              target="_blank"
-              rel="noopener"
-            >
+            <UiButton variant="ghost" :href="reportHref">
               {{ t('errors.actions.report') }}
-            </v-btn>
+            </UiButton>
           </div>
 
-          <v-expand-transition>
+          <Transition name="error-expand">
             <div v-show="showDetails" class="error-details">
               <div class="error-details__row">
                 <span class="error-details__k">{{ t('errors.details.path') }}</span>
@@ -77,32 +70,23 @@
                 <pre class="error-details__pre">{{ devStack }}</pre>
               </div>
             </div>
-          </v-expand-transition>
+          </Transition>
 
           <div class="error-details-toggle">
-            <v-btn
-              variant="text"
-              density="comfortable"
-              rounded="pill"
-              class="error-details-toggle__btn"
-              @click="showDetails = !showDetails"
-            >
+            <UiButton variant="ghost" size="sm" class="error-details-toggle__btn" @click="showDetails = !showDetails">
               {{ t(showDetails ? 'errors.actions.hideDetails' : 'errors.actions.showDetails') }}
-            </v-btn>
+            </UiButton>
           </div>
-        </v-card>
-      </v-container>
+        </div>
+      </div>
     </main>
-  </v-app>
+  </div>
 </template>
 
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-import { useTheme } from 'vuetify'
 
 const props = defineProps<{ error: NuxtError }>()
-
-const theme = useTheme()
 
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -124,7 +108,7 @@ const safePath = computed(() => {
 
 const devStack = computed(() => {
   if (!import.meta.dev) return ''
-  const stack = (props.error as any)?.stack
+  const stack = (props.error as { stack?: unknown } | undefined)?.stack
   return typeof stack === 'string' ? stack : ''
 })
 
@@ -226,8 +210,8 @@ const reload = () => {
   position: absolute;
   inset: -40px;
   background-image:
-    linear-gradient(to right, rgb(var(--v-theme-on-surface), 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(var(--v-theme-on-surface), 0.06) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1px);
   background-size: 44px 44px;
   transform: perspective(900px) rotateX(55deg) translateY(-120px);
   transform-origin: center;
@@ -236,7 +220,7 @@ const reload = () => {
   animation: gridFloat 10s ease-in-out infinite;
 }
 
-@supports not (background-image: linear-gradient(to right, rgb(var(--v-theme-on-surface), 0.06) 1px, transparent 1px)) {
+@supports not (background-image: linear-gradient(to right, color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1px)) {
   .error-grid {
     background-image:
       linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
@@ -248,11 +232,11 @@ const reload = () => {
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(45% 40% at 20% 20%, rgba(124, 58, 237, 0.38), transparent 60%),
-    radial-gradient(40% 35% at 80% 30%, rgba(14, 165, 233, 0.34), transparent 60%),
-    radial-gradient(45% 40% at 40% 80%, rgba(16, 185, 129, 0.22), transparent 65%);
+    radial-gradient(45% 40% at 20% 20%, color-mix(in srgb, var(--terra) 22%, transparent), transparent 60%),
+    radial-gradient(40% 35% at 80% 30%, color-mix(in srgb, var(--maize) 20%, transparent), transparent 60%),
+    radial-gradient(45% 40% at 40% 80%, color-mix(in srgb, var(--moss) 18%, transparent), transparent 65%);
   filter: blur(28px);
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .error-noise {
@@ -279,11 +263,11 @@ const reload = () => {
 .error-brand__name {
   font-weight: 700;
   letter-spacing: 0.2px;
-  color: rgb(var(--v-theme-on-background));
+  color: var(--ink);
   font-size: 18px;
 }
 
-@supports not (color: rgb(var(--v-theme-on-background))) {
+@supports not (color: var(--ink)) {
   .error-brand__name {
     color: #e4e4e7;
   }
@@ -295,15 +279,15 @@ const reload = () => {
 }
 
 .error-card {
-  border: 1px solid rgb(var(--v-theme-on-surface), 0.12);
-  background: rgba(var(--v-theme-surface), 0.62);
+  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  background: color-mix(in srgb, var(--paper) 62%, transparent);
   backdrop-filter: blur(14px);
   border-radius: 18px;
   overflow: hidden;
 }
 
 /* Fallback para cuando no se carga el tema */
-@supports not (background: rgba(var(--v-theme-surface), 0.62)) {
+@supports not (background: color-mix(in srgb, var(--paper) 62%, transparent)) {
   .error-card {
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: rgba(18, 18, 22, 0.62);
@@ -316,13 +300,13 @@ const reload = () => {
 
 .error-eyebrow {
   margin: 0 0 10px;
-  color: rgb(var(--v-theme-on-surface));
+  color: var(--ink);
   font-size: 13px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
-@supports not (color: rgb(var(--v-theme-on-surface))) {
+@supports not (color: var(--ink)) {
   .error-eyebrow {
     color: #a1a1aa;
   }
@@ -335,11 +319,11 @@ const reload = () => {
   line-height: 1;
   font-weight: 900;
   letter-spacing: -0.04em;
-  color: rgb(var(--v-theme-on-background));
+  color: var(--ink);
   margin-bottom: 10px;
 }
 
-@supports not (color: rgb(var(--v-theme-on-background))) {
+@supports not (color: var(--ink)) {
   .error-code {
     color: #fafafa;
   }
@@ -372,10 +356,10 @@ const reload = () => {
   margin: 0 0 8px;
   font-size: 22px;
   font-weight: 750;
-  color: rgb(var(--v-theme-on-background));
+  color: var(--ink);
 }
 
-@supports not (color: rgb(var(--v-theme-on-background))) {
+@supports not (color: var(--ink)) {
   .error-title {
     color: #fafafa;
   }
@@ -383,11 +367,11 @@ const reload = () => {
 
 .error-lead {
   margin: 0 0 16px;
-  color: rgb(var(--v-theme-on-surface));
+  color: var(--ink);
   max-width: 70ch;
 }
 
-@supports not (color: rgb(var(--v-theme-on-surface))) {
+@supports not (color: var(--ink)) {
   .error-lead {
     color: #a1a1aa;
   }
@@ -397,13 +381,13 @@ const reload = () => {
   margin: 0;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px dashed rgb(var(--v-theme-on-surface), 0.14);
-  background: rgb(var(--v-theme-on-surface), 0.03);
+  border: 1px dashed color-mix(in srgb, var(--ink) 14%, transparent);
+  background: color-mix(in srgb, var(--ink) 3%, transparent);
   display: grid;
   gap: 6px;
 }
 
-@supports not (background: rgb(var(--v-theme-on-surface), 0.03)) {
+@supports not (background: color-mix(in srgb, var(--ink) 3%, transparent)) {
   .error-hint {
     border: 1px dashed rgba(255, 255, 255, 0.14);
     background: rgba(255, 255, 255, 0.03);
@@ -412,20 +396,20 @@ const reload = () => {
 
 .error-hint__label {
   font-size: 12px;
-  color: rgb(var(--v-theme-on-surface));
+  color: var(--ink);
 }
 
-@supports not (color: rgb(var(--v-theme-on-surface))) {
+@supports not (color: var(--ink)) {
   .error-hint__label {
     color: #a1a1aa;
   }
 }
 
 .error-hint__text {
-  color: rgb(var(--v-theme-on-background));
+  color: var(--ink);
 }
 
-@supports not (color: rgb(var(--v-theme-on-background))) {
+@supports not (color: var(--ink)) {
   .error-hint__text {
     color: #e4e4e7;
   }
@@ -458,25 +442,25 @@ const reload = () => {
 }
 
 .error-details__k {
-  color: rgb(var(--v-theme-on-surface));
+  color: var(--ink);
   font-size: 12px;
 }
 
-@supports not (color: rgb(var(--v-theme-on-surface))) {
+@supports not (color: var(--ink)) {
   .error-details__k {
     color: #a1a1aa;
   }
 }
 
 .error-details__v {
-  color: rgb(var(--v-theme-on-background));
+  color: var(--ink);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
     monospace;
   font-size: 12.5px;
   overflow-wrap: anywhere;
 }
 
-@supports not (color: rgb(var(--v-theme-on-background))) {
+@supports not (color: var(--ink)) {
   .error-details__v {
     color: #e4e4e7;
   }
@@ -491,15 +475,15 @@ const reload = () => {
   margin: 0;
   padding: 12px;
   border-radius: 12px;
-  border: 1px solid rgb(var(--v-theme-on-surface), 0.1);
-  background: rgb(var(--v-theme-surface), 0.25);
+  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  background: color-mix(in srgb, var(--paper) 25%, transparent);
   overflow: auto;
   max-height: 240px;
   font-size: 12px;
-  color: rgb(var(--v-theme-on-surface));
+  color: var(--ink);
 }
 
-@supports not (color: rgb(var(--v-theme-on-surface))) {
+@supports not (color: var(--ink)) {
   .error-details__pre {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.25);
