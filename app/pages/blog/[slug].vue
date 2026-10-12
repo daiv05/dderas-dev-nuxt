@@ -316,7 +316,7 @@ useHead(() => {
 }
 
 .post-navigation-card:hover .post-navigation-title {
-  color: rgb(var(--v-theme-primary));
+  color: var(--terra);
 }
 
 .post-navigation-label {

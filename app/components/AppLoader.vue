@@ -42,7 +42,7 @@ const { t } = useI18n();
   height: 28px;
   border-radius: 3px;
   opacity: 0.9;
-  background-color: rgb(var(--v-theme-on-surface));
+  background-color: var(--ink);
   animation: pulse 1s ease-in-out infinite;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
   will-change: transform, opacity;
@@ -73,7 +73,7 @@ const { t } = useI18n();
 .loader-text {
   font-size: 0.9rem;
   font-weight: 600;
-  color: rgb(var(--v-theme-on-surface));
+  color: var(--ink);
   opacity: 0.9;
 }
 </style>

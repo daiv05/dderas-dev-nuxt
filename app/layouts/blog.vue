@@ -1,288 +1,139 @@
 <template>
-  <v-app>
-    <v-app-bar flat scroll-behavior="hide" scroll-threshold="300" elevation="0" class="blog-header">
-      <div class="blog-header-content">
+  <div class="blog-shell">
+    <header class="blog-header">
+      <div class="blog-header__inner">
         <NuxtLink :to="localePath('/blog')" class="blog-brand">
-          <span class="blog-brand-name">{{ t('navigation.brand.name') }}</span>
-          <span v-if="postCount" class="blog-edition">no.{{ String(postCount).padStart(2, '0') }}</span>
+          <span class="blog-brand__name">{{ t('navigation.brand.blogName') }}</span>
+          <span v-if="postCount" class="blog-brand__edition mono">no.{{ String(postCount).padStart(2, '0') }}</span>
         </NuxtLink>
-        <div class="blog-header-actions">
-          <v-btn variant="text" size="small" class="text-none back-btn" :to="localePath('/')">
+        <div class="blog-header__actions mono">
+          <NuxtLink :to="localePath('/')" class="blog-back">
+            <UiIcon name="arrow-left" :size="14" />
             {{ t('navigation.backToMain') }}
-          </v-btn>
-          <div class="blog-controls">
-            <ThemeToggle />
-            <LocaleToggle />
-          </div>
+          </NuxtLink>
+          <LocaleToggle />
+          <ThemeToggle />
         </div>
       </div>
-    </v-app-bar>
+    </header>
 
-    <!-- Contenido principal -->
-    <v-main class="blog-main">
+    <main id="main" class="blog-main">
       <div class="blog-container" @click="handleImageClick">
         <slot />
       </div>
-    </v-main>
+    </main>
 
-    <!-- Footer simple -->
-    <footer class="blog-footer">
-      <div class="blog-footer-content">
-        <NuxtLink class="blog-footer-text" :to="localePath('/')">
-          © {{ currentYear }} {{ t('navigation.brand.name') }}
-        </NuxtLink>
-        <div class="blog-footer-links">
-          <a :href="contactInfo.socials.github" target="_blank" rel="noopener" aria-label="GitHub">
-            <v-icon size="20" :icon="mdiGithub"></v-icon>
-          </a>
-          <a
-            :href="contactInfo.socials.linkedin"
-            target="_blank"
-            rel="noopener"
-            aria-label="LinkedIn"
-          >
-            <v-icon size="20" :icon="mdiLinkedin"></v-icon>
-          </a>
-          <a :href="`mailto:${contactInfo.email}`" aria-label="Email">
-            <v-icon size="20" :icon="mdiEmail"></v-icon>
-          </a>
-        </div>
-      </div>
-    </footer>
-
-    <v-btn
-      v-show="showScrollTop"
-      :icon="mdiArrowUp"
-      class="scroll-to-top"
-      size="small"
-      variant="tonal"
-      aria-label="Scroll to top"
-      title="Scroll to top"
-      @click="scrollToTop"
-    ></v-btn>
-
+    <SiteFooter />
+    <ScrollTopButton :threshold="300" />
     <ImageViewer v-model="showImageViewer" :src="selectedImage.src" :alt="selectedImage.alt" />
-  </v-app>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { mdiArrowUp, mdiGithub, mdiLinkedin, mdiEmail } from '@mdi/js'
-import { contactInfo } from '~/data/contact'
-
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
-const { scrollToTop, getScrollTop, getScrollElement } = useBlogScroll()
 const { getPosts } = useBlog()
 
 const { data: allPosts } = await useAsyncData(
   () => `blog-layout-count-${locale.value}`,
   () => getPosts(),
-  { watch: [locale] }
+  { watch: [locale] },
 )
 const postCount = computed(() => allPosts.value?.length ?? 0)
 
-const showScrollTop = ref(false)
 const showImageViewer = ref(false)
 const selectedImage = ref({ src: '', alt: '' })
-const currentYear = new Date().getFullYear()
-
-const updateScrollTop = () => {
-  showScrollTop.value = getScrollTop() > 300
-}
 
 const handleImageClick = (event: MouseEvent) => {
   const target = event.target as HTMLElement
-  if (target.tagName === 'IMG' && target.closest('.markdown-body')) {
-    if (target.closest('a')) return
-
-    const img = target as HTMLImageElement
-    selectedImage.value = {
-      src: img.src,
-      alt: img.alt || ''
-    }
-    showImageViewer.value = true
-  }
+  if (target.tagName !== 'IMG' || !target.closest('.markdown-body') || target.closest('a')) return
+  const img = target as HTMLImageElement
+  selectedImage.value = { src: img.src, alt: img.alt || '' }
+  showImageViewer.value = true
 }
-
-onMounted(() => {
-  if (!import.meta.client) return
-
-  const scroller = getScrollElement()
-  
-  if (scroller instanceof HTMLElement) {
-    scroller.addEventListener('scroll', updateScrollTop, { passive: true })
-  } else {
-    globalThis.addEventListener('scroll', updateScrollTop, { passive: true })
-  }
-
-  updateScrollTop()
-  requestAnimationFrame(updateScrollTop)
-
-  onBeforeUnmount(() => {
-    if (scroller instanceof HTMLElement) {
-      scroller.removeEventListener('scroll', updateScrollTop)
-    } else {
-      globalThis.removeEventListener('scroll', updateScrollTop)
-    }
-  })
-})
 </script>
 
 <style scoped>
-.blog-header {
-  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
-  background: rgba(var(--v-theme-surface), 0.92) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+.blog-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.blog-header-content {
+.blog-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.blog-header__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  height: var(--nav-height);
+  padding: 0 var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  max-width: 78ch;
-  margin: 0 auto;
-  padding: 0 16px;
 }
 
 .blog-brand {
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
-  text-decoration: none;
-  color: rgb(var(--v-theme-on-surface));
-  margin-left: 1rem;
 }
 
-.blog-brand-name {
-  font-size: 1.25rem;
+.blog-brand__name {
+  font-size: 1.2rem;
   font-weight: 700;
-  line-height: 1.2;
+  font-style: italic;
 }
 
-.blog-edition {
-  font-family: var(--font-mono);
+.blog-brand__edition {
   font-size: 0.7rem;
-  opacity: 0.35;
-  font-weight: 400;
+  color: var(--terra);
 }
 
-.back-btn {
-  opacity: 0.7;
-  transition: opacity var(--transition-fast);
-}
-
-.back-btn:hover {
-  opacity: 1;
-}
-
-.blog-header-actions {
+.blog-header__actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.5rem;
+  font-size: 0.8rem;
 }
 
-.blog-controls {
-  display: flex;
+.blog-back {
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.35rem;
+  color: var(--muted);
+  margin-right: 0.5rem;
+  transition: color var(--transition-fast);
+}
+
+.blog-back:hover {
+  color: var(--ink);
 }
 
 .blog-main {
   flex: 1;
-  min-height: 0;
-  overflow-y: auto;
 }
 
 .blog-container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 60px 16px;
+  padding: 3.5rem var(--gutter);
 }
 
-.blog-footer {
-  border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
-  background: rgb(var(--v-theme-surface));
-  padding: 16px;
-}
-
-.blog-footer-content {
-  max-width: 78ch;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.blog-footer-text {
-  margin: 0;
-  font-size: 0.875rem;
-  opacity: 0.7;
-  text-decoration: none;
-  color: inherit;
-}
-
-.blog-footer-links {
-  display: flex;
-  gap: 16px;
-}
-
-.blog-footer-links a {
-  color: rgb(var(--v-theme-on-surface));
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-.blog-footer-links a:hover {
-  opacity: 1;
-}
-
-.scroll-to-top {
-  position: fixed;
-  bottom: 75px;
-  right: 24px;
-  z-index: 1000;
-  opacity: 0.5;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(var(--v-theme-surface));
-  border: 1px solid rgba(var(--v-border-color), 0.25);
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
-}
-
-.scroll-to-top:hover {
-  opacity: 0.7;
-  transform: translateY(-1px);
-  border-color: rgba(var(--v-border-color), 0.35);
-}
-
-/* Responsive */
 @media (max-width: 600px) {
-  .blog-header-content {
-    padding: 0 12px;
-  }
-
-  .blog-brand-name {
-    font-size: 1.1rem;
-  }
-
   .blog-container {
-    padding: 24px 12px;
+    padding: 1.5rem var(--gutter);
   }
 
-  .blog-footer-content {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-  }
-  .scroll-to-top {
-    bottom: 0.9rem;
-    right: 0.9rem;
+  .blog-back span {
+    display: none;
   }
 }
 </style>

@@ -1,5 +1,3 @@
-import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
-
 const SITE_URL = import.meta.env.NUXT_PUBLIC_SITE_URL || "https://deras.dev";
 
 export default defineNuxtConfig({
@@ -128,24 +126,7 @@ export default defineNuxtConfig({
       fallbackLocale: "en",
     },
   },
-  build: {
-    transpile: ["vuetify"],
-  },
   vite: {
-    ssr: {
-      noExternal: ["vuetify"],
-    },
-    plugins: [
-      // @ts-expect-error
-      vuetify({ autoImport: true })
-    ],
-    vue: {
-      template: {
-        compilerOptions: {
-        },
-        transformAssetUrls,
-      },
-    },
     optimizeDeps: {
       include: ["vue-mermaid-render"],
     },

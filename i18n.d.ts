@@ -1,5 +1,5 @@
 // i18n.d.ts
-import en from './app/locales/en.json';
+import type en from './app/locales/en.json';
 
 type MessageSchema = typeof en;
 

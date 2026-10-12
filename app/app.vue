@@ -30,7 +30,7 @@ useHead(() => {
   }
 
   const localeEntries = Array.isArray(locales.value) ? locales.value : []
-  for (const entry of localeEntries as any[]) {
+  for (const entry of localeEntries as Array<"en" | "es" | { code?: "en" | "es" }>) {
     const code = typeof entry === 'string' ? entry : entry?.code
     if (!code) continue
 

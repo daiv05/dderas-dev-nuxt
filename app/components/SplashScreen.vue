@@ -83,7 +83,7 @@ onUnmounted(() => {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgb(var(--v-theme-background));
+  background: var(--paper);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +92,7 @@ onUnmounted(() => {
 .signature-svg {
   width: min(500px, 80vw);
   overflow: visible;
-  color: rgb(var(--v-theme-on-background));
+  color: var(--ink);
 }
 
 .signature-path {

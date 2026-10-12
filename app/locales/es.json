@@ -4,7 +4,8 @@
       "name": "DDeras",
       "shortName": "DDeras",
       "tagline": "Ingeniero de Software",
-      "blogTagline": "Tech blog"
+      "blogTagline": "Tech blog",
+      "blogName": "Notas de campo"
     },
     "themeToggle": {
       "toLight": "Modo claro",
@@ -18,11 +19,11 @@
       "es": "ES"
     },
     "items": {
-      "home": "Inicio",
-      "about": "Sobre mí",
-      "projects": "Proyectos",
-      "blog": "Blog",
-      "resources": "Recursos"
+      "work": "trabajo",
+      "experience": "experiencia",
+      "writing": "escritura",
+      "resources": "recursos",
+      "blog": "Blog"
     },
     "backToMain": "Portafolio",
     "backToBlog": "Inicio",
@@ -32,7 +33,12 @@
       "github": "GitHub",
       "linkedin": "LinkedIn",
       "email": "Correo"
-    }
+    },
+    "label": "Navegación principal",
+    "open": "Abrir menú",
+    "close": "Cerrar menú",
+    "skip": "Saltar al contenido",
+    "scrollTop": "Volver arriba"
   },
   "errors": {
     "generic": {
@@ -623,18 +629,13 @@
     ],
     "noteBlock": {
       "title": "Contribuciones",
-      "body": "Si tienes recursos útiles que compartir, no dudes en ponerte en contacto conmigo para que podamos incluirlos aquí."
-    }
+      "body": "Si tienes recursos útiles que compartir, no dudes en ponerte en contacto conmigo para que podamos incluirlos aquí.",
+      "cta": "Escríbeme"
+    },
+    "viewMore": "Ver más"
   },
   "footer": {
-    "description": "Ingeniero de software. Construyo soluciones modernas y escalables.",
-    "quickMap": "Secciones",
-    "links": {
-      "home": "Inicio",
-      "projects": "Proyectos",
-      "resources": "Recursos"
-    },
-    "contact": "Contacto",
-    "builtWith": "Hecho con ❤️ usando Vue"
+    "role": "Ingeniero de Software · agentes de IA, LLM y RAG",
+    "label": "Enlaces del pie de página"
   }
 }

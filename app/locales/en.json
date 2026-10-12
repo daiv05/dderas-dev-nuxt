@@ -4,7 +4,8 @@
       "name": "DDeras",
       "shortName": "DDeras",
       "tagline": "Software Engineer",
-      "blogTagline": "Tech blog"
+      "blogTagline": "Tech blog",
+      "blogName": "Field notes"
     },
     "themeToggle": {
       "toLight": "Light mode",
@@ -18,11 +19,11 @@
       "es": "ES"
     },
     "items": {
-      "home": "Home",
-      "about": "About me",
-      "projects": "Projects",
-      "blog": "Blog",
-      "resources": "Resources"
+      "work": "work",
+      "experience": "experience",
+      "writing": "writing",
+      "resources": "resources",
+      "blog": "Blog"
     },
     "backToMain": "Portfolio",
     "backToBlog": "Home",
@@ -32,7 +33,12 @@
       "github": "GitHub",
       "linkedin": "LinkedIn",
       "email": "Email"
-    }
+    },
+    "label": "Main navigation",
+    "open": "Open menu",
+    "close": "Close menu",
+    "skip": "Skip to content",
+    "scrollTop": "Back to top"
   },
   "errors": {
     "generic": {
@@ -627,18 +633,13 @@
     ],
     "noteBlock": {
       "title": "Contributions",
-      "body": "If you have useful resources to share, feel free to contact me so we can include them here."
-    }
+      "body": "If you have useful resources to share, feel free to contact me so we can include them here.",
+      "cta": "Get in touch"
+    },
+    "viewMore": "View more"
   },
   "footer": {
-    "description": "Software engineer. I build modern and scalable solutions.",
-    "quickMap": "Sections",
-    "links": {
-      "home": "Home",
-      "projects": "Projects",
-      "resources": "Resources"
-    },
-    "contact": "Contact",
-    "builtWith": "Made with ❤️ using Vue"
+    "role": "Software Engineer · AI agents, LLM & RAG systems",
+    "label": "Footer links"
   }
 }

@@ -1,12 +1,9 @@
 <template>
-  <landing-window />
-  <description />
+  <section class="home-pending">
+    <h1>David Deras</h1>
+  </section>
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: "default",
-});
-
 usePageSeo('home')
 </script>

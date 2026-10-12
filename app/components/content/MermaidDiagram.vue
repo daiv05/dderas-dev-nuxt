@@ -3,7 +3,7 @@
 </template>
 <script setup>
 import { VueMermaidRender } from 'vue-mermaid-render'
-const props = defineProps({
+defineProps({
     content: {
         type: String,
         required: true

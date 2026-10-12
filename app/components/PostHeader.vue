@@ -30,7 +30,7 @@ interface Props {
   summary?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   title: '',
   date: '',
   lastmod: '',
