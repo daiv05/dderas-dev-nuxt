@@ -223,348 +223,6 @@
   "loader": {
     "message": "Cargando…"
   },
-  "hero": {
-    "eyebrow": "Hola, soy",
-    "title": "David Deras",
-    "highlight": "Ingeniero de Software",
-    "availability": "Disponible para proyectos",
-    "headline": "Diseño y desarrollo",
-    "headlineAccent": "software full-stack",
-    "roleLabel": "Ahora",
-    "lead": "Sistemas full-stack para instituciones públicas, retail y plataformas de datos - con IA en el proceso.",
-    "ctas": {
-      "primary": "Ver proyectos",
-      "secondary": "Escribirme"
-    },
-    "stackTitle": "Stack que uso",
-    "techStack": [
-      {
-        "id": "frontend",
-        "name": "Frontend",
-        "techs": [
-          {
-            "id": "vue",
-            "label": "Vue 3"
-          },
-          {
-            "id": "nuxt",
-            "label": "Nuxt 4"
-          },
-          {
-            "id": "typescript",
-            "label": "TypeScript"
-          },
-          {
-            "id": "vite",
-            "label": "Vite"
-          },
-          {
-            "id": "pinia",
-            "label": "Pinia"
-          }
-        ]
-      },
-      {
-        "id": "backend",
-        "name": "Backend",
-        "techs": [
-          {
-            "id": "laravel",
-            "label": "Laravel"
-          },
-          {
-            "id": "php",
-            "label": "PHP 8"
-          },
-          {
-            "id": "api-rest",
-            "label": "APIs REST"
-          }
-        ]
-      },
-      {
-        "id": "infra",
-        "name": "Infra",
-        "techs": [
-          {
-            "id": "vercel",
-            "label": "Vercel"
-          },
-          {
-            "id": "railway",
-            "label": "Railway"
-          },
-          {
-            "id": "gcp",
-            "label": "GCP"
-          },
-          {
-            "id": "cloudflare",
-            "label": "Cloudflare"
-          }
-        ]
-      },
-      {
-        "id": "ui",
-        "name": "UI",
-        "techs": [
-          {
-            "id": "vuetify",
-            "label": "Vuetify"
-          },
-          {
-            "id": "primevue",
-            "label": "PrimeVue"
-          },
-          {
-            "id": "figma",
-            "label": "Figma"
-          }
-        ]
-      },
-      {
-        "id": "testing",
-        "name": "Testing",
-        "techs": [
-          {
-            "id": "vitest",
-            "label": "Vitest"
-          }
-        ]
-      },
-      {
-        "id": "ai",
-        "name": "AI Tools",
-        "techs": [
-          {
-            "id": "copilot",
-            "label": "Copilot"
-          },
-          {
-            "id": "claude",
-            "label": "Claude"
-          }
-        ]
-      }
-    ],
-    "agendaTitle": "En qué estoy ahora",
-    "agenda": [
-      {
-        "title": "MusyCharts v2",
-        "status": "Rediseño completo: UI/UX, SSR y Core Web Vitals"
-      },
-      {
-        "title": "React + patrones con agentes",
-        "status": "Explorando React"
-      },
-      {
-        "title": "Portafolio DDeras",
-        "status": "Nuxt 4 y auditoría de rendimiento"
-      }
-    ],
-    "snapshotTitle": "Datos rápidos",
-    "focusNotes": [
-      {
-        "label": "Base",
-        "value": "San Salvador, SV"
-      },
-      {
-        "label": "Experiencia",
-        "value": "+3 años en producción real"
-      },
-      {
-        "label": "Enfoque",
-        "value": "Sistemas completos · IA en el proceso"
-      }
-    ],
-    "codeLabel": "profile.js",
-    "roles": [
-      "Software Engineer · MINSAL",
-      "AI-Assisted Developer",
-      "Full Stack · Vue & Laravel",
-      "Systems Designer"
-    ]
-  },
-  "overview": {
-    "eyebrow": "Qué encontrarás aquí",
-    "title": "Contenido en constante evolución",
-    "lead": "Este sitio es una mezcla de portafolio, blog y repositorio de recursos. Entra a lo que te sirva y vuelve cuando quieras.",
-    "cards": [
-      {
-        "label": "01",
-        "title": "Proyectos",
-        "body": "Proyectos en los que he trabajado, con decisiones técnicas y lo que aprendí en el proceso.",
-        "tags": [
-          "Vue 3",
-          "Laravel",
-          "Full Stack"
-        ],
-        "cta": "Ver proyectos",
-        "to": "/projects"
-      },
-      {
-        "label": "02",
-        "title": "Blog",
-        "body": "Notas técnicas, tutoriales cortos y soluciones prácticas.",
-        "tags": [
-          "Vue 3",
-          "Laravel",
-          "Cloud"
-        ],
-        "cta": "Ir al blog",
-        "to": "/blog",
-        "openInNewTab": true
-      },
-      {
-        "label": "03",
-        "title": "Recursos",
-        "body": "Recursos útiles, bookmarks y material académico que uso y recomiendo.",
-        "tags": [
-          "Notion",
-          "Libros",
-          "Herramientas"
-        ],
-        "cta": "Ver recursos",
-        "to": "/resources"
-      }
-    ],
-    "collaboration": {
-      "title": "¿Tienes algo que construir?",
-      "body": "¿Estás construyendo algo o tienes curiosidad de lo que la IA puede hacer en tu producto? Escríbeme",
-      "cta": "Contactar"
-    }
-  },
-  "about": {
-    "facts": {
-      "location": "Ubicación",
-      "locationValue": "San Salvador, El Salvador",
-      "github": "GitHub",
-      "email": "Email",
-      "languages": "Idiomas",
-      "languagesValue": "Español (nativo) · Inglés (A2)",
-      "mode": "Modalidad",
-      "modeValue": "Remoto · Híbrido · Presencial"
-    },
-    "buttons": {
-      "contact": "Contactar"
-    },
-    "me": {
-      "title": "Sobre mí",
-      "body": "Ingeniero de software con enfoque en aplicaciones web modernas. Trabajo desarrollando soluciones que abarcan desde APIs y lógica de negocio hasta interfaces de usuario eficientes. Me gusta construir software bien estructurado y mantenible, prestando atención tanto al diseño del sistema como a la experiencia del usuario. También tengo experiencia trabajando con entornos Linux, despliegues automatizados y herramientas de CI/CD. Disfruto aprender constantemente y enfrentar problemas técnicos que requieran análisis y buenas decisiones de arquitectura."
-    },
-    "skills": {
-      "title": "Competencias principales",
-      "groups": [
-        {
-          "title": "Frontend",
-          "items": [
-            "Vue 3 · TypeScript · Vite",
-            "Arquitectura de componentes",
-            "Pinia y manejo de estado",
-            "SEO y SSR en SPAs",
-            "Accesibilidad (a11y)"
-          ]
-        },
-        {
-          "title": "Backend",
-          "items": [
-            "Laravel 10/11/12 · PHP 8",
-            "Diseño de APIs REST",
-            "Roles y permisos (Spatie)",
-            "Modelado de datos y relaciones",
-            "Optimización de rendimiento"
-          ]
-        },
-        {
-          "title": "Infra & Deploy",
-          "items": [
-            "Vercel · Railway · GCP",
-            "Nginx básico",
-            "HTTPS, dominios y redirects",
-            "CI/CD simple con GitHub",
-            "Entornos dev / prod"
-          ]
-        },
-        {
-          "title": "Proceso e IA",
-          "items": [
-            "Desarrollo asistido por IA (Claude, Copilot, Cursor)",
-            "Documentación técnica que la gente realmente lee",
-            "Entregas iterativas con clientes y equipos reales",
-            "Soporte y mantenimiento en producción de verdad"
-          ]
-        }
-      ]
-    },
-    "experience": {
-      "title": "Experiencia y entregables",
-      "timeline": [
-        {
-          "date": "Ene 2024 - Presente",
-          "title": "Desarrollador Full Stack · DTIC - MINSAL",
-          "description": "Desarrollo de plataformas públicas y sistemas internos para el Ministerio de Salud: nuevas funcionalidades, integraciones, monitoreo y mejoras de performance en Vue 3 y Laravel.",
-          "tags": [
-            "Vue 3",
-            "Laravel",
-            "GovTech"
-          ]
-        },
-        {
-          "date": "Ago 2024 - Dic 2025",
-          "title": "ReportFIA · FIA - Universidad de El Salvador",
-          "description": "Desarrollo de un sistema de gestión de incidencias y reportes para la Unidad de Planificación de la Facultad de Ingeniería y Arquitectura.",
-          "tags": [
-            "Laravel",
-            "Vue",
-            "Gestión de incidencias"
-          ]
-        },
-        {
-          "date": "Mar 2023 - Jun 2023",
-          "title": "Desarrollador Full Stack · Carmencita Store",
-          "description": "Construcción de un ERP para inventario, RRHH y delivery en la zona costera. Planeación SCRUM, interfaces en Figma y despliegues coordinados con el equipo administrativo.",
-          "tags": [
-            "Laravel",
-            "Vue",
-            "ERP"
-          ]
-        },
-        {
-          "date": "Jun 2023 - Dic 2023",
-          "title": "Frontend Intern · Secretaría de Innovación / CASATIC",
-          "description": "Programa de habilidades digitales con enfoque en desarrollo y metodologías ágiles para innovación pública.",
-          "tags": [
-            "Vue",
-            "Agile"
-          ]
-        }
-      ]
-    },
-    "interests": {
-      "title": "Intereses actuales",
-      "items": [
-        "Cómo encajan los agentes de IA en arquitecturas reales",
-        "React y qué de Vue realmente se traslada",
-        "Core Web Vitals y que los sitios se sientan rápidos, no solo que puntúen bien",
-        "Flujos con IA que sumen, no que estorben"
-      ]
-    }
-  },
-  "projects": {
-    "eyebrow": "Selección de trabajo",
-    "title": "Mis proyectos",
-    "lead": "Algunos proyectos en los que he trabajado, con comentarios sobre decisiones técnicas y aprendizajes.",
-    "labels": {
-      "summary": "Resumen",
-      "deliverables": "Entregables destacados",
-      "client": "Cliente",
-      "technologies": "Tecnologías",
-      "captures": "Capturas",
-      "viewOnline": "Visitar",
-      "viewRepo": "Revisar código",
-      "year": "Año"
-    }
-  },
   "resources": {
     "eyebrow": "Recursos útiles",
     "title": "Herramientas y conocimiento",
@@ -639,6 +297,84 @@
     "label": "Enlaces del pie de página"
   },
   "home": {
+    "hero": {
+      "eyebrow": "Ingeniero de Software · San Salvador, El Salvador",
+      "title": "Construyo agentes de IA y sistemas RAG",
+      "titleAccent": "que llegan a producción.",
+      "lead": "Harness de agentes, pipelines de recuperación y las plataformas full stack que los ejecutan, para servicios del sector público. Actualmente curso una especialización en Machine Learning.",
+      "cta": "Escríbeme",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "queryNote": "Es una búsqueda real por similitud sobre embeddings de mi trabajo."
+    },
+    "build": {
+      "title": "Qué construyo",
+      "note": "la cámara viaja a cada cúmulo mientras haces scroll",
+      "clusters": {
+        "agents": {
+          "title": "Harness de agentes",
+          "body": "Runtimes con skills administrables, registros de herramientas, hooks de ciclo de vida y clientes MCP, con ejecuciones en cola, guardrails y traspaso a humanos.",
+          "evidence": [
+            "MCP",
+            "Tool calling",
+            "Claude · Gemini",
+            "Guardrails"
+          ],
+          "tag": "Agentes"
+        },
+        "rag": {
+          "title": "Sistemas de recuperación",
+          "body": "Fragmentación de documentos con Docling, embeddings indexados con HNSW en pgvector y búsqueda híbrida semántica y de texto completo.",
+          "evidence": [
+            "Docling",
+            "pgvector",
+            "Búsqueda híbrida",
+            "FastAPI"
+          ],
+          "tag": "RAG"
+        },
+        "ml": {
+          "title": "ML aplicado",
+          "body": "Visión por computadora con evaluación honesta: particiones agrupadas por fuente, auditorías de equidad y modelos int8 que corren offline en un teléfono.",
+          "evidence": [
+            "PyTorch",
+            "TFLite int8",
+            "Optuna",
+            "Detección OOD"
+          ],
+          "tag": "ML"
+        },
+        "fullstack": {
+          "title": "Plataformas",
+          "body": "Servicios en Laravel, Node.js y Vue 3 sobre Google Cloud, preparados para miles de interacciones en web, Telegram y WhatsApp.",
+          "evidence": [
+            "Laravel",
+            "Vue 3",
+            "Cloud Run",
+            "Pub/Sub"
+          ],
+          "tag": "Full stack"
+        }
+      }
+    },
+    "work": {
+      "title": "Trabajo seleccionado",
+      "all": "Todo el trabajo",
+      "caseStudy": "Caso de estudio"
+    },
+    "experience": {
+      "title": "Experiencia",
+      "present": "hoy"
+    },
+    "writing": {
+      "title": "Escritura",
+      "all": "Todos los artículos"
+    },
+    "contact": {
+      "title": "Construyamos algo",
+      "titleAccent": "útil.",
+      "lead": "Abierto a roles construyendo agentes LLM, sistemas RAG y machine learning aplicado."
+    },
     "space": {
       "legend": "Cúmulos del espacio de embeddings"
     },
@@ -647,22 +383,6 @@
       "placeholder": "pregunta algo…",
       "results": "Vecinos más cercanos",
       "suggested": "Consultas sugeridas"
-    },
-    "build": {
-      "clusters": {
-        "agents": {
-          "tag": "Agentes"
-        },
-        "rag": {
-          "tag": "RAG"
-        },
-        "ml": {
-          "tag": "ML"
-        },
-        "fullstack": {
-          "tag": "Full stack"
-        }
-      }
     }
   }
 }

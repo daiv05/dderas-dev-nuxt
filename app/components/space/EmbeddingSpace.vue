@@ -62,7 +62,7 @@ onMounted(() => {
 .space__legend {
   position: absolute;
   right: var(--gutter);
-  bottom: 1.5rem;
+  top: 1.25rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 1rem;

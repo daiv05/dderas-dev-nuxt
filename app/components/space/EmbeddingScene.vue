@@ -40,7 +40,7 @@ const pointMaterial = new MeshBasicMaterial({ transparent: true, opacity: 0.85 }
 const mesh = new InstancedMesh(sphere, pointMaterial, points.length)
 const matrix = new Matrix4()
 points.forEach((p, i) => {
-  const s = 0.008 + p.weight * 0.016
+  const s = 0.005 + p.weight * 0.011
   matrix.makeScale(s, s, s)
   matrix.setPosition(p.position[0], p.position[1], p.position[2])
   mesh.setMatrixAt(i, matrix)
@@ -112,7 +112,7 @@ const buildQuery = () => {
 const highlightScale = () => {
   const hits = highlighted.value
   points.forEach((p, i) => {
-    const s = (0.008 + p.weight * 0.016) * (hits.has(i) ? 2.2 : 1)
+    const s = (0.005 + p.weight * 0.011) * (hits.has(i) ? 2.2 : 1)
     matrix.makeScale(s, s, s)
     matrix.setPosition(p.position[0], p.position[1], p.position[2])
     mesh.setMatrixAt(i, matrix)
@@ -151,7 +151,7 @@ onBeforeRender(({ delta }) => {
   const focus = cluster ? centroids.value[cluster] : null
   if (focus) {
     lookAt.set(focus[0], focus[1], focus[2]).applyMatrix4(cloud.matrixWorld)
-    target.set(lookAt.x * 0.6, lookAt.y * 0.6, 1.55)
+    target.set(lookAt.x * 0.95, lookAt.y * 0.95, 1.3)
   } else {
     lookAt.set(0, 0, 0)
     target.set(0, 0, 2.1)
