@@ -60,16 +60,13 @@ export default defineNuxtConfig({
     },
     families: [
       {
-        name: 'Roboto',
-        provider: 'none',
-      },
-      {
-        name: 'Epilogue',
-        weights: [400, 500, 600, 700],
+        name: 'Fraunces',
+        weights: [400, 600, 700],
+        styles: ['normal', 'italic'],
       },
       {
         name: 'JetBrains Mono',
-        weights: [400, 600],
+        weights: [400, 500],
       },
     ],
   },

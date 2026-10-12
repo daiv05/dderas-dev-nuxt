@@ -37,8 +37,10 @@
     "happy-dom": "^21.0.1",
     "rehype-mathjax": "^7.1.0",
     "remark-math": "^6.0.0",
+    "typescript": "~5.9",
     "vite-plugin-vuetify": "^2.1.2",
     "vitest": "^4.1.11",
+    "vue-tsc": "^3.3.13",
     "vuetify": "^4.0.1"
   }
 }
