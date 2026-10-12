@@ -81,67 +81,72 @@
   },
   "seo": {
     "siteName": "DDeras",
-    "twitterHandle": "daiv_09",
+    "twitterHandle": "",
     "defaults": {
-      "title": "Software Engineer",
-      "description": "Personal portfolio, real projects and technical articles about software engineering, web development and cloud deployments.",
+      "title": "Software Engineer — AI Agents, LLM & RAG Systems",
+      "description": "David Deras builds AI agents, retrieval-augmented generation pipelines and the full-stack platforms that run them. Case studies, experience and technical writing on machine learning.",
       "keywords": [
         "David Deras",
         "Software Engineer",
-        "Full Stack Developer",
-        "Frontend Developer",
-        "Backend Developer",
-        "AI-assisted development",
-        "Applied AI in development",
+        "AI Engineer",
+        "LLM",
+        "Large Language Models",
+        "RAG",
+        "Retrieval-Augmented Generation",
+        "AI Agents",
+        "Model Context Protocol",
+        "MCP",
+        "Machine Learning",
+        "Computer Vision",
+        "Embeddings",
+        "pgvector",
+        "Laravel",
         "Vue 3",
-        "Vue 2",
-        "Vue",
-        "Laravel 11",
-        "Vuetify",
-        "PrimeVue",
-        "TypeScript",
-        "GovTech",
-        "End-to-end web systems",
-        "El Salvador",
-        "DDeras"
+        "Python",
+        "FastAPI",
+        "Google Cloud",
+        "El Salvador"
       ],
       "author": "David Deras",
       "ogImage": "/punpun_OG.webp",
-      "ogImageAlt": "Projects and tutorials"
+      "ogImageAlt": "David Deras — AI agents, LLM and RAG systems"
     },
     "pages": {
       "home": {
-        "title": "Software Engineer",
-        "description": "Personal portfolio, real projects and technical articles about software engineering, web development and cloud deployments.",
+        "title": "Software Engineer — AI Agents, LLM & RAG Systems",
+        "description": "David Deras builds AI agents, retrieval-augmented generation pipelines and the full-stack platforms that run them. Case studies, experience and technical writing on machine learning.",
         "keywords": [
           "David Deras",
           "Software Engineer",
-          "Full Stack Developer",
-          "Frontend Developer",
-          "Backend Developer",
-          "AI-assisted development",
-          "Applied AI in development",
+          "AI Engineer",
+          "LLM",
+          "Large Language Models",
+          "RAG",
+          "Retrieval-Augmented Generation",
+          "AI Agents",
+          "Model Context Protocol",
+          "MCP",
+          "Machine Learning",
+          "Computer Vision",
+          "Embeddings",
+          "pgvector",
+          "Laravel",
           "Vue 3",
-          "Vue 2",
-          "Vue",
-          "Laravel 11",
-          "Vuetify",
-          "PrimeVue",
-          "TypeScript",
-          "GovTech",
-          "End-to-end web systems",
-          "El Salvador",
-          "DDeras"
+          "Python",
+          "FastAPI",
+          "Google Cloud",
+          "El Salvador"
         ]
       },
       "blog": {
         "title": "Blog & technical articles",
-        "description": "Notes, guides and solutions about web development that I use daily.",
+        "description": "Technical notes on machine learning, statistics, evaluation and the engineering behind AI systems.",
         "keywords": [
-          "Technical blog",
-          "Vue",
-          "Laravel",
-          "Web development"
+          "Machine Learning",
+          "Statistics",
+          "Model evaluation",
+          "AI",
+          "Blog"
         ]
       },
       "resources": {
@@ -212,9 +217,6 @@
       "clear": "Clear",
       "results": "result | results"
     }
-  },
-  "loader": {
-    "message": "Loading…"
   },
   "resources": {
     "eyebrow": "Useful resources",

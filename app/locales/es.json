@@ -81,67 +81,72 @@
   },
   "seo": {
     "siteName": "DDeras",
-    "twitterHandle": "daiv_09",
+    "twitterHandle": "",
     "defaults": {
-      "title": "Ingeniero de Software",
-      "description": "Portafolio personal, proyectos reales y artículos técnicos sobre ingeniería de software, desarrollo web y despliegues en la nube.",
+      "title": "Ingeniero de Software — Agentes de IA, LLM y RAG",
+      "description": "David Deras construye agentes de IA, pipelines de generación aumentada por recuperación y las plataformas full stack que los ejecutan. Casos de estudio, experiencia y escritura técnica sobre machine learning.",
       "keywords": [
         "David Deras",
         "Ingeniero de Software",
-        "Desarrollador Full Stack",
-        "Frontend Developer",
-        "Backend Developer",
-        "Desarrollo asistido por IA",
-        "IA aplicada al desarrollo",
+        "Ingeniero de IA",
+        "LLM",
+        "Modelos de lenguaje",
+        "RAG",
+        "Generación aumentada por recuperación",
+        "Agentes de IA",
+        "Model Context Protocol",
+        "MCP",
+        "Machine Learning",
+        "Visión por computadora",
+        "Embeddings",
+        "pgvector",
+        "Laravel",
         "Vue 3",
-        "Vue 2",
-        "Vue",
-        "Laravel 11",
-        "Vuetify",
-        "PrimeVue",
-        "TypeScript",
-        "GovTech",
-        "Sistemas full stack",
-        "El Salvador",
-        "DDeras"
+        "Python",
+        "FastAPI",
+        "Google Cloud",
+        "El Salvador"
       ],
       "author": "David Deras",
       "ogImage": "/punpun_OG.webp",
-      "ogImageAlt": "Proyectos y artículos técnicos"
+      "ogImageAlt": "David Deras — agentes de IA, LLM y RAG"
     },
     "pages": {
       "home": {
-        "title": "Ingeniero de Software",
-        "description": "Portafolio personal, proyectos reales y artículos técnicos sobre ingeniería de software, desarrollo web y despliegues en la nube.",
+        "title": "Ingeniero de Software — Agentes de IA, LLM y RAG",
+        "description": "David Deras construye agentes de IA, pipelines de generación aumentada por recuperación y las plataformas full stack que los ejecutan. Casos de estudio, experiencia y escritura técnica sobre machine learning.",
         "keywords": [
           "David Deras",
           "Ingeniero de Software",
-          "Desarrollador Full Stack",
-          "Frontend Developer",
-          "Backend Developer",
-          "Desarrollo asistido por IA",
-          "IA aplicada al desarrollo",
+          "Ingeniero de IA",
+          "LLM",
+          "Modelos de lenguaje",
+          "RAG",
+          "Generación aumentada por recuperación",
+          "Agentes de IA",
+          "Model Context Protocol",
+          "MCP",
+          "Machine Learning",
+          "Visión por computadora",
+          "Embeddings",
+          "pgvector",
+          "Laravel",
           "Vue 3",
-          "Vue 2",
-          "Vue",
-          "Laravel 11",
-          "Vuetify",
-          "PrimeVue",
-          "TypeScript",
-          "GovTech",
-          "Sistemas full stack",
-          "El Salvador",
-          "DDeras"
+          "Python",
+          "FastAPI",
+          "Google Cloud",
+          "El Salvador"
         ]
       },
       "blog": {
         "title": "Blog",
-        "description": "Apuntes, guías y soluciones sobre desarrollo web que uso a diario.",
+        "description": "Notas técnicas sobre machine learning, estadística, evaluación y la ingeniería detrás de los sistemas de IA.",
         "keywords": [
-          "Blog tech",
-          "Vue",
-          "Laravel",
-          "Desarrollo web"
+          "Machine Learning",
+          "Estadística",
+          "Evaluación de modelos",
+          "IA",
+          "Blog"
         ]
       },
       "resources": {
@@ -212,9 +217,6 @@
       "clear": "Limpiar",
       "results": "resultado | resultados"
     }
-  },
-  "loader": {
-    "message": "Cargando…"
   },
   "resources": {
     "eyebrow": "Recursos útiles",
