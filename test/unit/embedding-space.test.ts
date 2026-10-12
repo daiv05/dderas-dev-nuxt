@@ -76,3 +76,14 @@ describe('createFallbackSpace', () => {
     expect(space.points.length).toBeGreaterThanOrEqual(seeds.length)
   })
 })
+
+describe('generated embedding space', () => {
+  it('passes schema validation and has 300-800 points', async () => {
+    const generated = (await import('~/data/embedding-space.json')).default
+    const space = parseSpace(generated)
+    expect(space).not.toBeNull()
+    expect(space!.points.length).toBeGreaterThanOrEqual(300)
+    expect(space!.points.length).toBeLessThanOrEqual(800)
+    expect(space!.queries[0]?.neighbors).toHaveLength(5)
+  })
+})

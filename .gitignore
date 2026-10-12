@@ -29,3 +29,5 @@ logs
 
 **.local.**
 .superpowers/
+scripts/.venv/
+scripts/.cache/
