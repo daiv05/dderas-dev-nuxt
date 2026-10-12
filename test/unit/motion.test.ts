@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { decideMotion } from '~/utils/motion'
+import { decideMotion, shouldReveal } from '~/utils/motion'
 
 const base = { reducedMotion: false, webgl: true, saveData: false, cores: 8 }
 
@@ -21,5 +21,17 @@ describe('decideMotion', () => {
   })
   it('allows 3D when core count is unknown', () => {
     expect(decideMotion({ ...base, cores: null }).allow3d).toBe(true)
+  })
+})
+
+describe('shouldReveal', () => {
+  it('skips elements already inside the first viewport', () => {
+    expect(shouldReveal(120, 900)).toBe(false)
+  })
+  it('animates elements below the first viewport', () => {
+    expect(shouldReveal(1200, 900)).toBe(true)
+  })
+  it('animates elements that start right at the fold', () => {
+    expect(shouldReveal(900, 900)).toBe(true)
   })
 })

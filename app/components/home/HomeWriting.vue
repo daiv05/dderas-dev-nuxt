@@ -6,6 +6,7 @@
         v-for="post in latest"
         :key="post.slug"
         :to="localePath(`/blog/${post.slug}`)"
+        :prefetch="false"
         class="writing__post"
         data-reveal="line"
       >
@@ -26,11 +27,14 @@ const { t, locale } = useI18n()
 const localePath = useLocalePath()
 const { getPosts } = useBlog()
 
-const { data: posts } = await useAsyncData(() => `home-writing-${locale.value}`, () => getPosts(), {
+const { data: latest } = await useAsyncData(() => `home-writing-${locale.value}`, () => getPosts(), {
   watch: [locale],
+  transform: (posts) =>
+    posts
+      .filter((p) => p.slug)
+      .slice(0, 3)
+      .map((p) => ({ slug: p.slug, title: p.title, summary: p.summary, tags: p.tags?.slice(0, 1) })),
 })
-
-const latest = computed(() => (posts.value ?? []).filter((p) => p.slug).slice(0, 3))
 </script>
 
 <style scoped>

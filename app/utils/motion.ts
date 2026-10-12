@@ -18,3 +18,10 @@ export function decideMotion(signals: MotionSignals): MotionDecision {
   const lowEnd = signals.cores !== null && signals.cores <= 4
   return { allowMotion: true, allow3d: signals.webgl && !signals.saveData && !lowEnd }
 }
+
+/**
+ * Indica si un elemento debe animarse al entrar: los que ya están visibles en la primera pantalla se muestran sin animación.
+ */
+export function shouldReveal(documentTop: number, viewportHeight: number): boolean {
+  return documentTop >= viewportHeight
+}

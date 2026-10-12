@@ -1,8 +1,10 @@
 <template>
   <div class="space" :class="{ 'space--live': showCanvas }">
-    <div class="space__fallback">
-      <EmbeddingFallback />
-    </div>
+    <ClientOnly>
+      <div class="space__fallback">
+        <EmbeddingFallback />
+      </div>
+    </ClientOnly>
     <LazyEmbeddingCanvas v-if="showCanvas" class="space__canvas" @error="failed = true" />
     <ul class="space__legend mono" :aria-label="t('home.space.legend')">
       <li
@@ -33,8 +35,14 @@ onMounted(() => {
     idle.value = true
   }
   const ric = (globalThis as typeof globalThis & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback
-  if (ric) ric(start, { timeout: 1500 })
-  else setTimeout(start, 600)
+  const schedule = () => {
+    setTimeout(() => {
+      if (ric) ric(start, { timeout: 2000 })
+      else start()
+    }, 1200)
+  }
+  if (document.readyState === 'complete') schedule()
+  else globalThis.addEventListener('load', schedule, { once: true })
 })
 </script>
 

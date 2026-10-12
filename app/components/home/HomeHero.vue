@@ -42,6 +42,8 @@ const { t } = useI18n()
 .hero__copy {
   position: relative;
   z-index: 1;
+  width: 100%;
+  min-width: 0;
   max-width: 36rem;
 }
 
@@ -53,7 +55,8 @@ const { t } = useI18n()
 }
 
 .hero__title {
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  overflow-wrap: break-word;
   line-height: 1;
   letter-spacing: -0.03em;
   margin: 1rem 0 1.25rem;

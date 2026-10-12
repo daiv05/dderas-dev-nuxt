@@ -33,7 +33,7 @@
       <li v-for="(r, i) in results" :key="r.id" class="query__result">
         <span class="query__rank mono">{{ String(i + 1).padStart(2, '0') }}</span>
         <span :class="['query__dot', `is-${r.cluster}`]" aria-hidden="true"></span>
-        <NuxtLink v-if="r.href" :to="localeHref(r.href)" class="query__label">{{ r.label }}</NuxtLink>
+        <NuxtLink v-if="r.href" :to="localeHref(r.href)" :prefetch="false" class="query__label">{{ r.label }}</NuxtLink>
         <span v-else class="query__label">{{ r.label }}</span>
       </li>
     </ol>
@@ -126,7 +126,9 @@ onBeforeUnmount(stopTyping)
 <style scoped>
 .query {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.75rem;
+  min-width: 0;
   max-width: 34rem;
 }
 
@@ -156,7 +158,7 @@ onBeforeUnmount(stopTyping)
 }
 
 .query__input::placeholder {
-  color: color-mix(in srgb, var(--paper) 55%, transparent);
+  color: color-mix(in srgb, var(--paper) 72%, transparent);
 }
 
 .query__input::-webkit-search-cancel-button {
@@ -170,7 +172,7 @@ onBeforeUnmount(stopTyping)
 
 .query__meta {
   font-size: 0.65rem;
-  color: color-mix(in srgb, var(--paper) 55%, transparent);
+  color: color-mix(in srgb, var(--paper) 78%, transparent);
 }
 
 .query__chips {
@@ -187,6 +189,8 @@ onBeforeUnmount(stopTyping)
   border: 1px solid var(--rule);
   border-radius: var(--radius-sm);
   padding: 0.3rem 0.55rem;
+  max-width: 100%;
+  text-align: left;
   cursor: pointer;
   transition: color var(--transition-fast), border-color var(--transition-fast);
 }
@@ -246,6 +250,7 @@ onBeforeUnmount(stopTyping)
 }
 
 .query__label {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

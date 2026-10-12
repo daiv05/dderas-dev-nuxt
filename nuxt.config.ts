@@ -1,5 +1,3 @@
-import tresTemplateOptions from "@tresjs/core/template-compiler-options";
-
 import { projectList } from "./app/data/projects";
 
 const SITE_URL = import.meta.env.NUXT_PUBLIC_SITE_URL || "https://deras.dev";
@@ -64,6 +62,10 @@ export default defineNuxtConfig({
   css: ["~/assets/styles/global.css"],
 
   components: [{ path: "~/components", pathPrefix: false }],
+
+  features: {
+    inlineStyles: true,
+  },
 
   fonts: {
     provider: 'google',
@@ -144,11 +146,6 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: ["vue-mermaid-render"],
-    },
-  },
-  vue: {
-    compilerOptions: {
-      isCustomElement: tresTemplateOptions.template.compilerOptions.isCustomElement,
     },
   },
 });

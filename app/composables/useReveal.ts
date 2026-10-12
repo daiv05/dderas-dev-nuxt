@@ -1,5 +1,7 @@
 import type { Ref } from 'vue'
 
+import { shouldReveal } from '~/utils/motion'
+
 const parseCount = (text: string) => {
   const match = text.match(/^([^\d]*)([\d,.]+)(.*)$/)
   if (!match) return null
@@ -25,8 +27,11 @@ export function useReveal(root: Ref<HTMLElement | null>) {
     const ScrollTrigger = nuxtApp.$ScrollTrigger
     if (!gsap || !ScrollTrigger) return
 
+    const below = (target: HTMLElement) => shouldReveal(target.getBoundingClientRect().top + globalThis.scrollY, globalThis.innerHeight)
+
     ctx = gsap.context(() => {
       el.querySelectorAll<HTMLElement>('[data-reveal="line"]').forEach((target, i) => {
+        if (!below(target)) return
         gsap.from(target, {
           opacity: 0,
           y: '0.6em',
@@ -38,6 +43,7 @@ export function useReveal(root: Ref<HTMLElement | null>) {
       })
 
       el.querySelectorAll<HTMLElement>('[data-reveal="rule"]').forEach((target) => {
+        if (!below(target)) return
         gsap.from(target, {
           scaleX: 0,
           transformOrigin: 'left center',
