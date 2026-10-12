@@ -394,5 +394,8 @@
     "dataset": "Dataset",
     "features": "Highlights",
     "stack": "Stack"
+  },
+  "loader": {
+    "message": "Loading…"
   }
 }

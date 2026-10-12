@@ -394,5 +394,8 @@
     "dataset": "Dataset",
     "features": "Puntos clave",
     "stack": "Stack"
+  },
+  "loader": {
+    "message": "Cargando…"
   }
 }
