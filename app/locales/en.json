@@ -641,5 +641,32 @@
   "footer": {
     "role": "Software Engineer · AI agents, LLM & RAG systems",
     "label": "Footer links"
+  },
+  "home": {
+    "space": {
+      "legend": "Clusters in the embedding space"
+    },
+    "query": {
+      "label": "Search my work by meaning",
+      "placeholder": "ask something…",
+      "results": "Nearest neighbors",
+      "suggested": "Suggested queries"
+    },
+    "build": {
+      "clusters": {
+        "agents": {
+          "tag": "Agents"
+        },
+        "rag": {
+          "tag": "RAG"
+        },
+        "ml": {
+          "tag": "ML"
+        },
+        "fullstack": {
+          "tag": "Full stack"
+        }
+      }
+    }
   }
 }

@@ -637,5 +637,32 @@
   "footer": {
     "role": "Ingeniero de Software · agentes de IA, LLM y RAG",
     "label": "Enlaces del pie de página"
+  },
+  "home": {
+    "space": {
+      "legend": "Cúmulos del espacio de embeddings"
+    },
+    "query": {
+      "label": "Busca en mi trabajo por significado",
+      "placeholder": "pregunta algo…",
+      "results": "Vecinos más cercanos",
+      "suggested": "Consultas sugeridas"
+    },
+    "build": {
+      "clusters": {
+        "agents": {
+          "tag": "Agentes"
+        },
+        "rag": {
+          "tag": "RAG"
+        },
+        "ml": {
+          "tag": "ML"
+        },
+        "fullstack": {
+          "tag": "Full stack"
+        }
+      }
+    }
   }
 }

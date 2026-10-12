@@ -18,6 +18,7 @@
     "@nuxtjs/i18n": "^10.2.3",
     "@nuxtjs/sitemap": "^7.5.2",
     "@pinia/nuxt": "^0.11.2",
+    "@tresjs/core": "^5.9.3",
     "better-sqlite3": "^12.5.0",
     "eslint": "^9.39.2",
     "gsap": "^3.14.2",
@@ -25,12 +26,14 @@
     "nuxt": "^4.2.2",
     "rehype-katex": "^7.0.1",
     "sass": "^1.72.0",
+    "three": "^0.186.1",
     "vue": "3.5.30",
     "vue-mermaid-render": "^0.2.0",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@nuxt/test-utils": "^4.3.3",
+    "@types/three": "^0.186.0",
     "@vue/eslint-config-prettier": "^10.2.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unused-imports": "^4.3.0",
