@@ -38,7 +38,7 @@ export default withNuxt({
     "import/no-unresolved": [
       "error",
       {
-        ignore: ["^~/", "^@/", "^#app", "^#imports", "^node:", "^virtual:"],
+        ignore: ["^~/", "^@/", "^#app", "^#imports", "^node:", "^virtual:", "^[.]/app/"],
       },
     ],
     "import/newline-after-import": ["warn", { count: 1 }],

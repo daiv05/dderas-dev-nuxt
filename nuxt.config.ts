@@ -1,6 +1,10 @@
 import tresTemplateOptions from "@tresjs/core/template-compiler-options";
 
+import { projectList } from "./app/data/projects";
+
 const SITE_URL = import.meta.env.NUXT_PUBLIC_SITE_URL || "https://deras.dev";
+
+const workRoutes = projectList.flatMap((p) => [`/work/${p.id}`, `/es/work/${p.id}`]);
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -9,15 +13,22 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/sitemap.xml', '/robots.txt'],
+      routes: ['/sitemap.xml', '/robots.txt', ...workRoutes],
     },
+  },
+
+  routeRules: {
+    '/about': { redirect: '/#experience' },
+    '/es/about': { redirect: '/es#experience' },
+    '/projects': { redirect: '/work' },
+    '/es/projects': { redirect: '/es/work' },
   },
 
   site: {
     url: SITE_URL,
     name: "DDeras",
     description:
-      "Personal website and blog of David Deras - Full-Stack Developer",
+      "David Deras - Software Engineer building AI agents, LLM and RAG systems, and machine learning.",
   },
 
   sitemap: {

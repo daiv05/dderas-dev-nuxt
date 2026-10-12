@@ -134,26 +134,6 @@
           "DDeras"
         ]
       },
-      "me": {
-        "title": "Un poco sobre mí",
-        "description": "Mi experiencia, aprendizaje y en qué he trabajado.",
-        "keywords": [
-          "David Deras",
-          "Perfil profesional",
-          "Experiencia",
-          "DDeras",
-          "daiv05"
-        ]
-      },
-      "projects": {
-        "title": "Proyectos",
-        "description": "Aplicaciones reales en las que he trabajado y cómo las construí.",
-        "keywords": [
-          "Proyectos",
-          "Casos reales",
-          "Portafolio"
-        ]
-      },
       "blog": {
         "title": "Blog",
         "description": "Apuntes, guías y soluciones sobre desarrollo web que uso a diario.",
@@ -173,6 +153,19 @@
           "Libros",
           "Herramientas",
           "UES"
+        ]
+      },
+      "work": {
+        "title": "Trabajo",
+        "description": "Casos de estudio: clasificador offline de enfermedades del maíz, PWA de gestión de incidencias, una app de anotación para Windows y más.",
+        "keywords": [
+          "David Deras",
+          "Casos de estudio",
+          "Machine Learning",
+          "IA en el borde",
+          "Laravel",
+          "Vue 3",
+          "Tauri"
         ]
       }
     }
@@ -384,5 +377,20 @@
       "results": "Vecinos más cercanos",
       "suggested": "Consultas sugeridas"
     }
+  },
+  "work": {
+    "eyebrow": "Archivo",
+    "title": "Trabajo",
+    "lead": "Sistemas, productos y experimentos, desde IA en el borde en un teléfono hasta plataformas del sector público.",
+    "back": "Todo el trabajo",
+    "client": "Contexto",
+    "year": "Año",
+    "result": "Resultado",
+    "links": "Enlaces",
+    "live": "En vivo",
+    "repo": "Código",
+    "dataset": "Dataset",
+    "features": "Puntos clave",
+    "stack": "Stack"
   }
 }

@@ -241,18 +241,20 @@ export const projectList: Project[] = [
   },
   {
     "id": "dderas-dev",
-    "date": "2025",
+    "date": "2026",
     "tags": [
       "Nuxt 4",
       "Vue 3",
-      "Vuetify 4",
+      "TresJS",
+      "Three.js",
       "GSAP",
-      "Pinia",
+      "Lenis",
       "Nuxt Content",
       "i18n",
       "SSG",
       "TypeScript",
-      "SASS"
+      "Python",
+      "UMAP"
     ],
     "featured": false,
     "cluster": "fullstack",
@@ -271,40 +273,36 @@ export const projectList: Project[] = [
     "translations": {
       "en": {
         "name": "Personal Portfolio & Blog - deras.dev",
-        "description": "My own website: a project portfolio and technical blog built with Nuxt 4 and Vuetify 4. Also a living experiment where I try things as I learn them.",
-        "longDescription": "deras.dev is my personal portfolio and full-stack development blog, built with Nuxt 4, Vue 3, and Vuetify 4. The goal was to have my own space to showcase projects and publish technical articles in both English and Spanish, without depending on third-party platforms.\n\nI chose Nuxt 4 over a conventional SPA to take advantage of SSG (Static Site Generation): the site is fully pre-rendered at build time, which gives near-instant load and real SEO with no extra configuration. @nuxtjs/sitemap automatically generates the sitemap with hreflang support for both locales.\n\nFor the blog I used @nuxt/content v3 with Markdown; I defined two separate collections (content_en and content_es) with their own route prefixes, validated with Zod. The advantage is that content lives in .md files versioned in git - no CMS or database needed.\n\nThe i18n system uses @nuxtjs/i18n with prefix_except_default strategy - English at the root, Spanish under /es/ - with automatic browser language detection and a preference cookie. UI translations live in separate JSON files.\n\nFor animations I used GSAP with ScrollTrigger. The biggest challenge was that Vuetify uses its own scroll container (.shell-main) instead of window, which breaks ScrollTrigger by default. I implemented a client-only plugin that detects the right scroller with retries, plus a native scroll listener fallback system to guarantee animations fire even when ScrollTrigger doesn't initialize in time (especially on mobile).\n\nVuetify 4 integrates with Vite using vite-plugin-vuetify with autoImport. Icons use pure MDI SVG (no icon font), reducing bundle size. The theme (light/dark) is managed with Pinia, synchronized with Vuetify in an SSR-safe way: the server reads the theme from the store and the client applies it to the DOM without hydration mismatches.\n\nThe font stack uses @nuxt/fonts with Epilogue for body text and JetBrains Mono for code, loaded from Google Fonts with automatic subsetting.",
+        "description": "This site: a static, bilingual portfolio where the 3D background is a real embedding space of my own work, plus a technical blog.",
+        "longDescription": "deras.dev is my portfolio and technical blog, built with Nuxt 4 and fully prerendered as a static site in English and Spanish.\n\nThe point cloud behind the home page is not decoration. A local script exports every project, experience bullet, capability and blog paragraph, embeds them with sentence-transformers (all-MiniLM-L6-v2), reduces the vectors to 3D with UMAP and writes a versioned JSON file. The page renders that space with TresJS and Three.js: one instanced mesh for the points, line segments for nearest-neighbor edges, and a camera that travels to each cluster as you scroll.\n\nThe live query in the hero is a real top-k similarity search: suggested queries are embedded ahead of time with the same model, so the browser only reads precomputed neighbors and no model runs on the client. Free text resolves to the closest suggested query by keyword overlap.\n\nPerformance and accessibility shaped the architecture. All content is real HTML, the 3D canvas loads only on the client after the first paint, caps its pixel ratio and pauses when hidden, and visitors with reduced motion, no WebGL, save-data or low-end devices get a static SVG of the same space.\n\nThe design system is custom (Fraunces and JetBrains Mono on a warm paper palette) and replaced Vuetify entirely. Motion uses GSAP with ScrollTrigger and Lenis, and the blog keeps using @nuxt/content with KaTeX and Mermaid.",
         "client": "Personal project",
         "category": "Portfolio / Technical blog",
-        "technologies": "Nuxt 4, Vue 3, Vuetify 4, GSAP 3 + ScrollTrigger, Pinia, @nuxt/content v3, @nuxtjs/i18n, @nuxtjs/sitemap, TypeScript, SASS, SSG",
+        "technologies": "Nuxt 4, Vue 3, TresJS, Three.js, GSAP + ScrollTrigger, Lenis, @nuxt/content, @nuxtjs/i18n, TypeScript, Python (sentence-transformers, UMAP), Vitest",
         "features": [
-          "Full SSG - build-time rendering with route prerendering and sitemap",
-          "Bilingual blog (en/es) with Markdown, syntax highlighting, and automatic ToC",
-          "Internationalization with @nuxtjs/i18n, browser detection and cookie persistence",
-          "Scroll animations with GSAP + ScrollTrigger, native scroll fallback for mobile",
-          "Dark/light theme managed with Pinia, SSR-safe sync with Vuetify (no hydration mismatch)",
-          "MDI icons as pure SVGs - no full icon font loaded",
-          "Structured SEO: per-page meta tags, per-locale hreflang, automatic sitemap",
-          "Epilogue + JetBrains Mono fonts with automatic subsetting via @nuxt/fonts",
-          "ESLint with unused-imports rules and integrated Prettier"
+          "Real embedding space of my own content, reduced to 3D with UMAP",
+          "Live top-k similarity query over precomputed neighbors",
+          "TresJS scene with instanced points and scroll-driven camera",
+          "Static SVG fallback for reduced motion, no WebGL and low-end devices",
+          "Custom Field Notes design system with light and dark themes",
+          "Bilingual static site with sitemap and hreflang",
+          "Blog with Markdown, KaTeX and Mermaid"
         ]
       },
       "es": {
         "name": "Portfolio & Blog Personal - deras.dev",
-        "description": "Mi propio sitio web: portfolio de proyectos y blog técnico construido con Nuxt 4 y Vuetify 4. Un proyecto donde también experimento con lo que aprendo.",
-        "longDescription": "deras.dev es mi portfolio personal y blog de desarrollo full-stack, construido con Nuxt 4, Vue 3 y Vuetify 4. El objetivo era tener un espacio propio donde mostrar proyectos y publicar artículos técnicos en español e inglés, sin depender de plataformas de terceros.\n\nElegí Nuxt 4 sobre un SPA convencional para aprovechar el SSG (Static Site Generation): el sitio se pre-renderiza completo en build time, lo que da carga casi instantánea y un SEO real sin configuración extra. @nuxtjs/sitemap genera automáticamente el sitemap con soporte hreflang para ambos idiomas.\n\nPara el blog usé @nuxt/content v3 con Markdown; definí dos colecciones separadas (content_en y content_es) con sus propios prefijos de ruta, validadas con Zod. La ventaja es que el contenido vive en archivos .md versionados en git, sin necesidad de CMS ni base de datos.\n\nEl sistema de internacionalización usa @nuxtjs/i18n con estrategia prefix_except_default - inglés en la raíz, español bajo /es/ - con detección automática del idioma del navegador y cookie de preferencia. Las traducciones de la UI van en archivos JSON separados.\n\nPara animaciones usé GSAP con ScrollTrigger. El mayor reto fue que Vuetify usa su propio contenedor de scroll (.shell-main) en vez del window, lo que rompe ScrollTrigger por defecto. Implementé un plugin cliente que detecta el scroller correcto con reintentos, y un sistema de fallback con listeners de scroll nativos para garantizar que las animaciones se disparen aunque ScrollTrigger no inicialice a tiempo (especialmente en mobile).\n\nVuetify 4 se integra con Vite usando vite-plugin-vuetify con autoImport. Los iconos son MDI SVG puro (sin fuente icon), lo que reduce el bundle. El tema (light/dark) se gestiona con Pinia, sincronizado con Vuetify de forma SSR-safe: el servidor lee el tema del store y el cliente lo aplica al DOM sin hydration mismatch.\n\nEl stack de fuentes usa @nuxt/fonts con Epilogue para textos y JetBrains Mono para código, cargadas desde Google Fonts con subsetting automático.",
+        "description": "Este sitio: un portafolio estático y bilingüe donde el fondo 3D es un espacio de embeddings real de mi propio trabajo, más un blog técnico.",
+        "longDescription": "deras.dev es mi portafolio y blog técnico, construido con Nuxt 4 y prerenderizado por completo como sitio estático en inglés y español.\n\nLa nube de puntos detrás de la página principal no es decoración. Un script local exporta cada proyecto, logro de experiencia, capacidad y párrafo del blog, los convierte en embeddings con sentence-transformers (all-MiniLM-L6-v2), reduce los vectores a 3D con UMAP y escribe un JSON versionado. La página dibuja ese espacio con TresJS y Three.js: un único mesh instanciado para los puntos, segmentos de línea para las aristas entre vecinos cercanos y una cámara que viaja a cada cúmulo mientras haces scroll.\n\nLa consulta en vivo del hero es una búsqueda real top-k por similitud: las consultas sugeridas se convierten en embeddings de antemano con el mismo modelo, así que el navegador solo lee vecinos precalculados y no corre ningún modelo en el cliente. El texto libre se resuelve a la consulta sugerida más cercana por palabras clave.\n\nEl rendimiento y la accesibilidad definieron la arquitectura. Todo el contenido es HTML real, el canvas 3D se carga solo en el cliente después del primer pintado, limita su resolución y se pausa cuando no está visible, y quienes tienen movimiento reducido, no tienen WebGL, usan ahorro de datos o equipos de gama baja ven un SVG estático del mismo espacio.\n\nEl sistema de diseño es propio (Fraunces y JetBrains Mono sobre una paleta cálida de papel) y reemplazó por completo a Vuetify. El movimiento usa GSAP con ScrollTrigger y Lenis, y el blog sigue usando @nuxt/content con KaTeX y Mermaid.",
         "client": "Proyecto personal",
         "category": "Portfolio / Blog técnico",
-        "technologies": "Nuxt 4, Vue 3, Vuetify 4, GSAP 3 + ScrollTrigger, Pinia, @nuxt/content v3, @nuxtjs/i18n, @nuxtjs/sitemap, TypeScript, SASS, SSG",
+        "technologies": "Nuxt 4, Vue 3, TresJS, Three.js, GSAP + ScrollTrigger, Lenis, @nuxt/content, @nuxtjs/i18n, TypeScript, Python (sentence-transformers, UMAP), Vitest",
         "features": [
-          "SSG completo - build time rendering con prerenderizado de rutas y sitemap",
-          "Blog bilingüe (en/es) con Markdown, syntax highlighting y ToC automático",
-          "Internacionalización con @nuxtjs/i18n, detección por navegador y persistencia en cookie",
-          "Animaciones de scroll con GSAP + ScrollTrigger, con fallback nativo para mobile",
-          "Tema dark/light gestionado con Pinia, sincronizado con Vuetify sin hydration mismatch",
-          "Íconos MDI en SVG puro, sin cargar fuente de iconos completa",
-          "SEO estructurado: meta tags por página, hreflang por locale, sitemap automático",
-          "Tipografías Epilogue + JetBrains Mono con subsetting automático vía @nuxt/fonts",
-          "ESLint con reglas de imports sin usar y prettier integrado"
+          "Espacio de embeddings real de mi propio contenido, reducido a 3D con UMAP",
+          "Consulta top-k en vivo sobre vecinos precalculados",
+          "Escena TresJS con puntos instanciados y cámara guiada por el scroll",
+          "Respaldo SVG estático para movimiento reducido, sin WebGL y equipos de gama baja",
+          "Sistema de diseño propio Field Notes con temas claro y oscuro",
+          "Sitio estático bilingüe con sitemap y hreflang",
+          "Blog en Markdown con KaTeX y Mermaid"
         ]
       }
     }

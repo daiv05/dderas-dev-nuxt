@@ -134,26 +134,6 @@
           "DDeras"
         ]
       },
-      "me": {
-        "title": "A bit about me",
-        "description": "My experience, learning, and what I have worked on.",
-        "keywords": [
-          "David Deras",
-          "Professional profile",
-          "Experience",
-          "DDeras",
-          "daiv05"
-        ]
-      },
-      "projects": {
-        "title": "Projects",
-        "description": "Real applications I have worked on and how I built them.",
-        "keywords": [
-          "Projects",
-          "Case studies",
-          "Portfolio"
-        ]
-      },
       "blog": {
         "title": "Blog & technical articles",
         "description": "Notes, guides and solutions about web development that I use daily.",
@@ -173,6 +153,19 @@
           "Books",
           "Tools",
           "UES"
+        ]
+      },
+      "work": {
+        "title": "Work",
+        "description": "Case studies: offline maize disease classifier, incident management PWA, a Windows annotation app and more.",
+        "keywords": [
+          "David Deras",
+          "Case studies",
+          "Machine Learning",
+          "Edge AI",
+          "Laravel",
+          "Vue 3",
+          "Tauri"
         ]
       }
     }
@@ -384,5 +377,20 @@
       "results": "Nearest neighbors",
       "suggested": "Suggested queries"
     }
+  },
+  "work": {
+    "eyebrow": "Archive",
+    "title": "Work",
+    "lead": "Systems, products and experiments, from edge AI on a phone to public-sector platforms.",
+    "back": "All work",
+    "client": "Context",
+    "year": "Year",
+    "result": "Result",
+    "links": "Links",
+    "live": "Live",
+    "repo": "Code",
+    "dataset": "Dataset",
+    "features": "Highlights",
+    "stack": "Stack"
   }
 }
