@@ -1,5 +1,4 @@
 <template>
-  <SplashScreen />
   <NuxtRouteAnnouncer />
   <NuxtLayout>
     <NuxtPage />
@@ -7,6 +6,8 @@
 </template>
 
 <script setup lang="ts">
+import { themeBootScript } from '~/utils/theme'
+
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const route = useRoute()
@@ -58,6 +59,7 @@ useHead(() => {
       lang: locale.value,
       class: appStore.theme === 'dark' ? 'dark' : ''
     },
+    script: [{ key: 'theme-boot', innerHTML: themeBootScript, tagPosition: 'head' as const }],
     link,
   }
 })
