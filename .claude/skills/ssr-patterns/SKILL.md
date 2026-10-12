@@ -1,17 +1,25 @@
 ---
 name: ssr-patterns
-description: SSR-safe patterns for Nuxt 4 - useAsyncData, useCookie, ClientOnly, hydration, scrollers. Use when facing hydration mismatches or accessing window/document.
+description: SSR-safe patterns for Nuxt 4 - useAsyncData, useCookie, useState, ClientOnly, .client components, hydration, window scrolling. Use when facing hydration mismatches or accessing window/document/WebGL.
 ---
 
 # SSR and Nuxt Patterns
 
 > Guards, hydration, cookies and SSR-safe patterns for Nuxt 4 with SSR enabled.
 
+## Key files
+
+- `app/composables/useMotionPreference.ts` - client-only signals exposed through `useState`
+- `app/components/space/EmbeddingSpace.vue` - lazy client-only canvas
+- `app/components/space/EmbeddingCanvas.client.vue` - `.client` component using WebGL
+- `app/plugins/gsap.client.ts`, `app/plugins/lenis.client.ts` - client-only plugins
+- `app/components/ThemeToggle.vue` - `ClientOnly` with fallback
+
 ## Client/server guards
 
 ```ts
-import.meta.server   // true during SSR
-import.meta.client   // true in the browser
+import.meta.server
+import.meta.client
 ```
 
 Use `<ClientOnly>` in templates instead of `v-if` with `import.meta.client`.
@@ -20,93 +28,82 @@ Use `<ClientOnly>` in templates instead of `v-if` with `import.meta.client`.
 
 ```vue
 <ClientOnly>
-  <!-- Only renders on the client -->
-  <ComponentWithWindow />
+  <UiIcon :name="appStore.theme === 'dark' ? 'sun' : 'moon'" :size="18" />
   <template #fallback>
-    <div>Loading...</div>
+    <UiIcon name="moon" :size="18" />
   </template>
 </ClientOnly>
 ```
 
-Use when accessing `window`, `document`, `localStorage`, or Vuetify's `useDisplay()`.
+## Client-only components and plugins
 
-## useAsyncData - correct pattern
+- A `.client.vue` suffix (`EmbeddingCanvas.client.vue`) or `.client.ts` suffix (`gsap.client.ts`, `lenis.client.ts`) keeps the file out of SSR
+- Heavy client components are loaded lazily and only after readiness: `<LazyEmbeddingCanvas v-if="showCanvas" />`
+- Plugin helpers can be absent on the server; read them through `useNuxtApp().$gsap`, `$ScrollTrigger`, `$lenis` and guard for `undefined` or `null`
+
+## Shared client state with useState
+
+```ts
+const allowMotion = useState('motion:allow', () => false)
+const allow3d = useState('motion:allow3d', () => false)
+const ready = useState('motion:ready', () => false)
+
+onMounted(() => {
+  if (ready.value) return
+  allowMotion.value = true
+  ready.value = true
+})
+```
+
+Server render uses the default `false` values, and they are only changed in `onMounted`, so the hydrated markup matches. Gate any motion or WebGL output on `ready` and the flags.
+
+## useAsyncData
 
 ```ts
 const { locale } = useI18n()
 
 const { data, pending, error } = await useAsyncData(
-  () => `unique-key-${parameter.value}-${locale.value}`,  // key as a function if it depends on reactives
+  () => `unique-key-${parameter.value}-${locale.value}`,
   () => fetchFunction(parameter.value),
-  { watch: [parameter, locale] }  // watch: [locale] is mandatory if the fetch depends on the language
+  { watch: [parameter, locale] }
 )
 ```
 
-- The key must be unique per route/language/parameter
-- `watch: [locale]` triggers automatic refetch on language change
+- The key must be unique per route, language and parameter
+- `watch: [locale]` is mandatory when the fetch depends on the language
 
-## useCookie - SSR-safe persistence
+## useCookie
 
 ```ts
 const value = useCookie<string>('cookie-name', {
   default: () => 'default-value',
   sameSite: 'lax'
 })
-// Read: value.value  |  Write: value.value = 'new'
 ```
 
-Do not use `localStorage` directly; use `useCookie`.
+## Scrolling
 
-## isHydrated - avoid mismatch
+All scrolling happens on `window`, handled by Lenis on the client.
 
 ```ts
-const isHydrated = ref(false)
+const onScroll = () => {
+  scrolled.value = globalThis.scrollY > 8
+}
 
 onMounted(() => {
-  nextTick(() => {
-    isHydrated.value = true
-    // now it is safe to access the DOM/window
-  })
+  globalThis.addEventListener('scroll', onScroll, { passive: true })
 })
 
-// In a computed that may differ between SSR and client:
-const computedValue = computed(() => {
-  if (!isHydrated.value) return ssrValue
-  return clientValue
+onBeforeUnmount(() => {
+  globalThis.removeEventListener('scroll', onScroll)
 })
-```
-
-## Project scrollers
-
-```ts
-import { getMainScroller } from '~/plugins/gsap'
-
-const scroller = getMainScroller()  // HTMLElement | null in SSR
-// default layout → .shell-main
-// blog layout    → .blog-main
-```
-
-- Do not use `window.scrollY` directly; it may differ between scrollers
-- `getMainScroller()` returns `null` in SSR - guard it with `import.meta.client`
-
-## Programmatic navigation
-
-```ts
-const localePath = useLocalePath()
-
-navigateTo(localePath('/about'))
-navigateTo(localePath('/blog/my-slug'), { replace: true })
-
-// New tab
-const router = useRouter()
-const url = router.resolve(localePath('/blog')).href
-globalThis.open(url, '_blank')
 ```
 
 ## Restrictions
 
-- Do not access `window` or `document` outside of `onMounted` or `import.meta.client` guards
+- Do not access `window`, `document` or `navigator` outside `onMounted` or `import.meta.client` guards
+- Do not create custom scroll containers; scroll on `window`
 - Do not use `$router.push()` without `localePath()`
 - Do not use `localStorage` for persistence; use `useCookie()`
-- Vuetify's `useDisplay()` only works inside `<ClientOnly>` or `onMounted`
-- Do not call `getMainScroller()` in SSR (returns null, won't throw but is useless)
+- Do not render WebGL, GSAP or Lenis output during SSR
+- Do not initialize `useState` motion flags to `true` on the server

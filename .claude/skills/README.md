@@ -1,9 +1,6 @@
 # Project Skills
 
-Reference skills that synthesize the conventions, APIs and standards of this
-project (Nuxt 4 + Vuetify 4 + i18n + @nuxt/content v3 + GSAP + Pinia). They let
-an agent act with full project context without re-exploring the codebase on
-every task.
+Reference skills that synthesize the conventions, APIs and standards of this project (Nuxt 4 + i18n + @nuxt/content v3 + three.js + GSAP + Lenis + Pinia + Vitest). They let an agent act with full project context without re-exploring the codebase on every task.
 
 ## How they work
 
@@ -13,36 +10,31 @@ Each skill lives in its own folder with a `SKILL.md` file:
 .claude/skills/<name>/SKILL.md
 ```
 
-The Claude Code harness **auto-discovers** any `.claude/skills/<name>/SKILL.md`
-- no `settings.json` change is required. The frontmatter `description` is what
-the harness reads to decide when a skill is relevant, so it must name the
-symbols / files / tasks that should trigger loading it.
+The Claude Code harness **auto-discovers** any `.claude/skills/<name>/SKILL.md` - no `settings.json` change is required. The frontmatter `description` is what the harness reads to decide when a skill is relevant, so it must name the symbols / files / tasks that should trigger loading it.
 
 ## Available skills
 
 | Skill | Covers | Primary project files |
 |-------|--------|-----------------------|
-| `css-system` | CSS variables, utility classes, theme colors | `app/assets/styles/*` |
-| `app-store` | Pinia store (theme/language), cookie persistence | `app/stores/app.ts` |
-| `ssr-patterns` | SSR guards, hydration, useCookie, scrollers | (cross-cutting) |
-| `i18n` | Bilingual EN/ES, useI18n, localePath | `app/locales/*.json`, `nuxt.config.ts` |
-| `composables` | useBlog, usePageSeo, useEnterAnimations, etc. | `app/composables/*` |
+| `css-system` | Global stylesheets, utility classes, dark mode | `app/assets/styles/*` |
+| `design-system` | Field Notes tokens, fonts, Ui primitives, icons | `app/assets/styles/tokens.css`, `app/components/ui/*`, `app/utils/icons.ts` |
+| `embedding-space` | 3D embedding space, query console, scroll story, data generation | `app/components/space/*`, `app/composables/useEmbeddingSpace.ts`, `app/utils/embedding-space.ts`, `scripts/*` |
+| `app-store` | Pinia store (theme/language), cookie persistence, theme class | `app/stores/app.ts`, `app/app.vue` |
+| `ssr-patterns` | SSR guards, hydration, useCookie, useState, client-only components | (cross-cutting) |
+| `i18n` | Bilingual EN/ES, useI18n, localePath, key namespaces | `app/locales/*.json`, `nuxt.config.ts` |
+| `composables` | useBlog, usePageSeo, useReveal, useMotionPreference, etc. | `app/composables/*` |
 | `seo` | usePageSeo(), ogType, `seo.*` locale structure | `app/composables/usePageSeo.ts`, locales |
-| `gsap-animations` | GSAP plugin, animateInOnEnter, getMainScroller | `app/plugins/gsap.ts`, `app/composables/useEnterAnimations.ts` |
-| `vuetify` | Vuetify 4, themes, MDI icons, useDisplay() | `app/plugins/vuetify.ts`, `app/stores/app.ts` |
-| `components` | Global + content components, layouts | `app/components/*`, `app/layouts/*` |
-| `data-files` | contact.ts, projects.ts, sidebar-items.ts | `app/data/*` |
+| `gsap-animations` | GSAP and Lenis plugins, `$gsap`, `$ScrollTrigger`, `$lenis` | `app/plugins/gsap.client.ts`, `app/plugins/lenis.client.ts` |
+| `components` | Shell, home and content components, layouts | `app/components/*`, `app/layouts/*` |
+| `data-files` | contact.ts, projects.ts, experience.ts | `app/data/*` |
 | `blog-content` | Frontmatter, collections, images, Markdown features | `content/{en,es}/blog/*`, `content.config.ts` |
-| `pages-and-routing` | Routes, definePageMeta, navigation, prerender | `app/pages/*`, `app/router.options.ts` |
+| `pages-and-routing` | Routes, definePageMeta, navigation, redirects, prerender | `app/pages/*`, `app/router.options.ts` |
 
 ## Maintenance
 
-These skills are manually curated snapshots. They drift from the code unless
-kept in sync.
+These skills are manually curated snapshots. They drift from the code unless kept in sync.
 
-**Rule:** when you modify a composable, component, store, style or locale,
-update the corresponding `SKILL.md` **in the same commit**. Use the table above
-(skill → project files) to find which skill to touch.
+**Rule:** when you modify a composable, component, store, style or locale, update the corresponding `SKILL.md` **in the same commit**. Use the table above (skill → project files) to find which skill to touch.
 
 ## Adding a new skill
 
@@ -56,8 +48,7 @@ update the corresponding `SKILL.md` **in the same commit**. Use the table above
    ---
    ```
 
-3. Write the body: start with **Key files**, then API/usage with real code
-   snippets, and end with a **Restrictions** section ("do not …" rules).
+3. Write the body: start with **Key files**, then API/usage with real code snippets, and end with a **Restrictions** section ("do not …" rules).
 4. Add a row to the table above and to the project memory pointer.
 
 ## Conventions

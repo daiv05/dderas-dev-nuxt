@@ -1,107 +1,103 @@
 ---
 name: pages-and-routing
-description: Pages, routes, definePageMeta, localized navigation, prerender. Use when creating pages or changing navigation/routing.
+description: Pages, routes, definePageMeta, localized navigation, redirects, hash scrolling and prerender. Use when creating pages or changing navigation and routing.
 ---
 
 # Pages and Routes
 
-> Page structure, available routes and navigation patterns.
+> Page structure, routes and navigation patterns.
 
 ## Key files
 
 - `app/pages/index.vue` - `/`
-- `app/pages/about.vue` - `/about`
-- `app/pages/projects.vue` - `/projects`
+- `app/pages/work/index.vue` - `/work`
+- `app/pages/work/[slug].vue` - `/work/[slug]`
 - `app/pages/resources.vue` - `/resources`
 - `app/pages/blog/index.vue` - `/blog`
 - `app/pages/blog/[slug].vue` - `/blog/[slug]`
-- `app/router.options.ts` - custom scroll behavior
-- `app/data/sidebar-items.ts` - menu items (see the `data-files` skill)
+- `app/router.options.ts` - scroll behavior and redirects
+- `app/components/SiteNav.vue` - navigation items
+- `nuxt.config.ts` - `routeRules` and prerender routes
 
-## Available routes
+## Routes
 
 | Route | Layout | Description |
 |------|--------|-------------|
-| `/` | `default` | Landing with hero and overview |
-| `/about` | `default` | Profile and experience |
-| `/projects` | `default` | Project portfolio |
-| `/resources` | `default` | Resources and material |
-| `/blog` | `blog` | Article listing (6/page) |
-| `/blog/[slug]` | `blog` | Individual article |
+| `/` | `default` | Home: hero with embedding space, build clusters, work, experience (`#experience`), writing, contact |
+| `/work` | `default` | Project archive, featured first |
+| `/work/[slug]` | `default` | Case study; throws a 404 for an unknown id |
+| `/resources` | `default` | Resources |
+| `/blog` | `blog` | Article listing |
+| `/blog/[slug]` | `blog` | Article |
 
-All routes have an equivalent in `/es/*`.
+Every route has an `/es/*` equivalent.
 
-## Creating a new page
+## Creating a page
 
 ```vue
-<!-- app/pages/new.vue -->
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
-usePageSeo('new')  // must exist in seo.pages.new in both locales
+
+const { t } = useI18n()
+const root = ref<HTMLElement | null>(null)
+
+useReveal(root)
+usePageSeo('work')
 </script>
 
 <template>
-  <!-- content -->
+  <div ref="root">
+    <h1 data-reveal="line">{{ t('work.title') }}</h1>
+  </div>
 </template>
 ```
 
 Additional steps:
-1. Add `seo.pages.new` in `app/locales/en.json` and `es.json`
-2. Add an item in `app/data/sidebar-items.ts` (if it goes in the menu)
-3. Add a key in `navigation.items.new` in both locales
+1. Add `seo.pages.<key>` in `app/locales/en.json` and `es.json`
+2. Add the item to `items` in `SiteNav.vue` and `navigation.items.<key>` in both locales (if it belongs in the menu)
 
 ## Navigation
 
 ```vue
-<!-- Template -->
-<NuxtLink :to="localePath('/blog')">Blog</NuxtLink>
-<NuxtLink :to="localePath(`/blog/${post.slug}`)">{{ post.title }}</NuxtLink>
+<NuxtLink :to="localePath('/work')">{{ t('navigation.items.work') }}</NuxtLink>
+<NuxtLink :to="localePath(`/work/${project.id}`)">{{ name }}</NuxtLink>
 ```
 
 ```ts
-// Script
 const localePath = useLocalePath()
-navigateTo(localePath('/about'))
 navigateTo(localePath('/blog/my-slug'), { replace: true })
-
-// New tab
-const router = useRouter()
-const url = router.resolve(localePath('/blog')).href
-globalThis.open(url, '_blank')
 ```
 
-## Scroll behavior (router.options.ts)
-
-- Smooth scroll enabled globally
-- Available scrollers: `.shell-main` (default) and `.blog-main` (blog)
-- Hash links (`#heading`) smooth-scroll to the heading
-- Scroll position is remembered per route
-
-## Configured redirects
-
-```
-/tools     → /
-/es/tools  → /es
-```
-
-## Static prerendering
-
-- `nitro.prerender.crawlLinks: true` - prerenders all linked routes
-- Blog pages are prerendered automatically from the markdown files
-- Explicit prerendered routes: `/sitemap.xml`, `/robots.txt`
-
-## contactInfo in pages
+## Scroll and redirects
 
 ```ts
-// To display email, socials, etc. in pages
-import { contactInfo } from '~/data/contact'
-// Do not hardcode email or social network URLs
+const NAV_OFFSET = 72
+
+scrollBehavior(to, from, savedPosition) {
+  if (savedPosition) return savedPosition
+  if (to.hash) {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve({ el: to.hash, top: NAV_OFFSET }), to.path === from.path ? 0 : 120)
+    })
+  }
+  return { left: 0, top: 0 }
+}
 ```
+
+- Scrolling is on `window`; hash targets are offset by 72px for the sticky nav
+- `router.options.ts` redirects `/tools` to `/` and `/es/tools` to `/es`
+- `routeRules` redirect `/about` to `/#experience`, `/projects` to `/work`, and the `/es` equivalents
+
+## Prerendering
+
+- `nitro.prerender.crawlLinks: true`
+- Explicit routes: `/sitemap.xml`, `/robots.txt`, and `/work/<id>` plus `/es/work/<id>` for every project
+- Blog pages are prerendered from the Markdown files
 
 ## Restrictions
 
-- Always `definePageMeta({ layout: '...' })` in each page (there is no default layout)
-- Always `usePageSeo('pageKey')` in each page (SEO critical for prerender)
+- Always call `definePageMeta({ layout: '...' })` (`default` or `blog`) and `usePageSeo('key')` in each page
 - Do not use `$router.push()` without `localePath()`
-- Do not create new layouts without updating `plugins/gsap.ts` (depends on `.shell-main`/`.blog-main`)
-- The route param in `/blog/[slug].vue` is `route.params.slug`
+- Do not hardcode email or social URLs in pages; import `contactInfo` from `~/data/contact`
+- Do not create a page per project; case studies come from `projectList` via `work/[slug].vue`
+- The route param in `[slug].vue` is `route.params.slug`
