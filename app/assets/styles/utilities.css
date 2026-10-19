@@ -5,3 +5,13 @@
 .mono {
   font-family: var(--font-mono);
 }
+
+html.space-grab {
+  cursor: grab;
+}
+
+html.space-grabbing,
+html.space-grabbing * {
+  cursor: grabbing !important;
+  user-select: none;
+}

@@ -19,6 +19,7 @@ import {
   MeshBasicMaterial,
   NoToneMapping,
   PerspectiveCamera,
+  Quaternion,
   RingGeometry,
   Scene,
   Vector3,
@@ -34,7 +35,12 @@ const { space, centroids, activeCluster, activeQuery, highlighted } = useEmbeddi
 
 const CAMERA_Z = 2.1
 const FOCUS_Z = 1.3
+const AUTO_SPIN = 0.035
+const DRAG_SPEED = 0.006
+const INERTIA_DECAY = 3.2
+const GRAB_BLOCKERS = 'a, button, input, textarea, select, label, summary, [contenteditable], [role="button"], p, h1, h2, h3, h4, li, dd, dt, pre, code, blockquote, figcaption'
 const sizeOf = (weight: number) => 0.005 + weight * 0.011
+const damp = (rate: number, dt: number) => 1 - Math.exp(-rate * dt)
 
 let renderer: WebGLRenderer | null = null
 let frame = 0
@@ -45,6 +51,10 @@ let intersection: IntersectionObserver | null = null
 let resizeObserver: ResizeObserver | null = null
 
 const pointer = { x: 0, y: 0 }
+const drag = { active: false, id: -1, x: 0, y: 0, t: 0, vx: 0, vy: 0 }
+const spinAxis = new Vector3()
+const spinStep = new Quaternion()
+const worldUp = new Vector3(0, 1, 0)
 const scene = new Scene()
 const camera = new PerspectiveCamera(45, 1, 0.1, 20)
 camera.position.set(0, 0, CAMERA_Z)
@@ -82,14 +92,14 @@ const readPalette = () => {
   const css = getComputedStyle(document.documentElement)
   const read = (name: string) => new Color(css.getPropertyValue(name).trim() || '#888888')
   return {
-    agents: read('--terra'),
+    agents: read('--accent'),
     rag: read('--ink'),
-    ml: read('--maize'),
-    fullstack: read('--moss'),
+    ml: read('--signal'),
+    fullstack: read('--leaf'),
     ink: read('--ink'),
-    terra: read('--terra'),
+    accent: read('--accent'),
     paper: read('--paper'),
-  } as Record<ClusterId | 'ink' | 'terra' | 'paper', Color>
+  } as Record<ClusterId | 'ink' | 'accent' | 'paper', Color>
 }
 
 const layoutPoints = () => {
@@ -114,8 +124,8 @@ const paint = () => {
   })
   if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true
   edgeMaterial.color = palette.ink
-  queryMaterial.color = palette.terra
-  ringMaterial.color = palette.terra
+  queryMaterial.color = palette.accent
+  ringMaterial.color = palette.accent
 }
 
 const buildQuery = () => {
@@ -139,15 +149,42 @@ const buildQuery = () => {
 
 const target = new Vector3()
 const lookAt = new Vector3()
+const gaze = new Vector3()
 let last = 0
+
+/**
+ * Gira la nube alrededor de un eje perpendicular al desplazamiento en pantalla.
+ *
+ * @param {number} dx Desplazamiento horizontal en píxeles.
+ * @param {number} dy Desplazamiento vertical en píxeles.
+ */
+const spinBy = (dx: number, dy: number) => {
+  const distance = Math.hypot(dx, dy)
+  if (!distance) return
+  spinAxis.set(dy / distance, dx / distance, 0)
+  spinStep.setFromAxisAngle(spinAxis, distance * DRAG_SPEED)
+  cloud.quaternion.premultiply(spinStep)
+}
 
 const tick = (now: number) => {
   frame = requestAnimationFrame(tick)
   const dt = Math.min((now - last) / 1000 || 0, 0.05)
   last = now
-  cloud.rotation.y += dt * 0.035
-  root.rotation.x = MathUtils.lerp(root.rotation.x, pointer.y * 0.18, 0.05)
-  root.rotation.y = MathUtils.lerp(root.rotation.y, pointer.x * 0.25, 0.05)
+
+  if (!drag.active) {
+    if (drag.vx || drag.vy) {
+      spinBy(drag.vx * dt, drag.vy * dt)
+      const decay = Math.exp(-INERTIA_DECAY * dt)
+      drag.vx = Math.abs(drag.vx) > 1 ? drag.vx * decay : 0
+      drag.vy = Math.abs(drag.vy) > 1 ? drag.vy * decay : 0
+    }
+    spinStep.setFromAxisAngle(worldUp, dt * AUTO_SPIN)
+    cloud.quaternion.premultiply(spinStep)
+  }
+
+  const ease = damp(3, dt)
+  root.rotation.x = MathUtils.lerp(root.rotation.x, drag.active ? 0 : pointer.y * 0.18, ease)
+  root.rotation.y = MathUtils.lerp(root.rotation.y, drag.active ? 0 : pointer.x * 0.25, ease)
 
   const cluster = activeCluster.value
   const focus = cluster ? centroids.value[cluster] : null
@@ -159,8 +196,10 @@ const tick = (now: number) => {
     lookAt.set(0, 0, 0)
     target.set(0, 0, CAMERA_Z)
   }
-  camera.position.lerp(target, 0.035)
-  camera.lookAt(lookAt.multiplyScalar(0.5))
+  const follow = damp(2.1, dt)
+  camera.position.lerp(target, follow)
+  gaze.lerp(lookAt.multiplyScalar(0.5), follow)
+  camera.lookAt(gaze)
   if (queryGroup.visible) ring.lookAt(camera.position)
   renderer?.render(scene, camera)
 }
@@ -187,9 +226,68 @@ const resize = () => {
   camera.updateProjectionMatrix()
 }
 
+/**
+ * Indica si el puntero está sobre una zona libre del lienzo donde se puede arrastrar sin interferir con texto o controles.
+ *
+ * @param {PointerEvent} event Evento del puntero.
+ * @returns {boolean} Verdadero si el arrastre puede comenzar ahí.
+ */
+const canGrab = (event: PointerEvent) => {
+  const el = host.value
+  if (!el || event.pointerType === 'touch') return false
+  const rect = el.getBoundingClientRect()
+  const inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom
+  if (!inside) return false
+  const targetEl = event.target as Element | null
+  return !targetEl?.closest?.(GRAB_BLOCKERS)
+}
+
+const setGrabCursor = (state: 'grab' | 'grabbing' | null) => {
+  const html = document.documentElement
+  html.classList.toggle('space-grab', state === 'grab')
+  html.classList.toggle('space-grabbing', state === 'grabbing')
+}
+
 const onPointer = (event: PointerEvent) => {
   pointer.x = (event.clientX / globalThis.innerWidth) * 2 - 1
   pointer.y = (event.clientY / globalThis.innerHeight) * 2 - 1
+  if (drag.active && event.pointerId === drag.id) {
+    const dx = event.clientX - drag.x
+    const dy = event.clientY - drag.y
+    drag.x = event.clientX
+    drag.y = event.clientY
+    const elapsed = Math.max((event.timeStamp - drag.t) / 1000, 1 / 240)
+    drag.t = event.timeStamp
+    spinBy(dx, dy)
+    drag.vx = MathUtils.lerp(drag.vx, dx / elapsed, 0.4)
+    drag.vy = MathUtils.lerp(drag.vy, dy / elapsed, 0.4)
+    return
+  }
+  setGrabCursor(canGrab(event) ? 'grab' : null)
+}
+
+const onPointerDown = (event: PointerEvent) => {
+  if (event.button !== 0 || !canGrab(event)) return
+  event.preventDefault()
+  drag.active = true
+  drag.id = event.pointerId
+  drag.x = event.clientX
+  drag.y = event.clientY
+  drag.vx = 0
+  drag.vy = 0
+  drag.t = event.timeStamp
+  setGrabCursor('grabbing')
+}
+
+const onPointerUp = (event: PointerEvent) => {
+  if (!drag.active || event.pointerId !== drag.id) return
+  if (event.timeStamp - drag.t > 90) {
+    drag.vx = 0
+    drag.vy = 0
+  }
+  drag.active = false
+  drag.id = -1
+  setGrabCursor(canGrab(event) ? 'grab' : null)
 }
 
 const onVisibility = () => {
@@ -235,6 +333,9 @@ onMounted(() => {
   })
   intersection.observe(el)
   globalThis.addEventListener('pointermove', onPointer, { passive: true })
+  globalThis.addEventListener('pointerdown', onPointerDown)
+  globalThis.addEventListener('pointerup', onPointerUp)
+  globalThis.addEventListener('pointercancel', onPointerUp)
   document.addEventListener('visibilitychange', onVisibility)
   start()
 })
@@ -245,6 +346,10 @@ onBeforeUnmount(() => {
   resizeObserver?.disconnect()
   intersection?.disconnect()
   globalThis.removeEventListener('pointermove', onPointer)
+  globalThis.removeEventListener('pointerdown', onPointerDown)
+  globalThis.removeEventListener('pointerup', onPointerUp)
+  globalThis.removeEventListener('pointercancel', onPointerUp)
+  setGrabCursor(null)
   document.removeEventListener('visibilitychange', onVisibility)
   sphere.dispose()
   pointMaterial.dispose()
