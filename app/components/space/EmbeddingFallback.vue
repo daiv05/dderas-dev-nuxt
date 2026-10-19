@@ -64,7 +64,7 @@ const y = (i: number) => -(space.value.points[i]?.position[1] ?? 0)
 }
 
 .space-fallback__query line {
-  stroke: var(--terra);
+  stroke: var(--accent);
   stroke-width: 0.004;
   stroke-dasharray: 0.015 0.012;
 }
@@ -75,7 +75,7 @@ const y = (i: number) => -(space.value.points[i]?.position[1] ?? 0)
 }
 
 .space-fallback__point.is-agents {
-  fill: var(--terra);
+  fill: var(--accent);
 }
 
 .space-fallback__point.is-rag {
@@ -83,11 +83,11 @@ const y = (i: number) => -(space.value.points[i]?.position[1] ?? 0)
 }
 
 .space-fallback__point.is-ml {
-  fill: var(--maize);
+  fill: var(--signal);
 }
 
 .space-fallback__point.is-fullstack {
-  fill: var(--moss);
+  fill: var(--leaf);
 }
 
 .space-fallback__point.is-hit {
@@ -98,7 +98,7 @@ const y = (i: number) => -(space.value.points[i]?.position[1] ?? 0)
 
 .space-fallback__query-dot {
   fill: none;
-  stroke: var(--terra);
+  stroke: var(--accent);
   stroke-width: 0.008;
 }
 </style>

@@ -297,9 +297,9 @@ usePageSeo("blog");
 }
 
 .tag-chip.active {
-  background: color-mix(in srgb, var(--terra) 10%, transparent);
-  border-color: color-mix(in srgb, var(--terra) 40%, transparent);
-  color: var(--terra);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  color: var(--accent);
 }
 
 .tag-chip--more {
@@ -405,7 +405,7 @@ usePageSeo("blog");
 .post-date {
   font-size: 0.72rem;
   font-family: var(--font-mono);
-  color: color-mix(in srgb, var(--terra) 55%, transparent);
+  color: color-mix(in srgb, var(--accent) 55%, transparent);
 }
 
 .post-tags {
@@ -430,7 +430,7 @@ usePageSeo("blog");
 }
 
 .post-tag.active {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .post-entry-title {
@@ -443,7 +443,7 @@ usePageSeo("blog");
 }
 
 .post-entry-link:hover .post-entry-title {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .post-entry-summary {

@@ -63,7 +63,7 @@ ol {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--terra) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
   color: var(--ink);
 }
 

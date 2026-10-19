@@ -87,7 +87,7 @@ const range = (start: string, end: string | null) => {
   top: 0.7em;
   width: 0.5rem;
   height: 1px;
-  background: var(--terra);
+  background: var(--accent);
 }
 
 @media (max-width: 760px) {

@@ -1,11 +1,11 @@
 :root {
-  --paper: #f2eee3;
-  --ink: #1a1a17;
-  --muted: #5c5a52;
-  --rule: rgba(26, 26, 23, 0.14);
-  --terra: #c2502e;
-  --maize: #e0a526;
-  --moss: #4f6d5a;
+  --paper: #eef0eb;
+  --ink: #14181c;
+  --muted: #565e66;
+  --rule: rgba(20, 24, 28, 0.14);
+  --accent: #2547b8;
+  --signal: #0d8a86;
+  --leaf: #6a7a2a;
   --on-accent: #ffffff;
 
   --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
@@ -41,8 +41,8 @@
   --bg-elevated: var(--paper);
   --bg-soft: var(--ink-2);
   --bg-muted: var(--ink-5);
-  --link: var(--terra);
-  --link-hover: var(--terra);
+  --link: var(--accent);
+  --link-hover: var(--accent);
   --radius-lg: var(--radius-md);
   --shell-padding: var(--gutter);
 
@@ -51,19 +51,19 @@
   --md-bg: transparent;
   --md-code-bg: var(--ink-5);
   --md-code-border: var(--rule);
-  --md-code-inline-text: var(--terra);
+  --md-code-inline-text: var(--accent);
   --md-blockquote-bg: var(--ink-2);
-  --md-blockquote-border: var(--terra);
+  --md-blockquote-border: var(--accent);
   --md-table-border: var(--rule);
 }
 
 html.dark {
-  --paper: #15140f;
-  --ink: #ede6d6;
-  --muted: #a39d8c;
-  --rule: rgba(237, 230, 214, 0.14);
-  --terra: #e0714d;
-  --maize: #e8b547;
-  --moss: #8fb39b;
-  --on-accent: #15140f;
+  --paper: #0e1216;
+  --ink: #e3e8e6;
+  --muted: #949ea3;
+  --rule: rgba(227, 232, 230, 0.14);
+  --accent: #7c9cff;
+  --signal: #4cc7bd;
+  --leaf: #b7c76a;
+  --on-accent: #0e1216;
 }

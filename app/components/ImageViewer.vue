@@ -299,7 +299,7 @@ const download = async () => {
 }
 
 .viewer-btn:focus-visible {
-  outline: 2px solid var(--maize);
+  outline: 2px solid var(--signal);
 }
 
 .viewer-btn:hover {

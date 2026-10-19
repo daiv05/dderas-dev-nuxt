@@ -141,7 +141,7 @@ onBeforeUnmount(() => {
 }
 
 .site-nav__dot {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .site-nav__links {
@@ -165,7 +165,7 @@ onBeforeUnmount(() => {
   right: 0;
   bottom: -2px;
   height: 1px;
-  background: var(--terra);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--transition-base);
@@ -221,7 +221,7 @@ onBeforeUnmount(() => {
 
 .site-nav__panel-index {
   font-size: 0.75rem;
-  color: var(--terra);
+  color: var(--accent);
   font-weight: 400;
 }
 

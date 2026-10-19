@@ -71,7 +71,7 @@ useScrollStory(CLUSTERS.map((cluster, i) => ({ el: refs[i]!, cluster })))
 }
 
 .build__item.is-active {
-  border-left-color: var(--terra);
+  border-left-color: var(--accent);
 }
 
 .build__tag {
@@ -91,7 +91,7 @@ useScrollStory(CLUSTERS.map((cluster, i) => ({ el: refs[i]!, cluster })))
 }
 
 .is-agents .build__dot {
-  background: var(--terra);
+  background: var(--accent);
 }
 
 .is-rag .build__dot {
@@ -99,11 +99,11 @@ useScrollStory(CLUSTERS.map((cluster, i) => ({ el: refs[i]!, cluster })))
 }
 
 .is-ml .build__dot {
-  background: var(--maize);
+  background: var(--signal);
 }
 
 .is-fullstack .build__dot {
-  background: var(--moss);
+  background: var(--leaf);
 }
 
 .build__title {

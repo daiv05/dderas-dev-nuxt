@@ -29,7 +29,7 @@ description: Field Notes CSS tokens, global stylesheets and utility classes. Use
 }
 
 .card:hover {
-  border-color: var(--terra);
+  border-color: var(--accent);
 }
 ```
 
@@ -47,8 +47,8 @@ The theme class is applied to `<html>` through `useHead` in `app/app.vue`, so da
 
 ```css
 html.dark {
-  --paper: #15140f;
-  --ink: #ede6d6;
+  --paper: #0e1216;
+  --ink: #e3e8e6;
 }
 ```
 
@@ -59,5 +59,5 @@ Components never branch on the theme in CSS; they only reference tokens.
 - Do not hardcode hex colors in components; use the tokens from `tokens.css`
 - Do not add new global CSS files; import them from `global.css` only if they are genuinely global
 - Do not use `--v-theme-*` variables or any UI-framework class; they do not exist
-- Prefer the token names (`--ink`, `--rule`, `--terra`) over the legacy aliases (`--text-subtle`, `--line-soft`, `--md-*`) in new code
+- Prefer the token names (`--ink`, `--rule`, `--accent`) over the legacy aliases (`--text-subtle`, `--line-soft`, `--md-*`) in new code
 - Respect `prefers-reduced-motion`; `reset.css` already disables transitions and animations globally

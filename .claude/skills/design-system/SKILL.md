@@ -5,7 +5,7 @@ description: Field Notes design system - tokens, palette, typography, UiButton/U
 
 # Field Notes Design System
 
-> Warm paper and ink palette, Fraunces serif for text, JetBrains Mono for labels and UI chrome, terracotta as the single action color.
+> Cool paper and ink palette, Fraunces serif for text, JetBrains Mono for labels and UI chrome, cobalt as the single action color.
 
 ## Key files
 
@@ -18,13 +18,13 @@ description: Field Notes design system - tokens, palette, typography, UiButton/U
 
 ```css
 :root {
-  --paper: #f2eee3;
-  --ink: #1a1a17;
-  --muted: #5c5a52;
-  --rule: rgba(26, 26, 23, 0.14);
-  --terra: #c2502e;
-  --maize: #e0a526;
-  --moss: #4f6d5a;
+  --paper: #eef0eb;
+  --ink: #14181c;
+  --muted: #565e66;
+  --rule: rgba(20, 24, 28, 0.14);
+  --accent: #2547b8;
+  --signal: #0d8a86;
+  --leaf: #6a7a2a;
   --on-accent: #ffffff;
 
   --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
@@ -50,20 +50,20 @@ description: Field Notes design system - tokens, palette, typography, UiButton/U
 }
 
 html.dark {
-  --paper: #15140f;
-  --ink: #ede6d6;
-  --muted: #a39d8c;
-  --rule: rgba(237, 230, 214, 0.14);
-  --terra: #e0714d;
-  --maize: #e8b547;
-  --moss: #8fb39b;
-  --on-accent: #15140f;
+  --paper: #0e1216;
+  --ink: #e3e8e6;
+  --muted: #949ea3;
+  --rule: rgba(227, 232, 230, 0.14);
+  --accent: #7c9cff;
+  --signal: #4cc7bd;
+  --leaf: #b7c76a;
+  --on-accent: #0e1216;
 }
 ```
 
 Legacy aliases kept for the blog and Markdown styles: `--font-display`, `--font-body`, `--text-primary`, `--text-main`, `--text-subtle`, `--line-soft`, `--line-strong`, `--surface-faint`, `--surface-mild`, `--bg-elevated`, `--bg-soft`, `--bg-muted`, `--link`, `--link-hover`, `--radius-lg`, `--shell-padding` and the `--md-*` set.
 
-Cluster colors of the embedding space: agents `--terra`, rag `--ink`, ml `--maize`, fullstack `--moss`.
+Cluster colors of the embedding space: agents `--accent`, rag `--ink`, ml `--signal`, fullstack `--leaf`.
 
 ## Primitives
 
@@ -114,7 +114,7 @@ Adding an icon: extend the `IconName` union and add its 24x24 path string to `ic
 ## Restrictions
 
 - Do not use generic fonts (Inter, Roboto, Arial, system-ui) or purple gradients; text is Fraunces and labels are JetBrains Mono
-- Use `--terra` for the primary action and accents; use `--maize` and `--moss` only as cluster or data colors
+- Use `--accent` for the primary action and accents; use `--signal` and `--leaf` only as cluster or data colors
 - Do not hardcode colors; both themes must work from the tokens
 - Do not add an icon library; icons are inline paths in `icons.ts`
 - Do not use native `<button>` or `<a>` for styled actions when `UiButton` fits

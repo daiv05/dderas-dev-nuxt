@@ -50,7 +50,7 @@ onMounted(() => {
 }
 
 .ui-dialog::backdrop {
-  background: color-mix(in srgb, #0d0c09 82%, transparent);
+  background: color-mix(in srgb, #07090c 82%, transparent);
   backdrop-filter: blur(4px);
 }
 </style>

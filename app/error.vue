@@ -232,9 +232,9 @@ const reload = () => {
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(45% 40% at 20% 20%, color-mix(in srgb, var(--terra) 22%, transparent), transparent 60%),
-    radial-gradient(40% 35% at 80% 30%, color-mix(in srgb, var(--maize) 20%, transparent), transparent 60%),
-    radial-gradient(45% 40% at 40% 80%, color-mix(in srgb, var(--moss) 18%, transparent), transparent 65%);
+    radial-gradient(45% 40% at 20% 20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+    radial-gradient(40% 35% at 80% 30%, color-mix(in srgb, var(--signal) 20%, transparent), transparent 60%),
+    radial-gradient(45% 40% at 40% 80%, color-mix(in srgb, var(--leaf) 18%, transparent), transparent 65%);
   filter: blur(28px);
   opacity: 0.8;
 }

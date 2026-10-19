@@ -85,13 +85,13 @@ const classes = computed(() => [
 }
 
 .ui-btn--solid {
-  background: var(--terra);
-  border-color: var(--terra);
+  background: var(--accent);
+  border-color: var(--accent);
   color: var(--on-accent);
 }
 
 .ui-btn--solid:hover {
-  background: color-mix(in srgb, var(--terra) 86%, var(--ink));
+  background: color-mix(in srgb, var(--accent) 86%, var(--ink));
 }
 
 .ui-btn--outline {
@@ -112,7 +112,7 @@ const classes = computed(() => [
 }
 
 .ui-btn:focus-visible {
-  outline: 2px solid var(--terra);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 

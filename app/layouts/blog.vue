@@ -94,7 +94,7 @@ const handleImageClick = (event: MouseEvent) => {
 
 .blog-brand__edition {
   font-size: 0.7rem;
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .blog-header__actions {

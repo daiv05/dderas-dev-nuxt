@@ -319,7 +319,7 @@ useHead(() => {
 }
 
 .post-navigation-card:hover .post-navigation-title {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .post-navigation-label {

@@ -64,7 +64,7 @@ const year = new Date().getFullYear()
 }
 
 .site-footer__links a:hover {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .site-footer__meta {

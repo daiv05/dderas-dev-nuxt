@@ -72,7 +72,7 @@ const featured = projectList.filter((p) => p.featured)
 }
 
 .work__card:focus-visible {
-  outline: 2px solid var(--terra);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -91,7 +91,7 @@ const featured = projectList.filter((p) => p.featured)
   font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 700;
   line-height: 1;
-  color: var(--terra);
+  color: var(--accent);
   letter-spacing: -0.02em;
 }
 
@@ -115,7 +115,7 @@ const featured = projectList.filter((p) => p.featured)
 }
 
 .work__card:hover .work__cta {
-  color: var(--terra);
+  color: var(--accent);
   gap: 0.6rem;
 }
 
@@ -129,7 +129,7 @@ const featured = projectList.filter((p) => p.featured)
 }
 
 .work__all:hover {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 @media (max-width: 900px) {

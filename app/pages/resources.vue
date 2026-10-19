@@ -209,7 +209,7 @@ usePageSeo('resources')
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--terra);
+  background-color: var(--accent);
 }
 
 .resources-grid {
@@ -331,7 +331,7 @@ usePageSeo('resources')
     border-color: var(--line-soft);
     transform: translateY(-2px);
     
-    .book-title { color: var(--terra); }
+    .book-title { color: var(--accent); }
   }
 }
 

@@ -135,7 +135,7 @@ usePageSeo('work', {
 }
 
 .case__back:hover {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .case__head {
@@ -147,7 +147,7 @@ usePageSeo('work', {
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .case__title {
@@ -187,7 +187,7 @@ usePageSeo('work', {
   font-size: 2rem;
   font-weight: 700;
   line-height: 1;
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .case__metric-label {
@@ -251,7 +251,7 @@ usePageSeo('work', {
   top: 0.7em;
   width: 0.5rem;
   height: 1px;
-  background: var(--terra);
+  background: var(--accent);
 }
 
 .case__tags {
@@ -288,7 +288,7 @@ usePageSeo('work', {
 }
 
 .case__shot:focus-visible {
-  outline: 2px solid var(--terra);
+  outline: 2px solid var(--accent);
 }
 
 @media (max-width: 900px) {

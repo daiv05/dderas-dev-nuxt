@@ -64,7 +64,7 @@ const { data: latest } = await useAsyncData(() => `home-writing-${locale.value}`
 }
 
 .writing__post:hover .writing__title {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .writing__summary {
@@ -89,7 +89,7 @@ const { data: latest } = await useAsyncData(() => `home-writing-${locale.value}`
 }
 
 .writing__all:hover {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 @media (max-width: 900px) {

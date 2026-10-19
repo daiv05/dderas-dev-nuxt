@@ -102,7 +102,7 @@ onMounted(() => {
 }
 
 .is-agents .space__swatch {
-  background: var(--terra);
+  background: var(--accent);
 }
 
 .is-rag .space__swatch {
@@ -110,10 +110,10 @@ onMounted(() => {
 }
 
 .is-ml .space__swatch {
-  background: var(--maize);
+  background: var(--signal);
 }
 
 .is-fullstack .space__swatch {
-  background: var(--moss);
+  background: var(--leaf);
 }
 </style>

@@ -92,12 +92,12 @@ usePageSeo('work')
 }
 
 .work-row:focus-visible {
-  outline: 2px solid var(--terra);
+  outline: 2px solid var(--accent);
 }
 
 .work-row__index {
   font-size: 0.7rem;
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .work-row__year {
@@ -118,7 +118,7 @@ usePageSeo('work')
 }
 
 .work-row:hover .work-row__name {
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .work-row__category {
@@ -137,7 +137,7 @@ usePageSeo('work')
 }
 
 .work-row:hover .work-row__arrow {
-  color: var(--terra);
+  color: var(--accent);
   transform: translateX(3px);
 }
 

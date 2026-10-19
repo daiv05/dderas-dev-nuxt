@@ -144,7 +144,7 @@ onBeforeUnmount(stopTyping)
 }
 
 .query__prompt {
-  color: var(--maize);
+  color: var(--signal);
 }
 
 .query__input {
@@ -166,7 +166,7 @@ onBeforeUnmount(stopTyping)
 }
 
 .query__bar:focus-within {
-  outline: 2px solid var(--terra);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -202,7 +202,7 @@ onBeforeUnmount(stopTyping)
 }
 
 .query__chip:focus-visible {
-  outline: 2px solid var(--terra);
+  outline: 2px solid var(--accent);
 }
 
 .query__results {
@@ -223,7 +223,7 @@ onBeforeUnmount(stopTyping)
 
 .query__rank {
   font-size: 0.65rem;
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .query__dot {
@@ -234,7 +234,7 @@ onBeforeUnmount(stopTyping)
 }
 
 .query__dot.is-agents {
-  background: var(--terra);
+  background: var(--accent);
 }
 
 .query__dot.is-rag {
@@ -242,11 +242,11 @@ onBeforeUnmount(stopTyping)
 }
 
 .query__dot.is-ml {
-  background: var(--maize);
+  background: var(--signal);
 }
 
 .query__dot.is-fullstack {
-  background: var(--moss);
+  background: var(--leaf);
 }
 
 .query__label {
@@ -257,6 +257,6 @@ onBeforeUnmount(stopTyping)
 }
 
 a.query__label:hover {
-  color: var(--terra);
+  color: var(--accent);
 }
 </style>

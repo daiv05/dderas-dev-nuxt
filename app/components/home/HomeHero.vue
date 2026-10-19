@@ -65,7 +65,7 @@ const { t } = useI18n()
 
 .hero__title em {
   font-weight: 400;
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .hero__lead {

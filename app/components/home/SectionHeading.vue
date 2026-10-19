@@ -22,7 +22,7 @@ defineProps<{ index: string; title: string; note?: string }>()
 
 .section-heading__index {
   font-size: 0.75rem;
-  color: var(--terra);
+  color: var(--accent);
 }
 
 .section-heading__title {
