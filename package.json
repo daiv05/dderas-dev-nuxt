@@ -40,7 +40,7 @@
     "rehype-mathjax": "^7.1.0",
     "remark-math": "^6.0.0",
     "typescript": "~5.9",
-    "vitest": "^4.1.11",
+    "vitest": "^4.1.12",
     "vue-tsc": "^3.3.13"
   }
 }
